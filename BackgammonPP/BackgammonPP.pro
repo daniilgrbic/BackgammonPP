@@ -9,11 +9,25 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    boardstate.cpp \
+    die.cpp \
+    game.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    move.cpp \
+    point.cpp \
+    roll.cpp
 
 HEADERS += \
-    mainwindow.h
+    boardstate.h \
+    die.h \
+    game.h \
+    mainwindow.h \
+    move.h \
+    playercolor.h \
+    point.h \
+    roll.h \
+    specialposition.h
 
 FORMS += \
     mainwindow.ui
