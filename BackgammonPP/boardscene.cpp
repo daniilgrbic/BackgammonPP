@@ -7,22 +7,28 @@ BoardScene::BoardScene(QObject *parent)
     this->setBoardTriangles();
 }
 
+BoardScene::~BoardScene()
+{
+    for (int i = 0; i < (int)boardTriangles.size(); ++i) {
+        delete boardTriangles[i];
+    }
+}
+
 void BoardScene::setBoardTriangles() {
-    for (int i = this->triangleNumber - 1; i >= 0 ; --i) {
-        qreal left_point = (i / (qreal)this->triangleNumber) * this->m_width;
-        // qreal right_point = ((i + 1) / (qreal)this->triangleNumber) * this->m_width;
+    // add triangles to boardTriangles
+    for (int i = 0; i < this->triangleNumber ; ++i) {
+        qreal x_point = (i / (qreal)this->triangleNumber) * this->m_width;
 
         qreal bottom_triangle_point = ((qreal)this->m_height - this->triangleHeight) * this->m_height;
-        // qreal upper_triangle_point = this->triangleHeight * this->m_height;
+        qreal upper_triangle_point = 0.0;
 
         BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, this->triangleWidth, this->triangleHeight);
-        bottomTriangle->setPos(left_point, bottom_triangle_point);
+        bottomTriangle->setPos(x_point, bottom_triangle_point);
 
         BoardTriangle *upperTriangle = new BoardTriangle(nullptr, this->triangleWidth, this->triangleHeight);
-        upperTriangle->setPos(left_point, 0.0);
+        upperTriangle->setPos(x_point, upper_triangle_point);
 
-
+        boardTriangles.push_front(upperTriangle);
         boardTriangles.push_back(bottomTriangle);
-        boardTriangles.push_back(upperTriangle);
     }
 }

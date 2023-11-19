@@ -9,6 +9,7 @@ class BoardScene : public QGraphicsScene
 {
 public:
     BoardScene(QObject *parent);
+    ~BoardScene();
 
 
 private:
