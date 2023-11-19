@@ -1,11 +1,16 @@
 #include "boardwindow.h"
+#include "boardtriangle.h"
 #include "ui_boardwindow.h"
 
 BoardWindow::BoardWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::BoardWindow)
+    ui(new Ui::BoardWindow),
+    m_boardScene(new BoardScene(this))
 {
     ui->setupUi(this);
+    ui->boardView->setScene(m_boardScene);
+
+
 }
 
 BoardWindow::~BoardWindow()

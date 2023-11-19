@@ -1,7 +1,10 @@
 #ifndef BOARDWINDOW_H
 #define BOARDWINDOW_H
 
+#include "boardscene.h"
 #include <QWidget>
+#include <QGraphicsScene>
+#include <QVector>
 
 namespace Ui {
 class BoardWindow;
@@ -17,6 +20,7 @@ public:
 
 private:
     Ui::BoardWindow *ui;
+    BoardScene *m_boardScene;
 };
 
 #endif // BOARDWINDOW_H
