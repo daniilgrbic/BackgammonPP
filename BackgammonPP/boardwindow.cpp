@@ -9,11 +9,14 @@ BoardWindow::BoardWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->boardView->setScene(m_boardScene);
-
-
 }
 
 BoardWindow::~BoardWindow()
 {
     delete ui;
+}
+
+void BoardWindow::paintEvent(QPaintEvent *) {
+    QPainter painter(this);
+    // m_boardScene->setPainter(*painter);
 }

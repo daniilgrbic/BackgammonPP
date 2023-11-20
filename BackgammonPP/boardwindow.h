@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QVector>
+#include <QPaintEvent>
 
 namespace Ui {
 class BoardWindow;
@@ -16,6 +17,7 @@ class BoardWindow : public QWidget
 
 public:
     explicit BoardWindow(QWidget *parent = nullptr);
+    void paintEvent(QPaintEvent *);
     ~BoardWindow();
 
 private:
