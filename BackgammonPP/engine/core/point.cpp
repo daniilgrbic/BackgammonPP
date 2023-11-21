@@ -1,19 +1,44 @@
 #include "point.h"
 
+#include <cassert>
+
 #include <QVariant>
 #include <QVariantMap>
 #include <QJsonDocument>
 
 Point::Point() = default;
 
-std::optional<PlayerColor> Point::whosOwner() const
+std::optional<PlayerColor> Point::owner() const
 {
     return m_owner;
 }
 
-int Point::countChecker() const
+uint Point::count()
 {
     return m_count;
+}
+
+uint Point::add(PlayerColor color, uint count)
+{
+    assert(m_count == 0 or m_owner == color);
+    m_count += count;
+    m_owner = color;
+    return m_count;
+}
+
+uint Point::remove(uint count)
+{
+    assert(m_count >= count);
+    m_count -= count;
+    if(m_count == 0)
+        m_owner.reset();
+    return m_count;
+}
+
+// TODO
+size_t Point::idByPlayer(PlayerColor color, size_t index)
+{
+    return 0;
 }
 
 QVariant Point::toVariant() const

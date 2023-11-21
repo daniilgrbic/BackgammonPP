@@ -5,7 +5,7 @@
 #include "move.h"
 #include "../../utility/serializable.h"
 
-#include <vector>
+#include <array>
 
 constexpr int NUMBER_OF_POINTS {24};
 
@@ -15,15 +15,15 @@ public:
     BoardState();
 
     int bar(PlayerColor player) const;
-    Point point(int pos) const;
+    Point& point(int pos);
     void move(const Move& move);
 
     // Serializable interface
-    QVariant toVariant() const;
-    void fromVariant(const QVariant &variant);
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
 
 private:
-    std::vector<Point> m_points;
+    std::array<Point, NUMBER_OF_POINTS> m_points;
     int m_blackBar = 0;
     int m_whiteBar = 0;
     int m_blackOff = 0;

@@ -4,13 +4,20 @@
 #include "../../utility/serializable.h"
 
 #include <optional>
+#include <vector>
+
+using uint = unsigned int;
 
 class Point : public Serializable
 {
 public:
     Point();
-    std::optional<PlayerColor> whosOwner() const;
-    int countChecker() const;
+    std::optional<PlayerColor> owner() const;
+    uint count();
+    uint add(PlayerColor color, uint count = 1);
+    uint remove(uint count = 1);
+
+    static size_t idByPlayer(PlayerColor color, size_t index);
 
     // Serializable interface
     QVariant toVariant() const;
@@ -18,5 +25,5 @@ public:
 
 private:
     std::optional<PlayerColor> m_owner;
-    int m_count = 0;
+    uint m_count = 0;
 };

@@ -6,14 +6,14 @@
 #include <QJsonDocument>
 
 BoardState::BoardState()
-    : m_points(std::vector<Point>(NUMBER_OF_POINTS))
+    : m_points(std::array<Point, NUMBER_OF_POINTS>())
 {}
 
 int BoardState::bar(PlayerColor player) const {
     return player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
 }
 
-Point BoardState::point(const int pos) const {
+Point& BoardState::point(const int pos) {
     return m_points[pos];
 }
 
