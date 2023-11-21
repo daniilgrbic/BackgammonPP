@@ -8,20 +8,20 @@ Point::Point() = default;
 
 std::optional<PlayerColor> Point::whosOwner() const
 {
-    return owner;
+    return m_owner;
 }
 
 int Point::countChecker() const
 {
-    return count;
+    return m_count;
 }
 
 QVariant Point::toVariant() const
 {
     QVariantMap map;
-    if(owner.has_value())
+    if(m_owner.has_value())
     {
-        switch(owner.value())
+        switch(m_owner.value())
         {
         case PlayerColor::BLACK:
             map.insert("owner", "black");
@@ -31,27 +31,27 @@ QVariant Point::toVariant() const
             break;
         }
     }
-    map.insert("count", count);
+    map.insert("count", m_count);
     return map;
 }
 
 void Point::fromVariant(const QVariant &variant)
 {
     QVariantMap data = variant.toMap();
-    count = data.value("count").toInt();
-    if(count)
+    m_count = data.value("count").toInt();
+    if(m_count)
     {
         if(data.value("owner").toString().toStdString() == "black")
         {
-            owner = PlayerColor::BLACK;
+            m_owner = PlayerColor::BLACK;
         }
         else
         {
-            owner = PlayerColor::WHITE;
+            m_owner = PlayerColor::WHITE;
         }
     }
     else
     {
-        owner.reset();
+        m_owner.reset();
     }
 }

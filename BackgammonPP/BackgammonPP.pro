@@ -14,7 +14,6 @@ SOURCES += \
     game.cpp \
     main.cpp \
     mainwindow.cpp \
-    move.cpp \
     point.cpp \
     roll.cpp
 
@@ -22,12 +21,14 @@ HEADERS += \
     boardstate.h \
     die.h \
     game.h \
+    gameresult.h \
     mainwindow.h \
     move.h \
     playercolor.h \
     point.h \
     roll.h \
-    specialposition.h
+    specialposition.h \
+    turn.h
 
 FORMS += \
     mainwindow.ui

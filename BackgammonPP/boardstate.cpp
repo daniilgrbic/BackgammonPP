@@ -6,27 +6,32 @@
 #include <QJsonDocument>
 
 BoardState::BoardState()
-    : points(std::vector<Point>(NUMBER_OF_POINTS))
+    : m_points(std::vector<Point>(NUMBER_OF_POINTS))
 {}
 
 int BoardState::bar(PlayerColor player) const {
-    return player == PlayerColor::BLACK ? blackBar : whiteBar;
+    return player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
 }
 
 Point BoardState::point(const int pos) const {
-    return points[pos];
+    return m_points[pos];
+}
+
+void BoardState::move(const Move &move)
+{
+    (void) move;
 }
 
 QVariant BoardState::toVariant() const
 {
     QVariantMap map;
-    map.insert("blackBar", blackBar);
-    map.insert("whiteBar", whiteBar);
-    map.insert("blackOff", blackOff);
-    map.insert("whiteOff", whiteOff);
+    map.insert("blackBar", m_blackBar);
+    map.insert("whiteBar", m_whiteBar);
+    map.insert("blackOff", m_blackOff);
+    map.insert("whiteOff", m_whiteOff);
 
     QVariantList pointList;
-    for(const auto &point : points)
+    for(const auto &point : m_points)
     {
         pointList.append(point.toVariant());
     }
@@ -37,15 +42,15 @@ QVariant BoardState::toVariant() const
 void BoardState::fromVariant(const QVariant &variant)
 {
     QVariantMap map = variant.toMap();
-    blackBar = map.value("blackBar").toInt();
-    whiteBar = map.value("whiteBar").toInt();
-    blackOff = map.value("blackOff").toInt();
-    whiteOff = map.value("whiteOff").toInt();
-    points.clear();
+    m_blackBar = map.value("blackBar").toInt();
+    m_whiteBar = map.value("whiteBar").toInt();
+    m_blackOff = map.value("blackOff").toInt();
+    m_whiteOff = map.value("whiteOff").toInt();
+    m_points.clear();
     for(auto &pointVar : map.value("points").toList())
     {
         Point point;
         point.fromVariant(pointVar);
-        points.push_back(point);
+        m_points.push_back(point);
     }
 }

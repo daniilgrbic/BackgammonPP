@@ -1,9 +1,6 @@
-#ifndef PLAYERCOLOR_H
-#define PLAYERCOLOR_H
+#pragma once
 
 enum class PlayerColor {
     BLACK,
     WHITE
 };
-
-#endif // PLAYERCOLOR_H

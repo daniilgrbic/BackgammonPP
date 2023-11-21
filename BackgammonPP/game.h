@@ -1,30 +1,23 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "boardstate.h"
-#include "playercolor.h"
-#include "roll.h"
-#include "move.h"
+#include "turn.h"
+#include "gameresult.h"
 
 #include <vector>
+#include <variant>
 
 class Game
 {
 public:
     Game();
-
-    std::vector<std::vector<Move>> generateLegalMoves();
+    virtual std::vector<Turn> generateLegalTurns() = 0;
+    GameResult playTurn(Turn turn);
 
 private:
-    PlayerColor black;
-    PlayerColor white;
+    virtual GameResult checkFinished() = 0;
 
-    Die firstDie {};
-    Die secondDie {};
-
-    BoardState state;
-
-    Roll currentRoll;
+    BoardState m_board;
+    std::vector<Turn> m_history;
+    GameResult m_gameResult;
 };
-
-#endif // GAME_H

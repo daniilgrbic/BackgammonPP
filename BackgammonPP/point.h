@@ -1,5 +1,4 @@
-#ifndef POINT_H
-#define POINT_H
+#pragma once
 
 #include "playercolor.h"
 #include "utility/serializable.h"
@@ -18,8 +17,6 @@ public:
     void fromVariant(const QVariant &variant);
 
 private:
-    std::optional<PlayerColor> owner;
-    int count = 0;
+    std::optional<PlayerColor> m_owner;
+    int m_count = 0;
 };
-
-#endif // POINT_H

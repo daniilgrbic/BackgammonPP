@@ -1,9 +1,6 @@
-#ifndef SPECIALPOSITION_H
-#define SPECIALPOSITION_H
+#pragma once
 
 enum class SpecialPosition {
     BAR,
     OFF
 };
-
-#endif // SPECIALPOSITION_H

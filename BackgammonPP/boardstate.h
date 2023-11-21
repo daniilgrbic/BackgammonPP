@@ -1,5 +1,4 @@
-#ifndef BOARDSTATE_H
-#define BOARDSTATE_H
+#pragma once
 
 #include "point.h"
 #include "playercolor.h"
@@ -24,11 +23,9 @@ public:
     void fromVariant(const QVariant &variant);
 
 private:
-    std::vector<Point> points;
-    int blackBar = 0;
-    int whiteBar = 0;
-    int blackOff = 0;
-    int whiteOff = 0;
+    std::vector<Point> m_points;
+    int m_blackBar = 0;
+    int m_whiteBar = 0;
+    int m_blackOff = 0;
+    int m_whiteOff = 0;
 };
-
-#endif // BOARDSTATE_H
