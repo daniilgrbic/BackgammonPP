@@ -1,7 +1,7 @@
 #pragma once
 
 #include "playercolor.h"
-#include "utility/serializable.h"
+#include "../../utility/serializable.h"
 
 #include <optional>
 

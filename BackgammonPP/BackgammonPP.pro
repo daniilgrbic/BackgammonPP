@@ -8,30 +8,13 @@ CONFIG += c++20
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    boardstate.cpp \
-    die.cpp \
-    game.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    point.cpp \
-    roll.cpp
+SOURCES += *.cpp \
+    engine/backgammon.cpp
 
-HEADERS += \
-    boardstate.h \
-    die.h \
-    game.h \
-    gameresult.h \
-    mainwindow.h \
-    move.h \
-    playercolor.h \
-    point.h \
-    roll.h \
-    specialposition.h \
-    turn.h
+HEADERS += *.h \
+    engine/backgammon.h
 
-FORMS += \
-    mainwindow.ui
+FORMS += *.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

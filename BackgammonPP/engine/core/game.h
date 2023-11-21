@@ -14,7 +14,7 @@ public:
     virtual std::vector<Turn> generateLegalTurns() = 0;
     GameResult playTurn(Turn turn);
 
-private:
+protected:
     virtual GameResult checkFinished() = 0;
 
     BoardState m_board;

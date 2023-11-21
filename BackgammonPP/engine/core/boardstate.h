@@ -3,7 +3,7 @@
 #include "point.h"
 #include "playercolor.h"
 #include "move.h"
-#include "utility/serializable.h"
+#include "../../utility/serializable.h"
 
 #include <vector>
 
