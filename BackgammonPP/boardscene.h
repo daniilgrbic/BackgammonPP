@@ -17,7 +17,8 @@ public:
 private:
     const qreal m_height = 1.0;
     const qreal m_width = 1.0;
-    const int triangleNumber = 24;
+    const int trianglePairs = 12;
+    const qreal barWidth = 1;
     const qreal triangleHeight = 100;
     const qreal triangleWidth = 50;
     const QPainter m_painter;
