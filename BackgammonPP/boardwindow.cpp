@@ -9,6 +9,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->boardView->setScene(m_boardScene);
+    ui->boardView->resize(605,305);
 }
 
 BoardWindow::~BoardWindow()

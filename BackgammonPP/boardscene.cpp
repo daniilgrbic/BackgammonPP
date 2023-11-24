@@ -3,30 +3,26 @@
 BoardScene::BoardScene(QObject *parent)
     : QGraphicsScene(parent)
 {
-    this->setSceneRect(QRectF(0, 0, 1, 1));
+    this->setSceneRect(0,0,600,300);
     this->setBoardTriangles();
 }
 
 void BoardScene::setBoardTriangles() {
-    for (int i = 0; i < this->triangleNumber; ++i) {
-        qreal x_point = (i / (qreal)this->triangleNumber) * this->m_width;
-
-        qreal bottom_triangle_point = ((qreal)this->m_height - this->triangleHeight) * this->m_height;
-        qreal upper_triangle_point = 0.0;
-
-        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, this->triangleWidth, this->triangleHeight);
-        bottomTriangle->setPos(x_point, bottom_triangle_point);
-
-        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, this->triangleWidth, this->triangleHeight);
-        upperTriangle->setPos(x_point, upper_triangle_point);
-
-        boardTriangles.push_front(upperTriangle);
+    for(int i {0}; i < this->triangleNumber / 2; ++i){
+        qreal x_point = this->triangleWidth * i;
+        qreal y_point = 200;
+        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true);
         boardTriangles.push_back(bottomTriangle);
     }
-
-    for (auto triangle: boardTriangles) {
-        this->drawBoardTriangle(triangle);
+    for(int i {0}; i < this->triangleNumber / 2; ++i){
+        qreal x_point = this->triangleWidth * i;
+        qreal y_point = 0;
+        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false);
+        boardTriangles.push_back(upperTriangle);
     }
+
+    for(auto triangle : qAsConst(boardTriangles))
+        this->drawBoardTriangle(triangle);
 }
 
 void BoardScene::drawBoardTriangle(BoardTriangle *boardTriangle) {

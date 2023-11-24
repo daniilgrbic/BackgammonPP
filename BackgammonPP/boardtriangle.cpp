@@ -1,14 +1,25 @@
 #include "boardtriangle.h"
+#include <QPainter>
+#include <QBrush>
 
-BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal m_width, qreal m_height)
-    : QGraphicsPolygonItem(parent), m_width(m_width), m_height(m_height)
+BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal x, qreal y, qreal width, qreal height, bool upwards)
+    : QGraphicsItem(parent), m_x(x), m_y(y), m_width(width), m_height(height), m_upwards(upwards)
 {
-    m_polygon << QPointF(0, 0) << QPointF(100, 0) << QPointF(100, 100);
-
-    this->setPolygon(m_polygon);
-    this->setBrush(QBrush(Qt::red, Qt::SolidPattern));
+    if(m_upwards)
+        m_polygon << QPointF(m_x, m_y + m_height) << QPointF(m_x + m_width, m_y + m_height) << QPointF(m_x + m_width / 2, m_y) << QPointF(m_x, m_y + m_height);
+    else
+        m_polygon << QPointF(m_x, m_y) << QPointF(m_x + m_width, m_y) << QPointF(m_x + m_width / 2, m_y + m_height) << QPointF(m_x, m_y);
 }
 
-QPolygonF BoardTriangle::getPolygon() {
-    return this->m_polygon;
+QRectF BoardTriangle::boundingRect() const {
+    return QRectF(m_x, m_y, m_width, m_height);
+}
+
+void BoardTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    painter->setBrush(QBrush(Qt::gray));
+    painter->drawRect(boundingRect());
+
+    painter->setBrush(QBrush(Qt::blue));
+    painter->drawPolygon(m_polygon);
+
 }
