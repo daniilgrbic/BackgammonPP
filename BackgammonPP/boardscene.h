@@ -11,7 +11,7 @@
 class BoardScene : public QGraphicsScene
 {
 public:
-    BoardScene(QObject *parent);
+    BoardScene(QObject *parent, qreal width, qreal height);
 
 
 private:

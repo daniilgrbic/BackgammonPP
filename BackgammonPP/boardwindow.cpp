@@ -4,12 +4,12 @@
 
 BoardWindow::BoardWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::BoardWindow),
-    m_boardScene(new BoardScene(this))
+    ui(new Ui::BoardWindow)
 {
     ui->setupUi(this);
+    m_boardScene = new BoardScene(this, ui->boardView->size().width()-5, ui->boardView->size().height()-5);
     ui->boardView->setScene(m_boardScene);
-    ui->boardView->resize(605,305);
+    //ui->boardView->resize(605,305);
 }
 
 BoardWindow::~BoardWindow()
