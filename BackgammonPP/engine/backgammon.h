@@ -13,4 +13,8 @@ public:
 
 private:
     GameResult checkFinished() override;
+
+    bool isBlot(int point, PlayerColor player) const;
+    bool isBlocked(int point, PlayerColor player) const;
+    bool isBearingOff(PlayerColor player) const;
 };

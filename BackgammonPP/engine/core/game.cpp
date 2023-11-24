@@ -8,7 +8,7 @@ Game::Game()
 
 GameResult Game::playTurn(Turn turn)
 {
-    for(const auto move : turn.moves)
+    for(const auto move : turn.m_moves)
     {
         m_board.move(move);
     }

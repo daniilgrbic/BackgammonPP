@@ -5,21 +5,21 @@ Roll::Roll()
 }
 
 Roll::Roll(PlayerColor onRoll, Die& first, Die& second)
-    : onRoll { onRoll }
+    : m_onRoll { onRoll }
 {
     auto firstValue = first.roll();
     auto secondValue = second.roll();
     if (firstValue != secondValue) {
-        diceValue = { firstValue, secondValue };
+        m_dice = { firstValue, secondValue };
     } else {
-        diceValue = std::vector<int>(4, firstValue);
+        m_dice = std::vector<int>(4, firstValue);
     }
 }
 
 std::vector<int> Roll::dice() const {
-    return diceValue;
+    return m_dice;
 }
 
-PlayerColor Roll::whosOnRoll() const {
-    return onRoll;
+PlayerColor Roll::onRoll() const {
+    return m_onRoll;
 }

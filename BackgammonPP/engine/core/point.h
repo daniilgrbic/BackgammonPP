@@ -13,11 +13,11 @@ class Point : public Serializable
 public:
     Point();
     std::optional<PlayerColor> owner() const;
-    uint count();
+    uint count() const;
     uint add(PlayerColor color, uint count = 1);
     uint remove(uint count = 1);
 
-    static size_t idByPlayer(PlayerColor color, size_t index);
+    static int idByPlayer(PlayerColor color, size_t index);
 
     // Serializable interface
     QVariant toVariant() const;

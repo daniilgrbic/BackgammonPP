@@ -15,8 +15,12 @@ public:
     BoardState();
 
     int bar(PlayerColor player) const;
-    Point& point(int pos);
+    Point& point(const int pos);
+    const Point& point(const int pos) const;
     void move(const Move& move);
+
+    BoardState getNextState(const Move& move) const;
+    BoardState getNextState(const std::vector<Move>& move) const;
 
     // Serializable interface
     QVariant toVariant() const override;

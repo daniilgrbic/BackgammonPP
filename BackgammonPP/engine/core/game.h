@@ -1,8 +1,9 @@
 #pragma once
 
 #include "boardstate.h"
-#include "turn.h"
 #include "gameresult.h"
+#include "turn.h"
+#include "roll.h"
 
 #include <vector>
 #include <variant>
@@ -18,6 +19,7 @@ protected:
     virtual GameResult checkFinished() = 0;
 
     BoardState m_board;
+    Roll m_currentRoll;
     std::vector<Turn> m_history;
     GameResult m_gameResult;
 };

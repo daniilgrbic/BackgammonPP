@@ -13,7 +13,7 @@ std::optional<PlayerColor> Point::owner() const
     return m_owner;
 }
 
-uint Point::count()
+uint Point::count() const
 {
     return m_count;
 }
@@ -36,7 +36,7 @@ uint Point::remove(uint count)
 }
 
 // TODO
-size_t Point::idByPlayer(PlayerColor color, size_t index)
+int Point::idByPlayer(PlayerColor color, size_t index)
 {
     return 0;
 }

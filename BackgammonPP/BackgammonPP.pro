@@ -8,9 +8,21 @@ CONFIG += c++20
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += *.cpp
+SOURCES += \
+    *.cpp \
+    engine/backgammon.cpp \
+    engine/core/boardstate.cpp \
+    engine/core/die.cpp \
+    engine/core/game.cpp \
+    engine/core/point.cpp \
+    engine/core/roll.cpp
 
-HEADERS += *.h
+HEADERS += \
+    *.h \
+    engine/backgammon.h \
+    engine/core/*.h \
+    utility/jsonserializer.h \
+    utility/serializable.h
 
 FORMS += *.ui
 

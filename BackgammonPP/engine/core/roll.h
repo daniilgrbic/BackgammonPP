@@ -1,5 +1,4 @@
-#ifndef ROLL_H
-#define ROLL_H
+#pragma once
 
 #include "die.h"
 #include "playercolor.h"
@@ -15,11 +14,9 @@ public:
 
     std::vector<int> dice() const;
 
-    PlayerColor whosOnRoll() const;
+    PlayerColor onRoll() const;
 
 private:
-    PlayerColor onRoll;
-    std::vector<int> diceValue;
+    PlayerColor m_onRoll;
+    std::vector<int> m_dice;
 };
-
-#endif // ROLL_H
