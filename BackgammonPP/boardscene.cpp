@@ -12,6 +12,7 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     this->setSceneRect(0, 0, m_width, m_height);
     this->setBoardTriangles();
     this->setBoardCheckers();
+    setBoardBar();
 }
 
 void BoardScene::setBoardTriangles() {
@@ -74,6 +75,13 @@ void BoardScene::setBoardCheckers(){
 
     for(int n = j + 2; j < n; ++j)
         boardTriangles[23]->addChecker(whiteCheckers[j]);
+}
+
+void BoardScene::setBoardBar()
+{
+   BoardBar *bar = new BoardBar(nullptr, triangleWidth, m_height);
+   bar->setPos((trianglePairs/2) * triangleWidth, 0);
+   addItem(bar);
 }
 
 void BoardScene::drawBoardTriangle(BoardTriangle *boardTriangle) {

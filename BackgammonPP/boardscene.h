@@ -8,6 +8,7 @@
 #include <QPen>
 #include "boardtriangle.h"
 #include "boardchecker.h"
+#include "boardbar.h"
 
 class BoardScene : public QGraphicsScene
 {
@@ -31,6 +32,7 @@ private:
     QVector<BoardChecker*> blackCheckers;
     void setBoardTriangles();
     void setBoardCheckers();
+    void setBoardBar();
     void drawBoardTriangle(BoardTriangle *boardTriangle);
 };
 

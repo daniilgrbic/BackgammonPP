@@ -7,7 +7,7 @@
 #include "boardchecker.h"
 
 BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal x, qreal y, qreal width, qreal height, bool upwards)
-    : QGraphicsItem(parent), m_x(x), m_y(y), m_width(width), m_height(height), m_upwards(upwards), m_checkersNumber(0)
+    : QGraphicsItem(parent), m_x(x), m_y(y), m_width(width), m_height(height), m_upwards(upwards)
 {
     setZValue(-1);
     this->setPos(m_x, m_y);

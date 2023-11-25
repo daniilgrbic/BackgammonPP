@@ -72,6 +72,8 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             }
             if(BoardTriangle *closestTriangle = dynamic_cast<BoardTriangle*>(closestItem)){
                     closestTriangle->addChecker(this);
+            }else{
+                this->setPos(m_anchorPoint);
             }
 
         }
