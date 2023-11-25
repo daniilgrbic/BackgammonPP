@@ -1,6 +1,7 @@
 #include "boardwindow.h"
 #include "boardtriangle.h"
 #include "ui_boardwindow.h"
+#include <QPainter>
 
 BoardWindow::BoardWindow(QWidget *parent) :
     QWidget(parent),
@@ -9,6 +10,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
     ui->setupUi(this);
     m_boardScene = new BoardScene(this, ui->boardView->size().width()-5, ui->boardView->size().height()-5);
     ui->boardView->setScene(m_boardScene);
+    ui->boardView->setRenderHint(QPainter::Antialiasing);
     //ui->boardView->resize(605,305);
 }
 
