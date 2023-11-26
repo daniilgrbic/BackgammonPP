@@ -4,7 +4,8 @@
 #include <QObject>
 #include <QString>
 #include <QTcpSocket>
-#include <system_error>
+#include <std::system_error>
+
 
 class Client : public QObject {
     Q_OBJECT
@@ -20,6 +21,7 @@ signals:
     void connectedAsWaiting();
     void potentialOpponent(QString oppName);
     void newState(QString state);
+    void newChatMessage(QString chatMessage);
 
 public slots:
     void readMessage();

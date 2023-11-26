@@ -1,4 +1,6 @@
-#include "Client.h"
+#include "network/client.h"
+#include "network/server.h"
+
 
 Client::Client(QObject* parent)
     : QObject(parent)
@@ -37,8 +39,10 @@ void Client::readMessage() {
         emit potentialOpponent(message.sliced(serverCmdPotOpp.length()));
     } else if (message.startsWith(serverCmdState)) {
         emit newState(message.sliced(serverCmdState.length()));
-    } else {
-        throw system_error;
+    } else if (message.startsWith(serverCmdChat)) {
+        emit newChatMessage(message.sliced(serverCmdChat.length()));
+    }else {
+        throw std::system_error;
     }
 }
 
@@ -48,7 +52,7 @@ void Client::sendStateToServer(QString state) {
         m_soket->waitForBytesWritten();
     }
     else {
-        throw system_error;
+        throw std::system_error;
     }
 }
 
@@ -58,7 +62,7 @@ void Client::sendOpponentToServer(QString oppName) {
         m_socket->waitForBytesWritten();
     }
     else {
-        throw system_error;
+        throw std::system_error;
     }
 }
 
@@ -68,6 +72,6 @@ void Client::sendNameToServer(QString name) {
         m_socket->waitForBytesWritten();
     }
     else {
-        throw system_error;
+        throw std::system_error;
     }
 }

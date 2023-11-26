@@ -3,6 +3,7 @@
 
 #include <QString>
 
+
 const quint16 PORT = 1234;
 const QString serverCmdOpp = "opp-";
 const QString serverCmdPotOpp = "potopp-";

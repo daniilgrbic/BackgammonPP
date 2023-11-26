@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,10 +11,19 @@ CONFIG += c++20
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    network/chat_message.cpp \
+    network/server.cpp \
+    network/client.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    network/chat_message.h \
+    network/server.h \
+    network/client.h \
+    network/server_commands.h \
+    utility/jsonserializer.h \
+    utility/serializable.h
 
 FORMS += \
     mainwindow.ui

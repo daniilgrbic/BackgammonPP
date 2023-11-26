@@ -1,4 +1,9 @@
-#include "server.h"
+#include "network/server.h"
+#include "network/chat_message.h"
+#include "utility/jsonserializer.h"
+#include <system_error>
+#include <string>
+
 
 Server::Server(QObject *parent)
     : QObject(parent)
@@ -55,24 +60,25 @@ void Server::broadcast(QString message) {
 void Server::processNameCommand(QTcpSocket* src, QString name) {
     if (m_clientNames.find(src) == m_clientNames.end()) { // socket doesn't have a name registered
         m_clientNames[src] = name;
+        m_clientSockets[name] = src;
 
         if (!m_gameStarted && src != m_player1) {
             m_player1->write(serverCmdPotOpp+name); // send the host potential opponent
         }
     } else {
-        throw system_error; // socket already has a name
+        throw std::system_error; // socket already has a name
     }
 }
 
 void Server::processOpponentCommand(QTcpSocket* src, QString oppName) {
     if (src != m_player1) {
-        throw system_error; // only the host can choose opponent
+        throw std::system_error; // only the host can choose opponent
     }
     if (m_clientNames.find(src) == m_clientNames.end()) {
-        throw system_error; // host must submit name first
+        throw std::system_error; // host must submit name first
     }
     if (m_gameStarted) {
-        throw system_error; // can't choose opponent after game has started
+        throw std::system_error; // can't choose opponent after game has started
     }
 
     QMap<QTcpSocket*, QString>::iterator i;
@@ -84,7 +90,7 @@ void Server::processOpponentCommand(QTcpSocket* src, QString oppName) {
     }
     
     if (m_player2 == nullptr) {
-        throw system_error; // couldn't find player
+        throw std::system_error; // couldn't find player
     }
     m_spectators.removeFirst(m_player2);
     m_player1->write(serverCmdConnectedPlayer);
@@ -95,24 +101,48 @@ void Server::processOpponentCommand(QTcpSocket* src, QString oppName) {
 
 void Server::processStateCommand(QTcpSocket* src, QString state) {
     if (src != m_player1 && src != m_player2) {
-        throw system_error; // only the host can choose opponent
+        throw std::system_error; // only the host can choose opponent
     }
     if (!m_gameStarted) {
-        throw system_error; // can't send state before the game has started
+        throw std::system_error; // can't send state before the game has started
     }
 
     if (src == m_player1) {
         if (m_player2 == nullptr) {
-            throw system_error; // m_player2 must exist
+            throw std::system_error; // m_player2 must exist
         }
         m_player2->write(serverCmdState + state);
     } else if (src == m_player2) {
         if (m_player1 == nullptr) {
-            throw system_error; // m_player1 must exist
+            throw std::system_error; // m_player1 must exist
         }
         m_player1->write(serverCmdState + state);
     }
     broadcast(serverCmdState + state);
+}
+
+void Server::processChatCommand(QTcpSocket* src, QString json) {
+    std::string temp = json.toStdString();
+    ChatMessage chatMessage = JSONSerializer<ChatMessage>::fromJson(temp);
+    chatMessage.setSender(m_clientNames[src]);
+    temp = JSONSerializer<ChatMessage>::toJson(chatMessage);
+    json = QString::fromUtf8(temp.c_str());
+
+    if (src == m_player1) {
+        if (m_player1 == nullptr)
+            throw std::system_error;
+        m_player2->write(serverCmdChat + json);
+    } else if (src == m_player2) {
+        if (m_player2 == nullptr)
+            throw std::system_error;
+        m_player1->write(serverCmdChat + json);
+    } else {
+        if (chatMessage.getReceiver().size() == 0) {
+            broadcast(serverCmdChat + json);
+        } else {
+            m_clientSockets[chatMessage.getReceiver()]->write(serverCmdChat + json);
+        }
+    }
 }
 
 void Server::readMessage() {
@@ -125,8 +155,10 @@ void Server::readMessage() {
         processOpponentCommand(sourceSocket, message.sliced(serverCmdOpp.length())); 
     } else if (message.startsWith(serverCmdState)) { // received a game state
         processStateCommand(sourceSocket, message.sliced(serverCmdState.length()));
+    } else if (message.startsWith(serverCmdChat)) {
+        processChatCommand(sourceSocket, message.sliced(serverCmdChat.length()));
     } else { // unknown command
-        throw system_error; 
+        throw std::system_error;
     }
 }
 
@@ -138,7 +170,7 @@ void Server::disconnected() {
         m_player2 = nullptr;
         m_spectators.clear();  
         m_clientNames.clear();  
-        throw system_error; // handle differently
+        throw std::system_error; // handle differently
     } 
 
     if (!m_spectators.isEmpty()) {
