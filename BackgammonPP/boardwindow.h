@@ -20,6 +20,9 @@ public:
     void paintEvent(QPaintEvent *);
     ~BoardWindow();
 
+private slots:
+    void on_pbExitGame_clicked();
+
 private:
     Ui::BoardWindow *ui;
     BoardScene *m_boardScene;

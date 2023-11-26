@@ -23,6 +23,19 @@
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="pbExitGame">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>610</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Exit Game</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

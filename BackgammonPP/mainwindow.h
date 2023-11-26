@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include "boardwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,7 +32,10 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pbStartGame_clicked();
+
 private:
     Ui::MainWindow *ui;
+    BoardWindow *boardWindow;
 };
 #endif // MAINWINDOW_H

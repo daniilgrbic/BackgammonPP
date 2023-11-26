@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+
+    boardWindow = new BoardWindow();
+    connect(ui->pbStartGame, SIGNAL(clicked()), this, SLOT(on_buttonGame_clicked()));
+
 }
 
 MainWindow::~MainWindow()
@@ -56,3 +60,9 @@ void MainWindow::on_pushButton_clicked()
    ui->stackedWidget->setCurrentIndex(0);
 }
 
+
+void MainWindow::on_pbStartGame_clicked()
+{
+   boardWindow->show();
+   this->close();
+}

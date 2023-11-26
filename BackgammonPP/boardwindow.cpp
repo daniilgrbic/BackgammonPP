@@ -21,5 +21,10 @@ BoardWindow::~BoardWindow()
 
 void BoardWindow::paintEvent(QPaintEvent *) {
     QPainter painter(this);
-    // m_boardScene->setPainter(*painter);
 }
+
+void BoardWindow::on_pbExitGame_clicked()
+{
+    this->close();
+}
+
