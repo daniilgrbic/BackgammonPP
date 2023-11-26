@@ -2,9 +2,9 @@
 #define BOARDCHECKER_H
 
 #include <QGraphicsItem>
-#include "boardtriangle.h"
+#include "checkerholder.h"
 
-class BoardTriangle;
+class CheckerHolder;
 
 class BoardChecker : public QGraphicsItem
 {
@@ -13,15 +13,15 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     void setAnchorPoint(const QPointF& anchorPoint);
-    void setTriangle(BoardTriangle* triangle);
+    void setHolder(CheckerHolder* holder);
     qreal getSize();
-    BoardTriangle *getTriangle();
+    CheckerHolder *getHolder();
 private:
     qreal m_size;
     QColor m_color;
     QPointF m_anchorPoint;
     bool m_dragged;
-    BoardTriangle* m_triangle;
+    CheckerHolder* m_holder;
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;

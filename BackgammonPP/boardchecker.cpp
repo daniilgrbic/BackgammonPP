@@ -9,9 +9,9 @@
 #include <QWidget>
 #include <QList>
 #include <QLineF>
-#include "boardtriangle.h"
+#include "checkerholder.h"
 
-BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, QColor color) : QGraphicsItem(parent) , m_size(size), m_color(color), m_dragged(false), m_triangle(nullptr)
+BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, QColor color) : QGraphicsItem(parent) , m_size(size), m_color(color), m_dragged(false), m_holder(nullptr)
 {
     setZValue(1);
     setFlag(QGraphicsItem::ItemIsMovable);
@@ -35,14 +35,14 @@ void BoardChecker::setAnchorPoint(const QPointF &anchorPoint){
     this->m_anchorPoint = anchorPoint;
 }
 
-void BoardChecker::setTriangle(BoardTriangle *triangle){
-    m_triangle = triangle;
+void BoardChecker::setHolder(CheckerHolder *holder){
+    m_holder = holder;
 }
 qreal BoardChecker::getSize(){
     return m_size;
 }
-BoardTriangle *BoardChecker::getTriangle(){
-    return m_triangle;
+CheckerHolder *BoardChecker::getHolder(){
+    return m_holder;
 }
 
 
@@ -65,13 +65,13 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             qreal shortestDist = 100000;
             for(QGraphicsItem* item : qAsConst(colItems)){
                 QLineF line(item->sceneBoundingRect().center(), this->sceneBoundingRect().center());
-                if(line.length() < shortestDist && dynamic_cast<BoardTriangle*>(item)){
+                if(line.length() < shortestDist && dynamic_cast<CheckerHolder*>(item)){
                     shortestDist = line.length();
                     closestItem = item;
                 }
             }
-            if(BoardTriangle *closestTriangle = dynamic_cast<BoardTriangle*>(closestItem)){
-                    closestTriangle->addChecker(this);
+            if(CheckerHolder *closestHolder = dynamic_cast<CheckerHolder*>(closestItem)){
+                    closestHolder->addChecker(this);
             }else{
                 this->setPos(m_anchorPoint);
             }

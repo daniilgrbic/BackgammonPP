@@ -7,7 +7,7 @@
 #include "boardchecker.h"
 
 BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal x, qreal y, qreal width, qreal height, bool upwards)
-    : QGraphicsItem(parent), m_x(x), m_y(y), m_width(width), m_height(height), m_upwards(upwards)
+    : QGraphicsItem(parent), CheckerHolder(), m_x(x), m_y(y), m_width(width), m_height(height), m_upwards(upwards)
 {
     setZValue(-1);
     this->setPos(m_x, m_y);
@@ -31,16 +31,16 @@ void BoardTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
 }
 void BoardTriangle::addChecker(BoardChecker *checker){
-    if(checker->getTriangle()){
-        checker->getTriangle()->removeChecker(checker);
-        if(!checker->getTriangle()->m_checkers.empty()){
-            BoardChecker *lastChecker = checker->getTriangle()->m_checkers.back();
+    if(checker->getHolder()){
+        checker->getHolder()->removeChecker(checker);
+        if(!checker->getHolder()->m_checkers.empty()){
+            BoardChecker *lastChecker = checker->getHolder()->m_checkers.back();
             lastChecker->setFlag(QGraphicsItem::ItemIsSelectable, true);
             lastChecker->setFlag(QGraphicsItem::ItemIsMovable, true);
         }
 
     }
-    checker->setTriangle(this);
+    checker->setHolder(this);
     if(!m_checkers.empty()){
         BoardChecker *lastChecker = m_checkers.back();
         lastChecker->setFlag(QGraphicsItem::ItemIsSelectable, false);
