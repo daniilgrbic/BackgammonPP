@@ -66,11 +66,10 @@ void BoardState::fromVariant(const QVariant &variant)
     m_whiteBar = map.value("whiteBar").toInt();
     m_blackOff = map.value("blackOff").toInt();
     m_whiteOff = map.value("whiteOff").toInt();
-    // m_points.clear();
-    for(auto &pointVar : map.value("points").toList())
+
+    QVariantList pointList = map.value("points").toList();
+    for(int i = 0; i < NUMBER_OF_POINTS; i++)
     {
-        Point point;
-        point.fromVariant(pointVar);
-        // m_points.push_back(point);
+        m_points[i].fromVariant(pointList[i]);
     }
 }
