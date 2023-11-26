@@ -1,14 +1,13 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <network/server_commands.h>
-#include <qglobal.h>
 #include <QObject>
 #include <QString>
 #include <QList>
 #include <QMap>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <network/server_commands.h>
 
 
 class Server : public QObject {
@@ -28,11 +27,11 @@ private:
     void processOpponentCommand(QTcpSocket* src, QString oppName);
     void processStateCommand(QTcpSocket* src, QString state);
     void processChatCommand(QTcpSocket* src, QString json);
-    QBool m_gameStarted;
+    bool m_gameStarted;
     QTcpServer* m_server;
     QTcpSocket* m_player1;
     QTcpSocket* m_player2;
-    QList<QTcpSocket*> m_spectators;
+    QSet<QTcpSocket*> m_spectators;
     QMap<QTcpSocket*, QString> m_clientNames;
     QMap<QString, QTcpSocket*> m_clientSockets;
 };

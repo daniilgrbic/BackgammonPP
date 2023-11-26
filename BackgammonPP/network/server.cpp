@@ -28,14 +28,14 @@ void Server::connected() {
     if (connectedSocket != nullptr) {
         if (m_player1 == nullptr) {
             m_player1 = connectedSocket;
-            m_player1->write(serverCmdConnectedHost);
+            m_player1->write(serverCmdConnectedHost.toStdString().c_str());
         } else {
-            m_spectators.push_back(connectedSocket);
+            m_spectators.insert(connectedSocket);
 
             if (m_gameStarted == true) {
-                connectedSocket->write(serverCmdConnectedSpectator);
+                connectedSocket->write(serverCmdConnectedSpectator.toStdString().c_str());
             } else {
-                connectedSocket->write(serverCmdConnectedWaiting);
+                connectedSocket->write(serverCmdConnectedWaiting.toStdString().c_str());
             }
         }
 
@@ -48,11 +48,11 @@ void Server::connected() {
 }
 
 void Server::broadcast(QString message) {
-    QList<QTcpSocket*>::iterator i;
+    QSet<QTcpSocket*>::iterator i;
     for (i = m_spectators.begin(); i != m_spectators.end(); i++) {
         QTcpSocket* spectator = *i;
         if (spectator != nullptr) {
-            spectator->write(message);
+            spectator->write(message.toStdString().c_str());
         }
     }
 }
@@ -63,60 +63,65 @@ void Server::processNameCommand(QTcpSocket* src, QString name) {
         m_clientSockets[name] = src;
 
         if (!m_gameStarted && src != m_player1) {
-            m_player1->write(serverCmdPotOpp+name); // send the host potential opponent
+            m_player1->write((serverCmdPotOpp+name).toStdString().c_str()); // send the host potential opponent
         }
     } else {
-        throw std::system_error; // socket already has a name
+        throw std::system_error(EDOM, std::generic_category()); // socket already has a name
     }
 }
 
 void Server::processOpponentCommand(QTcpSocket* src, QString oppName) {
     if (src != m_player1) {
-        throw std::system_error; // only the host can choose opponent
+        throw std::system_error(EDOM, std::generic_category()); // only the host can choose opponent
     }
     if (m_clientNames.find(src) == m_clientNames.end()) {
-        throw std::system_error; // host must submit name first
+        throw std::system_error(EDOM, std::generic_category()); // host must submit name first
     }
     if (m_gameStarted) {
-        throw std::system_error; // can't choose opponent after game has started
+        throw std::system_error(EDOM, std::generic_category()); // can't choose opponent after game has started
     }
 
-    QMap<QTcpSocket*, QString>::iterator i;
-    for (i = m_clientNames.begin(); i != m_clientNames.end(); i++) {
-            QTcpSocket* spectator = *i;
-            if (spectator->second == oppName) {
-                m_player2 = spectator->first;
+    for (auto e : m_clientNames.keys()) {
+            QTcpSocket* spectator = e;
+            if (m_spectators.contains(spectator)) {
+
             }
+    }
+    if (m_clientSockets.find(oppName) != m_clientSockets.end()) {
+            if (m_player2 != nullptr)
+                m_spectators.insert(m_player2);
+
+            m_player2 = m_clientSockets[oppName];
     }
     
     if (m_player2 == nullptr) {
-        throw std::system_error; // couldn't find player
+        throw std::system_error(EDOM, std::generic_category()); // couldn't find player
     }
-    m_spectators.removeFirst(m_player2);
-    m_player1->write(serverCmdConnectedPlayer);
-    m_player2->write(serverCmdConnectedPlayer);
+
+    m_player1->write(serverCmdConnectedPlayer.toStdString().c_str());
+    m_player2->write(serverCmdConnectedPlayer.toStdString().c_str());
     broadcast(serverCmdConnectedSpectator);
     m_gameStarted = true;
 }
 
 void Server::processStateCommand(QTcpSocket* src, QString state) {
     if (src != m_player1 && src != m_player2) {
-        throw std::system_error; // only the host can choose opponent
+        throw std::system_error(EDOM, std::generic_category()); // only the host can choose opponent
     }
     if (!m_gameStarted) {
-        throw std::system_error; // can't send state before the game has started
+        throw std::system_error(EDOM, std::generic_category()); // can't send state before the game has started
     }
 
     if (src == m_player1) {
         if (m_player2 == nullptr) {
-            throw std::system_error; // m_player2 must exist
+            throw std::system_error(EDOM, std::generic_category()); // m_player2 must exist
         }
-        m_player2->write(serverCmdState + state);
+        m_player2->write((serverCmdState + state).toStdString().c_str());
     } else if (src == m_player2) {
         if (m_player1 == nullptr) {
-            throw std::system_error; // m_player1 must exist
+            throw std::system_error(EDOM, std::generic_category()); // m_player1 must exist
         }
-        m_player1->write(serverCmdState + state);
+        m_player1->write((serverCmdState + state).toStdString().c_str());
     }
     broadcast(serverCmdState + state);
 }
@@ -130,17 +135,17 @@ void Server::processChatCommand(QTcpSocket* src, QString json) {
 
     if (src == m_player1) {
         if (m_player1 == nullptr)
-            throw std::system_error;
-        m_player2->write(serverCmdChat + json);
+            throw std::system_error(EDOM, std::generic_category());
+        m_player2->write((serverCmdChat + json).toStdString().c_str());
     } else if (src == m_player2) {
         if (m_player2 == nullptr)
-            throw std::system_error;
-        m_player1->write(serverCmdChat + json);
+            throw std::system_error(EDOM, std::generic_category());
+        m_player1->write((serverCmdChat + json).toStdString().c_str());
     } else {
         if (chatMessage.getReceiver().size() == 0) {
-            broadcast(serverCmdChat + json);
+            broadcast((serverCmdChat + json).toStdString().c_str());
         } else {
-            m_clientSockets[chatMessage.getReceiver()]->write(serverCmdChat + json);
+            m_clientSockets[chatMessage.getReceiver()]->write((serverCmdChat + json).toStdString().c_str());
         }
     }
 }
@@ -158,7 +163,7 @@ void Server::readMessage() {
     } else if (message.startsWith(serverCmdChat)) {
         processChatCommand(sourceSocket, message.sliced(serverCmdChat.length()));
     } else { // unknown command
-        throw std::system_error;
+        throw std::system_error(EDOM, std::generic_category());
     }
 }
 
@@ -170,13 +175,13 @@ void Server::disconnected() {
         m_player2 = nullptr;
         m_spectators.clear();  
         m_clientNames.clear();  
-        throw std::system_error; // handle differently
+        throw std::system_error(EDOM, std::generic_category()); // handle differently
     } 
 
     if (!m_spectators.isEmpty()) {
         if (m_clientNames.find(disconnectedSocket) != m_clientNames.end()) {
             m_clientNames.erase(m_clientNames.find(disconnectedSocket));
         }
-        m_spectators.removeFirst(disconnectedSocket);
+        m_spectators.remove(disconnectedSocket);
     }
 }

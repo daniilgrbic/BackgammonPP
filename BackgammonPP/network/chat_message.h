@@ -8,7 +8,7 @@
 class ChatMessage : public Serializable
 {
 public:
-    ChatMessage(QString m, QString r = "")
+    ChatMessage(QString m = "", QString r = "")
         : message{m}
         , receiver{r}
         {};
