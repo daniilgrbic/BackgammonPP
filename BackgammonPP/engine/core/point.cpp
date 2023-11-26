@@ -35,10 +35,10 @@ uint Point::remove(uint count)
     return m_count;
 }
 
-// TODO
 int Point::idByPlayer(PlayerColor color, size_t index)
 {
-    return 0;
+    assert(index >= 1 && index <= 24);
+    return color == PlayerColor::WHITE ? index-1 : 23-index;
 }
 
 QVariant Point::toVariant() const
