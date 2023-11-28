@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include "barcheckerholder.h"
 
 class BoardBar : public QGraphicsItem
 {
@@ -14,7 +15,7 @@ public:
 private:
     qreal m_width;
     qreal m_height;
-
+    BarCheckerHolder *topHolder, *bottomHolder;
 };
 
 #endif // BOARDBAR_H

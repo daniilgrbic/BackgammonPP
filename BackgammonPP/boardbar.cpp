@@ -5,7 +5,11 @@ BoardBar::BoardBar(QGraphicsItem* parent, qreal width, qreal height)
       m_width(width),
       m_height(height)
 {
+    topHolder = new BarCheckerHolder(this, width, height * 0.3);
+    bottomHolder = new BarCheckerHolder(this, width, height * 0.3);
 
+    topHolder->setPos(0, 0.1*height);
+    bottomHolder->setPos(0, 0.6*height);
 }
 
 QRectF BoardBar::boundingRect() const {
