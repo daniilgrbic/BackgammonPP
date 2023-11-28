@@ -27,6 +27,7 @@ private:
     qreal m_height;
     bool m_upwards;
     QPolygonF m_polygon;
+    void updateCheckerPos();
 
 };
 

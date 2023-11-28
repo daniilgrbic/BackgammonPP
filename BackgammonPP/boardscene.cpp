@@ -38,12 +38,12 @@ void BoardScene::setBoardTriangles() {
 }
 void BoardScene::setBoardCheckers(){
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, 25, Qt::black);
+        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::black);
         boardCheckers.push_back(checker);
         blackCheckers.push_back(checker);
     }
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, 25, Qt::white);
+        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::white);
         boardCheckers.push_back(checker);
         whiteCheckers.push_back(checker);
     }

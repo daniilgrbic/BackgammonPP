@@ -49,17 +49,27 @@ void BoardTriangle::addChecker(BoardChecker *checker){
     m_checkers.push_back(checker);
     checker->setFlag(QGraphicsItem::ItemIsSelectable, true);
     checker->setFlag(QGraphicsItem::ItemIsMovable, true);
-    if(m_upwards){
-        checker->setPos(this->sceneBoundingRect().center().x(), this->pos().y() + m_height + checker->getSize() - 2 * checker->getSize() * m_checkers.size());
-    }else{
-        checker->setPos(this->sceneBoundingRect().center().x(),this->pos().y() - checker->getSize() + 2 * checker->getSize() * m_checkers.size());
+    updateCheckerPos();
+}
+
+void BoardTriangle::updateCheckerPos()
+{
+    if(m_checkers.empty())
+        return;
+    qreal centerDistance = std::min((m_height - m_width) / (m_checkers.size() - 1), m_width);
+    for(int i = 0; i < m_checkers.size(); i++){
+        BoardChecker *checker = m_checkers[i];
+        if(m_upwards){
+            checker->setPos(this->sceneBoundingRect().center().x(), this->pos().y() + m_height - checker->getSize() - centerDistance * i);
+        }else{
+            checker->setPos(this->sceneBoundingRect().center().x(),this->pos().y() + centerDistance * i);
+        }
+        checker->setAnchorPoint(checker->pos());
+        checker->setZValue(i);
     }
-    checker->setAnchorPoint(checker->pos());
-
-
-
 }
 
 void BoardTriangle::removeChecker(BoardChecker *checker){
     m_checkers.erase(std::remove(m_checkers.begin(), m_checkers.end(), checker), m_checkers.end());
+    updateCheckerPos();
 }
