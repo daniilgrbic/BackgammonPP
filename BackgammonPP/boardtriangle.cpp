@@ -30,27 +30,6 @@ void BoardTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->drawPolygon(m_polygon);
 
 }
-void BoardTriangle::addChecker(BoardChecker *checker){
-    if(checker->getHolder()){
-        checker->getHolder()->removeChecker(checker);
-        if(!checker->getHolder()->m_checkers.empty()){
-            BoardChecker *lastChecker = checker->getHolder()->m_checkers.back();
-            lastChecker->setFlag(QGraphicsItem::ItemIsSelectable, true);
-            lastChecker->setFlag(QGraphicsItem::ItemIsMovable, true);
-        }
-
-    }
-    checker->setHolder(this);
-    if(!m_checkers.empty()){
-        BoardChecker *lastChecker = m_checkers.back();
-        lastChecker->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        lastChecker->setFlag(QGraphicsItem::ItemIsMovable, false);
-    }
-    m_checkers.push_back(checker);
-    checker->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    checker->setFlag(QGraphicsItem::ItemIsMovable, true);
-    updateCheckerPos();
-}
 
 void BoardTriangle::updateCheckerPos()
 {
@@ -62,14 +41,10 @@ void BoardTriangle::updateCheckerPos()
         if(m_upwards){
             checker->setPos(this->sceneBoundingRect().center().x(), this->pos().y() + m_height - checker->getSize() - centerDistance * i);
         }else{
-            checker->setPos(this->sceneBoundingRect().center().x(),this->pos().y() + centerDistance * i);
+            checker->setPos(this->sceneBoundingRect().center().x(),this->pos().y() + checker->getSize() + centerDistance * i);
         }
         checker->setAnchorPoint(checker->pos());
         checker->setZValue(i);
     }
 }
 
-void BoardTriangle::removeChecker(BoardChecker *checker){
-    m_checkers.erase(std::remove(m_checkers.begin(), m_checkers.end(), checker), m_checkers.end());
-    updateCheckerPos();
-}

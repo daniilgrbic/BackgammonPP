@@ -16,10 +16,9 @@ class BoardTriangle : public QGraphicsItem, public CheckerHolder
 {
 public:
     BoardTriangle(QGraphicsItem *parent, qreal m_x, qreal m_y, qreal width, qreal height, bool upwards);
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    QRectF boundingRect() const;
-    virtual void addChecker(BoardChecker* checker) override;
-    virtual void removeChecker(BoardChecker* checker) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    QRectF boundingRect() const override;
+    void updateCheckerPos() override;
 private:
     qreal m_x;
     qreal m_y;
@@ -27,7 +26,6 @@ private:
     qreal m_height;
     bool m_upwards;
     QPolygonF m_polygon;
-    void updateCheckerPos();
 
 };
 

@@ -9,8 +9,9 @@ class CheckerHolder
 {
 public:
     CheckerHolder();
-    virtual void addChecker(BoardChecker* checker) = 0;
-    virtual void removeChecker(BoardChecker* checker) = 0;
+    virtual void addChecker(BoardChecker* checker);
+    virtual void removeChecker(BoardChecker* checker);
+    virtual void updateCheckerPos() = 0;
     QVector<BoardChecker*> m_checkers;
 };
 
