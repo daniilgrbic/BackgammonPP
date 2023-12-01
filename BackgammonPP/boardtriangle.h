@@ -26,7 +26,6 @@ private:
     qreal m_height;
     bool m_upwards;
     QPolygonF m_polygon;
-
 };
 
 #endif // BOARDTRIANGLE_H

@@ -49,12 +49,12 @@ CheckerHolder *BoardChecker::getHolder(){
 void BoardChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     setCursor(Qt::ClosedHandCursor);
-    std::cout << "click!" << std::endl;
+    setZValue(100);
     QGraphicsItem::mousePressEvent(event);
 }
 void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    std::cout << "release!" << std::endl;
+        setZValue(1);
     setCursor(Qt::OpenHandCursor);
     if(m_dragged){
         QList<QGraphicsItem*> colItems = collidingItems();
