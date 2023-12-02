@@ -13,6 +13,11 @@ int BoardState::bar(PlayerColor player) const {
     return player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
 }
 
+int BoardState::off(PlayerColor player) const
+{
+    return player == PlayerColor::BLACK ? m_blackOff : m_whiteOff;
+}
+
 Point& BoardState::point(const int pos) {
     assert(pos >= 0 and pos < NUMBER_OF_POINTS);
     return m_points[pos];

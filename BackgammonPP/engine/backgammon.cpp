@@ -13,36 +13,6 @@ Backgammon::Backgammon() : Game()
     };
 }
 
-GameResult Backgammon::checkFinished()
-{
-    return m_gameResult;
-}
-
-bool Backgammon::isBlot(int point, PlayerColor player) const {
-    const Point& p = m_board.point(Point::idByPlayer(player, point));
-    if(p.count() == 0 || p.count() > 1)
-        return false;
-    return p.owner().value() != player;
-}
-
-bool Backgammon::isBlocked(int point, PlayerColor player) const {
-    const Point& p = m_board.point(Point::idByPlayer(player, point));
-    if(p.count() <= 1)
-        return false;
-    return p.owner().value() != player;
-}
-
-bool Backgammon::isBearingOff(PlayerColor player) const {
-    if(m_board.bar(player))
-        return false;
-    for(int pointId = 24; pointId >= 7; pointId++) {
-        auto owner = m_board.point(Point::idByPlayer(player, pointId)).owner();
-        if(owner.has_value() && owner.value() == player)
-            return false;
-    }
-    return true;
-}
-
 // TODO:
 // - makes it work for both directions (currently only works for 24 -> 1)
 // - refactor function
@@ -141,4 +111,9 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
         [onRoll](const RollState& roll) { return Turn { 0, onRoll, roll.moves() }; }
     );
     return legalTurns;
+}
+
+bool Backgammon::isFinished(PlayerColor player) const
+{
+    return m_board.off(player) == CHECKERS_COUNT;
 }

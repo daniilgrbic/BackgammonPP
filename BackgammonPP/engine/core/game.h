@@ -6,20 +6,27 @@
 #include "roll.h"
 
 #include <vector>
-#include <variant>
+#include <optional>
 
 class Game
 {
 public:
     Game();
     virtual std::vector<Turn> generateLegalTurns() = 0;
-    GameResult playTurn(Turn turn);
+    void playTurn(Turn turn);
+    std::optional<GameResult> getResult() const;
+    virtual bool isFinished(PlayerColor player) const;
 
 protected:
-    virtual GameResult checkFinished() = 0;
+    bool isBlot(int point, PlayerColor player) const;
+    bool isBlocked(int point, PlayerColor player) const;
+    bool isBearingOff(PlayerColor player) const;
 
     BoardState m_board;
     Roll m_currentRoll;
     std::vector<Turn> m_history;
-    GameResult m_gameResult;
+    std::optional<GameResult> m_result;
+
+private:
+    const int CHECKERS_COUNT;
 };

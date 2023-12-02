@@ -15,6 +15,7 @@ public:
     BoardState();
 
     int bar(PlayerColor player) const;
+    int off(PlayerColor player) const;
     Point& point(const int pos);
     const Point& point(const int pos) const;
     void move(const Move& move);
