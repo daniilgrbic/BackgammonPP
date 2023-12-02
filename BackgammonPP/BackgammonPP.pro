@@ -1,8 +1,9 @@
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++17
+CONFIG += c++20
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -10,10 +11,19 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    network/chat_message.cpp \
+    network/server.cpp \
+    network/client.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    network/chat_message.h \
+    network/server.h \
+    network/client.h \
+    network/server_commands.h \
+    utility/jsonserializer.h \
+    utility/serializable.h
 
 FORMS += \
     mainwindow.ui
