@@ -5,29 +5,41 @@
 
 Backgammon::Backgammon() : Game()
 {
-    for(auto color : {PlayerColor::WHITE, PlayerColor::BLACK}) {
-        m_board.point(Point::idByPlayer(color, 5)).add(color, 5);
-        m_board.point(Point::idByPlayer(color, 7)).add(color, 3);
-        m_board.point(Point::idByPlayer(color, 13)).add(color, 5);
-        m_board.point(Point::idByPlayer(color, 24)).add(color, 2);
+    for(auto player : {PlayerColor::WHITE, PlayerColor::BLACK}) {
+        m_board.point(Point::idByPlayer(player, 5)).add(player, 5);
+        m_board.point(Point::idByPlayer(player, 7)).add(player, 3);
+        m_board.point(Point::idByPlayer(player, 13)).add(player, 5);
+        m_board.point(Point::idByPlayer(player, 24)).add(player, 2);
     };
 }
-
 
 GameResult Backgammon::checkFinished()
 {
     return m_gameResult;
 }
 
-bool Backgammon::isBlot([[maybe_unused]] int point, [[maybe_unused]] PlayerColor player) const {
-    return true;
+bool Backgammon::isBlot(int point, PlayerColor player) const {
+    const Point& p = m_board.point(Point::idByPlayer(player, point));
+    if(p.count() == 0 || p.count() > 1)
+        return false;
+    return p.owner().value() != player;
 }
 
-bool Backgammon::isBlocked([[maybe_unused]] int point,[[maybe_unused]] PlayerColor player) const {
-    return true;
+bool Backgammon::isBlocked(int point, PlayerColor player) const {
+    const Point& p = m_board.point(Point::idByPlayer(player, point));
+    if(p.count() <= 1)
+        return false;
+    return p.owner().value() != player;
 }
 
-bool Backgammon::isBearingOff([[maybe_unused]] PlayerColor player) const {
+bool Backgammon::isBearingOff(PlayerColor player) const {
+    if(m_board.bar(player))
+        return false;
+    for(int pointId = 24; pointId >= 7; pointId++) {
+        auto owner = m_board.point(Point::idByPlayer(player, pointId)).owner();
+        if(owner.has_value() && owner.value() == player)
+            return false;
+    }
     return true;
 }
 
