@@ -24,6 +24,7 @@
     1.2 Send message to other spectators, optionally choosing a receiver.
         1.2.1 If the user has chosen a specific receiver, only they will receive the message.
         1.2.2 Otherwise, all other spectators will receive the message.
+```
 
 ### Alternative Flows
 ```
