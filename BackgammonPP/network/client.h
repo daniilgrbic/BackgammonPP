@@ -28,7 +28,8 @@ public slots:
     void readMessage();
     void sendStateToServer(QString state);
     void sendOpponentToServer(QString state);
-    void sendNameToServer(QString state);
+    void sendNameToServer(QString name);
+    void sendChatMessageToServer(QString message);
     void disconnected();
 
 private:

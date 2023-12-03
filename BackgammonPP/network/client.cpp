@@ -20,6 +20,7 @@ bool Client::connectClient(QString ipAddress) {
 }
 
 void Client::disconnected() {
+    // TODO
     delete m_socket;
 }
 
@@ -66,6 +67,15 @@ void Client::sendOpponentToServer(QString oppName) {
 void Client::sendNameToServer(QString name) {
     if (m_socket->state() == QAbstractSocket::ConnectedState) {
         m_socket->write((serverCmdName + name).toStdString().c_str());
+        m_socket->waitForBytesWritten();
+    } else {
+        throw std::system_error(EDOM, std::generic_category());
+    }
+}
+
+void Client::sendChatMessageToServer(QString chatMessage) {
+    if (m_socket->state() == QAbstractSocket::ConnectedState) {
+        m_socket->write((serverCmdName + chatMessage).toStdString().c_str());
         m_socket->waitForBytesWritten();
     } else {
         throw std::system_error(EDOM, std::generic_category());
