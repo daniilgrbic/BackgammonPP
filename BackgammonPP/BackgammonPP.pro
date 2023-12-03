@@ -12,21 +12,37 @@ CONFIG += c++20
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    engine/backgammon.cpp \
+    engine/core/boardstate.cpp \
+    engine/core/die.cpp \
+    engine/core/game.cpp \
+    engine/core/point.cpp \
+    engine/core/roll.cpp \
     network/chat_message.cpp \
     network/server.cpp \
     network/client.cpp
 
 HEADERS += \
     mainwindow.h \
+    engine/backgammon.h \
+    engine/core/boardstate.h \
+    engine/core/die.h \
+    engine/core/game.h \
+    engine/core/gameresult.h \
+    engine/core/move.h \
+    engine/core/playercolor.h \
+    engine/core/point.h \
+    engine/core/roll.h \
+    engine/core/specialposition.h \
+    engine/core/turn.h \
+    utility/jsonserializer.h \
+    utility/serializable.h \
     network/chat_message.h \
     network/server.h \
     network/client.h \
-    network/server_commands.h \
-    utility/jsonserializer.h \
-    utility/serializable.h
+    network/server_commands.h
 
-FORMS += \
-    mainwindow.ui
+FORMS += *.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
