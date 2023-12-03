@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QPixmap>
+#include <QImage>
+#include <QString>
 #include "boardwindow.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,24 +21,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_btHost_clicked();
+    void on_btCreateGame_clicked();
 
-    void on_pbBackHosting_clicked();
-
-    void on_btPrefs_clicked();
-
-    void on_btJoin_clicked();
-
-    void on_pbBackJoin_clicked();
-
-    void on_pbExit_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_pbStartGame_clicked();
+    void on_btExit_clicked();
 
 private:
     Ui::MainWindow *ui;
     BoardWindow *boardWindow;
+    QString backgroundPicPath = "D:/RS/backgammon/BackgammonPP/img/blurred_backgammon_blacked.png";
+
 };
 #endif // MAINWINDOW_H

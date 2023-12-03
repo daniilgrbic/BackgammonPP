@@ -6,193 +6,238 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>439</width>
-    <height>459</height>
+    <width>683</width>
+    <height>412</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background: black;
+	color: white;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <property name="currentIndex">
-       <number>1</number>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="autoFillBackground">
+       <bool>false</bool>
       </property>
-      <widget class="QWidget" name="firstView">
+      <widget class="QPushButton" name="btExit">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>320</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+}
+
+QPushButton:hover {
+	color: green;
+}</string>
+       </property>
+       <property name="text">
+        <string>Exit Game</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title_label">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>0</y>
+         <width>691</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Corbel</family>
+         <pointsize>21</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+         <strikeout>false</strikeout>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: white;
+}</string>
+       </property>
+       <property name="text">
+        <string>Backgammon++</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bg_label">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>-30</y>
+         <width>691</width>
+         <height>431</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	filter: blur(8px);
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>110</y>
+         <width>145</width>
+         <height>231</height>
+        </rect>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <widget class="QPushButton" name="btHost">
+         <widget class="QPushButton" name="btCreateGame">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Corbel</family>
+            <pointsize>13</pointsize>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>OpenHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: left;
+}
+
+QPushButton:hover {
+	color: green;
+}</string>
+          </property>
           <property name="text">
-           <string>Host a Game</string>
+           <string>Create Game</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btJoin">
+         <widget class="QPushButton" name="btJoinGame">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Corbel</family>
+            <pointsize>13</pointsize>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>OpenHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: left;
+}
+
+QPushButton:hover {
+	color: green;
+}</string>
+          </property>
           <property name="text">
-           <string>Join a Game</string>
+           <string>Join Game</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btPrefs">
+         <widget class="QPushButton" name="btPreferences">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Corbel</family>
+            <pointsize>13</pointsize>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>OpenHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: left;
+}
+
+QPushButton:hover {
+	color: green;
+}</string>
+          </property>
           <property name="text">
            <string>Preferences</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="pbExit">
-          <property name="text">
-           <string>Exit Game</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="hostView">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <layout class="QFormLayout" name="formLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Nickname: </string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Game version:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QComboBox" name="comboBox"/>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="checkBox">
-            <property name="text">
-             <string>Play with AI bot</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QListView" name="listView"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbStartGame">
-          <property name="text">
-           <string>Start the game</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbBackHosting">
-          <property name="text">
-           <string>Go back</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="pageJoin">
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <layout class="QFormLayout" name="formLayout_2">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Nickname: </string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit_2"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Host address:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_3"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbJoinConfirm">
-          <property name="text">
-           <string>Join the game</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbBackJoin">
-          <property name="text">
-           <string>Go back</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="pagePreferences">
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>preferneces: to do</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Go back</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+      <zorder>bg_label</zorder>
+      <zorder>btExit</zorder>
+      <zorder>title_label</zorder>
+      <zorder>layoutWidget</zorder>
      </widget>
     </item>
    </layout>
@@ -202,7 +247,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>439</width>
+     <width>683</width>
      <height>21</height>
     </rect>
    </property>
