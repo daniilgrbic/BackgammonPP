@@ -10,6 +10,13 @@ CONFIG += c++20
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    barcheckerholder.cpp \
+    boardbar.cpp \
+    boardchecker.cpp \
+    boardscene.cpp \
+    boardtriangle.cpp \
+    boardwindow.cpp \
+    checkerholder.cpp \
     main.cpp \
     mainwindow.cpp \
     engine/backgammon.cpp \
@@ -40,9 +47,19 @@ HEADERS += \
     network/chat_message.h \
     network/server.h \
     network/client.h \
-    network/server_commands.h
+    network/server_commands.h \
+    barcheckerholder.h \
+    boardbar.h \
+    boardchecker.h \
+    boardscene.h \
+    boardtriangle.h \
+    boardwindow.h \
+    checkerholder.h \
+    mainwindow.h
 
-FORMS += *.ui
+FORMS += \
+    boardwindow.ui \
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
