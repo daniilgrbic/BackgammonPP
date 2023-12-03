@@ -5,6 +5,7 @@
 #include <QString>
 #include <QTcpSocket>
 #include <system_error>
+#include <network/server_commands.h>
 
 
 class Client : public QObject {
@@ -12,7 +13,7 @@ class Client : public QObject {
 public:
     Client(QObject* parent = nullptr);
     ~Client();
-    bool connect(QString ipAddress);
+    bool connectClient(QString ipAddress);
 
 signals:
     void connectedAsHost();
