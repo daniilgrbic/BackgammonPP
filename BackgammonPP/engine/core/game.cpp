@@ -5,6 +5,9 @@ Game::Game()
     , m_history(std::vector<Turn>{})
 { }
 
+Game::~Game()
+{}
+
 void Game::playTurn(Turn turn)
 {
     for(const auto move : turn.m_moves)
