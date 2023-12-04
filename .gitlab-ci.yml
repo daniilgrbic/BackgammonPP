@@ -25,11 +25,13 @@ pages:
   dependencies:
     - build_specification
   script: mv docs/specification.pdf public/specification.pdf
-
   artifacts:
     paths:
       - public
-
+  rules:
+  - changes:
+    - docs/*
+  allow_failure: true
 
 discord_notification:
   stage: notification
