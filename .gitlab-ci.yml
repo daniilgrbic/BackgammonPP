@@ -22,7 +22,7 @@ pages:
   stage: deploy_docs
   dependencies:
     - build_specification
-  script: mv docs/specification.pdf public/specification.pdf
+  script: mv specification.pdf public/specification.pdf
   artifacts:
     paths:
       - public
