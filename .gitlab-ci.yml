@@ -7,7 +7,7 @@ variables:
 build_specification:
   stage: build_docs
   image: ctornau/latex
-  script: cd docs && latexmk --lualatex -pdf specification.tex
+  script: cd docs && latexmk -shell-escape -pdf specification.tex
   rules:
   - changes:
     - docs/*
