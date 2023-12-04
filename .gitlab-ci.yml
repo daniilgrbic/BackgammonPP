@@ -8,8 +8,6 @@ variables:
 build_specification:
   stage: build_docs
   image: ctornau/latex
-  cache:
-    key: $CI_JOB_NAME
   script: cd docs && latexmk -shell-escape -pdf specification.tex
   rules:
   - changes:
@@ -39,5 +37,3 @@ discord_notification:
     - wget https://raw.githubusercontent.com/DiscordHooks/gitlab-ci-discord-webhook/master/send.sh
     - chmod +x send.sh
     - ./send.sh $CI_COMMIT_MESSAGE $WEBHOOK_URL
-  cache:
-    key: $CI_JOB_NAME
