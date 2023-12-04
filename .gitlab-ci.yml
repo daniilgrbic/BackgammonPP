@@ -1,5 +1,6 @@
 stages:
   - build_docs
+  - deploy_docs
   - notification
 variables:
   WEBHOOK_URL: "https://discord.com/api/webhooks/1180275747592609912/N_kk8D3GAGV9xeNJsNEHRudwySxCPLvgtR60BO-BZJLF9PaUHfcCP129VY6I3OLYe0nQ"
@@ -17,6 +18,18 @@ build_specification:
     paths:
       - docs/specification.pdf
   allow_failure: true
+
+pages:
+  image: alpine:latest
+  stage: deploy_docs
+  dependencies:
+    - build_docs
+  script:
+    - mv docs/specification.pdf public/specification.pdf
+
+  artifacts:
+    paths:
+      - public
 
 
 discord_notification:
