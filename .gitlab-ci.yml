@@ -17,22 +17,6 @@ build_specification:
       - docs/specification.pdf
   allow_failure: true
 
-pages:
-  image: alpine:latest
-  stage: deploy_docs
-  dependencies:
-    - build_specification
-  script: 
-    - mkdir public
-    - mv docs/specification.pdf public/
-  artifacts:
-    paths:
-      - public
-  rules:
-  - changes:
-    - docs/*
-  allow_failure: true
-
 discord_notification:
   stage: notification
   script:
