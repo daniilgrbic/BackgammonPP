@@ -23,6 +23,7 @@ pages:
   dependencies:
     - build_specification
   script: 
+    - mkdir public
     - mv docs/specification.pdf public/
   artifacts:
     paths:
