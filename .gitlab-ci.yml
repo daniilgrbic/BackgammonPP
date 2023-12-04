@@ -23,7 +23,7 @@ pages:
   image: alpine:latest
   stage: deploy_docs
   dependencies:
-    - build_docs
+    - build_specification
   script: mv docs/specification.pdf public/specification.pdf
 
   artifacts:
