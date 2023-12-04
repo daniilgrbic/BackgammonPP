@@ -24,7 +24,7 @@ pages:
     - build_specification
   script: 
     - ls docs
-    - mv specification.pdf public/specification.pdf
+    - mv docs/specification.pdf public/specification.pdf
   artifacts:
     paths:
       - public
