@@ -14,6 +14,7 @@ SOURCES += \
     engine/core/boardstate.cpp \
     engine/core/die.cpp \
     engine/core/game.cpp \
+    engine/core/move.cpp \
     engine/core/point.cpp \
     engine/core/roll.cpp
 

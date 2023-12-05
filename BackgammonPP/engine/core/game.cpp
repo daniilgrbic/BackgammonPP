@@ -21,18 +21,16 @@ std::optional<GameResult> Game::getResult() const
     return m_result;
 }
 
-bool Game::isBlot(int point, PlayerColor player) const {
-    const Point& p = m_board.point(Point::idByPlayer(player, point));
-    if(p.count() == 0 || p.count() > 1)
+bool Game::isBlot(const Point& point, PlayerColor player) const {
+    if(point.count() == 0 || point.count() > 1)
         return false;
-    return p.owner().value() != player;
+    return point.owner().value() == player;
 }
 
-bool Game::isBlocked(int point, PlayerColor player) const {
-    const Point& p = m_board.point(Point::idByPlayer(player, point));
-    if(p.count() <= 1)
+bool Game::isBlocked(const Point& point, PlayerColor player) const {
+    if(point.count() <= 1)
         return false;
-    return p.owner().value() != player;
+    return point.owner().value() == player;
 }
 
 bool Game::isBearingOff(PlayerColor player) const {

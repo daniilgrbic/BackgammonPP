@@ -19,8 +19,8 @@ public:
 
 protected:
     Game();
-    bool isBlot(int point, PlayerColor player) const;
-    bool isBlocked(int point, PlayerColor player) const;
+    bool isBlot(const Point& point, PlayerColor player) const;
+    bool isBlocked(const Point& point, PlayerColor player) const;
     bool isBearingOff(PlayerColor player) const;
 
     BoardState m_board;

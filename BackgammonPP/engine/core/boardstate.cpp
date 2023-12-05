@@ -1,5 +1,7 @@
 #include "boardstate.h"
 
+#include <algorithm>
+
 #include <QVariant>
 #include <QVariantMap>
 #include <QVariantList>
@@ -13,8 +15,7 @@ int BoardState::bar(PlayerColor player) const {
     return player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
 }
 
-int BoardState::off(PlayerColor player) const
-{
+int BoardState::off(PlayerColor player) const {
     return player == PlayerColor::BLACK ? m_blackOff : m_whiteOff;
 }
 
@@ -30,7 +31,35 @@ const Point& BoardState::point(const int pos) const {
 
 void BoardState::move(const Move &move)
 {
-    (void) move;
+    const auto& player = move.m_player;
+    const auto& from = move.m_from;
+    const auto& to = move.m_to;
+
+    auto& bar = player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
+    int& off = player == PlayerColor::BLACK ? m_blackOff : m_whiteOff;
+
+    if (const int* fromPos = std::get_if<int>(&from)) {
+        point(*fromPos).remove();
+    } else if (std::get<SpecialPosition>(from) == SpecialPosition::BAR) {
+        assert(bar >= 1);
+        bar -= 1;
+    } else {
+        assert(false);
+    }
+
+    if (const int* toPos = std::get_if<int>(&to)) {
+        point(*toPos).add(player);
+    } else if (std::get<SpecialPosition>(to) == SpecialPosition::BAR) {
+        bar += 1;
+    } else {
+        off += 1;
+    }
+}
+
+BoardState BoardState::mirror() const {
+    auto nextState = *this;
+    std::reverse(nextState.m_points.begin(), nextState.m_points.end());
+    return nextState;
 }
 
 BoardState BoardState::getNextState(const Move& move) const {

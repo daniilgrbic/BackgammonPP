@@ -13,15 +13,16 @@ Backgammon::Backgammon() : Game()
     };
 }
 
+// WIP
 // TODO:
-// - makes it work for both directions (currently only works for 24 -> 1)
+// - exhaustive testing: currently tested only for regular moves (from point to point, without blots)
 // - refactor function
 std::vector<Turn> Backgammon::generateLegalTurns() {
 
     class RollState {
     public:
         RollState(const std::vector<Move>& moves, const BoardState& board, const std::vector<int>& dice)
-            : m_moves { moves}, m_board { board }, m_dice { dice }
+            : m_moves { moves }, m_board { board }, m_dice { dice }
         {}
 
         const BoardState& board() const { return m_board; }
@@ -53,11 +54,15 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     };
 
     auto onRoll = m_currentRoll.onRoll();
-    auto opponent = onRoll == PlayerColor::BLACK ? PlayerColor::WHITE : PlayerColor::BLACK;
-    std::vector<int> dice;
-    auto board = m_board;
+    auto opponent = onRoll == PlayerColor::WHITE ? PlayerColor::BLACK : PlayerColor::WHITE;
 
-    std::vector<RollState> level {{{}, board, dice}};
+    std::vector<RollState> level {
+        {
+            {},
+            onRoll == PlayerColor::WHITE ? m_board : m_board.mirror(),
+            m_currentRoll.dice()
+        }
+    };
     std::vector<RollState> nextLevel = level;
 
     do {
@@ -71,11 +76,11 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
             for (size_t i = 0; i < dice.size(); ++i) {
                 auto die = dice[i];
                 if (board.bar(onRoll)) {
-                    auto nextPos = Point::idByPlayer(onRoll, NUMBER_OF_POINTS - die);
-                    if (!isBlocked(nextPos, opponent) && !isBlot(nextPos, opponent)) {
+                    auto nextPos = NUMBER_OF_POINTS - die;
+                    if (!isBlocked(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
                         auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos);
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                    } else if (isBlot(nextPos, opponent)) {
+                    } else if (isBlot(board.point(nextPos), opponent)) {
                         auto opponentMove = Move(opponent, nextPos, SpecialPosition::BAR);
                         auto onRollMove = Move(onRoll, SpecialPosition::BAR, nextPos);
                         nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
@@ -89,12 +94,12 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                                 nextLevel.push_back(roll.getNextRollState(nextMove, i));
                             }
                             break;
-                        } else if (!isBlocked(nextPos, opponent) && !isBlot(nextPos, opponent)) {
-                            auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos);
+                        } else if (!isBlocked(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
+                            auto nextMove = Move(onRoll, pos, nextPos);
                             nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                        } else if (isBlot(nextPos, opponent)) {
+                        } else if (isBlot(board.point(nextPos), opponent)) {
                             auto opponentMove = Move(opponent, nextPos, SpecialPosition::BAR);
-                            auto onRollMove = Move(onRoll, SpecialPosition::BAR, nextPos);
+                            auto onRollMove = Move(onRoll, pos, nextPos);
                             nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
                         }
                     }
@@ -108,7 +113,18 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     std::transform(
         level.cbegin(), level.cend(),
         std::back_inserter(legalTurns),
-        [onRoll](const RollState& roll) { return Turn { 0, onRoll, roll.moves() }; }
+        [onRoll](const RollState& roll) {
+            std::vector<Move> moves;
+            if (onRoll == PlayerColor::BLACK) {
+                std::transform(
+                    roll.moves().cbegin(), roll.moves().cend(),
+                    std::back_inserter(moves),
+                    [](const auto& move) { return move.mirror(); }
+                );
+            } else {
+                moves = std::move(roll.moves());
+            }
+            return Turn { 0, onRoll, moves }; }
     );
     return legalTurns;
 }
