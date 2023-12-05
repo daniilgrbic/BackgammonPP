@@ -6,8 +6,8 @@
 Backgammon::Backgammon() : Game()
 {
     for(auto player : {PlayerColor::WHITE, PlayerColor::BLACK}) {
-        m_board.point(Point::idByPlayer(player, 5)).add(player, 5);
-        m_board.point(Point::idByPlayer(player, 7)).add(player, 3);
+        m_board.point(Point::idByPlayer(player, 6)).add(player, 5);
+        m_board.point(Point::idByPlayer(player, 8)).add(player, 3);
         m_board.point(Point::idByPlayer(player, 13)).add(player, 5);
         m_board.point(Point::idByPlayer(player, 24)).add(player, 2);
     };
@@ -80,10 +80,10 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                         auto onRollMove = Move(onRoll, SpecialPosition::BAR, nextPos);
                         nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
                     }
-                } else for (int pos = NUMBER_OF_POINTS - 1; pos >= 0; --pos) {
+                } else for (int pos = NUMBER_OF_POINTS; pos >= 1; --pos) {
                     if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
                         auto nextPos = pos - die;
-                        if (nextPos < 0) {
+                        if (nextPos <= 0) {
                             if (isBearingOff(onRoll)) {
                                 auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                                 nextLevel.push_back(roll.getNextRollState(nextMove, i));

@@ -19,13 +19,13 @@ int BoardState::off(PlayerColor player) const
 }
 
 Point& BoardState::point(const int pos) {
-    assert(pos >= 0 and pos < NUMBER_OF_POINTS);
-    return m_points[pos];
+    assert(pos >= 1 and pos <= NUMBER_OF_POINTS);
+    return m_points[pos - 1];
 }
 
 const Point& BoardState::point(const int pos) const {
-    assert(pos >= 0 and pos < NUMBER_OF_POINTS);
-    return m_points[pos];
+    assert(pos >= 1 and pos <= NUMBER_OF_POINTS);
+    return m_points[pos - 1];
 }
 
 void BoardState::move(const Move &move)

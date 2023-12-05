@@ -1,3 +1,4 @@
+#include "boardstate.h"
 #include "point.h"
 
 #include <cassert>
@@ -37,8 +38,8 @@ uint Point::remove(uint count)
 
 int Point::idByPlayer(PlayerColor color, size_t index)
 {
-    assert(index >= 1 && index <= 24);
-    return color == PlayerColor::WHITE ? index-1 : 23-index;
+    assert(index >= 1 && index <= NUMBER_OF_POINTS);
+    return color == PlayerColor::WHITE ? index : NUMBER_OF_POINTS + 1 - index;
 }
 
 QVariant Point::toVariant() const
