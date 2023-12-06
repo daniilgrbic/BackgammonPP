@@ -13,6 +13,7 @@ SOURCES += \
     boardbar.cpp \
     boardchecker.cpp \
     boardscene.cpp \
+    boardsidebar.cpp \
     boardtriangle.cpp \
     boardwindow.cpp \
     checkerholder.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     boardbar.h \
     boardchecker.h \
     boardscene.h \
+    boardsidebar.h \
     boardtriangle.h \
     boardwindow.h \
     checkerholder.h \

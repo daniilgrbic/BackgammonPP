@@ -4,27 +4,31 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     : QGraphicsScene(parent),
       m_height(height),
       m_width(width),
-      barWidth(m_width / (1 + trianglePairs) ),///TODO: here too
-      triangleHeight(m_height*0.4), ///TODO: make constants instead of hardcoding
-      triangleWidth((m_width-barWidth)/trianglePairs)
+      triangleHeight(m_height*heightCoef), ///TODO: make constants instead of hardcoding
+      triangleWidth( (m_width) / (trianglePairs + midBarCoef + 2 * sideBarCoef) ),
+      barWidth(triangleWidth*midBarCoef),///TODO: here too
+      sideBarWidth(triangleWidth*sideBarCoef)
 {
 
     this->setSceneRect(0, 0, m_width, m_height);
     this->setBoardTriangles();
     this->setBoardCheckers();
     setBoardBar();
+    setSideBars();
 }
 
 void BoardScene::setBoardTriangles() {
     for(int i {0}; i < this->trianglePairs; ++i){
-        qreal x_point = this->triangleWidth * i +
+        qreal x_point = this->sideBarWidth +
+                this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
         qreal y_point = m_height - triangleHeight;
         BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true);
         boardTriangles.push_back(bottomTriangle);
     }
     for(int i {0}; i < this->trianglePairs; ++i){
-        qreal x_point = this->triangleWidth * i +
+        qreal x_point = this->sideBarWidth +
+                this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
         qreal y_point = 0;
         BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false);
@@ -80,8 +84,19 @@ void BoardScene::setBoardCheckers(){
 void BoardScene::setBoardBar()
 {
    BoardBar *bar = new BoardBar(nullptr, triangleWidth, m_height);
-   bar->setPos((trianglePairs/2) * triangleWidth, 0);
+   bar->setPos(this->sideBarWidth + (trianglePairs/2) * triangleWidth, 0);
    addItem(bar);
+}
+
+void BoardScene::setSideBars()
+{
+    BoardSideBar *left = new BoardSideBar(nullptr, sideBarWidth, m_height);
+    left->setPos(0, 0);
+    addItem(left);
+
+    BoardSideBar *right = new BoardSideBar(nullptr, sideBarWidth, m_height);
+    right->setPos(m_width-sideBarWidth, 0);
+    addItem(right);
 }
 
 void BoardScene::drawBoardTriangle(BoardTriangle *boardTriangle) {

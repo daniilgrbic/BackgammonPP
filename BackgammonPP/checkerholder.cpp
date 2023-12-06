@@ -1,7 +1,6 @@
 #include "checkerholder.h"
 
 CheckerHolder::CheckerHolder()
-    : m_checkers(QVector<BoardChecker*>())
 {
 
 }
@@ -10,7 +9,6 @@ void CheckerHolder::addChecker(BoardChecker *checker)
 {
     if(checker->getHolder()){
         checker->getHolder()->removeChecker(checker);
-
     }
     checker->setHolder(this);
     m_checkers.push_back(checker);
