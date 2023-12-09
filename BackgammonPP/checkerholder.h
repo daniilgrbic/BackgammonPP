@@ -12,7 +12,9 @@ public:
     virtual void addChecker(BoardChecker* checker);
     virtual void removeChecker(BoardChecker* checker);
     virtual void updateCheckerPos() = 0;
+
     QVector<BoardChecker*> m_checkers;
+    bool allowDropoff = true;
 };
 
 #endif // CHECKERHOLDER_H

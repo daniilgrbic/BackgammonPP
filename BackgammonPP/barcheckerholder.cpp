@@ -5,7 +5,9 @@ BarCheckerHolder::BarCheckerHolder(QGraphicsItem *parent, qreal width, qreal hei
       CheckerHolder(),
       m_width(width),
       m_height(height)
-{}
+{
+    allowDropoff = false;
+}
 
 QRectF BarCheckerHolder::boundingRect() const {
     return QRectF(0, 0, m_width, m_height);
