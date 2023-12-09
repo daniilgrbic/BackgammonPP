@@ -45,6 +45,11 @@ CheckerHolder *BoardChecker::getHolder(){
     return m_holder;
 }
 
+const QColor BoardChecker::getColor() const
+{
+    return m_color;
+}
+
 
 void BoardChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {

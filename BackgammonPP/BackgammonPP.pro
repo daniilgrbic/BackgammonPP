@@ -18,7 +18,9 @@ SOURCES += \
     boardwindow.cpp \
     checkerholder.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sidebarcheckerholder.cpp \
+    verticalchecker.cpp
 
 HEADERS += \
     barcheckerholder.h \
@@ -29,7 +31,9 @@ HEADERS += \
     boardtriangle.h \
     boardwindow.h \
     checkerholder.h \
-    mainwindow.h
+    mainwindow.h \
+    sidebarcheckerholder.h \
+    verticalchecker.h
 
 FORMS += \
     boardwindow.ui \

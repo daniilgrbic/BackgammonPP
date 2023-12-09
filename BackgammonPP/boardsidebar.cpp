@@ -4,6 +4,13 @@ BoardSideBar::BoardSideBar(QGraphicsItem* parent, qreal width, qreal height)
       m_width(width),
       m_height(height)
 {
+    qreal holderWidth = m_width / 1.25;
+    qreal holderHeight = m_height * 0.33;//fix constants
+    qreal holderX = (m_width - holderWidth) / 2;
+    top = new SidebarCheckerHolder(this, holderWidth, holderHeight);
+    top->setPos(holderX, (m_height/2 - holderHeight) / 2);
+    bottom = new SidebarCheckerHolder(this, holderWidth, holderHeight);
+    bottom->setPos(holderX, m_height/2 + (m_height/2 - holderHeight) / 2);
 }
 
 QRectF BoardSideBar::boundingRect() const {

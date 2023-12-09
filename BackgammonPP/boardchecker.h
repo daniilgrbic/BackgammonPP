@@ -16,6 +16,8 @@ public:
     void setHolder(CheckerHolder* holder);
     qreal getSize();
     CheckerHolder *getHolder();
+    const QColor getColor() const;
+
 private:
     qreal m_size;
     QColor m_color;
