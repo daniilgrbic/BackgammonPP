@@ -10,6 +10,7 @@
 #include "boardchecker.h"
 #include "boardbar.h"
 #include "boardsidebar.h"
+#include "boarddice.h"
 
 class BoardScene : public QGraphicsScene
 {

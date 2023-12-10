@@ -10,8 +10,8 @@ class BoardChecker : public QGraphicsItem
 {
 public:
     BoardChecker(QGraphicsItem *parent, qreal size, QColor color);
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    QRectF boundingRect() const override;
     void setAnchorPoint(const QPointF& anchorPoint);
     void setHolder(CheckerHolder* holder);
     qreal getSize();
