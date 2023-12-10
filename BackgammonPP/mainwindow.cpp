@@ -7,9 +7,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    std::cout << this->backgroundPicPath.toStdString() << std::endl;
     QPixmap pix(this->backgroundPicPath);
-    ui->bg_label->setPixmap(pix);
+    pix = pix.scaled(this->size(), Qt::IgnoreAspectRatio);
+    // ui->bg_label->setPixmap(pix);
+
+    QPalette palette;
+    palette.setBrush(QPalette::Window, pix);
+    this->setPalette(palette);
+
 
     boardWindow = new BoardWindow();
     connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));

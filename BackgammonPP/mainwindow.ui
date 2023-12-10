@@ -6,37 +6,52 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>683</width>
-    <height>412</height>
+    <width>689</width>
+    <height>517</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>250</width>
+    <height>350</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1920</width>
+    <height>1080</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow {
-	background: black;
-	color: white;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget {
+	background-repeat: no-repeat;
+	background-position: center;
+}</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <widget class="QWidget" name="widget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
       <widget class="QPushButton" name="btExit">
        <property name="geometry">
         <rect>
-         <x>550</x>
-         <y>320</y>
+         <x>530</x>
+         <y>380</y>
          <width>91</width>
          <height>31</height>
         </rect>
@@ -99,7 +114,7 @@ QPushButton:hover {
          <x>-10</x>
          <y>-30</y>
          <width>691</width>
-         <height>431</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -111,45 +126,53 @@ QPushButton:hover {
         <string/>
        </property>
       </widget>
-      <widget class="QWidget" name="layoutWidget">
+      <widget class="QFrame" name="frame">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>110</y>
-         <width>145</width>
-         <height>231</height>
+         <x>20</x>
+         <y>120</y>
+         <width>191</width>
+         <height>241</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QPushButton" name="btCreateGame">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="topMargin">
+           <number>0</number>
           </property>
-          <property name="font">
-           <font>
-            <family>Corbel</family>
-            <pointsize>13</pointsize>
-            <bold>false</bold>
-           </font>
+          <property name="rightMargin">
+           <number>0</number>
           </property>
-          <property name="cursor">
-           <cursorShape>OpenHandCursor</cursorShape>
+          <property name="bottomMargin">
+           <number>0</number>
           </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
+          <item>
+           <widget class="QPushButton" name="btCreateGame">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Corbel</family>
+              <pointsize>13</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>OpenHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
 	background: transparent;
 	color: white;
 	text-align: left;
@@ -158,32 +181,32 @@ QPushButton:hover {
 QPushButton:hover {
 	color: green;
 }</string>
-          </property>
-          <property name="text">
-           <string>Create Game</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btJoinGame">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Corbel</family>
-            <pointsize>13</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>OpenHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
+            </property>
+            <property name="text">
+             <string>Create Game</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btJoinGame">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Corbel</family>
+              <pointsize>13</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>OpenHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
 	background: transparent;
 	color: white;
 	text-align: left;
@@ -192,67 +215,94 @@ QPushButton:hover {
 QPushButton:hover {
 	color: green;
 }</string>
-          </property>
-          <property name="text">
-           <string>Join Game</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btPreferences">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Corbel</family>
-            <pointsize>13</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>OpenHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
+            </property>
+            <property name="text">
+             <string>Join Game</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btPreferences">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Corbel</family>
+              <pointsize>13</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>OpenHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
 	background: transparent;
 	color: white;
 	text-align: left;
 }
 
 QPushButton:hover {
+	background: transparent;
 	color: green;
 }</string>
-          </property>
-          <property name="text">
-           <string>Preferences</string>
-          </property>
-         </widget>
+            </property>
+            <property name="text">
+             <string>Preferences</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
       <zorder>bg_label</zorder>
       <zorder>btExit</zorder>
       <zorder>title_label</zorder>
-      <zorder>layoutWidget</zorder>
+      <zorder>frame</zorder>
      </widget>
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>683</width>
+     <width>689</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

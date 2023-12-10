@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include <QImage>
 #include <QString>
+#include <QPalette>
 #include <iostream>
 #include "boardwindow.h"
 
