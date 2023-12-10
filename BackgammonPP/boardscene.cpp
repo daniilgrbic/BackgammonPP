@@ -41,6 +41,12 @@ void BoardScene::setBoardTriangles() {
 
 }
 void BoardScene::setBoardCheckers(){
+
+    ///TODO: remove this.
+    BoardDice *die = new BoardDice(nullptr, triangleWidth, 6);
+    addItem(die);
+    die->setPos(0.25*m_width, 0.45*m_height);
+
     for(int i = 0; i < checkersNumber / 2; ++i){
         BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::black);
         boardCheckers.push_back(checker);
@@ -99,6 +105,9 @@ void BoardScene::setSideBars()
     addItem(right);
 }
 
+
 void BoardScene::drawBoardTriangle(BoardTriangle *boardTriangle) {
     this->addItem(boardTriangle);
 }
+
+
