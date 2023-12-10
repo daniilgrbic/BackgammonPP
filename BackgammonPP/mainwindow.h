@@ -3,9 +3,11 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QCoreApplication>
 #include <QPixmap>
 #include <QImage>
 #include <QString>
+#include <iostream>
 #include "boardwindow.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,7 +30,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     BoardWindow *boardWindow;
-    QString backgroundPicPath = "D:/RS/backgammon/BackgammonPP/img/blurred_backgammon_blacked.png";
+    QString backgroundPicPath = ":/resources/img/blurred_backgammon_blacked.png";
 
 };
 #endif // MAINWINDOW_H

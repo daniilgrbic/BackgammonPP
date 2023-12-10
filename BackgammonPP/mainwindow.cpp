@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    std::cout << this->backgroundPicPath.toStdString() << std::endl;
     QPixmap pix(this->backgroundPicPath);
     ui->bg_label->setPixmap(pix);
 
