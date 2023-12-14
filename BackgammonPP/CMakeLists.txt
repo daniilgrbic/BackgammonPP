@@ -40,6 +40,8 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     engine/bot/connectgene.cpp
 
 
+    game/basegame.cpp
+    game/basegame.hpp
 )
 target_link_libraries(BackgammonPP PRIVATE
     Qt::Core
