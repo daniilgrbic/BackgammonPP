@@ -7,6 +7,7 @@
 #include <random>
 #include <iostream>
 #include <queue>
+#include "engine/backgammon.h"
 
 Genome::Genome(std::string filename){
     std::ifstream filestream(filename);
@@ -200,4 +201,39 @@ double Genome::weights(const Genome& g1, const Genome& g2){
 }
 bool Genome::sameSpecies(const Genome& g1, const Genome& g2){
     return AI::deltaDisjoint*disjoint(g1, g2) + AI::deltaWeights*weights(g1, g2) < AI::deltaTreshold;
+}
+
+const Genome& Genome::playBackgammon(const Genome& g1, const Genome& g2){
+    Backgammon game;
+    // game.currentRoll().onRoll() vraca igraca koji prvi igra
+    // ovde eventualno obrnes ko je koji igrac kod ovih mreza i genoma
+    // konvencija je WHITE ide 24->1, a BLACK 1->24
+    Network n1(g1); //playercolor1
+    Network n2(g2); //playercolor2
+
+    while(true){
+                std::vector<Turn> turns = game.generateLegalTurns();
+//                std::pair<double, Turn> bestTurn = {};
+        //        for(auto turn : turns){
+        //           BoardState b = turn.m_finalBoard;
+        //           double eval = n1.evaluateNetwork(n1.inputFromState(b));
+        //           if(bestTurn.first < eval){ bestTurn.first = eval; bestTurn.second = turn};
+        //        }
+        //        game.playTurn(bestTurn.second);
+        //        if(game.isFinished(playercolor1)){
+        //            return g1;
+        //        }
+
+        //        std::vector<Turn> turns = game.generateLegalTurns();
+        //        std::pair<double, Turn> bestTurn;
+        //        for(auto turn : turns){
+        //           BoardState b = turn.m_finalBoard;
+        //           double eval = n2.evaluateNetwork(n2.inputFromState(b));
+        //           if(bestTurn.first < eval){ bestTurn.first = eval; bestTurn.second = turn};
+        //        }
+        //        game.playTurn(bestTurn.second);
+        //        if(game.isFinished(playercolor2)){
+        //            return g2;
+        //        }
+    }
 }
