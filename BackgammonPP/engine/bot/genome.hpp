@@ -1,13 +1,18 @@
 #pragma once
 
-#include "gene.hpp"
+#include "connectgene.hpp"
+#include "nodegene.hpp"
 #include "network.hpp"
 #include "neuron.hpp"
 #include "species.hpp"
 #include <string>
 #include <map>
 #include <vector>
+#include <QVector>
 #include <QString>
+#include <QMap>
+#include <random>
+
 class Network;
 class Species;
 class Genome{
@@ -17,25 +22,23 @@ public:
     static double weights(Genome g1, Genome g2);
     static bool sameSpecies(Genome g1, Genome g2);
 
-    Genome(QString filename);
+    Genome(std::string filename);
 
-    Neuron randomNeuron();
-    bool containsLink(int out, int into);
-    void pointMutate();
-    void linkMutate(double forceBias);
-    void nodeMutate();
-    void enableDisableMutate(bool enable);
+    void mutateAddConnection();
+    void mutateAddNode();
+    void mutateConnectionWeight();
+    void mutateEnableConnection();
+    void mutateDisableConnection();
     void mutate();
-    Genome breedChild(Species species);
 
-    void printToFile(QString filename);
+    void printToFile(std::string filename);
 
 
-    std::vector<Gene> genes;
+    QVector<ConnectGene*> genes;
+    QVector<NodeGene> nodegenes;
     int fitness;
     int adjustedFitness;
+    int maxNeuron = 0;
     Network* network;
-    Neuron maxneuron;
-    std::map<std::string, double> mutationRates;
-
+    QMap<std::string, double> mutationRates;
 };

@@ -3,32 +3,37 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
 #include <cmath>
 
 namespace AI{
-size_t inputSize = 29;
-size_t outputSize = 1;
+extern size_t inputSize;
+extern size_t outputSize;
 
-size_t populationSize = 300;
-double deltaDisjoint = 2.0;
-double deltaWeights = 0.4;
-double deltaTreshold = 1.0;
+extern size_t populationSize;
+extern size_t generations;
+extern double deltaDisjoint;
+extern double deltaWeights;
+extern double deltaTreshold;
 
-size_t staleSpecies = 15;
+extern size_t staleSpecies;
 
-double mutateConnectionsChance = 0.25;
-double perturbChance = 0.90;
-double crossoverChance = 0.75;
-double linkMutationChance = 2.0;
-double nodeMutationChance = 0.50;
-double biasMutationChance = 0.40;
-double disableMutationChance = 0.40;
-double enableMutationChance = 0.20;
+extern double mutateConnectionsChance;
+extern double perturbChance;
+extern double crossoverChance;
+extern double linkMutationChance;
+extern double nodeMutationChance;
+extern double biasMutationChance;
+extern double disableMutationChance;
+extern double enableMutationChance;
+extern double stepSize;
 
-size_t maxNodes = 1000000;
+extern size_t maxNodes;
 
-double sigmoid(const double x){
-    return 2 / (1 + exp(-4.9 * x)) - 1;
-}
+extern double sigmoid(const double x);
+
+extern std::default_random_engine generator;
+extern std::uniform_real_distribution<double> random01;
+
 
 }

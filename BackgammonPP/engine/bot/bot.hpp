@@ -3,14 +3,16 @@
 #include "network.hpp"
 #include "QString"
 #include "engine/core/boardstate.h"
+#include "engine/core/game.h"
+#include "engine/core/turn.h"
 
 namespace AI{
     class Bot{
     public:
-        Bot(QString filepath);
+        Bot(std::string filepath);
         ~Bot();
-        Move bestMove(BoardState state);
-        bool shouldDouble(BoardState state);
+        Turn bestTurn(const Game& game, const BoardState& state);
+        bool shouldDouble(const Game& game, const BoardState& state);
     private:
         Network* network;
     };

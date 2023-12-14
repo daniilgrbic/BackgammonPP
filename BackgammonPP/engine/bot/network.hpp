@@ -10,9 +10,9 @@ class Genome;
 class Network{
 public:
     Network(Genome genome);
-    Network(QString filename);
+    Network(std::string filename);
     double evaluateNetwork(const QVector<double>& inputs);
 private:
+    void calculateNeuron(Neuron& neuron);
     QMap<int, Neuron> neurons;
-    QVector<Neuron> sorted_topological;
 };

@@ -1,8 +1,9 @@
 #pragma once
 
 class Innovation{
+
 public:
+    Innovation(int innov) : innovation(innov) {};
     int newInnovation();
-private:
     int innovation;
 };

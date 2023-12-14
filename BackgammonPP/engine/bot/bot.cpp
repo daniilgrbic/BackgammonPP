@@ -1,18 +1,19 @@
 #include "bot.hpp"
 #include "engine/core/game.h"
+#include "engine/core/turn.h"
 
 namespace AI{
 
-    Bot::Bot(QString filepath){
+    Bot::Bot(std::string filepath){
         network = new Network(filepath);
     }
     Bot::~Bot(){
         delete network;
     }
-    Move Bot::bestMove(BoardState state){
+    Turn Bot::bestTurn(const Game& game, const BoardState& state){
 
     }
-    bool Bot::shouldDouble(BoardState state){
+    bool Bot::shouldDouble(const Game& game, const BoardState& state){
 
     }
 }
