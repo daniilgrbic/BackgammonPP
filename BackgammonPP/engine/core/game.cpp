@@ -14,6 +14,12 @@ void Game::playTurn(Turn turn)
     {
         m_board.move(move);
     }
+
+    m_currentRoll = m_currentRoll.getNextRoll(m_firstDie, m_secondDie);
+}
+
+const Roll& Game::currentRoll() const {
+    return m_currentRoll;
 }
 
 std::optional<GameResult> Game::getResult() const

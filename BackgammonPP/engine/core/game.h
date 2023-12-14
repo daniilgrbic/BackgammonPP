@@ -17,6 +17,8 @@ public:
     std::optional<GameResult> getResult() const;
     virtual bool isFinished(PlayerColor player) const = 0;
 
+    const Roll& currentRoll() const;
+
 protected:
     Game();
     bool isBlot(const Point& point, PlayerColor player) const;
@@ -27,6 +29,9 @@ protected:
     Roll m_currentRoll;
     std::vector<Turn> m_history;
     std::optional<GameResult> m_result;
+
+    Die m_firstDie {};
+    Die m_secondDie {};
 
 // private:
 //     const int CHECKERS_COUNT;

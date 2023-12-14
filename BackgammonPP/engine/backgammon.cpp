@@ -11,6 +11,8 @@ Backgammon::Backgammon() : Game()
         m_board.point(Point::idByPlayer(player, 13)).add(player, 5);
         m_board.point(Point::idByPlayer(player, 24)).add(player, 2);
     };
+
+    m_currentRoll = Roll::getInitialRoll(m_firstDie, m_secondDie);
 }
 
 // WIP
@@ -124,7 +126,8 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
             } else {
                 moves = std::move(roll.moves());
             }
-            return Turn { 0, onRoll, moves }; }
+
+            return Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() }; }
     );
     return legalTurns;
 }
