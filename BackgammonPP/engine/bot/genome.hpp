@@ -5,6 +5,7 @@
 #include "network.hpp"
 #include "neuron.hpp"
 #include "species.hpp"
+#include "innovation.hpp"
 #include <string>
 #include <map>
 #include <vector>
@@ -17,12 +18,14 @@ class Network;
 class Species;
 class Genome{
 public: 
-    static Genome crossover(Genome g1, Genome g2);
-    static double disjoint(Genome g1, Genome g2);
-    static double weights(Genome g1, Genome g2);
-    static bool sameSpecies(Genome g1, Genome g2);
+    static double disjoint(Genome& g1, Genome& g2);
+    static double weights(Genome& g1, Genome& g2);
+    static bool sameSpecies(Genome& g1, Genome& g2);
 
     Genome(std::string filename);
+    Genome();
+    Genome(const Genome& g1,const Genome& g2);
+    Genome(const Genome& genome);
 
     void mutateAddConnection();
     void mutateAddNode();
@@ -35,10 +38,11 @@ public:
 
 
     QVector<ConnectGene*> genes;
-    QVector<NodeGene> nodegenes;
+//    QVector<NodeGene> nodegenes;
     int fitness;
     int adjustedFitness;
-    int maxNeuron = 0;
     Network* network;
-    QMap<std::string, double> mutationRates;
+    Innovation* innovation;
+//    QMap<std::string, double> mutationRates;
+    int maxNeuron;
 };

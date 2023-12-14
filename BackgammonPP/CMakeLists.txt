@@ -37,6 +37,7 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     engine/bot/saved_genomes/lilith_copy.genome
     engine/bot/nodegene.hpp
     engine/bot/link.hpp
+    engine/bot/connectgene.cpp
 
 
 )

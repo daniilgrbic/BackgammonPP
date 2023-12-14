@@ -10,6 +10,9 @@
 
 Genome::Genome(std::string filename){
     std::ifstream filestream(filename);
+    int innov;
+    filestream >> maxNeuron >> innov;
+    innovation = new Innovation(innov);
     int id;
     int into;
     int out;
@@ -18,22 +21,16 @@ Genome::Genome(std::string filename){
     int innovation_num;
     while(filestream >> id >> out >> into >> weight >> enabled >> innovation_num){
         genes.push_back(new ConnectGene(out, into, weight, enabled, innovation_num));
-
-        if(out > maxNeuron){
-            maxNeuron = out + 1;
-        }
-        if(into > maxNeuron){
-            maxNeuron = into + 1;
-        }
     }
 
 }
 
 void Genome::printToFile(std::string filename){
     std::ofstream filestream(filename);
+    filestream << maxNeuron << " " << innovation->innovation << std::endl;
     int id = 1;
     for(auto gene : genes){
-        filestream << id++ << " " << gene->out << " " << gene->into << " " << gene->weight <<  " " << gene->enabled << " " << gene->innovation.innovation << std::endl;
+        filestream << id++ << " " << gene->out << " " << gene->into << " " << gene->weight <<  " " << gene->enabled << " " << gene->innovation << std::endl;
     }
 }
 
@@ -42,7 +39,6 @@ void Genome::mutateAddConnection(){
     if(true or AI::random01(AI::generator) < AI::mutateConnectionsChance){
         std::vector<std::vector<int>> adj_list(maxNeuron);
         std::vector<int> in_degree(maxNeuron, 0);
-//        std::cout << maxNeuron << std::endl;
 
         for(auto gene : genes){
             adj_list[gene->out].push_back(gene->into);
@@ -84,10 +80,6 @@ void Genome::mutateAddConnection(){
             std::cout << cnt << std::endl;
             return;
         }
-
-        for (int i = 0; i < top_order.size(); i++)
-            std::cout << top_order[i] << " ";
-        std::cout << std::endl;
         int startValue = 0;
         std::vector<int> unbiasedOrder(top_order.size());
         std::generate (
@@ -101,10 +93,8 @@ void Genome::mutateAddConnection(){
         for(int i = 0; i < top_order.size(); ++i){
             int first = top_order[unbiasedOrder[i]];
             for(int j = unbiasedOrder[i] + 1; j < top_order.size(); ++j){
-                if(std::find(adj_list[first].begin() + j, adj_list[first].end(), top_order[j]) == adj_list[first].end()){
-                    std::cout << "adding :" << top_order[unbiasedOrder[i]] << " -> " << top_order[j] << std::endl;
-                    std::cout << "---------------------------------------------------------------------------" << std::endl;
-                    genes.push_back(new ConnectGene(top_order[j], top_order[unbiasedOrder[i]], 1.0, true, 0));
+                if(std::find(adj_list[first].begin() + j, adj_list[first].end(), top_order[j]) == adj_list[first].end() && j > AI::inputSize){
+                    genes.push_back(new ConnectGene(top_order[unbiasedOrder[i]], top_order[j], 1.0, true, innovation->newInnovation()));
                     return;
                 }
             }
@@ -119,14 +109,13 @@ void Genome::mutateAddNode(){
         std::sample(genes.begin(), genes.end(), std::back_inserter(out), nelems, std::mt19937{std::random_device{}()});
         auto oldGene = out[0];
         oldGene->enabled = false;
-        genes.push_back(new ConnectGene(maxNeuron, oldGene->out, oldGene->weight, true, oldGene->innovation.innovation + 1));
-        genes.push_back(new ConnectGene(oldGene->into, maxNeuron, 1.0, true, oldGene->innovation.innovation + 2));
+        genes.push_back(new ConnectGene(maxNeuron, oldGene->into, oldGene->weight, true, innovation->newInnovation()));
+        genes.push_back(new ConnectGene(oldGene->out, maxNeuron, 1.0, true, innovation->newInnovation()));
 
         ++maxNeuron;
     }
 }
 void Genome::mutateConnectionWeight(){
-    //prodji sve gene i azuriraj tezine
     for(auto gene : genes){
         if(true or AI::random01(AI::generator) < AI::perturbChance){
             gene->weight = gene->weight + AI::random01(AI::generator) * AI::stepSize * 2 - AI::stepSize;
@@ -145,4 +134,43 @@ void Genome::mutate(){
     mutateAddNode();
     mutateConnectionWeight();
     mutateAddConnection();
+}
+
+Genome::Genome(const Genome& g1, const Genome& g2){
+    this->innovation = g1.innovation;
+    this->maxNeuron = std::max(g1.maxNeuron, g2.maxNeuron);
+    int i=0;
+    while(g1.genes[i]->innovation == g2.genes[i]->innovation){
+        if(0.5 > AI::random01(AI::generator)){
+            ConnectGene* newGene = new ConnectGene(g1.genes[i]);
+            genes.push_back(newGene);
+
+        }else{
+            ConnectGene* newGene = new ConnectGene(g2.genes[i]);
+            genes.push_back(newGene);
+        }
+        ++i;
+    }
+    if(0.5 > AI::random01(AI::generator)){//TODO change so that genome with better fitness is chosen
+        while(i < g1.genes.size()){
+            ConnectGene* newGene = new ConnectGene(g1.genes[i]);
+            genes.push_back(newGene);
+            ++i;
+        }
+    }else{
+        while(i < g2.genes.size()){
+            ConnectGene* newGene = new ConnectGene(g2.genes[i]);
+            genes.push_back(newGene);
+            ++i;
+        }
+    }
+
+
+}
+Genome::Genome(const Genome& genome){
+    this->innovation = genome.innovation;
+    this->maxNeuron = genome.maxNeuron;
+    for(int i = 0; i < genome.genes.size(); ++i){
+        this->genes.push_back(new ConnectGene(genome.genes[i]));
+    }
 }

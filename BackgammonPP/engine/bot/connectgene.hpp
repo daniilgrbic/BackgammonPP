@@ -1,14 +1,14 @@
 #pragma once
 
-#include "innovation.hpp"
+#include <cstddef>
 
 class ConnectGene{
 public:
-    ConnectGene(int into, int out, double weight, bool enabled, int innov) : into(into), out(out), weight(weight), enabled(enabled), innovation(innov) {
-    }
+    ConnectGene(ConnectGene* gene) : out(gene->out), into(gene->into), weight(gene->weight), enabled(gene->enabled), innovation(gene->innovation) {}
+    ConnectGene(int out, int into, double weight, bool enabled, int innov) : out(out), into(into), weight(weight), enabled(enabled), innovation(innov) {}
     int into;
     int out;
     double weight;
     bool enabled = true;
-    Innovation innovation;
+    size_t innovation;
 };
