@@ -23,6 +23,8 @@ public:
 private slots:
     void on_pbExitGame_clicked();
 
+    void on_pbRollDice_clicked();
+
 private:
     Ui::BoardWindow *ui;
     BoardScene *m_boardScene;

@@ -1,24 +1,28 @@
-#ifndef BOARDDICE_H
-#define BOARDDICE_H
+#ifndef BOARDPLAYINGDIE_H
+#define BOARDPLAYINGDIE_H
 #include <QGraphicsItem>
 #include <QBrush>
 #include <QPainter>
 #include <QVector>
+#include "boarddie.h"
 
-class BoardDice : public QGraphicsItem
+class BoardPlayingDie : public BoardDie
 {
 public:
-    BoardDice(QGraphicsItem *parent, qreal side, int value);
+    enum class Position {
+        LEFT,
+        RIGHT
+    };
+    BoardPlayingDie(QGraphicsItem *parent, qreal side, QMap<Position, QPointF> posMap, int value = 1);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    QRectF boundingRect() const override;
+    void updateDie(Position pos, int value);
 private:
-    qreal m_side;
     qreal m_dotSizeShare = 0.15;
     int m_value;
     qreal m_dotDiameter;
-    //MOVE OUT TO WHEREVER CONSTANTS ARE.
-    const QColor m_primary = Qt::black;
-    const QColor m_secondary = Qt::white;
+
+    Position m_position;
+    QMap<Position, QPointF> m_posMap;
 
     const QVector<QPointF> dotPositions[6] = {
         { QPointF(0.50, 0.50) },
@@ -30,4 +34,4 @@ private:
     };
 };
 
-#endif // BOARDDICE_H
+#endif // BOARDPLAYINGDIE_H

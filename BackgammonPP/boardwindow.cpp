@@ -1,6 +1,7 @@
 #include "boardwindow.h"
 #include "boardtriangle.h"
 #include "ui_boardwindow.h"
+#include "boardplayingdie.h"
 #include <QPainter>
 
 BoardWindow::BoardWindow(QWidget *parent) :
@@ -26,5 +27,15 @@ void BoardWindow::paintEvent(QPaintEvent *) {
 void BoardWindow::on_pbExitGame_clicked()
 {
     this->close();
+}
+
+
+void BoardWindow::on_pbRollDice_clicked()
+{
+    //get these informations from the game state;
+    int value1 = 2;
+    int value2 = 3;
+    BoardPlayingDie::Position pos = BoardPlayingDie::Position::LEFT;
+    m_boardScene->updatePlayingDice(value1, value2, pos);
 }
 

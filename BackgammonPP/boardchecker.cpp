@@ -11,6 +11,7 @@
 #include <QLineF>
 #include "checkerholder.h"
 
+
 BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, QColor color) : QGraphicsItem(parent) , m_size(size), m_color(color), m_dragged(false), m_holder(nullptr)
 {
     setZValue(1);

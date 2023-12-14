@@ -36,6 +36,19 @@
     <string>Exit Game</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pbRollDice">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>580</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Roll dice</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -12,7 +12,9 @@ SOURCES += \
     barcheckerholder.cpp \
     boardbar.cpp \
     boardchecker.cpp \
-    boarddice.cpp \
+    boarddie.cpp \
+    boarddoublingdie.cpp \
+    boardplayingdie.cpp \
     boardscene.cpp \
     boardsidebar.cpp \
     boardtriangle.cpp \
@@ -27,7 +29,9 @@ HEADERS += \
     barcheckerholder.h \
     boardbar.h \
     boardchecker.h \
-    boarddice.h \
+    boarddie.h \
+    boarddoublingdie.h \
+    boardplayingdie.h \
     boardscene.h \
     boardsidebar.h \
     boardtriangle.h \
