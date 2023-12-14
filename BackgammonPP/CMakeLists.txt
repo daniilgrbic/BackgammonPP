@@ -30,6 +30,8 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     mainwindow.cpp mainwindow.h mainwindow.ui
     utility/jsonserializer.h
     utility/serializable.h
+    game/basegame.cpp
+    game/basegame.hpp
 )
 target_link_libraries(BackgammonPP PRIVATE
     Qt::Core
