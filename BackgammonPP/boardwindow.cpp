@@ -26,7 +26,7 @@ void BoardWindow::paintEvent(QPaintEvent *) {
 
 void BoardWindow::on_pbExitGame_clicked()
 {
-    this->close();
+    emit requestCloseGame();
 }
 
 

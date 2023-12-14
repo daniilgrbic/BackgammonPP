@@ -20,6 +20,7 @@ SOURCES += \
     boardtriangle.cpp \
     boardwindow.cpp \
     checkerholder.cpp \
+    controller.cpp \
     main.cpp \
     mainwindow.cpp \
     sidebarcheckerholder.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     boardtriangle.h \
     boardwindow.h \
     checkerholder.h \
+    controller.h \
     mainwindow.h \
     sidebarcheckerholder.h \
     verticalchecker.h

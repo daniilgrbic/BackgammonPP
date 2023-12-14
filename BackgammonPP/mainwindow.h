@@ -23,6 +23,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void requestCreateGame();
+
 private slots:
     void on_btCreateGame_clicked();
 

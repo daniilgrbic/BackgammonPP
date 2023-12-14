@@ -20,6 +20,9 @@ public:
     void paintEvent(QPaintEvent *);
     ~BoardWindow();
 
+signals:
+    void requestCloseGame();
+
 private slots:
     void on_pbExitGame_clicked();
 

@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // setFixedSize(width(), height());
+    // this->showFullScreen();
 
     QPixmap pix(this->backgroundPicPath);
     pix = pix.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -16,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setPalette(palette);
 
 
-    boardWindow = new BoardWindow();
     connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
 
 }
@@ -28,8 +29,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btCreateGame_clicked()
 {
-    boardWindow->show();
-    this->close();
+    emit requestCreateGame();
 }
 
 
