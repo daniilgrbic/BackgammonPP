@@ -174,3 +174,30 @@ Genome::Genome(const Genome& genome){
         this->genes.push_back(new ConnectGene(genome.genes[i]));
     }
 }
+
+double Genome::disjoint(const Genome& g1, const Genome& g2){
+    size_t disjoint {0};
+
+    size_t i {0};
+    while(g1.genes[i]->innovation == g2.genes[i]->innovation){
+        ++i;
+    }
+    disjoint += g1.genes.size() + g2.genes.size() - 2 * i;
+    size_t N = std::max(g1.genes.size(), g2.genes.size());
+
+    return static_cast<double>(disjoint) / N;
+
+}
+double Genome::weights(const Genome& g1, const Genome& g2){
+    double sum {0.0};
+    size_t i {0};
+    while(g1.genes[i]->innovation == g2.genes[i]->innovation){
+        sum += std::abs(g1.genes[i]->weight - g2.genes[i]->weight);
+        ++i;
+    }
+    return sum / i;
+
+}
+bool Genome::sameSpecies(const Genome& g1, const Genome& g2){
+    return AI::deltaDisjoint*disjoint(g1, g2) + AI::deltaWeights*weights(g1, g2) < AI::deltaTreshold;
+}
