@@ -17,6 +17,7 @@ public:
     uint add(PlayerColor color, uint count = 1);
     uint remove(uint count = 1);
 
+    // [[maybe unused]]
     static int idByPlayer(PlayerColor color, size_t index);
 
     // Serializable interface

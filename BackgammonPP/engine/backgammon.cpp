@@ -79,7 +79,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                 auto die = dice[i];
                 if (board.bar(onRoll)) {
                     auto nextPos = NUMBER_OF_POINTS - die;
-                    if (!isBlocked(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
+                    if (!isBlockedBy(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
                         auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos);
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
                     } else if (isBlot(board.point(nextPos), opponent)) {
@@ -91,12 +91,12 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                     if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
                         auto nextPos = pos - die;
                         if (nextPos <= 0) {
-                            if (isBearingOff(onRoll)) {
+                            if (isBearingOff(board, onRoll)) {
                                 auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                                 nextLevel.push_back(roll.getNextRollState(nextMove, i));
                             }
                             break;
-                        } else if (!isBlocked(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
+                        } else if (!isBlockedBy(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
                             auto nextMove = Move(onRoll, pos, nextPos);
                             nextLevel.push_back(roll.getNextRollState(nextMove, i));
                         } else if (isBlot(board.point(nextPos), opponent)) {

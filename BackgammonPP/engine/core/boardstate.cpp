@@ -36,7 +36,7 @@ void BoardState::move(const Move &move)
     const auto& to = move.m_to;
 
     auto& bar = player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
-    int& off = player == PlayerColor::BLACK ? m_blackOff : m_whiteOff;
+    auto& off = player == PlayerColor::BLACK ? m_blackOff : m_whiteOff;
 
     if (const int* fromPos = std::get_if<int>(&from)) {
         point(*fromPos).remove();
@@ -54,6 +54,8 @@ void BoardState::move(const Move &move)
     } else {
         off += 1;
     }
+
+
 }
 
 BoardState BoardState::mirror() const {

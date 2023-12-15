@@ -28,22 +28,18 @@ std::optional<GameResult> Game::getResult() const
 }
 
 bool Game::isBlot(const Point& point, PlayerColor player) const {
-    if(point.count() == 0 || point.count() > 1)
-        return false;
-    return point.owner().value() == player;
+    return point.count() == 1 && point.owner().value() == player;
 }
 
-bool Game::isBlocked(const Point& point, PlayerColor player) const {
-    if(point.count() <= 1)
-        return false;
-    return point.owner().value() == player;
+bool Game::isBlockedBy(const Point& point, PlayerColor player) const {
+    return point.count() >= 2 && point.owner().value() == player;
 }
 
-bool Game::isBearingOff(PlayerColor player) const {
-    if(m_board.bar(player))
+bool Game::isBearingOff(const BoardState& board, PlayerColor player) const {
+    if(board.bar(player))
         return false;
     for(int pointId = 24; pointId >= 7; --pointId) {
-        auto owner = m_board.point(Point::idByPlayer(player, pointId)).owner();
+        auto owner = board.point(pointId).owner();
         if(owner && owner.value() == player)
             return false;
     }
