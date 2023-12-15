@@ -251,8 +251,8 @@ QPushButton:hover {
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>410</y>
-           <width>621</width>
+           <y>430</y>
+           <width>631</width>
            <height>51</height>
           </rect>
          </property>
@@ -291,7 +291,7 @@ QPushButton:hover {
 }</string>
           </property>
           <property name="text">
-           <string>Exit Game</string>
+           <string>Exit</string>
           </property>
          </widget>
         </widget>
@@ -390,6 +390,14 @@ QPushButton:hover {
           <width>151</width>
           <height>51</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
