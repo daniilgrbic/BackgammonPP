@@ -5,6 +5,10 @@
 #include "boardwindow.h"
 #include <QApplication>
 
+// FIXME: CAN'T IMPORT LIBRARIES
+// #include <QMediaPlayer>
+// #include <QMediaPlaylist>
+
 class Controller : public QObject
 {
     Q_OBJECT
@@ -19,6 +23,9 @@ public slots:
 private:
     MainWindow mainWindow;
     BoardWindow boardWindow;
+    QString themeSongPath = ":/music/audio/skip_james-devil_got_my_woman.mp3";
+
+    void playThemeSong();
 };
 
 #endif // CONTROLLER_H

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/music">
+        <file>audio/skip_james-devil_got_my_woman.mp3</file>
+    </qresource>
+</RCC>

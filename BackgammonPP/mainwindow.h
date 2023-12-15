@@ -28,6 +28,8 @@ signals:
 
 private slots:
     void on_btCreateGame_clicked();
+    void on_btReturnToMenu_clicked();
+    void on_btPreferences_clicked();
 
     void on_btExit_clicked();
 

@@ -1,6 +1,8 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): \
+    QT += widgets \
+    QT += multimedia
 
 CONFIG += c++17
 
@@ -53,4 +55,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    background_menu_image.qrc
+    background_menu_image.qrc \
+    music.qrc
