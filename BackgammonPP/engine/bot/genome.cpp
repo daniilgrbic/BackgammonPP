@@ -212,28 +212,33 @@ const Genome& Genome::playBackgammon(const Genome& g1, const Genome& g2){
     Network n2(g2); //playercolor2
 
     while(true){
-                std::vector<Turn> turns = game.generateLegalTurns();
-//                std::pair<double, Turn> bestTurn = {};
-        //        for(auto turn : turns){
-        //           BoardState b = turn.m_finalBoard;
-        //           double eval = n1.evaluateNetwork(n1.inputFromState(b));
-        //           if(bestTurn.first < eval){ bestTurn.first = eval; bestTurn.second = turn};
-        //        }
-        //        game.playTurn(bestTurn.second);
-        //        if(game.isFinished(playercolor1)){
-        //            return g1;
-        //        }
+        std::vector<Turn> turns = game.generateLegalTurns();
+        std::pair<double, Turn> bestTurn = {0.0, turns[0]};
+        for(const auto& turn : turns){
+            BoardState b = turn.m_finalBoard;
+            double eval = n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, b));
+            if(bestTurn.first < eval){
+                bestTurn.first = eval;
+                bestTurn.second = turn;
+            };
+        }
+        game.playTurn(bestTurn.second);
+        if(game.isFinished(PlayerColor::WHITE)){
+            return g1;
+        }
 
-        //        std::vector<Turn> turns = game.generateLegalTurns();
-        //        std::pair<double, Turn> bestTurn;
-        //        for(auto turn : turns){
-        //           BoardState b = turn.m_finalBoard;
-        //           double eval = n2.evaluateNetwork(n2.inputFromState(b));
-        //           if(bestTurn.first < eval){ bestTurn.first = eval; bestTurn.second = turn};
-        //        }
-        //        game.playTurn(bestTurn.second);
-        //        if(game.isFinished(playercolor2)){
-        //            return g2;
-        //        }
+        turns = game.generateLegalTurns();
+        bestTurn = {0.0, turns[0]};
+        for(const auto& turn : turns){
+            BoardState b = turn.m_finalBoard;
+            double eval = n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, b.mirror()));
+            if(bestTurn.first < eval){
+                bestTurn.first = eval;
+                bestTurn.second = turn;};
+        }
+        game.playTurn(bestTurn.second);
+        if(game.isFinished(PlayerColor::BLACK)){
+            return g2;
+        }
     }
 }

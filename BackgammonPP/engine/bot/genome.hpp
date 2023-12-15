@@ -21,6 +21,7 @@ public:
     static double disjoint(const Genome& g1, const Genome& g2);
     static double weights(const Genome& g1, const Genome& g2);
     static bool sameSpecies(const Genome& g1, const Genome& g2);
+    static const Genome& playBackgammon(const Genome& g1, const Genome& g2);
 
     Genome();
     Genome(std::string filename);
