@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "engine/bot/genome.hpp"
 #include <random>
 #include <cmath>
 
@@ -35,5 +36,9 @@ extern double sigmoid(const double x);
 extern std::default_random_engine generator;
 extern std::uniform_real_distribution<double> random01;
 
+class Neat{
+public:
+    static void calculateFitness(std::vector<Genome>& population);
 
+};
 }

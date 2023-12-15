@@ -75,13 +75,13 @@ const QVector<double> Network::inputFromState(PlayerColor player, const BoardSta
     }
     QVector<double> inputs(AI::inputSize - 1);
     for(int i = 0; i < 24; ++i){
-        if(board.point(i).count() == 0)
-            inputs[i] = board.point(i).count();
+        if(board.point(i+1).count() == 0)
+            inputs[i] = board.point(i+1).count();
         else{
-            if(board.point(i).owner() == player){
-                inputs[i] = board.point(i).count();
+            if(board.point(i+1).owner() == player){
+                inputs[i] = board.point(i+1).count();
             }else{
-                inputs[i] = -board.point(i).count();
+                inputs[i] = -board.point(i+1).count();
             }
         }
     }

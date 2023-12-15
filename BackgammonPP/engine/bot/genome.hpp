@@ -13,6 +13,7 @@
 #include <QString>
 #include <QMap>
 #include <random>
+#include <atomic>
 
 class Network;
 class Species;
@@ -21,9 +22,9 @@ public:
     static double disjoint(const Genome& g1, const Genome& g2);
     static double weights(const Genome& g1, const Genome& g2);
     static bool sameSpecies(const Genome& g1, const Genome& g2);
-    static const Genome& playBackgammon(const Genome& g1, const Genome& g2);
+    static void playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std::atomic<int>& fit2);
 
-    Genome();
+    Genome() = default;
     Genome(std::string filename);
     Genome(const Genome& g1,const Genome& g2);
     Genome(const Genome& genome);
@@ -40,7 +41,7 @@ public:
 
     QVector<ConnectGene*> genes;
 
-    int fitness;
+    int fitness{0};
     int adjustedFitness;
     Network* network;
     Innovation* innovation;

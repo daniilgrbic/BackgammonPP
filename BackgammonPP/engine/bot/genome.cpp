@@ -8,6 +8,8 @@
 #include <iostream>
 #include <queue>
 #include "engine/backgammon.h"
+#include <atomic>
+#include <thread>
 
 Genome::Genome(std::string filename){
     std::ifstream filestream(filename);
@@ -37,7 +39,7 @@ void Genome::printToFile(std::string filename){
 
 
 void Genome::mutateAddConnection(){
-    if(true or AI::random01(AI::generator) < AI::mutateConnectionsChance){
+    if(AI::random01(AI::generator) < AI::mutateConnectionsChance){
         std::vector<std::vector<int>> adj_list(maxNeuron);
         std::vector<int> in_degree(maxNeuron, 0);
 
@@ -104,7 +106,7 @@ void Genome::mutateAddConnection(){
     }
 }
 void Genome::mutateAddNode(){
-    if(true or AI::random01(AI::generator) < AI::nodeMutationChance){
+    if(AI::random01(AI::generator) < AI::nodeMutationChance){
         std::vector<ConnectGene *> out;
         int nelems = 1;
         std::sample(genes.begin(), genes.end(), std::back_inserter(out), nelems, std::mt19937{std::random_device{}()});
@@ -118,7 +120,7 @@ void Genome::mutateAddNode(){
 }
 void Genome::mutateConnectionWeight(){
     for(auto gene : genes){
-        if(true or AI::random01(AI::generator) < AI::perturbChance){
+        if(AI::random01(AI::generator) < AI::perturbChance){
             gene->weight = gene->weight + AI::random01(AI::generator) * AI::stepSize * 2 - AI::stepSize;
         }else{
             gene->weight = AI::random01(AI::generator) * 4 - 2;
@@ -141,7 +143,7 @@ Genome::Genome(const Genome& g1, const Genome& g2){
     this->innovation = g1.innovation;
     this->maxNeuron = std::max(g1.maxNeuron, g2.maxNeuron);
     int i=0;
-    while(g1.genes[i]->innovation == g2.genes[i]->innovation){
+    while(i < g1.genes.size() && i < g2.genes.size() && g1.genes[i]->innovation == g2.genes[i]->innovation){
         if(0.5 > AI::random01(AI::generator)){
             ConnectGene* newGene = new ConnectGene(g1.genes[i]);
             genes.push_back(newGene);
@@ -152,7 +154,7 @@ Genome::Genome(const Genome& g1, const Genome& g2){
         }
         ++i;
     }
-    if(0.5 > AI::random01(AI::generator)){//TODO change so that genome with better fitness is chosen
+    if(g1.fitness > g2.fitness){
         while(i < g1.genes.size()){
             ConnectGene* newGene = new ConnectGene(g1.genes[i]);
             genes.push_back(newGene);
@@ -166,7 +168,6 @@ Genome::Genome(const Genome& g1, const Genome& g2){
         }
     }
 
-
 }
 Genome::Genome(const Genome& genome){
     this->innovation = genome.innovation;
@@ -174,6 +175,7 @@ Genome::Genome(const Genome& genome){
     for(int i = 0; i < genome.genes.size(); ++i){
         this->genes.push_back(new ConnectGene(genome.genes[i]));
     }
+    this->fitness = genome.fitness;
 }
 
 double Genome::disjoint(const Genome& g1, const Genome& g2){
@@ -203,20 +205,20 @@ bool Genome::sameSpecies(const Genome& g1, const Genome& g2){
     return AI::deltaDisjoint*disjoint(g1, g2) + AI::deltaWeights*weights(g1, g2) < AI::deltaTreshold;
 }
 
-const Genome& Genome::playBackgammon(const Genome& g1, const Genome& g2){
+void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std::atomic<int>& fit2){
     Backgammon game;
     // game.currentRoll().onRoll() vraca igraca koji prvi igra
     // ovde eventualno obrnes ko je koji igrac kod ovih mreza i genoma
     // konvencija je WHITE ide 24->1, a BLACK 1->24
-    Network n1(g1); //playercolor1
-    Network n2(g2); //playercolor2
-
+//    Network n1(g1); //playercolor1
+//    Network n2(g2); //playercolor2
+//    std::cout << "Its time to duel" << std::endl;
     while(true){
         std::vector<Turn> turns = game.generateLegalTurns();
         std::pair<double, Turn> bestTurn = {0.0, turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
-            double eval = n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, b));
+            double eval = g1.network->evaluateNetwork(g1.network->inputFromState(PlayerColor::WHITE, b));
             if(bestTurn.first < eval){
                 bestTurn.first = eval;
                 bestTurn.second = turn;
@@ -224,21 +226,25 @@ const Genome& Genome::playBackgammon(const Genome& g1, const Genome& g2){
         }
         game.playTurn(bestTurn.second);
         if(game.isFinished(PlayerColor::WHITE)){
-            return g1;
+            ++fit1;
+            std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
+            return;
         }
 
         turns = game.generateLegalTurns();
         bestTurn = {0.0, turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
-            double eval = n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, b.mirror()));
+            double eval = g2.network->evaluateNetwork(g2.network->inputFromState(PlayerColor::BLACK, b.mirror()));
             if(bestTurn.first < eval){
                 bestTurn.first = eval;
                 bestTurn.second = turn;};
         }
         game.playTurn(bestTurn.second);
         if(game.isFinished(PlayerColor::BLACK)){
-            return g2;
+            ++fit2;
+            std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
+            return;
         }
     }
 }

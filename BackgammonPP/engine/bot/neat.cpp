@@ -3,14 +3,16 @@
 #include <string>
 #include <cmath>
 #include "neat.hpp"
+#include "engine/bot/genome.hpp"
 #include <random>
+#include <thread>
 
 namespace AI{
 size_t inputSize = 29;
 size_t outputSize = 1;
 
-size_t populationSize = 300;
-size_t generations = 100;
+size_t populationSize = 20;
+size_t generations = 1000;
 double deltaDisjoint = 2.0;
 double deltaWeights = 0.4;
 double deltaTreshold = 1.0;
@@ -36,7 +38,31 @@ double sigmoid(const double x){
 std::default_random_engine generator;
 std::uniform_real_distribution<double> random01(0.0, 1.0);
 
+
+void Neat::calculateFitness(std::vector<Genome>& population){
+    std::vector<std::atomic<int>> results(AI::populationSize);
+    for(auto& gen : population){
+        gen.network = new Network(gen);
+    }
+    for(int i = 0; i < AI::populationSize; ++i){
+        std::vector<std::thread> threads;
+        for(int j = 0; j < AI::populationSize; ++j){
+            if(&population[i] != &population[j]){
+                threads.push_back(std::thread(Genome::playBackgammon,std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
+            }
+        }
+        for(auto& tr : threads){
+            tr.join();
+        }
+    }
+    for(int i = 0; i < AI::populationSize; ++i){
+        population[i].fitness = results[i];
+    }
 }
+
+}
+
+
 
 /*
 newGeneration()
