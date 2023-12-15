@@ -42,9 +42,9 @@ bool Game::isBlocked(const Point& point, PlayerColor player) const {
 bool Game::isBearingOff(PlayerColor player) const {
     if(m_board.bar(player))
         return false;
-    for(int pointId = 24; pointId >= 7; pointId++) {
+    for(int pointId = 24; pointId >= 7; --pointId) {
         auto owner = m_board.point(Point::idByPlayer(player, pointId)).owner();
-        if(owner.has_value() && owner.value() == player)
+        if(owner && owner.value() == player)
             return false;
     }
     return true;
