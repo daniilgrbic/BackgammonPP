@@ -14,22 +14,25 @@ public:
     Client(QObject* parent = nullptr);
     ~Client();
     bool connectClient(QString ipAddress);
+    void sendStateToServer(QString state);
+    void sendOpponentToServer(QString state);
+    void sendNameToServer(QString name);
+    void sendChatMessageToServer(QString message);
 
 signals:
+    // these should be handled in Game
     void connectedAsHost();
     void connectedAsPlayer();
     void connectedAsSpectator();
     void connectedAsWaiting();
     void potentialOpponent(QString oppName);
-    void newState(QString state);
     void newChatMessage(QString chatMessage);
+    // these should be handled in Player
+    void newState(QString state);
+
 
 public slots:
     void readMessage();
-    void sendStateToServer(QString state);
-    void sendOpponentToServer(QString state);
-    void sendNameToServer(QString name);
-    void sendChatMessageToServer(QString message);
     void disconnected();
 
 private:
