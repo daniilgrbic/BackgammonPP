@@ -14,7 +14,9 @@ find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Network)
 find_package(Qt${QT_VERSION_MAJOR} OPTIONAL_COMPONENTS Widgets)
 
-qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
+add_subdirectory(tests)
+
+set(SOURCE
     engine/backgammon.cpp engine/backgammon.h
     engine/core/boardstate.cpp engine/core/boardstate.h
     engine/core/die.cpp engine/core/die.h
@@ -30,6 +32,11 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     mainwindow.cpp mainwindow.h mainwindow.ui
     utility/jsonserializer.h
     utility/serializable.h
+)
+
+qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
+    ${SOURCE}
+    tests/CMakeLists.txt
 )
 target_link_libraries(BackgammonPP PRIVATE
     Qt::Core
