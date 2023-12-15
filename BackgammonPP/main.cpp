@@ -53,6 +53,10 @@ int main(int argc, char *argv[])
                   {
                       return a.fitness > b.fitness;
                   });
+        for(auto& g : population){
+            std::cout << g.fitness << " ";
+        }
+        std::cout << std::endl;
         population[0].printToFile(std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(i)).append(".genome"));
     }
     std::cout << population[0].fitness << std::endl;

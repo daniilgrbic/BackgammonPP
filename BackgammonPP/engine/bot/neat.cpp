@@ -11,7 +11,7 @@ namespace AI{
 size_t inputSize = 29;
 size_t outputSize = 1;
 
-size_t populationSize = 20;
+size_t populationSize = 5;
 size_t generations = 1000;
 double deltaDisjoint = 2.0;
 double deltaWeights = 0.4;
@@ -44,15 +44,17 @@ void Neat::calculateFitness(std::vector<Genome>& population){
     for(auto& gen : population){
         gen.network = new Network(gen);
     }
-    for(int i = 0; i < AI::populationSize; ++i){
-        std::vector<std::thread> threads;
-        for(int j = 0; j < AI::populationSize; ++j){
-            if(&population[i] != &population[j]){
-                threads.push_back(std::thread(Genome::playBackgammon,std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
+    for(int n = 0; n < 3; ++n){
+        for(int i = 0; i < AI::populationSize; ++i){
+            std::vector<std::thread> threads;
+            for(int j = 0; j < AI::populationSize; ++j){
+                if(&population[i] != &population[j]){
+                    threads.push_back(std::thread(Genome::playBackgammon,std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
+                }
             }
-        }
-        for(auto& tr : threads){
-            tr.join();
+            for(auto& tr : threads){
+                tr.join();
+            }
         }
     }
     for(int i = 0; i < AI::populationSize; ++i){
