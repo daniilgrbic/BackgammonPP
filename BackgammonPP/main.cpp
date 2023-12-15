@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 //    w.show();
 //    return a.exec();
     std::cout << "Starting reading..." << std::endl;
-    Genome genome("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\lilith_copy.genome");
+    Genome genome("../BackgammonPP/engine/bot/saved_genomes/lilith_copy.genome");
     std::cout << "Genome read" << std::endl;
 //    for(int i = 0; i < 5; ++i){
 //        genome.mutate();
@@ -40,8 +40,9 @@ int main(int argc, char *argv[])
     for(int i = 0; i < AI::generations; ++i){
         std::cout << "Generation " << i << std::endl;
         for(int j = 0; j < AI::populationSize; ++j){
+
             std::vector<Genome> out;
-            std::sample(population.begin(), population.begin() + 8, std::back_inserter(out), 2, std::mt19937 {std::random_device{}()});
+            std::sample(population.begin(), population.begin() + AI::populationSize/2, std::back_inserter(out), 2, std::mt19937 {std::random_device{}()});
             newPopulation[j] = Genome(out[0], out[1]);
             newPopulation[j].mutate();
         }
@@ -52,10 +53,10 @@ int main(int argc, char *argv[])
                   {
                       return a.fitness > b.fitness;
                   });
-        population[0].printToFile(std::string("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\gen_").append(std::to_string(i)).append(".genome"));
+        population[0].printToFile(std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(i)).append(".genome"));
     }
     std::cout << population[0].fitness << std::endl;
-    population[0].printToFile("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\eva.genome");
+    population[0].printToFile("../BackgammonPP/engine/bot/saved_genomes/eva.genome");
 
 
 
