@@ -4,7 +4,6 @@
 #include "../../utility/serializable.h"
 
 #include <optional>
-#include <vector>
 
 using uint = unsigned int;
 
