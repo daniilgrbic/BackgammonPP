@@ -35,7 +35,7 @@ void BoardWindow::on_pbRollDice_clicked()
     //get these informations from the game state;
     int value1 = 2;
     int value2 = 3;
-    BoardPlayingDie::Position pos = BoardPlayingDie::Position::LEFT;
+    BoardPlayingDie::Position pos = BoardPlayingDie::Position::RIGHT;
     m_boardScene->updatePlayingDice(value1, value2, pos);
 }
 

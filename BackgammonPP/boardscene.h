@@ -24,7 +24,8 @@ private:
     const qreal heightCoef = 0.4;
     const qreal midBarCoef = 1.0;
     const qreal sideBarCoef = 1.25;
-    const qreal playingDieCoef = 1.0;
+    const qreal playingDieCoef = 0.9;
+    const qreal doublingDieCoef = 0.7;
     const int trianglePairs = 12;
     const int checkersNumber = 30;
 
@@ -34,7 +35,8 @@ private:
     const qreal triangleWidth = 50;
     const qreal barWidth = 1;
     const qreal sideBarWidth;
-    const qreal playingDieWidth;
+    const qreal playingDieSide;
+    const qreal doublingDieSide;
     const QPainter m_painter;
 
     QVector<BoardTriangle*> boardTriangles;
@@ -50,6 +52,7 @@ private:
     void setBoardBar();
     void setSideBars();
     void setPlayingDice();
+    void setDoublingDie();
     void drawBoardTriangle(BoardTriangle *boardTriangle);
 };
 

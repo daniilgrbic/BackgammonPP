@@ -73,6 +73,7 @@
           <font>
            <family>Corbel</family>
            <pointsize>21</pointsize>
+           <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
            <underline>false</underline>
@@ -123,10 +124,13 @@
           <string notr="true"/>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -152,6 +156,7 @@
                <font>
                 <family>Corbel</family>
                 <pointsize>13</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -186,6 +191,7 @@ QPushButton:hover {
                <font>
                 <family>Corbel</family>
                 <pointsize>13</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -220,6 +226,7 @@ QPushButton:hover {
                <font>
                 <family>Corbel</family>
                 <pointsize>13</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -257,10 +264,13 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
          </property>
          <widget class="QPushButton" name="btExit">
           <property name="geometry">
@@ -315,6 +325,7 @@ QPushButton:hover {
          <font>
           <family>Corbel</family>
           <pointsize>21</pointsize>
+          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
           <underline>false</underline>

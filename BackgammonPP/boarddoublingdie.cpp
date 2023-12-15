@@ -1,8 +1,9 @@
 #include "boarddoublingdie.h"
 
-BoardDoublingDie::BoardDoublingDie(QGraphicsItem *parent, qreal side, int value)
+BoardDoublingDie::BoardDoublingDie(QGraphicsItem *parent, qreal side, QMap<Position, QPointF> posMap,int value)
     : BoardDie(parent, side),
-      m_value(value)
+      m_value(value),
+      m_posMap(posMap)
 {
     assert(validValues.contains(value));
 }
@@ -22,9 +23,10 @@ void BoardDoublingDie::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     painter->drawText(drawRect, Qt::AlignCenter, QString::number(m_value));
 }
 
-void BoardDoublingDie::doubleValue(){
-    m_value *= 2;
-    assert(validValues.contains(m_value));
+void BoardDoublingDie::updateDie(Position pos, int value){
+    assert(validValues.contains(value));
+    setPos(m_posMap[pos]);
+    m_value = value;
     update();
+    show();
 }
-

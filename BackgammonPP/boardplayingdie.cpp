@@ -28,7 +28,5 @@ void BoardPlayingDie::updateDie(Position pos, int value){
     m_value = value;
     update();
     show();
-    std::cout << "ovde" << std::endl;
-    std::cout << m_posMap[pos].y() << std::endl;
 }
 

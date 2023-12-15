@@ -8,7 +8,8 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
       triangleWidth( (m_width) / (trianglePairs + midBarCoef + 2 * sideBarCoef) ),
       barWidth(triangleWidth*midBarCoef),///TODO: here too
       sideBarWidth(triangleWidth*sideBarCoef),
-      playingDieWidth(triangleWidth * playingDieCoef)
+      playingDieSide(triangleWidth * playingDieCoef),
+      doublingDieSide(doublingDieCoef*triangleWidth)
 {
 
     setSceneRect(0, 0, m_width, m_height);
@@ -17,6 +18,7 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setBoardBar();
     setSideBars();
     setPlayingDice();
+    setDoublingDie();
 }
 
 void BoardScene::setBoardTriangles() {
@@ -111,24 +113,24 @@ void BoardScene::drawBoardTriangle(BoardTriangle *boardTriangle) {
 void BoardScene::setPlayingDice()
 {
     QMap<BoardPlayingDie::Position, QPointF> map1;
-    QPointF Left1(sideBarWidth + 1.5*triangleWidth - 0.5*playingDieWidth
-                  , 0.5*m_height - 0.5*playingDieWidth);
-    QPointF Right1(sideBarWidth + 4.5*triangleWidth - 0.5*playingDieWidth
-                  , 0.5*m_height - 0.5*playingDieWidth);
+    QPointF Left1(sideBarWidth + 1.5*triangleWidth - 0.5*playingDieSide
+                  , 0.5*m_height - 0.5*playingDieSide);
+    QPointF Right1(sideBarWidth + 6*triangleWidth + barWidth + 1.5*triangleWidth - 0.5*playingDieSide
+                  , 0.5*m_height - 0.5*playingDieSide);
     map1[BoardPlayingDie::Position::LEFT] = std::move(Left1);
     map1[BoardPlayingDie::Position::RIGHT] = std::move(Right1);
 
-    die1 = new BoardPlayingDie(nullptr, playingDieWidth, std::move(map1));
+    die1 = new BoardPlayingDie(nullptr, playingDieSide, std::move(map1));
 
     QMap<BoardPlayingDie::Position, QPointF> map2;
-    QPointF Left2(sideBarWidth + 6*triangleWidth + barWidth + 1.5*triangleWidth - 0.5*playingDieWidth
-                  , 0.5*m_height - 0.5*playingDieWidth);
-    QPointF Right2(sideBarWidth + 6*triangleWidth + barWidth + 4.5*triangleWidth - 0.5*playingDieWidth
-                  , 0.5*m_height - 0.5*playingDieWidth);
+    QPointF Left2(sideBarWidth + 4.5*triangleWidth - 0.5*playingDieSide
+                  , 0.5*m_height - 0.5*playingDieSide);
+    QPointF Right2(sideBarWidth + 6*triangleWidth + barWidth + 4.5*triangleWidth - 0.5*playingDieSide
+                  , 0.5*m_height - 0.5*playingDieSide);
     map2[BoardPlayingDie::Position::LEFT] = std::move(Left2);
     map2[BoardPlayingDie::Position::RIGHT] = std::move(Right2);
 
-   die2 = new BoardPlayingDie(nullptr, playingDieWidth, std::move(map2));
+   die2 = new BoardPlayingDie(nullptr, playingDieSide, std::move(map2));
 
 
     die1->hide();
@@ -136,6 +138,25 @@ void BoardScene::setPlayingDice()
 
     addItem(die1);
     addItem(die2);
+}
+
+void BoardScene::setDoublingDie(){
+    QMap<BoardDoublingDie::Position, QPointF> map;
+    QPointF Out( (sideBarWidth - doublingDieSide) * 0.5
+                  , 0.5*m_height - 0.5*doublingDieSide);
+
+    QPointF Left(sideBarWidth + (trianglePairs * 0.25) *triangleWidth - 0.5*doublingDieSide
+                  , 0.5*m_height - 0.5*doublingDieSide);
+    QPointF Right(sideBarWidth + (trianglePairs * 0.5) * triangleWidth + barWidth + (trianglePairs * 0.25)*triangleWidth - 0.5*doublingDieSide
+                  , 0.5*m_height - 0.5*doublingDieSide);
+
+    map[BoardDoublingDie::Position::OUT] = std::move(Out);
+    map[BoardDoublingDie::Position::LEFT] = std::move(Left);
+    map[BoardDoublingDie::Position::RIGHT] = std::move(Right);
+
+    doublingDie = new BoardDoublingDie(nullptr, doublingDieSide, std::move(map));
+    doublingDie->updateDie(BoardDoublingDie::Position::OUT, 2);
+    addItem(doublingDie);
 }
 
 void BoardScene::updatePlayingDice(int value1, int value2, BoardPlayingDie::Position pos){
