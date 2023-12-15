@@ -51,7 +51,7 @@
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>0</y>
+         <y>20</y>
          <width>691</width>
          <height>61</height>
         </rect>
@@ -101,10 +101,13 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>120</y>
-         <width>181</width>
-         <height>241</height>
+         <y>110</y>
+         <width>121</width>
+         <height>261</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -140,7 +143,7 @@
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -174,7 +177,7 @@ QPushButton:hover {
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -208,7 +211,7 @@ QPushButton:hover {
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -234,8 +237,8 @@ QPushButton:hover {
       <widget class="QFrame" name="exitFrame">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>380</y>
+         <x>30</x>
+         <y>410</y>
          <width>621</width>
          <height>51</height>
         </rect>
@@ -260,6 +263,9 @@ QPushButton:hover {
           <family>Corbel</family>
           <pointsize>13</pointsize>
          </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {

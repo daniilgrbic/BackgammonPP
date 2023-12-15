@@ -6,17 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // setFixedSize(width(), height());
-    // this->showFullScreen();
+    setFixedSize(width(), height());
 
-    QPixmap pix(this->backgroundPicPath);
-    pix = pix.scaled(this->size(), Qt::IgnoreAspectRatio);
-    // ui->bg_label->setPixmap(pix);
-
-    QPalette palette;
-    palette.setBrush(QPalette::Window, pix);
-    this->setPalette(palette);
-
+    setPicture(this->backgroundPicPath, this);
+    setPicture(this->sketchPicPath, ui->optionsFrame);
 
     connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
 
@@ -25,6 +18,17 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setPicture(QString picturePath, QWidget *pictureWidget) {
+    QPixmap pix(picturePath);
+    pix = pix.scaled(pictureWidget->size(), Qt::IgnoreAspectRatio);
+
+    QPalette pallete;
+    pallete.setBrush(QPalette::Window, pix);
+    pictureWidget->setPalette(pallete);
+    pictureWidget->setAutoFillBackground(true);
+    pictureWidget->setFixedSize(pix.size());
 }
 
 void MainWindow::on_btCreateGame_clicked()

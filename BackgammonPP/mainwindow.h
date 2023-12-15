@@ -35,6 +35,8 @@ private:
     Ui::MainWindow *ui;
     BoardWindow *boardWindow;
     QString backgroundPicPath = ":/resources/img/blurred_backgammon_blacked.png";
+    QString sketchPicPath = ":/resources/img/menu_sketch.png";
 
+    void setPicture(QString picturePath, QWidget *pictureWidget);
 };
 #endif // MAINWINDOW_H
