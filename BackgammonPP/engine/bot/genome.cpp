@@ -210,15 +210,15 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
     // game.currentRoll().onRoll() vraca igraca koji prvi igra
     // ovde eventualno obrnes ko je koji igrac kod ovih mreza i genoma
     // konvencija je WHITE ide 24->1, a BLACK 1->24
-//    Network n1(g1); //playercolor1
-//    Network n2(g2); //playercolor2
+    Network n1(g1); //playercolor1
+    Network n2(g2); //playercolor2
 //    std::cout << "Its time to duel" << std::endl;
     while(true){
         std::vector<Turn> turns = game.generateLegalTurns();
         std::pair<double, Turn> bestTurn = {0.0, turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
-            double eval = g1.network->evaluateNetwork(g1.network->inputFromState(PlayerColor::WHITE, b));
+            double eval = n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, b));
             if(bestTurn.first < eval){
                 bestTurn.first = eval;
                 bestTurn.second = turn;
@@ -235,7 +235,7 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
         bestTurn = {0.0, turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
-            double eval = g2.network->evaluateNetwork(g2.network->inputFromState(PlayerColor::BLACK, b.mirror()));
+            double eval = n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, b.mirror()));
             if(bestTurn.first < eval){
                 bestTurn.first = eval;
                 bestTurn.second = turn;};
