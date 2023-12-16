@@ -41,9 +41,6 @@ std::uniform_real_distribution<double> random01(0.0, 1.0);
 
 void Neat::calculateFitness(std::vector<Genome>& population){
     std::vector<std::atomic<int>> results(AI::populationSize);
-    for(auto& gen : population){
-        gen.network = new Network(gen);
-    }
     for(int n = 0; n < 3; ++n){
         for(int i = 0; i < AI::populationSize; ++i){
             std::vector<std::thread> threads;
