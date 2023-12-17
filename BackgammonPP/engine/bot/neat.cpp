@@ -32,7 +32,7 @@ double stepSize = 0.10;
 size_t maxNodes = 1000000;
 
 double sigmoid(const double x){
-    return 2 / (1 + exp(-4.9 * x)) - 1;
+    return 1 / (1 + exp(-x));
 }
 
 std::default_random_engine generator;

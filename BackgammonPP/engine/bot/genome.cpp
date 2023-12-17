@@ -215,7 +215,7 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
 //    std::cout << "Its time to duel" << std::endl;
     while(true){
         std::vector<Turn> turns = game.generateLegalTurns();
-        std::pair<double, Turn> bestTurn = {0.0, turns[0]};
+        std::pair<double, Turn> bestTurn = {n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, turns[0].m_finalBoard)), turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
             double eval = n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, b));
@@ -232,7 +232,7 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
         }
 
         turns = game.generateLegalTurns();
-        bestTurn = {0.0, turns[0]};
+        bestTurn = {n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, turns[0].m_finalBoard)), turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
             double eval = n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, b.mirror()));

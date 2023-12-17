@@ -25,13 +25,13 @@ Network::Network(std::string filename){
 }
 void Network::calculateNeuron(Neuron& neuron){
     double value = 0.0;
-    for(auto incoming : neuron.incoming){
+    for(auto& incoming : neuron.incoming){
         if(!neurons[incoming->out].calculated){
             calculateNeuron(neurons[incoming->out]);
         }
         value += neurons[incoming->out].value * incoming->weight;
     }
-    neuron.value = AI::sigmoid(value);
+    neuron.value = AI::sigmoid(value) > 0.5;
     neuron.calculated = true;
 }
 
@@ -45,7 +45,12 @@ double Network::evaluateNetwork(const QVector<double>& inputs){
     neurons[AI::inputSize - 1].calculated = true;
 
 
-    calculateNeuron(neurons[AI::inputSize]);
+//    calculateNeuron(neurons[AI::inputSize]);
+    for(auto& incoming : neurons[AI::inputSize].incoming){
+        calculateNeuron(neurons[incoming->out]);
+        neurons[AI::inputSize].value += neurons[incoming->out].value * incoming->weight;
+    }
+
     for(auto& neuron : neurons){
         neuron.calculated = false;
     }
