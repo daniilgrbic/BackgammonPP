@@ -60,7 +60,7 @@ double Network::evaluateNetwork(const QVector<double>& inputs){
 
 
     calculateNeuron(neurons[AI::inputSize]);
-    for(auto neuron : neurons){
+    for(auto& neuron : neurons){
         neuron.calculated = false;
     }
     return neurons[AI::inputSize].value;

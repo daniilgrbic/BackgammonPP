@@ -6,6 +6,7 @@
 #include "engine/bot/genome.hpp"
 #include <random>
 #include <thread>
+#include <future>
 
 namespace AI{
 size_t inputSize = 29;
@@ -43,14 +44,8 @@ void Neat::calculateFitness(std::vector<Genome>& population){
     std::vector<std::atomic<int>> results(AI::populationSize);
     for(int n = 0; n < 3; ++n){
         for(int i = 0; i < AI::populationSize; ++i){
-            std::vector<std::thread> threads;
-            for(int j = 0; j < AI::populationSize; ++j){
-                if(&population[i] != &population[j]){
-                    threads.push_back(std::thread(Genome::playBackgammon,std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
-                }
-            }
-            for(auto& tr : threads){
-                tr.join();
+            for(int j = i + 1; j < AI::populationSize; ++j){
+                Genome::playBackgammon(std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j]));
             }
         }
     }
