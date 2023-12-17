@@ -1,13 +1,14 @@
 #include "network/client.h"
 
 
-Client::Client(QObject* parent)
+Client::Client(bool host, QObject* parent)
     : QObject(parent)
+    , m_host{host}
 {
     m_socket = new QTcpSocket(this);
 
-    connect(m_socket, &QTcpSocket::readyRead, this, &Client::readMessage);
-    connect(m_socket, &QTcpSocket::disconnected, this, &Client::disconnected);
+    QObject::connect(m_socket, &QTcpSocket::readyRead, this, &Client::readMessageFromServer);
+    QObject::connect(m_socket, &QTcpSocket::disconnected, this, &Client::disconnectedFromServer);
 }
 
 Client::~Client() {
@@ -15,59 +16,53 @@ Client::~Client() {
 }
 
 bool Client::connectClient(QString ipAddress) {
-    m_socket->connectToHost(QHostAddress(ipAddress), PORT);
+    m_socket->connectToHost(QHostAddress(ipAddress), srvconst::PORT);
     return m_socket->waitForConnected();
 }
 
-void Client::disconnected() {
-    delete m_socket;
-}
-
-void Client::readMessage() {
+void Client::readMessageFromServer() {
     QString message = m_socket->readAll();
 
-    if (message == serverCmdConnectedHost) {
-        emit connectedAsHost();
-    } else if (message == serverCmdConnectedPlayer) {
-        emit connectedAsPlayer();
-    } else if (message == serverCmdConnectedSpectator) {
-        emit connectedAsSpectator();
-    } else if (message == serverCmdConnectedWaiting) {
-        emit connectedAsWaiting();
-    } else if (message.startsWith(serverCmdPotOpp)) {
-        emit potentialOpponent(message.sliced(serverCmdPotOpp.length()));
-    } else if (message.startsWith(serverCmdState)) {
-        emit newState(message.sliced(serverCmdState.length()));
-    } else if (message.startsWith(serverCmdChat)) {
-        emit newChatMessage(message.sliced(serverCmdChat.length()));
+    if (message == srvconst::serverCmdConnected) {
+        emit connected(message);
+    } else if (message.startsWith(srvconst::serverCmdPotOpp)) {
+        emit potentialOpponent(message.sliced(srvconst::serverCmdPotOpp.length()));
+    } else if (message.startsWith(srvconst::serverCmdState)) {
+        emit newState(message.sliced(srvconst::serverCmdState.length()));
+    } else if (message.startsWith(srvconst::serverCmdChat)) {
+        emit newChatMessage(message.sliced(srvconst::serverCmdChat.length()));
     } else {
-        throw std::system_error(EDOM, std::generic_category());
+        emit unknownServerCommand(message);
     }
+}
+
+void Client::disconnectedFromServer() {
+    emit disconnected();
 }
 
 void Client::sendStateToServer(QString state) {
     if (m_socket->state() == QAbstractSocket::ConnectedState) {
-        m_socket->write((serverCmdState + state).toStdString().c_str());
+        m_socket->write((srvconst::serverCmdState + state).toStdString().c_str());
         m_socket->waitForBytesWritten();
     } else {
-        throw std::system_error(EDOM, std::generic_category());
+        emit notConnected();
     }
 }
 
-void Client::sendOpponentToServer(QString oppName) {
+void Client::sendPlayerToServer(QString oppName) {
     if (m_socket->state() == QAbstractSocket::ConnectedState) {
-        m_socket->write((serverCmdOpp + oppName).toStdString().c_str());
+        m_socket->write((srvconst::serverCmdSelectPlayer + oppName).toStdString().c_str());
         m_socket->waitForBytesWritten();
     } else {
-        throw std::system_error(EDOM, std::generic_category());
+        emit notConnected();
     }
 }
 
 void Client::sendNameToServer(QString name) {
     if (m_socket->state() == QAbstractSocket::ConnectedState) {
-        m_socket->write((serverCmdName + name).toStdString().c_str());
+        m_socket->write((srvconst::serverCmdName + name).toStdString().c_str());
         m_socket->waitForBytesWritten();
     } else {
-        throw std::system_error(EDOM, std::generic_category());
+        emit notConnected();
     }
 }

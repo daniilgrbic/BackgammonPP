@@ -5,8 +5,7 @@
 #include "utility/serializable.h"
 
 
-class ChatMessage : public Serializable
-{
+class ChatMessage : public Serializable {
 public:
     ChatMessage(QString m = "", QString r = "")
         : message{m}

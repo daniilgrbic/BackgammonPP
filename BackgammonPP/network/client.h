@@ -4,35 +4,39 @@
 #include <QObject>
 #include <QString>
 #include <QTcpSocket>
-#include <system_error>
-#include <network/server_commands.h>
+#include <network/server_consts.h>
 
 
 class Client : public QObject {
     Q_OBJECT
 public:
-    Client(QObject* parent = nullptr);
+    Client(bool host = false, QObject* parent = nullptr);
     ~Client();
     bool connectClient(QString ipAddress);
 
 signals:
-    void connectedAsHost();
-    void connectedAsPlayer();
-    void connectedAsSpectator();
-    void connectedAsWaiting();
+    void connected(QString msg);
+    void disconnected();
+    void setHost();
     void potentialOpponent(QString oppName);
     void newState(QString state);
     void newChatMessage(QString chatMessage);
+    void unknownServerCommand(QString str);
+    void notConnected();
+
 
 public slots:
-    void readMessage();
+    void readMessageFromServer();
+    void disconnectedFromServer();
+
     void sendStateToServer(QString state);
-    void sendOpponentToServer(QString state);
+    void sendPlayerToServer(QString state);
     void sendNameToServer(QString state);
-    void disconnected();
+
 
 private:
     QTcpSocket* m_socket;
+    bool m_host;
 };
 
 #endif // CLIENT_H

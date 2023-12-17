@@ -42,12 +42,12 @@ HEADERS += \
     engine/core/roll.h \
     engine/core/specialposition.h \
     engine/core/turn.h \
+    network/server_consts.h \
     utility/jsonserializer.h \
     utility/serializable.h \
     network/chat_message.h \
     network/server.h \
     network/client.h \
-    network/server_commands.h \
     barcheckerholder.h \
     boardbar.h \
     boardchecker.h \
