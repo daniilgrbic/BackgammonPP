@@ -25,8 +25,8 @@ void Client::readMessageFromServer() {
 
     if (message == srvconst::serverCmdConnected) {
         emit connected(message);
-    } else if (message.startsWith(srvconst::serverCmdPotOpp)) {
-        emit potentialOpponent(message.sliced(srvconst::serverCmdPotOpp.length()));
+    } else if (message.startsWith(srvconst::serverCmdAddName)) {
+        emit potentialOpponent(message.sliced(srvconst::serverCmdAddName.length()));
     } else if (message.startsWith(srvconst::serverCmdState)) {
         emit newState(message.sliced(srvconst::serverCmdState.length()));
     } else if (message.startsWith(srvconst::serverCmdChat)) {
@@ -60,7 +60,7 @@ void Client::sendPlayerToServer(QString oppName) {
 
 void Client::sendNameToServer(QString name) {
     if (m_socket->state() == QAbstractSocket::ConnectedState) {
-        m_socket->write((srvconst::serverCmdName + name).toStdString().c_str());
+        m_socket->write((srvconst::serverCmdAddName + name).toStdString().c_str());
         m_socket->waitForBytesWritten();
     } else {
         emit notConnected();
