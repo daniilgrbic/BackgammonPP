@@ -38,6 +38,8 @@ set(SOURCE
     engine/core/turn.h
     engine/backgammon.cpp
     engine/backgammon.h
+    engine/longnardy.cpp
+    engine/longnardy.h
     utility/jsonserializer.h
     utility/serializable.h
     background_menu_image.qrc

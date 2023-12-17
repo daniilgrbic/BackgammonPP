@@ -22,8 +22,8 @@ public:
 protected:
     Game();
     bool isBlot(const Point& point, PlayerColor player) const;
-    bool isBlockedBy(const Point& point, PlayerColor player) const;
-    bool isBearingOff(const BoardState& board, PlayerColor player) const;
+    virtual bool isBlockedBy(const Point& point, PlayerColor player) const;
+    virtual bool isBearingOff(const BoardState& board, PlayerColor player) const;
 
     BoardState m_board;
     Roll m_currentRoll;
