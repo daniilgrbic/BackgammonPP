@@ -6,35 +6,21 @@
 #include <QStack>
 
 Network::Network(Genome genome){
+    neurons.resize(genome.maxNeuron);
     for(auto gene : genome.genes){
         if(!gene->enabled)
             continue;
-        if(neurons.find(gene->into) != neurons.end()){
-            neurons[gene->into].incoming.push_back(gene);
-        }else{
-            neurons.insert(gene->into, Neuron());
-            neurons[gene->into].incoming.push_back(gene);
-        }
-        if(neurons.find(gene->out) == neurons.end()){
-            neurons.insert(gene->out, Neuron());
-        }
+        neurons[gene->into].incoming.push_back(gene);
     }
 }
 
 Network::Network(std::string filename){
     Genome genome(filename);
+    neurons.resize(genome.maxNeuron);
     for(auto gene : genome.genes){
         if(!gene->enabled)
             continue;
-        if(neurons.find(gene->into) != neurons.end()){
-            neurons[gene->into].incoming.push_back(gene);
-        }else{
-            neurons.insert(gene->into, Neuron());
-            neurons[gene->into].incoming.push_back(gene);
-        }
-        if(neurons.find(gene->out) == neurons.end()){
-            neurons.insert(gene->out, Neuron());
-        }
+        neurons[gene->into].incoming.push_back(gene);
     }
 }
 void Network::calculateNeuron(Neuron& neuron){
