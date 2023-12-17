@@ -1,8 +1,6 @@
 #include "boardstate.h"
 #include "point.h"
 
-#include <cassert>
-
 #include <QVariant>
 #include <QVariantMap>
 #include <QJsonDocument>
@@ -21,7 +19,9 @@ uint Point::count() const
 
 uint Point::add(PlayerColor color, uint count)
 {
-    assert(m_count == 0 or m_owner == color);
+    if(m_count > 0 and m_owner != color)
+        throw std::logic_error("Cannot add checkers to point owned by opponent");
+
     m_count += count;
     m_owner = color;
     return m_count;
@@ -29,7 +29,9 @@ uint Point::add(PlayerColor color, uint count)
 
 uint Point::remove(uint count)
 {
-    assert(m_count >= count);
+    if(m_count < count)
+        throw std::logic_error("Cannot remove more checkers than present on a point");
+
     m_count -= count;
     if(m_count == 0)
         m_owner.reset();
@@ -38,7 +40,9 @@ uint Point::remove(uint count)
 
 int Point::idByPlayer(PlayerColor color, size_t index)
 {
-    assert(index >= 1 && index <= NUMBER_OF_POINTS);
+    if(index < 1 or index > NUMBER_OF_POINTS)
+        throw std::logic_error("Point index must be an integer between 1 and 24");
+
     return color == PlayerColor::WHITE ? index : NUMBER_OF_POINTS + 1 - index;
 }
 
