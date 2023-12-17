@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
-project(BackgammonPP VERSION 1.0 LANGUAGES C CXX)
+project(
+  BackgammonPP
+  VERSION 1.0
+  LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -17,40 +20,73 @@ find_package(Qt${QT_VERSION_MAJOR} OPTIONAL_COMPONENTS Widgets)
 add_subdirectory(tests)
 
 set(SOURCE
-    engine/backgammon.cpp engine/backgammon.h
-    engine/core/boardstate.cpp engine/core/boardstate.h
-    engine/core/die.cpp engine/core/die.h
-    engine/core/game.cpp engine/core/game.h
+    engine/core/boardstate.cpp
+    engine/core/boardstate.h
+    engine/core/die.cpp
+    engine/core/die.h
+    engine/core/game.cpp
+    engine/core/game.h
     engine/core/gameresult.h
-    engine/core/move.cpp engine/core/move.h
+    engine/core/move.cpp
+    engine/core/move.h
     engine/core/playercolor.h
-    engine/core/point.cpp engine/core/point.h
-    engine/core/roll.cpp engine/core/roll.h
+    engine/core/point.cpp
+    engine/core/point.h
+    engine/core/roll.cpp
+    engine/core/roll.h
     engine/core/specialposition.h
     engine/core/turn.h
-    main.cpp
-    mainwindow.cpp mainwindow.h mainwindow.ui
+    engine/backgammon.cpp
+    engine/backgammon.h
     utility/jsonserializer.h
     utility/serializable.h
-)
+    background_menu_image.qrc
+    barcheckerholder.cpp
+    barcheckerholder.h
+    boardbar.cpp
+    boardbar.h
+    boardchecker.cpp
+    boardchecker.h
+    boarddie.cpp
+    boarddie.h
+    boarddoublingdie.cpp
+    boarddoublingdie.h
+    boardplayingdie.cpp
+    boardplayingdie.h
+    boardscene.cpp
+    boardscene.h
+    boardsidebar.cpp
+    boardsidebar.h
+    boardtriangle.cpp
+    boardtriangle.h
+    boardwidget.cpp
+    boardwidget.h
+    boardwindow.cpp
+    boardwindow.h
+    boardwindow.ui
+    checkerholder.cpp
+    checkerholder.h
+    CMakeLists.txt
+    controller.cpp
+    controller.h
+    main.cpp
+    mainwindow.cpp
+    mainwindow.h
+    mainwindow.ui
+    preferences.ui
+    sidebarcheckerholder.cpp
+    sidebarcheckerholder.h
+    verticalchecker.cpp
+    verticalchecker.h)
 
-qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
-    ${SOURCE}
-    tests/CMakeLists.txt
-)
-target_link_libraries(BackgammonPP PRIVATE
-    Qt::Core
-    Qt::Gui
-    Qt::Network
-)
+qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE})
+target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
 
 if((QT_VERSION_MAJOR GREATER 4))
-    target_link_libraries(BackgammonPP PRIVATE
-        Qt::Widgets
-    )
+  target_link_libraries(BackgammonPP PRIVATE Qt::Widgets)
 endif()
 
-install(TARGETS BackgammonPP
-    BUNDLE DESTINATION .
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+install(
+  TARGETS BackgammonPP
+  BUNDLE DESTINATION .
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
