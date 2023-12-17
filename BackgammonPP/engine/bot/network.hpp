@@ -16,5 +16,5 @@ public:
     const QVector<double> inputFromState(PlayerColor player, const BoardState& board);
 private:
     void calculateNeuron(Neuron& neuron);
-    QMap<int, Neuron> neurons;
+    std::vector<Neuron> neurons;
 };
