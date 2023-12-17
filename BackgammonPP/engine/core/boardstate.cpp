@@ -54,8 +54,6 @@ void BoardState::move(const Move &move)
     } else {
         off += 1;
     }
-
-
 }
 
 BoardState BoardState::mirror() const {

@@ -11,6 +11,8 @@ struct Move
 
     Move mirror() const;
 
+    bool operator ==(const Move&) const = default;
+
     PlayerColor m_player;
     std::variant<int, SpecialPosition> m_from;
     std::variant<int, SpecialPosition> m_to;

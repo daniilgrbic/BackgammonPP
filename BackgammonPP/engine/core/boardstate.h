@@ -6,6 +6,7 @@
 #include "../../utility/serializable.h"
 
 #include <array>
+#include <vector>
 
 constexpr int NUMBER_OF_POINTS {24};
 
@@ -25,6 +26,8 @@ public:
 
     BoardState getNextState(const Move& move) const;
     BoardState getNextState(const std::vector<Move>& move) const;
+
+    bool operator ==(const BoardState&) const = default;
 
     // Serializable interface
     QVariant toVariant() const override;

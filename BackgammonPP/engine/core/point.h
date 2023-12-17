@@ -20,6 +20,8 @@ public:
     // [[maybe unused]]
     static int idByPlayer(PlayerColor color, size_t index);
 
+    bool operator ==(const Point&) const = default;
+
     // Serializable interface
     QVariant toVariant() const;
     void fromVariant(const QVariant &variant);
