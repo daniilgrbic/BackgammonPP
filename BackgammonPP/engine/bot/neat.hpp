@@ -39,6 +39,8 @@ extern std::uniform_real_distribution<double> random01;
 class Neat{
 public:
     static void calculateFitness(std::vector<Genome>& population);
+    static void savePopulation(std::vector<Genome>& population, std::string filename);
+    static void loadPopulation(std::vector<Genome>& population, std::string filename);
 
 };
 }

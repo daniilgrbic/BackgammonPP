@@ -57,21 +57,43 @@ void Neat::calculateFitness(std::vector<Genome>& population){
     }
 }
 
+void Neat::savePopulation(std::vector<Genome>& population, std::string filename){
+    std::ofstream filestream(filename);
+    filestream << population.size() << std::endl;
+    for(auto& genome : population){
+        filestream << genome.genes.size() << std::endl;
+        filestream << genome.maxNeuron << " " << genome.innovation->innovation << std::endl;
+        int id = 1;
+        for(auto gene : genome.genes){
+            filestream << id++ << " " << gene->out << " " << gene->into << " " << gene->weight <<  " " << gene->enabled << " " << gene->innovation << std::endl;
+        }
+    }
+}
+void Neat::loadPopulation(std::vector<Genome>& population, std::string filename){
+    std::ifstream filestream(filename);
+    int size;
+    filestream >> size;
+    assert(AI::populationSize == size);
+    population.reserve(size);
+    for(int i = 0; i < size; ++i){
+        int numGenes;
+        filestream >> numGenes;
+        int innov;
+        filestream >> population[i].maxNeuron >> innov;
+        population[i].innovation = new Innovation(innov);
+        int id;
+        int into;
+        int out;
+        double weight;
+        bool enabled;
+        int innovation_num;
+        for(int j = 0; j < numGenes; ++j){
+            filestream >> id >> out >> into >> weight >> enabled >> innovation_num;
+            population[i].genes.push_back(new ConnectGene(out, into, weight, enabled, innovation_num));
+        }
+    }
+}
+
 }
 
 
-
-/*
-newGeneration()
-initializePool()
-initializeRun()
-evaluateCurrent()
-nextGenome()
-fitnessAlreadyMeasured()
-writeFile(filename)
-savePool()
-loadFile(filename)
-loadPool()
-playTop()
-
-*/
