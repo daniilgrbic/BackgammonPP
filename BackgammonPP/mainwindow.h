@@ -2,6 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStackedWidget>
+#include <QCoreApplication>
+#include <QPixmap>
+#include <QImage>
+#include <QString>
+#include <QPalette>
+#include <iostream>
+#include "boardwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +23,22 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void requestCreateGame();
+
+private slots:
+    void on_btCreateGame_clicked();
+    void on_btReturnToMenu_clicked();
+    void on_btPreferences_clicked();
+
+    void on_btExit_clicked();
+
 private:
     Ui::MainWindow *ui;
+    BoardWindow *boardWindow;
+    QString backgroundPicPath = ":/resources/img/blurred_backgammon_blacked.png";
+    QString sketchPicPath = ":/resources/img/menu_sketch.png";
+
+    void setPicture(QString picturePath, QWidget *pictureWidget);
 };
 #endif // MAINWINDOW_H

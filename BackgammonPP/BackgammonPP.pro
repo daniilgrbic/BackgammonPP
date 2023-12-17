@@ -1,6 +1,7 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4):
+    QT += widgets
 
 CONFIG += c++20
 
@@ -28,11 +29,49 @@ HEADERS += \
     point.h \
     roll.h \
     specialposition.h
+    barcheckerholder.cpp \
+    boardbar.cpp \
+    boardchecker.cpp \
+    boarddie.cpp \
+    boarddoublingdie.cpp \
+    boardplayingdie.cpp \
+    boardscene.cpp \
+    boardsidebar.cpp \
+    boardtriangle.cpp \
+    boardwindow.cpp \
+    checkerholder.cpp \
+    controller.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    sidebarcheckerholder.cpp \
+    verticalchecker.cpp
+
+HEADERS += \
+    barcheckerholder.h \
+    boardbar.h \
+    boardchecker.h \
+    boarddie.h \
+    boarddoublingdie.h \
+    boardplayingdie.h \
+    boardscene.h \
+    boardsidebar.h \
+    boardtriangle.h \
+    boardwindow.h \
+    checkerholder.h \
+    controller.h \
+    mainwindow.h \
+    sidebarcheckerholder.h \
+    verticalchecker.h
 
 FORMS += \
+    boardwindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    background_menu_image.qrc \
+    music.qrc
