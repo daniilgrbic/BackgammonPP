@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include "neat.hpp"
+#include "utility/threadsafequeue.h"
 #include "engine/bot/genome.hpp"
 #include <random>
 #include <thread>
@@ -38,20 +39,42 @@ double sigmoid(const double x){
 std::default_random_engine generator;
 std::uniform_real_distribution<double> random01(0.0, 1.0);
 
+void doWork(ThreadSafeQueue<Job> &jobs, std::atomic<bool> &done){
+    while(true){
+        std::optional<Job> next = jobs.pop();
+        if(next.has_value()){
+            auto value = next.value();
+            Genome::playBackgammon(std::get<0>(value), std::get<1>(value), std::get<2>(value), std::get<3>(value));
+        }else{
+            if(done && jobs.empty())
+                return;
+            std::this_thread::yield();
+        }
+
+    }
+}
 
 void Neat::calculateFitness(std::vector<Genome>& population){
+    int no_workers = 8;
     std::vector<std::atomic<int>> results(AI::populationSize);
+    std::vector<std::thread> threads;
+    ThreadSafeQueue<Job> jobs;
+    std::atomic<bool> done = false;
+    for(int i = 0; i < no_workers; i++)
+        threads.push_back(std::thread(doWork, std::ref(jobs), std::ref(done)));
+
     for(int n = 0; n < 5; ++n){
         for(int i = 0; i < AI::populationSize; ++i){
-            std::vector<std::thread> threads;
             for(int j = i + 1; j < AI::populationSize; ++j){
-                threads.push_back(std::thread(Genome::playBackgammon,std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
-            }
-            for(auto& tr : threads){
-                tr.join();
+                    jobs.push(std::make_tuple(std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
             }
         }
     }
+    done = true;
+    for(auto& tr : threads){
+        tr.join();
+    }
+    std::cout << "done \n";
     for(int i = 0; i < AI::populationSize; ++i){
         population[i].fitness = results[i];
     }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "utility/threadsafequeue.h"
 #include "engine/bot/genome.hpp"
 #include <random>
 #include <cmath>
@@ -35,6 +36,8 @@ extern double sigmoid(const double x);
 
 extern std::default_random_engine generator;
 extern std::uniform_real_distribution<double> random01;
+
+typedef std::tuple<Genome&, Genome&, std::atomic<int>&, std::atomic<int>&> Job;
 
 class Neat{
 public:
