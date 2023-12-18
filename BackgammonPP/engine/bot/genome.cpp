@@ -10,6 +10,7 @@
 #include "engine/backgammon.h"
 #include <atomic>
 #include <thread>
+#include <functional>
 
 Genome::Genome(std::string filename){
     std::ifstream filestream(filename);
@@ -23,7 +24,7 @@ Genome::Genome(std::string filename){
     bool enabled;
     int innovation_num;
     while(filestream >> id >> out >> into >> weight >> enabled >> innovation_num){
-        genes.push_back(new ConnectGene(out, into, weight, enabled, innovation_num));
+        genes.push_back(ConnectGene(out, into, weight, enabled, innovation_num));
     }
 
 }
@@ -33,7 +34,7 @@ void Genome::printToFile(std::string filename){
     filestream << maxNeuron << " " << innovation->innovation << std::endl;
     int id = 1;
     for(auto gene : genes){
-        filestream << id++ << " " << gene->out << " " << gene->into << " " << gene->weight <<  " " << gene->enabled << " " << gene->innovation << std::endl;
+        filestream << id++ << " " << gene.out << " " << gene.into << " " << gene.weight <<  " " << gene.enabled << " " << gene.innovation << std::endl;
     }
 }
 
@@ -44,7 +45,7 @@ void Genome::mutateAddConnection(){
         std::vector<int> in_degree(maxNeuron, 0);
 
         for(auto gene : genes){
-            adj_list[gene->out].push_back(gene->into);
+            adj_list[gene.out].push_back(gene.into);
         }
 
         for (int u = 0; u < maxNeuron; u++) {
@@ -107,23 +108,23 @@ void Genome::mutateAddConnection(){
 }
 void Genome::mutateAddNode(){
     if(AI::random01(AI::generator) < AI::nodeMutationChance){
-        std::vector<ConnectGene *> out;
+        std::vector<std::reference_wrapper<ConnectGene>> out;
         int nelems = 1;
         std::sample(genes.begin(), genes.end(), std::back_inserter(out), nelems, std::mt19937{std::random_device{}()});
         auto oldGene = out[0];
-        oldGene->enabled = false;
-        genes.push_back(new ConnectGene(maxNeuron, oldGene->into, oldGene->weight, true, innovation->newInnovation()));
-        genes.push_back(new ConnectGene(oldGene->out, maxNeuron, 1.0, true, innovation->newInnovation()));
+        oldGene.get().enabled = false;
+        genes.push_back(ConnectGene(maxNeuron, oldGene.get().into, oldGene.get().weight, true, innovation->newInnovation()));
+        genes.push_back(ConnectGene(oldGene.get().out, maxNeuron, 1.0, true, innovation->newInnovation()));
 
         ++maxNeuron;
     }
 }
 void Genome::mutateConnectionWeight(){
-    for(auto gene : genes){
+    for(auto& gene : genes){
         if(AI::random01(AI::generator) < AI::perturbChance){
-            gene->weight = gene->weight + AI::random01(AI::generator) * AI::stepSize * 2 - AI::stepSize;
+            gene.weight = gene.weight + AI::random01(AI::generator) * AI::stepSize * 2 - AI::stepSize;
         }else{
-            gene->weight = AI::random01(AI::generator) * 4 - 2;
+            gene.weight = AI::random01(AI::generator) * 4 - 2;
         }
     }
 }
@@ -143,27 +144,23 @@ Genome::Genome(const Genome& g1, const Genome& g2){
     this->innovation = g1.innovation;
     this->maxNeuron = std::max(g1.maxNeuron, g2.maxNeuron);
     int i=0;
-    while(i < g1.genes.size() && i < g2.genes.size() && g1.genes[i]->innovation == g2.genes[i]->innovation){
+    while(i < g1.genes.size() && i < g2.genes.size() && g1.genes[i].innovation == g2.genes[i].innovation){
         if(0.5 > AI::random01(AI::generator)){
-            ConnectGene* newGene = new ConnectGene(g1.genes[i]);
-            genes.push_back(newGene);
+            genes.push_back(ConnectGene(g1.genes[i]));
 
         }else{
-            ConnectGene* newGene = new ConnectGene(g2.genes[i]);
-            genes.push_back(newGene);
+            genes.push_back(ConnectGene(g2.genes[i]));
         }
         ++i;
     }
     if(g1.fitness > g2.fitness){
         while(i < g1.genes.size()){
-            ConnectGene* newGene = new ConnectGene(g1.genes[i]);
-            genes.push_back(newGene);
+            genes.push_back(ConnectGene(g1.genes[i]));
             ++i;
         }
     }else{
         while(i < g2.genes.size()){
-            ConnectGene* newGene = new ConnectGene(g2.genes[i]);
-            genes.push_back(newGene);
+            genes.push_back(ConnectGene(g2.genes[i]));
             ++i;
         }
     }
@@ -173,7 +170,7 @@ Genome::Genome(const Genome& genome){
     this->innovation = genome.innovation;
     this->maxNeuron = genome.maxNeuron;
     for(int i = 0; i < genome.genes.size(); ++i){
-        this->genes.push_back(new ConnectGene(genome.genes[i]));
+        this->genes.push_back(ConnectGene(genome.genes[i]));
     }
     this->fitness = genome.fitness;
 }
@@ -182,7 +179,7 @@ double Genome::disjoint(const Genome& g1, const Genome& g2){
     size_t disjoint {0};
 
     size_t i {0};
-    while(g1.genes[i]->innovation == g2.genes[i]->innovation){
+    while(g1.genes[i].innovation == g2.genes[i].innovation){
         ++i;
     }
     disjoint += g1.genes.size() + g2.genes.size() - 2 * i;
@@ -194,8 +191,8 @@ double Genome::disjoint(const Genome& g1, const Genome& g2){
 double Genome::weights(const Genome& g1, const Genome& g2){
     double sum {0.0};
     size_t i {0};
-    while(g1.genes[i]->innovation == g2.genes[i]->innovation){
-        sum += std::abs(g1.genes[i]->weight - g2.genes[i]->weight);
+    while(g1.genes[i].innovation == g2.genes[i].innovation){
+        sum += std::abs(g1.genes[i].weight - g2.genes[i].weight);
         ++i;
     }
     return sum / i;

@@ -39,7 +39,7 @@ public:
     void printToFile(std::string filename);
 
 
-    QVector<ConnectGene*> genes;
+    QVector<ConnectGene> genes;
 
     int fitness{0};
     int adjustedFitness;

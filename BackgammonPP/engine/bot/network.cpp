@@ -7,29 +7,29 @@
 
 Network::Network(Genome genome){
     neurons.resize(genome.maxNeuron);
-    for(auto gene : genome.genes){
-        if(!gene->enabled)
+    for(auto& gene : genome.genes){
+        if(!gene.enabled)
             continue;
-        neurons[gene->into].incoming.push_back(gene);
+        neurons[gene.into].incoming.push_back(gene);
     }
 }
 
 Network::Network(std::string filename){
     Genome genome(filename);
     neurons.resize(genome.maxNeuron);
-    for(auto gene : genome.genes){
-        if(!gene->enabled)
+    for(auto& gene : genome.genes){
+        if(!gene.enabled)
             continue;
-        neurons[gene->into].incoming.push_back(gene);
+        neurons[gene.into].incoming.push_back(gene);
     }
 }
 void Network::calculateNeuron(Neuron& neuron){
     double value = 0.0;
     for(auto& incoming : neuron.incoming){
-        if(!neurons[incoming->out].calculated){
-            calculateNeuron(neurons[incoming->out]);
+        if(!neurons[incoming.out].calculated){
+            calculateNeuron(neurons[incoming.out]);
         }
-        value += neurons[incoming->out].value * incoming->weight;
+        value += neurons[incoming.out].value * incoming.weight;
     }
     neuron.value = AI::sigmoid(value) > 0.5;
     neuron.calculated = true;
@@ -47,8 +47,8 @@ double Network::evaluateNetwork(const QVector<double>& inputs){
 
 //    calculateNeuron(neurons[AI::inputSize]);
     for(auto& incoming : neurons[AI::inputSize].incoming){
-        calculateNeuron(neurons[incoming->out]);
-        neurons[AI::inputSize].value += neurons[incoming->out].value * incoming->weight;
+        calculateNeuron(neurons[incoming.out]);
+        neurons[AI::inputSize].value += neurons[incoming.out].value * incoming.weight;
     }
 
     for(auto& neuron : neurons){

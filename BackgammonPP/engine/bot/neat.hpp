@@ -7,6 +7,7 @@
 #include "engine/bot/genome.hpp"
 #include <random>
 #include <cmath>
+#include <thread>
 
 namespace AI{
 extern size_t inputSize;
@@ -44,6 +45,5 @@ public:
     static void calculateFitness(std::vector<Genome>& population);
     static void savePopulation(std::vector<Genome>& population, std::string filename);
     static void loadPopulation(std::vector<Genome>& population, std::string filename);
-
 };
 }

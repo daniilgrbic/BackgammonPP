@@ -10,28 +10,14 @@
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
-//    return a.exec();
     std::cout << "Starting reading..." << std::endl;
     Genome genome("../BackgammonPP/engine/bot/saved_genomes/lilith_copy.genome");
     std::cout << "Genome read" << std::endl;
-//    for(int i = 0; i < 5; ++i){
-//        genome.mutate();
-//    }
-//    Genome genome1(genome);
-//    Genome genome2(genome);
-//    for(int i = 0; i < 5; ++i){
-//        genome1.mutate();
-//    }
-//    for(int i = 0; i < 5; ++i){
-//        genome2.mutate();
-//    }
 
 
     std::vector<Genome> population(AI::populationSize, genome);
-    std::vector<Genome> newPopulation(AI::populationSize, genome);
+//    AI::Neat::loadPopulation(population, "../BackgammonPP/engine/bot/saved_genomes/gen_70.population");
+    std::vector<Genome> newPopulation(AI::populationSize, Genome());
     AI::Neat::calculateFitness(population);
     std::sort(population.begin(), population.end(), [](Genome a, Genome b)
               {
@@ -57,31 +43,10 @@ int main(int argc, char *argv[])
             std::cout << g.fitness << " ";
         }
         std::cout << std::endl;
-        population[0].printToFile(std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(i)).append(".genome"));
+        AI::Neat::savePopulation(population, std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(i)).append(".population"));
     }
     std::cout << population[0].fitness << std::endl;
     population[0].printToFile("../BackgammonPP/engine/bot/saved_genomes/eva.genome");
-
-
-
-
-
-
-
-
-
-
-//    Genome genome3(genome1, genome2);
-//    std::cout << genome.innovation->innovation << std::endl;
-//    genome.printToFile("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\lilith_mutated.genome");
-//    genome1.printToFile("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\lilith_mutated1.genome");
-//    genome2.printToFile("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\lilith_mutated2.genome");
-//    genome3.printToFile("D:\\backgammon\\BackgammonPP\\engine\\bot\\saved_genomes\\lilith_mutated3.genome");
-//    Network net(genome);
-//    QVector<double> inputs(28, 1);
-
-//    std::cout << inputs.size() << std::endl;
-//    std::cout << net.evaluateNetwork(inputs) << std::endl;
 
     return 0;
 }

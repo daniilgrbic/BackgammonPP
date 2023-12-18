@@ -39,6 +39,8 @@ double sigmoid(const double x){
 std::default_random_engine generator;
 std::uniform_real_distribution<double> random01(0.0, 1.0);
 
+
+
 void doWork(ThreadSafeQueue<Job> &jobs, std::atomic<bool> &done){
     while(true){
         std::optional<Job> next = jobs.pop();
@@ -54,6 +56,7 @@ void doWork(ThreadSafeQueue<Job> &jobs, std::atomic<bool> &done){
     }
 }
 
+
 void Neat::calculateFitness(std::vector<Genome>& population){
     int no_workers = 8;
     std::vector<std::atomic<int>> results(AI::populationSize);
@@ -63,10 +66,12 @@ void Neat::calculateFitness(std::vector<Genome>& population){
     for(int i = 0; i < no_workers; i++)
         threads.push_back(std::thread(doWork, std::ref(jobs), std::ref(done)));
 
-    for(int n = 0; n < 5; ++n){
+    for(int n = 0; n < 3; ++n){
         for(int i = 0; i < AI::populationSize; ++i){
-            for(int j = i + 1; j < AI::populationSize; ++j){
+            for(int j = 0; j < AI::populationSize; ++j){
+                if(&population[i] != &population[j]){
                     jobs.push(std::make_tuple(std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
+                }
             }
         }
     }
@@ -80,6 +85,7 @@ void Neat::calculateFitness(std::vector<Genome>& population){
     }
 }
 
+
 void Neat::savePopulation(std::vector<Genome>& population, std::string filename){
     std::ofstream filestream(filename);
     filestream << population.size() << std::endl;
@@ -88,7 +94,7 @@ void Neat::savePopulation(std::vector<Genome>& population, std::string filename)
         filestream << genome.maxNeuron << " " << genome.innovation->innovation << std::endl;
         int id = 1;
         for(auto gene : genome.genes){
-            filestream << id++ << " " << gene->out << " " << gene->into << " " << gene->weight <<  " " << gene->enabled << " " << gene->innovation << std::endl;
+            filestream << id++ << " " << gene.out << " " << gene.into << " " << gene.weight <<  " " << gene.enabled << " " << gene.innovation << std::endl;
         }
     }
 }
@@ -98,12 +104,11 @@ void Neat::loadPopulation(std::vector<Genome>& population, std::string filename)
     filestream >> size;
     assert(AI::populationSize == size);
     population.reserve(size);
+    int innov;
     for(int i = 0; i < size; ++i){
         int numGenes;
         filestream >> numGenes;
-        int innov;
         filestream >> population[i].maxNeuron >> innov;
-        population[i].innovation = new Innovation(innov);
         int id;
         int into;
         int out;
@@ -112,8 +117,12 @@ void Neat::loadPopulation(std::vector<Genome>& population, std::string filename)
         int innovation_num;
         for(int j = 0; j < numGenes; ++j){
             filestream >> id >> out >> into >> weight >> enabled >> innovation_num;
-            population[i].genes.push_back(new ConnectGene(out, into, weight, enabled, innovation_num));
+            population[i].genes.push_back(ConnectGene(out, into, weight, enabled, innovation_num));
         }
+    }
+    Innovation* innovation = new Innovation(innov);
+    for(int i = 0; i < size; ++i){
+        population[i].innovation = innovation;
     }
 }
 
