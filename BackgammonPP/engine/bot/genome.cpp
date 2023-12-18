@@ -98,7 +98,7 @@ void Genome::mutateAddConnection(){
             int first = top_order[unbiasedOrder[i]];
             for(int j = unbiasedOrder[i] + 1; j < top_order.size(); ++j){
                 if(std::find(adj_list[first].begin() + j, adj_list[first].end(), top_order[j]) == adj_list[first].end() && j > AI::inputSize){
-                    genes.push_back(new ConnectGene(top_order[unbiasedOrder[i]], top_order[j], 1.0, true, innovation->newInnovation()));
+                    genes.push_back(ConnectGene(top_order[unbiasedOrder[i]], top_order[j], 1.0, true, innovation->newInnovation()));
                     return;
                 }
             }
