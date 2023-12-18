@@ -12,8 +12,8 @@ namespace AI{
 size_t inputSize = 29;
 size_t outputSize = 1;
 
-size_t populationSize = 10;
-size_t generations = 1000;
+size_t populationSize = 100;
+size_t generations = 10000;
 double deltaDisjoint = 2.0;
 double deltaWeights = 0.4;
 double deltaTreshold = 1.0;
@@ -66,12 +66,10 @@ void Neat::calculateFitness(std::vector<Genome>& population){
     for(int i = 0; i < no_workers; i++)
         threads.push_back(std::thread(doWork, std::ref(jobs), std::ref(done)));
 
-    for(int n = 0; n < 3; ++n){
+    for(int n = 0; n < 1; ++n){
         for(int i = 0; i < AI::populationSize; ++i){
-            for(int j = 0; j < AI::populationSize; ++j){
-                if(&population[i] != &population[j]){
+            for(int j = i + 1; j < AI::populationSize; ++j){
                     jobs.push(std::make_tuple(std::ref(population[i]), std::ref(population[j]), std::ref(results[i]), std::ref(results[j])));
-                }
             }
         }
     }

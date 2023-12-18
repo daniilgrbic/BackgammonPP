@@ -13,7 +13,7 @@ public:
     Network(Genome genome);
     Network(std::string filename);
     double evaluateNetwork(const QVector<double>& inputs);
-    const QVector<double> inputFromState(PlayerColor player, const BoardState& board);
+    const QVector<double> inputFromState(const BoardState& board);
 private:
     void calculateNeuron(Neuron& neuron);
     std::vector<Neuron> neurons;

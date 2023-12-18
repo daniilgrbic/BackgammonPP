@@ -212,10 +212,10 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
 //    std::cout << "Its time to duel" << std::endl;
     while(true){
         std::vector<Turn> turns = game.generateLegalTurns();
-        std::pair<double, Turn> bestTurn = {n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, turns[0].m_finalBoard)), turns[0]};
+        std::pair<double, Turn> bestTurn = {n1.evaluateNetwork(n1.inputFromState(turns[0].m_finalBoard)), turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
-            double eval = n1.evaluateNetwork(n1.inputFromState(PlayerColor::WHITE, b));
+            double eval = n1.evaluateNetwork(n1.inputFromState(b));
             if(bestTurn.first < eval){
                 bestTurn.first = eval;
                 bestTurn.second = turn;
@@ -227,12 +227,12 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
             std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
             return;
         }
-
+        //TODO turns should be mirrored too
         turns = game.generateLegalTurns();
-        bestTurn = {n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, turns[0].m_finalBoard.mirror())), turns[0]};
+        bestTurn = {n2.evaluateNetwork(n2.inputFromState(turns[0].m_finalBoard.mirror())), turns[0]};
         for(const auto& turn : turns){
             BoardState b = turn.m_finalBoard;
-            double eval = n2.evaluateNetwork(n2.inputFromState(PlayerColor::BLACK, b.mirror()));
+            double eval = n2.evaluateNetwork(n2.inputFromState(b.mirror()));
             if(bestTurn.first < eval){
                 bestTurn.first = eval;
                 bestTurn.second = turn;};
