@@ -2,14 +2,46 @@
 
 #include <algorithm>
 #include <iterator>
+// #include <iostream>
 
 LongNardy::LongNardy() : Game()
 {
-    for(auto player : {PlayerColor::WHITE, PlayerColor::BLACK}) {
-        m_board.point(Point::idByPlayer(player, 24)).add(player, 15);
-    };
+    m_board.point(pointIdByPlayer(PlayerColor::WHITE, 1)).add(PlayerColor::WHITE, 15);
+    m_board.point(pointIdByPlayer(PlayerColor::BLACK, 1)).add(PlayerColor::BLACK, 15);
 
-    m_currentRoll = Roll::getInitialRoll(m_firstDie, m_secondDie);
+    // intial play order is determined just like in backgammon,
+    // but then the first player throws both dice again (instead of using the intial roll)
+    m_currentRoll = Roll(
+        Roll::getInitialRoll(m_firstDie, m_secondDie).onRoll(),
+        m_firstDie,
+        m_secondDie
+        );
+}
+
+int LongNardy::pointIdByPlayer(PlayerColor player, int point)
+{
+    if(player == PlayerColor::WHITE)
+        return point;
+    else
+        return (point >= 1 and point <= 12) ? 13 - point : 27 - point;
+}
+
+BoardState LongNardy::mirrorBoard(BoardState boardState)
+{
+    for(int i = 1; i <= 12; i++) {
+        std::swap(boardState.point(i), boardState.point(25 - i));
+    }
+    return boardState;
+}
+
+Move LongNardy::mirrorMove(Move move)
+{
+    Move newMove = move;
+    if(std::holds_alternative<int>(move.m_from))
+        newMove.m_from = pointIdByPlayer(move.m_player, std::get<int>(move.m_from));
+    if(std::holds_alternative<int>(move.m_to))
+        newMove.m_to = pointIdByPlayer(move.m_player, std::get<int>(move.m_to));
+    return newMove;
 }
 
 std::vector<Turn> LongNardy::generateLegalTurns() {
@@ -54,7 +86,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     std::vector<RollState> level {
         {
             {},
-            onRoll == PlayerColor::WHITE ? m_board : m_board.mirror(),
+            onRoll == PlayerColor::WHITE ? m_board : mirrorBoard(m_board),
             m_currentRoll.dice()
         }
     };
@@ -68,21 +100,36 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
             const BoardState& board = rollState.board();
             const std::vector<int>& diceRolls = rollState.dice();
 
+            int movesFromHead = 0;
+            for(const Move& move : rollState.moves()) {
+                if(std::holds_alternative<int>(move.m_from) and std::get<int>(move.m_from) == NUMBER_OF_POINTS)
+                    movesFromHead++;
+            }
+
             for (size_t i = 0; i < diceRolls.size(); i++) {
                 int dieRoll = diceRolls[i];
                 for (int pos = NUMBER_OF_POINTS; pos >= 1; pos--) {
-                    if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
-                        int nextPos = pos - dieRoll;
-                        if (nextPos <= 0) {
-                            if (isBearingOff(board, onRoll)) {
-                                auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
-                                nextLevel.push_back(rollState.getNextRollState(nextMove, i));
-                            }
-                            break;
-                        } else if (not isBlockedBy(board.point(nextPos), opponent)) {
-                            auto nextMove = Move(onRoll, pos, nextPos);
+
+                    // player is only allowed to take more than 1 checker from head on first turn
+                    if(pos == NUMBER_OF_POINTS) {
+                        if(movesFromHead == 2) continue;
+                        if(movesFromHead == 1 and m_history.empty()) continue;
+                    }
+
+                    // skip pos if held by opponent
+                    if(board.point(pos).owner() and board.point(pos).owner().value() != onRoll)
+                        continue;
+
+                    int nextPos = pos - dieRoll;
+                    if (nextPos <= 0) {
+                        if (isBearingOff(board, onRoll)) {
+                            auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                             nextLevel.push_back(rollState.getNextRollState(nextMove, i));
                         }
+                        break;
+                    } else if (not isBlockedBy(board.point(nextPos), opponent)) {
+                        auto nextMove = Move(onRoll, pos, nextPos);
+                        nextLevel.push_back(rollState.getNextRollState(nextMove, i));
                     }
                 }
             }
@@ -99,13 +146,13 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
                 std::transform(
                     roll.moves().cbegin(), roll.moves().cend(),
                     std::back_inserter(moves),
-                    [](const auto& move) { return move.mirror(); }
+                    [](const auto& move) { return mirrorMove(move); }
                 );
             } else {
                 moves = std::move(roll.moves());
             }
 
-            return Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() }; }
+            return Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? roll.board() : mirrorBoard(roll.board()) }; }
     );
     return legalTurns;
 }
