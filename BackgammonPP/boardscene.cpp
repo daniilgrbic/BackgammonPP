@@ -19,6 +19,7 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setSideBars();
     setPlayingDice();
     setDoublingDie();
+    disableAllHolders();
 }
 
 void BoardScene::setBoardTriangles() {
@@ -89,20 +90,20 @@ void BoardScene::setBoardCheckers(){
 
 void BoardScene::setBoardBar()
 {
-   BoardBar *bar = new BoardBar(nullptr, triangleWidth, m_height);
-   bar->setPos(this->sideBarWidth + (trianglePairs/2) * triangleWidth, 0);
-   addItem(bar);
+   m_midBar = new BoardBar(nullptr, triangleWidth, m_height);
+   m_midBar->setPos(this->sideBarWidth + (trianglePairs/2) * triangleWidth, 0);
+   addItem(m_midBar);
 }
 
 void BoardScene::setSideBars()
 {
-    BoardSideBar *left = new BoardSideBar(nullptr, sideBarWidth, m_height);
-    left->setPos(0, 0);
-    addItem(left);
+    m_leftBar = new BoardSideBar(nullptr, sideBarWidth, m_height);
+    m_leftBar->setPos(0, 0);
+    addItem(m_leftBar);
 
-    BoardSideBar *right = new BoardSideBar(nullptr, sideBarWidth, m_height);
-    right->setPos(m_width-sideBarWidth, 0);
-    addItem(right);
+    m_rightBar = new BoardSideBar(nullptr, sideBarWidth, m_height);
+    m_rightBar->setPos(m_width-sideBarWidth, 0);
+    addItem(m_rightBar);
 }
 
 
@@ -164,4 +165,22 @@ void BoardScene::updatePlayingDice(int value1, int value2, BoardPlayingDie::Posi
         die1->updateDie(pos, value1);
     if(value2)
         die2->updateDie(pos, value2);
+}
+
+void BoardScene::disableAllCheckers(){
+    for(BoardChecker *checker: boardCheckers){
+        checker->setFlag(QGraphicsItem::ItemIsSelectable, false);
+        checker->setFlag(QGraphicsItem::ItemIsMovable, false);
+    }
+}
+
+void BoardScene::disableAllHolders(){
+    for(BoardTriangle *triangle: boardTriangles){
+        triangle->allowDropoff = false;
+    }
+    m_leftBar->topHolder->allowDropoff = false;
+    m_leftBar->topHolder->allowDropoff = false;
+    m_rightBar->bottomHolder->allowDropoff = false;
+    m_rightBar->bottomHolder->allowDropoff = false;
+
 }

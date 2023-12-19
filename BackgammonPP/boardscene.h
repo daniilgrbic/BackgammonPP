@@ -46,6 +46,8 @@ private:
     BoardPlayingDie *die1;
     BoardPlayingDie *die2;
     BoardDoublingDie *doublingDie;
+    BoardBar *m_midBar;
+    BoardSideBar *m_leftBar, *m_rightBar;
 
     void setBoardTriangles();
     void setBoardCheckers();
@@ -54,6 +56,9 @@ private:
     void setPlayingDice();
     void setDoublingDie();
     void drawBoardTriangle(BoardTriangle *boardTriangle);
+    void disableAllCheckers();
+    void disableAllHolders();
+
 };
 
 #endif // BOARDSCENE_H
