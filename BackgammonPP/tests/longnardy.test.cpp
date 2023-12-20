@@ -52,8 +52,53 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
 
         // Assert
         REQUIRE(turns.size() == 1);
-        auto finalBoard = turns[0].m_finalBoard;
+        auto finalBoard = turns.front().m_finalBoard;
         REQUIRE(finalBoard.point(24).count() == 14);
         REQUIRE(finalBoard.point(19).count() == 1);
+    }
+
+    SECTION("First roll double (other than 4s or 6s)") {
+        // Arrange
+        auto game = LongNardyTestHelper();
+        game.setCurrentRoll(PlayerColor::WHITE, {2, 2, 2, 2});
+
+        // Act
+        auto turns = game.generateLegalTurns();
+
+        // Assert
+        REQUIRE(turns.size() == 1);
+        auto finalBoard = turns.front().m_finalBoard;
+        REQUIRE(finalBoard.point(24).count() == 14);
+        REQUIRE(finalBoard.point(16).count() == 1);
+    }
+
+    SECTION("First roll double 4s") {
+        // Arrange
+        auto game = LongNardyTestHelper();
+        game.setCurrentRoll(PlayerColor::WHITE, {4, 4, 4, 4});
+
+        // Act
+        auto turns = game.generateLegalTurns();
+
+        // Assert
+        REQUIRE(turns.size() == 1);
+        auto finalBoard = turns.front().m_finalBoard;
+        REQUIRE(finalBoard.point(24).count() == 13);
+        REQUIRE(finalBoard.point(16).count() == 2);
+    }
+
+    SECTION("First roll double 6s") {
+        // Arrange
+        auto game = LongNardyTestHelper();
+        game.setCurrentRoll(PlayerColor::WHITE, {6, 6, 6, 6});
+
+        // Act
+        auto turns = game.generateLegalTurns();
+
+        // Assert
+        REQUIRE(turns.size() == 1);
+        auto finalBoard = turns.front().m_finalBoard;
+        REQUIRE(finalBoard.point(24).count() == 13);
+        REQUIRE(finalBoard.point(18).count() == 2);
     }
 }

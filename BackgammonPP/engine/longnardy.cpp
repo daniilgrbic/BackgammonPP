@@ -91,6 +91,10 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     };
     std::vector<RollState> nextLevel = level;
 
+    auto dice = m_currentRoll.dice();
+    bool doubles = std::count(dice.begin(), dice.end(), dice.front()) == dice.size();
+    bool doubleFirstMove = doubles and (dice.front() == 4 or dice.front() == 6) and m_history.empty();
+
     do {
         level = std::move(nextLevel);
         nextLevel = {};
@@ -110,9 +114,10 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
                 for (int pos = NUMBER_OF_POINTS; pos >= 1; pos--) {
 
                     // player is only allowed to take more than 1 checker from head on first turn
+                    // when rolling double 4s or double 6s
                     if(pos == NUMBER_OF_POINTS) {
                         if(movesFromHead == 2) continue;
-                        if(movesFromHead == 1 and m_history.empty()) continue;
+                        if(movesFromHead == 1 and !doubleFirstMove) continue;
                     }
 
                     // skip pos if held by opponent
