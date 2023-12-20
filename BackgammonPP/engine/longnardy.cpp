@@ -120,14 +120,21 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
                     if(board.point(pos).owner() and board.point(pos).owner().value() != onRoll)
                         continue;
 
+                    // skip pos if unoccupied
+                    if(board.point(pos).count() == 0)
+                        continue;
+
                     int nextPos = pos - dieRoll;
+
                     if (nextPos <= 0) {
                         if (isBearingOff(board, onRoll)) {
                             auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                             nextLevel.push_back(rollState.getNextRollState(nextMove, i));
                         }
                         break;
-                    } else if (not isBlockedBy(board.point(nextPos), opponent)) {
+                    }
+
+                    if (not isBlockedBy(board.point(nextPos), opponent)) {
                         auto nextMove = Move(onRoll, pos, nextPos);
                         nextLevel.push_back(rollState.getNextRollState(nextMove, i));
                     }
