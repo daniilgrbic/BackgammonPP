@@ -60,14 +60,14 @@ void BoardChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-        setZValue(1);
+    setZValue(1);
     setCursor(Qt::OpenHandCursor);
     if(m_dragged){
         QList<QGraphicsItem*> colItems = collidingItems();
         if(colItems.empty())
             this->setPos(m_anchorPoint);
         else {
-            QGraphicsItem * closestItem = colItems.at(0);
+            QGraphicsItem * closestItem = nullptr;
             qreal shortestDist = 100000;
             for(QGraphicsItem* item : qAsConst(colItems)){
                 QLineF line(item->sceneBoundingRect().center(), this->sceneBoundingRect().center());
@@ -77,10 +77,12 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
                     closestItem = item;
                 }
             }
-            if(CheckerHolder *closestHolder = dynamic_cast<CheckerHolder*>(closestItem)){
-                    closestHolder->addChecker(this);
+            if(closestItem){
+                CheckerHolder *closestHolder = dynamic_cast<CheckerHolder*>(closestItem);
+                closestHolder->addChecker(this);
             }else{
                 this->setPos(m_anchorPoint);
+                m_holder->updateCheckerPos();
             }
 
         }
