@@ -28,6 +28,7 @@ set(SOURCE
     engine/core/roll.cpp engine/core/roll.h
     engine/core/specialposition.h
     engine/core/turn.h
+    engine/core/turntrie.cpp engine/core/turntrie.h
     main.cpp
     mainwindow.cpp mainwindow.h mainwindow.ui
     utility/jsonserializer.h

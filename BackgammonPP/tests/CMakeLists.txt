@@ -19,6 +19,7 @@ add_executable(BackgammonPPTest
     boardstate.test.cpp
     point.test.cpp
     ../engine/core/boardstate.cpp ../engine/core/boardstate.h
+    ../engine/core/move.cpp ../engine/core/move.h
     ../engine/core/point.cpp ../engine/core/point.h
     ../engine/core/playercolor.h
     ../utility/jsonserializer.h

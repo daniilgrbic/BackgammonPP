@@ -4,7 +4,9 @@
 #include "move.h"
 #include "boardstate.h"
 
+#include <algorithm>
 #include <vector>
+#include <iterator>
 
 struct Turn
 {
