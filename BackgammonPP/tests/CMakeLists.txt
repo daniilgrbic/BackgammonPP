@@ -15,14 +15,34 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
+include_directories("../")
+
 add_executable(BackgammonPPTest
-    boardstate.test.cpp
-    point.test.cpp
-    ../engine/core/boardstate.cpp ../engine/core/boardstate.h
-    ../engine/core/point.cpp ../engine/core/point.h
+    ../engine/core/boardstate.cpp
+    ../engine/core/boardstate.h
+    ../engine/core/die.cpp
+    ../engine/core/die.h
+    ../engine/core/game.cpp
+    ../engine/core/game.h
+    ../engine/core/gameresult.h
+    ../engine/core/move.cpp
+    ../engine/core/move.h
     ../engine/core/playercolor.h
+    ../engine/core/point.cpp
+    ../engine/core/point.h
+    ../engine/core/roll.cpp
+    ../engine/core/roll.h
+    ../engine/core/specialposition.h
+    ../engine/core/turn.h
+    ../engine/backgammon.cpp
+    ../engine/backgammon.h
+    ../engine/longnardy.cpp
+    ../engine/longnardy.h
     ../utility/jsonserializer.h
     ../utility/serializable.h
+    boardstate.test.cpp
+    longnardy.test.cpp
+    point.test.cpp
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
