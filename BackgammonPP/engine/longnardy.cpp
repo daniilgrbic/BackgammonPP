@@ -27,8 +27,9 @@ int LongNardy::pointIdByPlayer(PlayerColor player, int point)
 
 BoardState LongNardy::mirrorBoard(BoardState boardState)
 {
+    BoardState mirroredBoard;
     for(int i = 1; i <= 12; i++) {
-        std::swap(boardState.point(i), boardState.point(25 - i));
+        std::swap(boardState.point(i), boardState.point(i+12));
     }
     return boardState;
 }

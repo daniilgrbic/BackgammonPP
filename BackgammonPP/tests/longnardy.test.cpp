@@ -22,7 +22,7 @@ void printTurns(const std::vector<Turn>& turns) {
 }
 
 TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
-    SECTION("Constructor") {
+    SECTION("Should construct a game of Long Nardy") {
 
         for(int i = 0; i < 20; i++) {
             // Arrange
@@ -42,7 +42,7 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         }
     }
 
-    SECTION("First roll 2 and 3") {
+    SECTION("Should generate legal turns for white player - first roll 2 and 3") {
         // Arrange
         auto game = LongNardyTestHelper();
         game.setCurrentRoll(PlayerColor::WHITE, {2, 3});
@@ -57,7 +57,7 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         REQUIRE(finalBoard.point(19).count() == 1);
     }
 
-    SECTION("First roll double (other than 4s or 6s)") {
+    SECTION("Should generate legal turns for white player - first roll a double (other than 4s or 6s)") {
         // Arrange
         auto game = LongNardyTestHelper();
         game.setCurrentRoll(PlayerColor::WHITE, {2, 2, 2, 2});
@@ -72,7 +72,7 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         REQUIRE(finalBoard.point(16).count() == 1);
     }
 
-    SECTION("First roll double 4s") {
+    SECTION("Should generate legal turns for white player - first roll double 4s") {
         // Arrange
         auto game = LongNardyTestHelper();
         game.setCurrentRoll(PlayerColor::WHITE, {4, 4, 4, 4});
@@ -87,7 +87,7 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         REQUIRE(finalBoard.point(16).count() == 2);
     }
 
-    SECTION("First roll double 6s") {
+    SECTION("Should generate legal turns for white player - first roll double 6s") {
         // Arrange
         auto game = LongNardyTestHelper();
         game.setCurrentRoll(PlayerColor::WHITE, {6, 6, 6, 6});
@@ -100,5 +100,47 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         auto finalBoard = turns.front().m_finalBoard;
         REQUIRE(finalBoard.point(24).count() == 13);
         REQUIRE(finalBoard.point(18).count() == 2);
+    }
+
+    SECTION("Should mirror board for black player") {
+        // Arrange
+        auto bs = BoardState();
+        bs.point(1).add(PlayerColor::WHITE, 4);
+        bs.point(3).add(PlayerColor::BLACK, 3);
+        bs.point(10).add(PlayerColor::WHITE, 1);
+        bs.point(11).add(PlayerColor::BLACK, 2);
+        bs.point(12).add(PlayerColor::WHITE, 5);
+        bs.point(13).add(PlayerColor::BLACK, 6);
+
+        // Act
+        auto mbs = LongNardy::mirrorBoard(bs);
+        auto mmbs = LongNardy::mirrorBoard(mbs);
+
+        // Assert
+        REQUIRE(bs == mmbs);
+        REQUIRE((mbs.point(13).count() == 4 and mbs.point(13).owner() == PlayerColor::WHITE));
+        REQUIRE((mbs.point(15).count() == 3 and mbs.point(15).owner() == PlayerColor::BLACK));
+        REQUIRE((mbs.point(22).count() == 1 and mbs.point(22).owner() == PlayerColor::WHITE));
+        REQUIRE((mbs.point(23).count() == 2 and mbs.point(23).owner() == PlayerColor::BLACK));
+        REQUIRE((mbs.point(24).count() == 5 and mbs.point(24).owner() == PlayerColor::WHITE));
+        REQUIRE((mbs.point(1).count() == 6 and mbs.point(1).owner() == PlayerColor::BLACK));
+    }
+
+    SECTION("Should generate legal turns for black player - first roll 2 and 3") {
+        // Arrange
+        auto game = LongNardyTestHelper();
+        auto player = PlayerColor::BLACK;
+        game.setCurrentRoll(player, {2, 3});
+
+        // Act
+        auto turns = game.generateLegalTurns();
+
+        // Assert
+        REQUIRE(turns.size() == 1);
+        auto finalBoard = turns.front().m_finalBoard;
+        REQUIRE(finalBoard.point(LongNardy::pointIdByPlayer(player, 24)).count() == 14);
+        REQUIRE(finalBoard.point(LongNardy::pointIdByPlayer(player, 19)).count() == 1);
+        REQUIRE(finalBoard.point(12).count() == 14);
+        REQUIRE(finalBoard.point(7).count() == 1);
     }
 }
