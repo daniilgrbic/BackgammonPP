@@ -58,7 +58,7 @@ void doWork(ThreadSafeQueue<Job> &jobs, std::atomic<bool> &done){
 
 
 void Neat::calculateFitness(std::vector<Genome>& population){
-    int no_workers = 8;
+    int no_workers = 16;
     std::vector<std::atomic<int>> results(AI::populationSize);
     std::vector<std::thread> threads;
     ThreadSafeQueue<Job> jobs;

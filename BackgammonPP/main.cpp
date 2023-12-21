@@ -13,17 +13,17 @@ int main(int argc, char *argv[])
     std::cout << "Starting reading..." << std::endl;
     Genome genome("../BackgammonPP/engine/bot/saved_genomes/lilith_copy.genome");
     std::cout << "Genome read" << std::endl;
-
+    int start = 189;
 
     std::vector<Genome> population(AI::populationSize, genome);
-//    AI::Neat::loadPopulation(population, "../BackgammonPP/engine/bot/saved_genomes/gen_70.population");
+    AI::Neat::loadPopulation(population, std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(start)).append(".population"));
     std::vector<Genome> newPopulation(AI::populationSize, Genome());
     AI::Neat::calculateFitness(population);
     std::sort(population.begin(), population.end(), [](Genome a, Genome b)
               {
                   return a.fitness > b.fitness;
               });
-    for(int i = 0; i < AI::generations; ++i){
+    for(int i = start + 1; i < AI::generations; ++i){
         std::cout << "Generation " << i << std::endl;
         for(int j = 0; j < AI::populationSize; ++j){
 
@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
         }
         std::cout << std::endl;
         AI::Neat::savePopulation(population, std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(i)).append(".population"));
+        population[0].printToFile(std::string("../BackgammonPP/engine/bot/saved_genomes/gen_").append(std::to_string(i)).append(".genome"));
     }
     std::cout << population[0].fitness << std::endl;
     population[0].printToFile("../BackgammonPP/engine/bot/saved_genomes/eva.genome");
