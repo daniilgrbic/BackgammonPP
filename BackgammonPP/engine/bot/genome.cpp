@@ -224,7 +224,7 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
         game.playTurn(bestTurn.second);
         if(game.isFinished(PlayerColor::WHITE)){
             ++fit1;
-            std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
+//            std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
             return;
         }
         //TODO turns should be mirrored too
@@ -240,7 +240,7 @@ void Genome::playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std:
         game.playTurn(bestTurn.second);
         if(game.isFinished(PlayerColor::BLACK)){
             ++fit2;
-            std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
+//            std::cout << std::this_thread::get_id() << " | game finished" << std::endl;
             return;
         }
     }
