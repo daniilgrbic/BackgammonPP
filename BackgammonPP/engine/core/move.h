@@ -6,6 +6,7 @@
 #include <variant>
 #include <functional>
 
+
 struct Move
 {
     Move(const PlayerColor player, const std::variant<int, SpecialPosition>& from, const std::variant<int, SpecialPosition>& to, const bool isHit = false);

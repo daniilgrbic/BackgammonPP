@@ -20,7 +20,6 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setSideBars();
     setPlayingDice();
     setDoublingDie();
-    disableAllHolders();
     whiteOut = m_leftBar->bottomHolder;
     blackOut = m_leftBar->topHolder;
 }
@@ -31,7 +30,7 @@ void BoardScene::setBoardTriangles() {
                 this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
         qreal y_point = m_height - triangleHeight;
-        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true);
+        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true, trianglePairs - i);
         boardTriangles.push_back(bottomTriangle);
     }
     ///temporary fix for syncing triangle numerations between the board and the game engine, reverse the bottom row of triangles
@@ -42,7 +41,7 @@ void BoardScene::setBoardTriangles() {
                 this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
         qreal y_point = 0;
-        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false);
+        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false, trianglePairs + 1 + i);
         boardTriangles.push_back(upperTriangle);
     }
 
@@ -55,12 +54,12 @@ void BoardScene::setBoardCheckers(){
 
 
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::black);
+        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::BLACK);
         boardCheckers.push_back(checker);
         blackCheckers.push_back(checker);
     }
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::white);
+        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::WHITE);
         boardCheckers.push_back(checker);
         whiteCheckers.push_back(checker);
     }
@@ -101,6 +100,8 @@ void BoardScene::setBoardBar()
    m_midBar = new BoardBar(nullptr, triangleWidth, m_height);
    m_midBar->setPos(this->sideBarWidth + (trianglePairs/2) * triangleWidth, 0);
    addItem(m_midBar);
+   whiteBar = m_midBar->topHolder;
+   blackBar = m_midBar->bottomHolder;
 }
 
 void BoardScene::setSideBars()
@@ -232,4 +233,27 @@ void BoardScene::setBoardState(const BoardState state){
     }
 
     assert(whiteCheckerCount == whiteCheckers.size() && blackCheckerCount == blackCheckers.size());
+}
+
+void BoardScene::getMoveInit(TurnTrie *trie){
+    this->m_turnTrie = trie;
+    prepareCheckers();
+}
+
+void BoardScene::prepareCheckers(){
+    std::vector<Move> nextMoves = m_turnTrie->nextMoves();
+    for(Move &move : nextMoves){
+        HolderType fromType = move.m_from;
+        if(const SpecialPosition *specPos = std::get_if<SpecialPosition>(&fromType)){
+            assert(*specPos == SpecialPosition::BAR);
+            if(move.m_player == PlayerColor::WHITE){
+                whiteBar->enableCheckers(PlayerColor::WHITE);
+            }else{
+                blackBar->enableCheckers(PlayerColor::BLACK);
+            }
+        }else if(const int *point = std::get_if<int>(&fromType)){
+            assert((*point) >= 1 && (*point <= 24));
+            boardTriangles[(*point) - 1]->enableCheckers(move.m_player);
+        }
+    }
 }

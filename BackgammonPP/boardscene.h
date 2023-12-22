@@ -13,6 +13,7 @@
 #include "boardplayingdie.h"
 #include "boarddoublingdie.h"
 #include "engine/core/boardstate.h"
+#include "engine/core/turntrie.h"
 
 class BoardScene : public QGraphicsScene
 {
@@ -21,7 +22,12 @@ public:
     void updatePlayingDice(int value1, int value2, BoardPlayingDie::Position pos);
 
     void setBoardState(const BoardState state);
+    void getMoveInit(TurnTrie *trie);
+    void getMoveUpdate(/*STARTING AND ENDING HOLDER*/);
+    void getMoveFinish();
 
+    void prepareCheckers();
+    void prepareHolders(const HolderType& origin);
 
 private:
     const qreal heightCoef = 0.4;
@@ -52,6 +58,9 @@ private:
     BoardBar *m_midBar;
     BoardSideBar *m_leftBar, *m_rightBar;
     CheckerHolder *whiteOut, *blackOut;
+    CheckerHolder *whiteBar, *blackBar;
+
+    TurnTrie* m_turnTrie;
 
     void setBoardTriangles();
     void setBoardCheckers();
