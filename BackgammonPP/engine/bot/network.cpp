@@ -54,7 +54,7 @@ double Network::evaluateNetwork(const QVector<double>& inputs){
     for(auto& neuron : neurons){
         neuron.calculated = false;
     }
-    return neurons[AI::inputSize].value;
+    return (AI::sigmoid(neurons[AI::inputSize].value) + 1.0 )/ 2.0;
 }
 
 const QVector<double> Network::inputFromState(const BoardState& board){
