@@ -69,6 +69,7 @@ void BoardScene::setBoardCheckers(){
 
     int i = 0;
     int j = 0;
+    /*
     for(int n = i + 5; i < n; ++i)
         boardTriangles[11]->addChecker(blackCheckers[i]);
 
@@ -92,6 +93,7 @@ void BoardScene::setBoardCheckers(){
 
     for(int n = j + 2; j < n; ++j)
         boardTriangles[23]->addChecker(whiteCheckers[j]);
+        */
 }
 
 void BoardScene::setBoardBar()
@@ -199,12 +201,12 @@ void BoardScene::setBoardState(const BoardState state){
         auto point = state.point(i);
         if(point.owner() == PlayerColor::WHITE){
             for(int j = 0; j < point.count(); j++){
-                boardTriangles[i]->addChecker(whiteCheckers[whiteCheckerCount]);
+                boardTriangles[i-1]->addChecker(whiteCheckers[whiteCheckerCount]);
                 whiteCheckerCount++;
             }
         }else{
             for(int j = 0; j < point.count(); j++){
-                boardTriangles[i]->addChecker(blackCheckers[blackCheckerCount]);
+                boardTriangles[i-1]->addChecker(blackCheckers[blackCheckerCount]);
                 blackCheckerCount++;
             }
         }
