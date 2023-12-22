@@ -13,7 +13,7 @@ namespace AI{
         Bot(std::string filepath);
         ~Bot();
         Turn bestTurn(PlayerColor color, const std::vector<Turn>& turns);
-        bool shouldDouble(const Game& game, const BoardState& state);
+        bool shouldDouble(PlayerColor color, const BoardState& state, bool onTurn);
     private:
         Network* network;
     };

@@ -39,8 +39,13 @@ namespace AI{
 
 
     }
-    bool Bot::shouldDouble(const Game& game, const BoardState& state){
-        return true;
+    double Bot::shouldDouble(PlayerColor color, const BoardState& state){
+        double magicConstant = 0.8;
+        if(color == PlayerColor::WHITE){
+            return network->evaluateNetwork(network->inputFromState(state)) > magicConstant;
+        }else{
+            return network->evaluateNetwork(network->inputFromState(state.mirror())) > magicConstant;
+        }
     }
 }
 
