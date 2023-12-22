@@ -52,7 +52,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     std::vector<RollState> level {
         {
             {},
-            onRoll == PlayerColor::WHITE ? m_board : m_board.mirror(),
+            onRoll == PlayerColor::WHITE ? m_board : Backgammon::mirrorBoard(m_board),
             m_currentRoll.dice()
         }
     };
@@ -110,7 +110,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                 moves = std::move(roll.moves());
             }
 
-            return Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() }; }
+            return Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? roll.board() : Backgammon::mirrorBoard(roll.board()) }; }
     );
     return legalTurns;
 }
@@ -118,4 +118,8 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
 bool Backgammon::isFinished(PlayerColor player) const
 {
     return m_board.off(player) == CHECKERS_COUNT;
+}
+
+BoardState Backgammon::mirrorBoard(const BoardState& board) {
+    return board.verticalMirror();
 }

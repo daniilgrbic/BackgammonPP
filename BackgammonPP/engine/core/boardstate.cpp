@@ -62,11 +62,27 @@ void BoardState::move(const Move &move)
     }
 }
 
-BoardState BoardState::mirror() const {
+BoardState BoardState::verticalMirror() const {
     auto nextState = *this;
     std::reverse(nextState.m_points.begin(), nextState.m_points.end());
     return nextState;
 }
+
+BoardState BoardState::horizontalMirror() const {
+    auto nextState = *this;
+
+    constexpr auto HALF_OF_POINTS = NUMBER_OF_POINTS / 2;
+    for (auto i = 1; i <= HALF_OF_POINTS / 2; ++i) {
+        std::swap(nextState.point(i), nextState.point(HALF_OF_POINTS + 1 - i));
+        std::swap(nextState.point(HALF_OF_POINTS + i), nextState.point(NUMBER_OF_POINTS + 1 - i));
+    }
+    return nextState;
+}
+
+BoardState BoardState::centralMirror() const {
+    return verticalMirror().horizontalMirror();
+}
+
 
 BoardState BoardState::getNextState(const Move& move) const {
     auto nextState = *this;

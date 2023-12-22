@@ -21,7 +21,9 @@ public:
     const Point& point(const int pos) const;
     void move(const Move& move);
 
-    BoardState mirror() const;
+    BoardState verticalMirror() const;
+    BoardState horizontalMirror() const;
+    BoardState centralMirror() const;
 
     BoardState getNextState(const Move& move) const;
     BoardState getNextState(const std::vector<Move>& move) const;
