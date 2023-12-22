@@ -14,8 +14,17 @@ MainWindow::MainWindow(QWidget *parent)
     setPicture(this->sketchPicPath, ui->optionsFrame);
 
     connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
+    connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
     connect(ui->btPreferences, SIGNAL(clicked()), this, SLOT(on_btPreference_clicked()));
-    connect(ui->btReturnToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+    connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+
+    // Create Game Lobby
+    connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+
+    // Join Game Lobby
+    connect(ui->pbBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+
+    // pbBackFromJoinLobby
 }
 
 MainWindow::~MainWindow()
@@ -36,12 +45,13 @@ void MainWindow::setPicture(QString picturePath, QWidget *pictureWidget) {
 
 void MainWindow::on_btCreateGame_clicked()
 {
-    emit requestCreateGame();
+    ui->stackedWidget->setCurrentIndex(1);
+    // emit requestCreateGame();
 }
 
 void MainWindow::on_btPreferences_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_btReturnToMenu_clicked()
@@ -54,3 +64,7 @@ void MainWindow::on_btExit_clicked()
     this->close();
 }
 
+void MainWindow::on_btJoinGame_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
