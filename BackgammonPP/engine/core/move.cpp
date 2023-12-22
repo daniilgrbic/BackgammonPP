@@ -1,8 +1,8 @@
 #include "move.h"
 #include "boardstate.h"
 
-Move::Move(const PlayerColor player, const std::variant<int, SpecialPosition>& from, const std::variant<int, SpecialPosition>& to)
-    : m_player { player }, m_from { from }, m_to { to }
+Move::Move(const PlayerColor player, const std::variant<int, SpecialPosition>& from, const std::variant<int, SpecialPosition>& to, const bool isHit)
+    : m_player { player }, m_from { from }, m_to { to }, m_isHit { isHit }
 {}
 
 Move Move::mirror() const {
@@ -20,5 +20,5 @@ Move Move::mirror() const {
         to = m_to;
     }
 
-    return { m_player, from, to };
+    return { m_player, from, to, m_isHit };
 }

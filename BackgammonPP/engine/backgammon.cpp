@@ -40,15 +40,6 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
             return { nextMoves, nextState, nextDice };
         }
 
-        RollState getNextRollState(const std::vector<Move> moves, int dieUsed) const {
-            auto nextMoves = m_moves;
-            nextMoves.insert(nextMoves.end(), moves.begin(), moves.end());
-            auto nextState = m_board.getNextState(moves);
-            auto nextDice = m_dice;
-            nextDice.erase(std::next(nextDice.begin(), dieUsed));
-            return { nextMoves, nextState, nextDice };
-        }
-
     private:
         std::vector<Move> m_moves;
         BoardState m_board;
@@ -79,13 +70,9 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                 auto die = dice[i];
                 if (board.bar(onRoll)) {
                     auto nextPos = NUMBER_OF_POINTS - die;
-                    if (!isBlockedBy(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
-                        auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos);
+                    if (!isBlockedBy(board.point(nextPos), opponent)) {
+                        auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos, isBlot(board.point(nextPos), opponent));
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                    } else if (isBlot(board.point(nextPos), opponent)) {
-                        auto opponentMove = Move(opponent, nextPos, SpecialPosition::BAR);
-                        auto onRollMove = Move(onRoll, SpecialPosition::BAR, nextPos);
-                        nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
                     }
                 } else for (int pos = NUMBER_OF_POINTS; pos >= 1; --pos) {
                     if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
@@ -96,13 +83,9 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                                 nextLevel.push_back(roll.getNextRollState(nextMove, i));
                             }
                             break;
-                        } else if (!isBlockedBy(board.point(nextPos), opponent) && !isBlot(board.point(nextPos), opponent)) {
-                            auto nextMove = Move(onRoll, pos, nextPos);
+                        } else if (!isBlockedBy(board.point(nextPos), opponent)) {
+                            auto nextMove = Move(onRoll, pos, nextPos, isBlot(board.point(nextPos), opponent));
                             nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                        } else if (isBlot(board.point(nextPos), opponent)) {
-                            auto opponentMove = Move(opponent, nextPos, SpecialPosition::BAR);
-                            auto onRollMove = Move(onRoll, pos, nextPos);
-                            nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
                         }
                     }
                 }

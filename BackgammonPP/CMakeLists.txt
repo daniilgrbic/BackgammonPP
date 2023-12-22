@@ -38,6 +38,9 @@ set(SOURCE
     engine/core/turn.h
     engine/backgammon.cpp
     engine/backgammon.h
+    engine/core/turntrie.cpp engine/core/turntrie.h
+    main.cpp
+    mainwindow.cpp mainwindow.h mainwindow.ui
     utility/jsonserializer.h
     utility/serializable.h
     background_menu_image.qrc

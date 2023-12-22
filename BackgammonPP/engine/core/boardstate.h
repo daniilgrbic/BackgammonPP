@@ -6,7 +6,6 @@
 #include "../../utility/serializable.h"
 
 #include <array>
-#include <vector>
 
 constexpr int NUMBER_OF_POINTS {24};
 
