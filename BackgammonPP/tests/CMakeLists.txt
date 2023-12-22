@@ -17,12 +17,17 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(BackgammonPPTest
     boardstate.test.cpp
+    move.test.cpp
     point.test.cpp
     ../engine/core/boardstate.cpp ../engine/core/boardstate.h
+    ../engine/core/move.cpp ../engine/core/move.h
     ../engine/core/point.cpp ../engine/core/point.h
+    ../engine/core/turn.cpp ../engine/core/turn.h
     ../engine/core/playercolor.h
     ../utility/jsonserializer.h
     ../utility/serializable.h
+    turn.test.cpp
+
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)

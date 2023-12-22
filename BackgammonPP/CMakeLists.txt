@@ -35,6 +35,7 @@ set(SOURCE
     engine/core/roll.cpp
     engine/core/roll.h
     engine/core/specialposition.h
+    engine/core/turn.cpp
     engine/core/turn.h
     engine/backgammon.cpp
     engine/backgammon.h
