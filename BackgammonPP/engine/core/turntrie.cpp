@@ -52,7 +52,7 @@ Turn TurnTrie::getTurn() const {
     return m_currentNode->turn.value();
 }
 
-void TurnTrie::playMove(Move& move) {
+void TurnTrie::playMove(const Move& move) {
     assert(hasNextMove(move));
 
     auto* nextNode = m_currentNode->children[move];

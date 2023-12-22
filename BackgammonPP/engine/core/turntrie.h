@@ -19,7 +19,7 @@ public:
     bool isFinishedTurn() const;
     Turn getTurn() const;
 
-    void playMove(Move& move);
+    void playMove(const Move& move);
     void undoMove();
 
 private:

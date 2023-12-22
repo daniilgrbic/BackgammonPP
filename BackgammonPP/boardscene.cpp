@@ -1,5 +1,6 @@
 #include "boardscene.h"
 #include <algorithm>
+#include "boardwindow.h"
 
 BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     : QGraphicsScene(parent),
@@ -256,4 +257,53 @@ void BoardScene::prepareCheckers(){
             boardTriangles[(*point) - 1]->enableCheckers(move.m_player);
         }
     }
+}
+
+void BoardScene::prepareHolders(const HolderType &origin){
+    std::vector<Move> nextMoves = m_turnTrie->nextMoves();
+    for(const Move& move : nextMoves){
+        if(move.m_from != origin){
+            continue;
+        }
+        if(const SpecialPosition *specPos = std::get_if<SpecialPosition>(&move.m_to)){
+            if(move.m_player == PlayerColor::WHITE){
+                if(*specPos == SpecialPosition::BAR){
+                    whiteBar->allowDropoff = true;
+                }else if(*specPos == SpecialPosition::OFF){
+                    whiteOut->allowDropoff = true;
+                }
+            }else if(move.m_player == PlayerColor::BLACK){
+                if(*specPos == SpecialPosition::BAR){
+                    blackBar->allowDropoff = true;
+                }else if(*specPos == SpecialPosition::OFF){
+                    blackOut->allowDropoff = true;
+                }
+            }
+        }else if(const int *point = std::get_if<int>(&move.m_to)){
+            assert((*point) >= 1 && (*point <= 24));
+            boardTriangles[(*point) - 1]->allowDropoff = true;
+        }
+
+    }
+}
+
+void BoardScene::getMoveUpdate(const HolderType origin, const HolderType to){
+    std::vector<Move> nextMoves = m_turnTrie->nextMoves();
+    Move const *nextMove = nullptr;
+    for(const Move &move : nextMoves){
+        if(move.m_from == origin && move.m_to == to){
+            m_turnTrie->playMove(move);
+        }
+    }
+    if(m_turnTrie->isFinishedTurn()){
+        emit enableEndTurn();
+    }
+}
+
+void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
+    this->legalTurns = legalTurns;
+}
+
+void BoardScene::setRoll(Roll const *roll){
+    this->roll = roll;
 }

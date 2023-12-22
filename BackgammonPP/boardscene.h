@@ -14,20 +14,28 @@
 #include "boarddoublingdie.h"
 #include "engine/core/boardstate.h"
 #include "engine/core/turntrie.h"
+#include "engine/core/roll.h"
 
 class BoardScene : public QGraphicsScene
 {
+    Q_OBJECT
 public:
     BoardScene(QObject *parent, qreal width, qreal height);
     void updatePlayingDice(int value1, int value2, BoardPlayingDie::Position pos);
 
     void setBoardState(const BoardState state);
     void getMoveInit(TurnTrie *trie);
-    void getMoveUpdate(/*STARTING AND ENDING HOLDER*/);
+    void getMoveUpdate(const HolderType origin, const HolderType to);
     void getMoveFinish();
+
+    void setLegalTurns(std::vector<Turn> const *legalTurns);
+    void setRoll(Roll const *roll);
 
     void prepareCheckers();
     void prepareHolders(const HolderType& origin);
+
+signals:
+    void enableEndTurn();
 
 private:
     const qreal heightCoef = 0.4;
@@ -61,6 +69,9 @@ private:
     CheckerHolder *whiteBar, *blackBar;
 
     TurnTrie* m_turnTrie;
+    std::vector<Turn> const *legalTurns;
+    Roll const *roll;
+
 
     void setBoardTriangles();
     void setBoardCheckers();
