@@ -12,12 +12,15 @@
 #include "boardsidebar.h"
 #include "boardplayingdie.h"
 #include "boarddoublingdie.h"
+#include "engine/core/boardstate.h"
 
 class BoardScene : public QGraphicsScene
 {
 public:
     BoardScene(QObject *parent, qreal width, qreal height);
     void updatePlayingDice(int value1, int value2, BoardPlayingDie::Position pos);
+
+    void setBoardState(const BoardState state);
 
 
 private:
@@ -48,6 +51,7 @@ private:
     BoardDoublingDie *doublingDie;
     BoardBar *m_midBar;
     BoardSideBar *m_leftBar, *m_rightBar;
+    CheckerHolder *whiteOut, *blackOut;
 
     void setBoardTriangles();
     void setBoardCheckers();

@@ -1,4 +1,5 @@
 #include "boardscene.h"
+#include <algorithm>
 
 BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     : QGraphicsScene(parent),
@@ -20,6 +21,8 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setPlayingDice();
     setDoublingDie();
     disableAllHolders();
+    whiteOut = m_leftBar->bottomHolder;
+    blackOut = m_leftBar->topHolder;
 }
 
 void BoardScene::setBoardTriangles() {
@@ -31,6 +34,9 @@ void BoardScene::setBoardTriangles() {
         BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true);
         boardTriangles.push_back(bottomTriangle);
     }
+    ///temporary fix for syncing triangle numerations between the board and the game engine, reverse the bottom row of triangles
+    std::reverse(boardTriangles.begin(),boardTriangles.end());
+
     for(int i {0}; i < this->trianglePairs; ++i){
         qreal x_point = this->sideBarWidth +
                 this->triangleWidth * i +
@@ -64,16 +70,16 @@ void BoardScene::setBoardCheckers(){
     int i = 0;
     int j = 0;
     for(int n = i + 5; i < n; ++i)
-        boardTriangles[0]->addChecker(blackCheckers[i]);
+        boardTriangles[11]->addChecker(blackCheckers[i]);
 
     for(int n = j + 3; j < n; ++j)
-        boardTriangles[4]->addChecker(whiteCheckers[j]);
+        boardTriangles[7]->addChecker(whiteCheckers[j]);
 
     for(int n = j + 5; j < n; ++j)
-        boardTriangles[6]->addChecker(whiteCheckers[j]);
+        boardTriangles[5]->addChecker(whiteCheckers[j]);
 
     for(int n = i + 2; i < n; ++i)
-        boardTriangles[11]->addChecker(blackCheckers[i]);
+        boardTriangles[0]->addChecker(blackCheckers[i]);
 
     for(int n = j + 5; j < n; ++j)
         boardTriangles[12]->addChecker(whiteCheckers[j]);
@@ -183,4 +189,45 @@ void BoardScene::disableAllHolders(){
     m_rightBar->bottomHolder->allowDropoff = false;
     m_rightBar->bottomHolder->allowDropoff = false;
 
+}
+
+
+void BoardScene::setBoardState(const BoardState state){
+    int blackCheckerCount = 0, whiteCheckerCount = 0;
+    assert(NUMBER_OF_POINTS == trianglePairs * 2);
+    for(int i = 1; i <= NUMBER_OF_POINTS; i++){
+        auto point = state.point(i);
+        if(point.owner() == PlayerColor::WHITE){
+            for(int j = 0; j < point.count(); j++){
+                boardTriangles[i]->addChecker(whiteCheckers[whiteCheckerCount]);
+                whiteCheckerCount++;
+            }
+        }else{
+            for(int j = 0; j < point.count(); j++){
+                boardTriangles[i]->addChecker(blackCheckers[blackCheckerCount]);
+                blackCheckerCount++;
+            }
+        }
+    }
+    for(int j = 0; j < state.bar(PlayerColor::WHITE); j++){
+        m_midBar->topHolder->addChecker(whiteCheckers[whiteCheckerCount]);
+        whiteCheckerCount++;
+    }
+
+    for(int j = 0; j < state.bar(PlayerColor::BLACK); j++){
+        m_midBar->bottomHolder->addChecker(blackCheckers[blackCheckerCount]);
+        blackCheckerCount++;
+    }
+
+    for(int j = 0; j < state.off(PlayerColor::WHITE); j++){
+        whiteOut->addChecker(whiteCheckers[whiteCheckerCount]);
+        whiteCheckerCount++;
+    }
+
+    for(int j = 0; j < state.off(PlayerColor::BLACK); j++){
+        blackOut->addChecker(blackCheckers[blackCheckerCount]);
+        blackCheckerCount++;
+    }
+
+    assert(whiteCheckerCount == whiteCheckers.size() && blackCheckerCount == blackCheckers.size());
 }

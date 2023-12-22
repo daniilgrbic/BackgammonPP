@@ -3,6 +3,8 @@
 #include "ui_boardwindow.h"
 #include "boardplayingdie.h"
 #include <QPainter>
+#include "engine/core/boardstate.h"
+#include "engine/backgammon.h"
 
 BoardWindow::BoardWindow(QWidget *parent) :
     QWidget(parent),
@@ -33,6 +35,7 @@ void BoardWindow::on_pbExitGame_clicked()
 void BoardWindow::on_pbRollDice_clicked()
 {
     //get these informations from the game state;
+    m_boardScene->setBoardState(Backgammon().board());
     int value1 = 2;
     int value2 = 3;
     BoardPlayingDie::Position pos = BoardPlayingDie::Position::RIGHT;
