@@ -26,7 +26,9 @@ void Client::readMessageFromServer() {
     if (message == srvconst::serverCmdConnected) {
         emit connected(message);
     } else if (message.startsWith(srvconst::serverCmdAddName)) {
-        emit potentialOpponent(message.sliced(srvconst::serverCmdAddName.length()));
+        emit addName(message.sliced(srvconst::serverCmdAddName.length()));
+    } else if (message.startsWith(srvconst::serverCmdRemoveName)) {
+        emit removeName(message.sliced(srvconst::serverCmdRemoveName.length()));
     } else if (message.startsWith(srvconst::serverCmdState)) {
         emit newState(message.sliced(srvconst::serverCmdState.length()));
     } else if (message.startsWith(srvconst::serverCmdChat)) {

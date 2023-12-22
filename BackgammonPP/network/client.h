@@ -17,11 +17,13 @@ public:
 signals:
     void connected(QString msg);
     void disconnected();
-    void setHost();
-    void potentialOpponent(QString oppName);
+    void addName(QString name);
+    void removeName(QString name);
+    void selectPlayer(QString name);
+    void removePlayer(QString name);
     void newState(QString state);
     void newChatMessage(QString chatMessage);
-    void unknownServerCommand(QString str);
+    void unknownServerCommand(QString srvCmd);
     void notConnected();
 
 

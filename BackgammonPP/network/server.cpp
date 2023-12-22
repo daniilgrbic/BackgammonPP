@@ -98,7 +98,7 @@ void Server::readMessage() {
     else if (message.startsWith(srvconst::serverCmdChat)) {
         processChatCommand(sourceSocket, message.sliced(srvconst::serverCmdChat.length()));
     }
-    else if (message.startsWith(srvconst::serverCmdGameOn)) {
+    else if (message.startsWith(srvconst::serverCmdGameStart)) {
         processGameStartCommand();
     }
     else {
@@ -148,7 +148,12 @@ void Server::broadcast(QTcpSocket * src, QString message, bool all) {
 }
 
 void Server::processAddNameCommand(QTcpSocket* src, QString name) {
-    // TODO check if name contains only alphabet or underscore
+    for (auto c : name) {
+        if (!c.isLetter() && !(c != '_')) {
+            return; // handle in a better way
+        }
+    }
+
     if (m_gameStarted) {
         src->write(srvconst::serverCmdGameOn.toStdString().c_str());
         return;
