@@ -24,7 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     // btStartGame
 
     // Join Game Lobby
-    connect(ui->pbBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+    connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+    connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
 
     // Preferences - labelPrefUsername, btSavePreferences
     connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -61,6 +62,7 @@ void MainWindow::on_btPreference_clicked()
 
 void MainWindow::on_btReturnToMenu_clicked()
 {
+    ui->messageFromServer->setText("");
     this->ui->lineEdit->setText(this->ui->labelPrefUsername->text());
     ui->stackedWidget->setCurrentIndex(0);
 }
@@ -73,6 +75,28 @@ void MainWindow::on_btExit_clicked()
 void MainWindow::on_btJoinGame_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_btJoinLobby_clicked()
+{
+
+    const QString &ipAddress = ui->inputIP->toPlainText();
+    const QString &userName = ui->inputName->toPlainText();
+    if (!this->isValidIpAddress(ipAddress)) {
+        QMessageBox::information(nullptr, "Alert", "Enter valid IP address");
+    }
+    else if (userName.size() < MIN_USERNAME_SIZE or userName.size() > MAX_USERNAME_SIZE) {
+        QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
+    }
+    else {
+        ui->messageFromServer->setText(
+            QString("PLEASE WAIT...\n") +
+            QString("Finding hosted game...\n") +
+            QString("IP Address: ") + ipAddress + QString("\n") +
+            QString("Host Player Username: ") + userName + QString("\n")
+        );
+        // qDebug() << " " << ipAddress << " | " << userName << "\n";
+    }
 }
 
 void MainWindow::on_btStartGame_clicked()
@@ -92,8 +116,8 @@ void MainWindow::on_btStartGame_clicked()
 
 void MainWindow::on_btSavePreference_clicked()
 {
-    if (this->ui->lineEdit->text().size() < 5 or this->ui->lineEdit->text().size() > 20) {
-        QMessageBox::information(nullptr, "Alert", "Enter Username between 5 and 20 characters");
+    if (this->ui->lineEdit->text().size() < MIN_USERNAME_SIZE or this->ui->lineEdit->text().size() > MAX_USERNAME_SIZE) {
+        QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
         return;
     }
     emit requestPreferences();
@@ -127,3 +151,7 @@ PlayerType MainWindow::getPlayerType()
 
 
 
+bool MainWindow::isValidIpAddress(const QString &ipAddress) {
+    QHostAddress address;
+    return address.setAddress(ipAddress);
+}

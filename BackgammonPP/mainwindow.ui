@@ -67,7 +67,7 @@
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="mainMenu">
        <widget class="QWidget" name="widget" native="true">
@@ -1077,7 +1077,7 @@ QPushButton:hover {
 }</string>
                </property>
                <property name="text">
-                <string>Player name:</string>
+                <string>Opponent Username</string>
                </property>
               </widget>
              </item>
@@ -1142,7 +1142,7 @@ QPushButton:hover {
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QPushButton" name="pbBackFromJoinLobby">
+           <widget class="QPushButton" name="btBackFromJoinLobby">
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
@@ -1164,7 +1164,7 @@ QPushButton:hover {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pbJoinLobby">
+           <widget class="QPushButton" name="btJoinLobby">
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
@@ -1208,6 +1208,8 @@ QPushButton:hover {
             <property name="styleSheet">
              <string notr="true">QLabel {
 	background-color: #EDE9E8 ;
+	color: black;
+	padding-left: 10px;
 }</string>
             </property>
             <property name="text">

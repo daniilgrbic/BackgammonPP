@@ -23,4 +23,7 @@ struct Preferences {
     }
 };
 
+const qint8 MIN_USERNAME_SIZE = 8;
+const qint8 MAX_USERNAME_SIZE = 20;
+
 #endif // CONSTS_H

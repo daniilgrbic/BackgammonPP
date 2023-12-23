@@ -9,6 +9,7 @@
 #include <QString>
 #include <QPalette>
 #include <QMessageBox>
+#include <QHostAddress>
 #include <iostream>
 #include "boardwindow.h"
 #include "consts.h"
@@ -40,6 +41,7 @@ private slots:
     void on_btStartGame_clicked();
 
     void on_btJoinGame_clicked();
+    void on_btJoinLobby_clicked();
 
     void on_btSavePreference_clicked();
 
@@ -52,6 +54,7 @@ private:
     QString sketchPicPath = ":/resources/img/menu_sketch.png";
 
     void setPicture(QString picturePath, QWidget *pictureWidget);
+    bool isValidIpAddress(const QString &ipAddress);
     void displayPreferences();
     GameType getGameType();
     PlayerType getPlayerType();
