@@ -1,9 +1,11 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include "consts.h"
 #include "mainwindow.h"
 #include "boardwindow.h"
 #include <QApplication>
+
 
 // FIXME: CAN'T IMPORT LIBRARIES
 // #include <QMediaPlayer>
@@ -16,13 +18,19 @@ class Controller : public QObject
 public:
     Controller();
 
+signals:
+    void sendPreferences(Preferences *preferences);
+
 public slots:
     void createGameFromMenu();
     void closeGameAndOpenMenu();
+    void getPreferences();
 
 private:
-    MainWindow mainWindow;
-    BoardWindow boardWindow;
+    MainWindow *mainWindow;
+    BoardWindow *boardWindow;
+    Preferences *preferences;
+    QString playerName = "Player";
     QString themeSongPath = ":/music/audio/skip_james-devil_got_my_woman.mp3";
 
     void playThemeSong();

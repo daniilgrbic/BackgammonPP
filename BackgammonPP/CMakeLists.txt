@@ -82,7 +82,8 @@ set(SOURCE
     verticalchecker.cpp
     verticalchecker.h)
 
-qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE})
+qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE}
+    consts.h)
 target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
 
 if((QT_VERSION_MAJOR GREATER 4))

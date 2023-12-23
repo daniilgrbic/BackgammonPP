@@ -2,12 +2,18 @@
 
 Controller::Controller()
 {
-    mainWindow.show();
+    this->preferences = new Preferences();
+    this->mainWindow = new MainWindow();
+    this->boardWindow = new BoardWindow();
+    mainWindow->show();
 
     this->playThemeSong();
 
-    connect(&mainWindow, &MainWindow::requestCreateGame, this, &Controller::createGameFromMenu);
-    connect(&boardWindow, &BoardWindow::requestCloseGame, this, &Controller::closeGameAndOpenMenu);
+    connect(mainWindow, &MainWindow::requestCreateGame, this, &Controller::createGameFromMenu);
+    connect(boardWindow, &BoardWindow::requestCloseGame, this, &Controller::closeGameAndOpenMenu);
+
+    connect(mainWindow, &MainWindow::requestPreferences, this, &Controller::getPreferences);
+    connect(this, &Controller::sendPreferences, mainWindow, &MainWindow::handlePreferences);
 }
 
 void Controller::playThemeSong()
@@ -27,14 +33,19 @@ void Controller::playThemeSong()
     */
 }
 
+void Controller::getPreferences()
+{
+    emit sendPreferences(this->preferences);
+}
+
 void Controller::createGameFromMenu()
 {
-    mainWindow.close();
-    boardWindow.show();
+    mainWindow->close();
+    boardWindow->show();
 }
 
 void Controller::closeGameAndOpenMenu()
 {
-    boardWindow.close();
-    mainWindow.show();
+    boardWindow->close();
+    mainWindow->show();
 }

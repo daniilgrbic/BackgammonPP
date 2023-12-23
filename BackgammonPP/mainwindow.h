@@ -8,8 +8,10 @@
 #include <QImage>
 #include <QString>
 #include <QPalette>
+#include <QMessageBox>
 #include <iostream>
 #include "boardwindow.h"
+#include "consts.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,12 +27,21 @@ public:
 
 signals:
     void requestCreateGame();
+    void requestPreferences();
+
+public slots:
+    void handlePreferences(Preferences *preferences);
 
 private slots:
-    void on_btCreateGame_clicked();
     void on_btReturnToMenu_clicked();
-    void on_btPreferences_clicked();
+    void on_btPreference_clicked();
+
+    void on_btCreateGame_clicked();
+    void on_btStartGame_clicked();
+
     void on_btJoinGame_clicked();
+
+    void on_btSavePreference_clicked();
 
     void on_btExit_clicked();
 
@@ -41,5 +52,8 @@ private:
     QString sketchPicPath = ":/resources/img/menu_sketch.png";
 
     void setPicture(QString picturePath, QWidget *pictureWidget);
+    void displayPreferences();
+    GameType getGameType();
+    PlayerType getPlayerType();
 };
 #endif // MAINWINDOW_H
