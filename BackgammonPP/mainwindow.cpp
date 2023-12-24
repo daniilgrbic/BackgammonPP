@@ -1,5 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "stringlistmodel.h"
+#include <iostream>
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
     connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
     // btStartGame
+//    connect(ui->btStartGame2)
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -59,6 +64,8 @@ void MainWindow::on_btPreference_clicked()
     emit requestPreferences();
     ui->stackedWidget->setCurrentIndex(2);
 }
+
+
 
 void MainWindow::on_btReturnToMenu_clicked()
 {
@@ -111,6 +118,12 @@ void MainWindow::on_btStartGame_clicked()
     }
     else {
         // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
+        QStringList opponents;
+        model = new StringListModel(opponents);
+        ui->lvOpponents->setModel(model);
+        ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
+        model->addOpponent("pera"); //Example how to add names to listview
+        ui->stackedWidget->setCurrentIndex(4);
     }
 }
 
@@ -155,3 +168,21 @@ bool MainWindow::isValidIpAddress(const QString &ipAddress) {
     QHostAddress address;
     return address.setAddress(ipAddress);
 }
+
+void MainWindow::on_btCreateGame2_clicked()
+{
+    std::string selectedOpponent = ui->lvOpponents->currentIndex().data(Qt::DisplayRole).toString().toStdString();
+    if(selectedOpponent == ""){
+        QMessageBox::information(nullptr, "Alert", "You must select an opponent");
+    }else{
+        std::cout << selectedOpponent << std::endl;
+        //emit request for game creation
+    }
+}
+
+
+void MainWindow::on_btReturnFromCreateGame2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+

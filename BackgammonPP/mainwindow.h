@@ -13,6 +13,7 @@
 #include <iostream>
 #include "boardwindow.h"
 #include "consts.h"
+#include "stringlistmodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -47,6 +48,10 @@ private slots:
 
     void on_btExit_clicked();
 
+    void on_btCreateGame2_clicked();
+
+    void on_btReturnFromCreateGame2_clicked();
+
 private:
     Ui::MainWindow *ui;
     BoardWindow *boardWindow;
@@ -58,5 +63,6 @@ private:
     void displayPreferences();
     GameType getGameType();
     PlayerType getPlayerType();
+    StringListModel *model;
 };
 #endif // MAINWINDOW_H
