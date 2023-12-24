@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Network Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} OPTIONAL_COMPONENTS Widgets)
 
 add_subdirectory(tests)
@@ -83,8 +83,10 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     playableplayer.h playableplayer.cpp
     localplayer.h localplayer.cpp
     stringlistmodel.h stringlistmodel.cpp
+
+    music.qrc
 )
-target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
+target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network Qt::Multimedia)
 
 if((QT_VERSION_MAJOR GREATER 4))
   target_link_libraries(BackgammonPP PRIVATE Qt::Widgets)

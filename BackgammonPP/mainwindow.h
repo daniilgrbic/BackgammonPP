@@ -28,7 +28,7 @@ public:
 
 signals:
     void requestCreateGame();
-    void requestPreferences();
+    void requestPreferences(qint16 newVolume);
 
 public slots:
     void handlePreferences(Preferences *preferences);
