@@ -25,8 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
     // Create Game Lobby
     connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
     connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
-    // btStartGame
-//    connect(ui->btStartGame2)
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -113,16 +111,26 @@ void MainWindow::on_btStartGame_clicked()
     QString opponentPlayer = this->ui->labelTextEdit->toPlainText();
     qint32 moveNumber = this->ui->sbGameDuration->value();
 
+    if (moveNumber < MIN_NUM_MOVES or moveNumber > MAX_NUM_MOVES) {
+        QMessageBox::information(nullptr, "Alert", "Enter valid move number: [" + QString::number(MIN_NUM_MOVES) + ", " + QString::number(MAX_NUM_MOVES) + "]");
+        return;
+    }
+
     if (playerType == BotPlayer) {
         emit requestCreateGame();
     }
-    else {
+    else {        
+        if (opponentPlayer.size() < MIN_USERNAME_SIZE or opponentPlayer.size() > MAX_USERNAME_SIZE) {
+            QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
+            return;
+        }
+
         // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
         QStringList opponents;
         model = new StringListModel(opponents);
         ui->lvOpponents->setModel(model);
         ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
-        model->addOpponent("pera"); //Example how to add names to listview
+        model->addOpponent("pera"); // Example how to add names to listview
         ui->stackedWidget->setCurrentIndex(4);
     }
 }
@@ -169,7 +177,7 @@ bool MainWindow::isValidIpAddress(const QString &ipAddress) {
     return address.setAddress(ipAddress);
 }
 
-void MainWindow::on_btCreateGame2_clicked()
+void MainWindow::on_btCreateGameLobby_clicked()
 {
     std::string selectedOpponent = ui->lvOpponents->currentIndex().data(Qt::DisplayRole).toString().toStdString();
     if(selectedOpponent == ""){
@@ -181,7 +189,7 @@ void MainWindow::on_btCreateGame2_clicked()
 }
 
 
-void MainWindow::on_btReturnFromCreateGame2_clicked()
+void MainWindow::on_btReturnFromCreateGameLobby_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
 }

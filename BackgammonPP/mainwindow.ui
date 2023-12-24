@@ -695,7 +695,7 @@ QPushButton:hover {
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>681</width>
+          <width>661</width>
           <height>51</height>
          </rect>
         </property>
@@ -1249,21 +1249,36 @@ QPushButton:hover {
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="CreateGame2">
+      <widget class="QWidget" name="CreateGameLobby">
        <widget class="QWidget" name="gridLayoutWidget">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>10</y>
+          <x>10</x>
+          <y>20</y>
           <width>641</width>
           <height>441</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="1" column="0">
-          <widget class="QPushButton" name="btCreateGame2">
+          <widget class="QPushButton" name="btStartCreatedGame">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: center;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
+           </property>
            <property name="text">
-            <string>Create Game</string>
+            <string>Start Game</string>
            </property>
           </widget>
          </item>
@@ -1272,7 +1287,7 @@ QPushButton:hover {
          </item>
         </layout>
        </widget>
-       <widget class="QPushButton" name="btReturnFromCreateGame2">
+       <widget class="QPushButton" name="btReturnFromCreateGameLobby">
         <property name="geometry">
          <rect>
           <x>490</x>
@@ -1280,6 +1295,21 @@ QPushButton:hover {
           <width>161</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: center;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
         </property>
         <property name="text">
          <string>Back</string>

@@ -48,9 +48,9 @@ private slots:
 
     void on_btExit_clicked();
 
-    void on_btCreateGame2_clicked();
+    void on_btCreateGameLobby_clicked();
 
-    void on_btReturnFromCreateGame2_clicked();
+    void on_btReturnFromCreateGameLobby_clicked();
 
 private:
     Ui::MainWindow *ui;
