@@ -12,24 +12,38 @@
 #include "checkerholder.h"
 
 
-BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, QColor color) : QGraphicsItem(parent) , m_size(size), m_color(color), m_dragged(false), m_holder(nullptr)
+BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, PlayerColor color) :
+    QGraphicsItem(parent) ,
+    m_size(size), m_color(color),
+    m_dragged(false),
+    m_holder(nullptr)
 {
     setZValue(1);
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges);
     setCursor(Qt::OpenHandCursor);
+    switch(color){
+    case PlayerColor::WHITE:
+        m_QColor = Qt::white;
+        break;
+    case PlayerColor::BLACK:
+        m_QColor = Qt::black;
+        break;
+    default:
+        assert(false);
+    }
 }
 QRectF BoardChecker::boundingRect() const {
     return QRectF(-m_size,-m_size, 2 * m_size, 2 * m_size);
 }
 
 void BoardChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-//    painter->setBrush(QBrush(Qt::gray));
-//    painter->drawRect(boundingRect());
+    //    painter->setBrush(QBrush(Qt::gray));
+    //    painter->drawRect(boundingRect());
 
-    painter->setBrush(QBrush(m_color));
-    painter->drawEllipse(QPoint(0,0),m_size,m_size);
+    painter->setBrush(QBrush(m_QColor));
+    painter->drawEllipse(QPoint(0,0),(int) m_size,(int) m_size);
 }
 
 void BoardChecker::setAnchorPoint(const QPointF &anchorPoint){
@@ -46,9 +60,14 @@ CheckerHolder *BoardChecker::getHolder(){
     return m_holder;
 }
 
-const QColor BoardChecker::getColor() const
+const PlayerColor BoardChecker::getColor() const
 {
     return m_color;
+}
+
+const QColor BoardChecker::getQColor() const
+{
+    return m_QColor;
 }
 
 

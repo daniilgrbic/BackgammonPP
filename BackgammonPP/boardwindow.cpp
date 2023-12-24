@@ -3,6 +3,8 @@
 #include "ui_boardwindow.h"
 #include "boardplayingdie.h"
 #include <QPainter>
+#include "engine/core/boardstate.h"
+#include "engine/backgammon.h"
 
 BoardWindow::BoardWindow(QWidget *parent) :
     QWidget(parent),
@@ -13,6 +15,9 @@ BoardWindow::BoardWindow(QWidget *parent) :
     ui->boardView->setScene(m_boardScene);
     ui->boardView->setRenderHint(QPainter::Antialiasing);
     //ui->boardView->resize(605,305);
+    ui->pbEndTurn->setEnabled(false);
+    ui->pbRollDice->setEnabled(false);
+    connect(m_boardScene, &BoardScene::enableEndTurn, this, &BoardWindow::enableEndTurn);
 }
 
 BoardWindow::~BoardWindow()
@@ -39,3 +44,14 @@ void BoardWindow::on_pbRollDice_clicked()
     m_boardScene->updatePlayingDice(value1, value2, pos);
 }
 
+void BoardWindow::requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll){
+
+    m_boardScene->setLegalTurns(legalTurns);
+    m_boardScene->setRoll(roll);
+    ui->pbRollDice->setEnabled(true);
+    return;
+}
+
+void BoardWindow::enableEndTurn(){
+    ui->pbEndTurn->setEnabled(true);
+}

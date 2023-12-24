@@ -22,6 +22,10 @@ const Roll& Game::currentRoll() const {
     return m_currentRoll;
 }
 
+const BoardState& Game::board() const {
+    return m_board;
+}
+
 std::optional<GameResult> Game::getResult() const
 {
     return m_result;

@@ -6,7 +6,7 @@
 #include <QGraphicsScene>
 #include <QVector>
 #include <QPaintEvent>
-
+#include "engine/core/game.h"
 namespace Ui {
 class BoardWindow;
 }
@@ -19,10 +19,11 @@ public:
     explicit BoardWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
     ~BoardWindow();
-
+public slots:
+    void requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll);
+    void enableEndTurn();
 signals:
     void requestCloseGame();
-
 private slots:
     void on_pbExitGame_clicked();
 

@@ -18,6 +18,7 @@ public:
     virtual bool isFinished(PlayerColor player) const = 0;
 
     const Roll& currentRoll() const;
+    const BoardState& board() const;
 
 protected:
     Game();

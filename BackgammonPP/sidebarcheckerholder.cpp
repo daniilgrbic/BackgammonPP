@@ -8,6 +8,7 @@ SidebarCheckerHolder::SidebarCheckerHolder(QGraphicsItem *parent, qreal width, q
       m_height(height)
 {
     setZValue(1);
+    m_type = SpecialPosition::OFF;
 }
 
 QRectF SidebarCheckerHolder::boundingRect() const {
@@ -45,7 +46,7 @@ void SidebarCheckerHolder::updateVericalCheckers()
         qreal VCheckerWidth = m_width;
         qreal VCheckerHeight = m_height / checkerNumber;
         uint index = verticalCheckers.size();
-        VerticalChecker* newChecker = new VerticalChecker(this, VCheckerWidth, VCheckerHeight, m_checkers.back()->getColor(), Qt::gray);
+        VerticalChecker* newChecker = new VerticalChecker(this, VCheckerWidth, VCheckerHeight, m_checkers.back()->getQColor(), Qt::gray);
         newChecker->setPos(0, index * VCheckerHeight);
         newChecker->setZValue(2);
         verticalCheckers.push_back(newChecker);

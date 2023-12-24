@@ -5,7 +5,9 @@
 #include "boardstate.h"
 #include "../../utility/serializable.h"
 
+#include <algorithm>
 #include <vector>
+#include <iterator>
 
 struct Turn : public Serializable
 {
