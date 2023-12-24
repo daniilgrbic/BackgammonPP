@@ -596,7 +596,7 @@ QPushButton:hover {
 }</string>
              </property>
              <property name="text">
-              <string>Duration (number of moves):</string>
+              <string>Number of games:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -616,6 +616,9 @@ QPushButton:hover {
 	background-color: #EDE9E8 ;
 	color: black;
 }</string>
+             </property>
+             <property name="value">
+              <number>3</number>
              </property>
             </widget>
            </widget>
@@ -1070,16 +1073,20 @@ QPushButton:hover {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_2">
-               <property name="styleSheet">
-                <string notr="true">QLabel {
-	color: white;
-}</string>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-               <property name="text">
-                <string>Opponent Username</string>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
-              </widget>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1112,13 +1119,20 @@ QPushButton:hover {
               </widget>
              </item>
              <item>
-              <widget class="QTextEdit" name="inputName">
-               <property name="styleSheet">
-                <string notr="true">QTextEdit {
-	background-color: #EDE9E8 ;
-}</string>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1182,38 +1196,6 @@ QPushButton:hover {
             </property>
             <property name="text">
              <string>Join</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QFrame" name="frame_5">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>110</y>
-           <width>431</width>
-           <height>141</height>
-          </rect>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLabel" name="messageFromServer">
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-	background-color: #EDE9E8 ;
-	color: black;
-	padding-left: 10px;
-}</string>
-            </property>
-            <property name="text">
-             <string/>
             </property>
            </widget>
           </item>
