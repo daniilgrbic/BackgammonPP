@@ -1,8 +1,6 @@
 #pragma once
 
 #include <QObject>
-#include <QString>
-#include <QList>
 #include <QMap>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -17,19 +15,30 @@ public:
 
 public slots:
     void connected();
-    void readMessage();
     void disconnected();
+    void readMessage();
 
 private:
-    void broadcast(QString message);
-    void processNameCommand(QTcpSocket* src, QString name);
-    void processOpponentCommand(QTcpSocket* src, QString oppName);
+    void broadcast(QTcpSocket* src, QString message, bool all = false);
+    void processAddNameCommand(QTcpSocket* src, QString name);
+    void processRemoveNameCommand(QTcpSocket* src, QString name);
+    void processSelectPlayerCommand(QTcpSocket* src, QString name);
+    void processRemovePlayerCommand(QTcpSocket* src, QString name);
     void processStateCommand(QTcpSocket* src, QString state);
+    void processChatCommand(QTcpSocket* src, QString json);
+    void processGameStartCommand();
+
+    void nukeGame();
+    void removeName(QTcpSocket *);
+
     bool m_gameStarted;
     QTcpServer* m_server;
+    QTcpSocket* m_host;
     QTcpSocket* m_player1;
     QTcpSocket* m_player2;
     QSet<QTcpSocket*> m_spectators;
     QMap<QTcpSocket*, QString> m_clientNames;
     QMap<QString, QTcpSocket*> m_clientSockets;
+    QMap<QString, int> m_namesCnt;
 };
+
