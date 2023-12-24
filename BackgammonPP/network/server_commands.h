@@ -3,13 +3,15 @@
 #include <QString>
 
 
-const quint16 PORT = 1234;
-const QString serverCmdOpp = "opp-";
-const QString serverCmdPotOpp = "potopp-";
-const QString serverCmdName = "name-";
-const QString serverCmdChat = "chat-";
-const QString serverCmdState = "state-";
-const QString serverCmdConnectedHost = "connected-host";
-const QString serverCmdConnectedPlayer = "connected-player";
-const QString serverCmdConnectedSpectator = "connected-spectator";
-const QString serverCmdConnectedWaiting = "connected-waiting";
+namespace srvconst {
+const quint16 PORT = 12345;
+inline const QString serverCmdConnected = "connected";
+inline const QString serverCmdAddName = "name-add-";
+inline const QString serverCmdRemoveName = "name-remove-";
+inline const QString serverCmdSelectPlayer = "player-select-";
+inline const QString serverCmdRemovePlayer = "player-remove-";
+inline const QString serverCmdState = "state-";
+inline const QString serverCmdChat = "chat-";
+inline const QString serverCmdGameOn = "game-on";
+inline const QString serverCmdGameStart = "game-start";
+}

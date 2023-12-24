@@ -37,6 +37,8 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     network/client.cpp
     network/client.h
     network/server_commands.h
+    network/chat_message.cpp
+    network/chat_message.h
     utility/jsonserializer.h
     utility/serializable.h
     background_menu_image.qrc

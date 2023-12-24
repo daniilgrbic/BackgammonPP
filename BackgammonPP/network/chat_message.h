@@ -1,5 +1,4 @@
-#ifndef CHAT_MESSAGE_H
-#define CHAT_MESSAGE_H
+#pragma once
 
 #include <QString>
 #include "utility/serializable.h"
@@ -27,4 +26,3 @@ private:
     QString sender;
 };
 
-#endif // CHAT_MESSAGE_H

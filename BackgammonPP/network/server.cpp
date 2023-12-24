@@ -1,6 +1,7 @@
 #include "network/server.h"
 #include "network/chat_message.h"
 #include "utility/jsonserializer.h"
+#include "network/server_commands.h"
 #include <string>
 
 
@@ -190,6 +191,10 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
     }
 }
 
+void Server::processRemoveNameCommand(QTcpSocket* src, QString name) {
+
+}
+
 void Server::processSelectPlayerCommand(QTcpSocket* src, QString playerName) {
     if (src != m_host) {
         throw std::runtime_error("Only the host can choose opponent");
@@ -268,6 +273,10 @@ void Server::processChatCommand(QTcpSocket* src, QString json) {
     }
 }
 
+void Server::processGameStartCommand() {
+
+}
+
 void Server::nukeGame() {
     processRemovePlayerCommand(m_host, m_clientNames[m_player1]);
     processRemovePlayerCommand(m_host, m_clientNames[m_player2]);
@@ -287,3 +296,4 @@ void Server::removeName(QTcpSocket *disconnectedSocket) {
     m_clientSockets.erase(m_clientSockets.find(m_clientNames[disconnectedSocket]));
     m_clientNames.erase(m_clientNames.find(disconnectedSocket));
 }
+
