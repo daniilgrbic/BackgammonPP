@@ -28,8 +28,8 @@ private:
     Preferences *preferences;
     QMediaPlayer *themeSong;
     QAudioOutput *themeAudioOutput;
-    QString playerName = "Player";
-    QString themeSongPath = "qrc:/audio/uSnovimaProdBane.mp3";
+    QString playerName = Preferences().playerName;
+    QString themeSongPath = THEME_SOUND_PATH;
 
     void playThemeSong();
 };
