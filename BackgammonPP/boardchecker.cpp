@@ -39,11 +39,11 @@ QRectF BoardChecker::boundingRect() const {
 }
 
 void BoardChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-//    painter->setBrush(QBrush(Qt::gray));
-//    painter->drawRect(boundingRect());
+    //    painter->setBrush(QBrush(Qt::gray));
+    //    painter->drawRect(boundingRect());
 
     painter->setBrush(QBrush(m_QColor));
-    painter->drawEllipse(QPoint(0,0),m_size,m_size);
+    painter->drawEllipse(QPoint(0,0),(int) m_size,(int) m_size);
 }
 
 void BoardChecker::setAnchorPoint(const QPointF &anchorPoint){
