@@ -19,3 +19,12 @@ void CheckerHolder::removeChecker(BoardChecker *checker){
     m_checkers.erase(std::remove(m_checkers.begin(), m_checkers.end(), checker), m_checkers.end());
     updateCheckerPos();
 }
+
+void CheckerHolder::enableCheckers(const PlayerColor &color){
+    for(BoardChecker *checker: m_checkers){
+        if(checker->getColor() == color){
+            checker->setFlag(QGraphicsItem::ItemIsSelectable, false);
+            checker->setFlag(QGraphicsItem::ItemIsMovable, false);
+        }
+    }
+}

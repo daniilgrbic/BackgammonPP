@@ -1,4 +1,6 @@
 #include "boardscene.h"
+#include <algorithm>
+#include "boardwindow.h"
 
 BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     : QGraphicsScene(parent),
@@ -19,7 +21,8 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setSideBars();
     setPlayingDice();
     setDoublingDie();
-    disableAllHolders();
+    whiteOut = m_leftBar->bottomHolder;
+    blackOut = m_leftBar->topHolder;
 }
 
 void BoardScene::setBoardTriangles() {
@@ -28,15 +31,18 @@ void BoardScene::setBoardTriangles() {
                 this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
         qreal y_point = m_height - triangleHeight;
-        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true);
+        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true, trianglePairs - i);
         boardTriangles.push_back(bottomTriangle);
     }
+    ///temporary fix for syncing triangle numerations between the board and the game engine, reverse the bottom row of triangles
+    std::reverse(boardTriangles.begin(),boardTriangles.end());
+
     for(int i {0}; i < this->trianglePairs; ++i){
         qreal x_point = this->sideBarWidth +
                 this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
         qreal y_point = 0;
-        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false);
+        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false, trianglePairs + 1 + i);
         boardTriangles.push_back(upperTriangle);
     }
 
@@ -49,12 +55,12 @@ void BoardScene::setBoardCheckers(){
 
 
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::black);
+        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::BLACK);
         boardCheckers.push_back(checker);
         blackCheckers.push_back(checker);
     }
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, Qt::white);
+        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::WHITE);
         boardCheckers.push_back(checker);
         whiteCheckers.push_back(checker);
     }
@@ -63,17 +69,18 @@ void BoardScene::setBoardCheckers(){
 
     int i = 0;
     int j = 0;
+    /*
     for(int n = i + 5; i < n; ++i)
-        boardTriangles[0]->addChecker(blackCheckers[i]);
+        boardTriangles[11]->addChecker(blackCheckers[i]);
 
     for(int n = j + 3; j < n; ++j)
-        boardTriangles[4]->addChecker(whiteCheckers[j]);
+        boardTriangles[7]->addChecker(whiteCheckers[j]);
 
     for(int n = j + 5; j < n; ++j)
-        boardTriangles[6]->addChecker(whiteCheckers[j]);
+        boardTriangles[5]->addChecker(whiteCheckers[j]);
 
     for(int n = i + 2; i < n; ++i)
-        boardTriangles[11]->addChecker(blackCheckers[i]);
+        boardTriangles[0]->addChecker(blackCheckers[i]);
 
     for(int n = j + 5; j < n; ++j)
         boardTriangles[12]->addChecker(whiteCheckers[j]);
@@ -86,6 +93,7 @@ void BoardScene::setBoardCheckers(){
 
     for(int n = j + 2; j < n; ++j)
         boardTriangles[23]->addChecker(whiteCheckers[j]);
+        */
 }
 
 void BoardScene::setBoardBar()
@@ -93,6 +101,8 @@ void BoardScene::setBoardBar()
    m_midBar = new BoardBar(nullptr, triangleWidth, m_height);
    m_midBar->setPos(this->sideBarWidth + (trianglePairs/2) * triangleWidth, 0);
    addItem(m_midBar);
+   whiteBar = m_midBar->topHolder;
+   blackBar = m_midBar->bottomHolder;
 }
 
 void BoardScene::setSideBars()
@@ -183,4 +193,117 @@ void BoardScene::disableAllHolders(){
     m_rightBar->bottomHolder->allowDropoff = false;
     m_rightBar->bottomHolder->allowDropoff = false;
 
+}
+
+
+void BoardScene::setBoardState(const BoardState state){
+    int blackCheckerCount = 0, whiteCheckerCount = 0;
+    assert(NUMBER_OF_POINTS == trianglePairs * 2);
+    for(int i = 1; i <= NUMBER_OF_POINTS; i++){
+        auto point = state.point(i);
+        if(point.owner() == PlayerColor::WHITE){
+            for(int j = 0; j < point.count(); j++){
+                boardTriangles[i-1]->addChecker(whiteCheckers[whiteCheckerCount]);
+                whiteCheckerCount++;
+            }
+        }else{
+            for(int j = 0; j < point.count(); j++){
+                boardTriangles[i-1]->addChecker(blackCheckers[blackCheckerCount]);
+                blackCheckerCount++;
+            }
+        }
+    }
+    for(int j = 0; j < state.bar(PlayerColor::WHITE); j++){
+        m_midBar->topHolder->addChecker(whiteCheckers[whiteCheckerCount]);
+        whiteCheckerCount++;
+    }
+
+    for(int j = 0; j < state.bar(PlayerColor::BLACK); j++){
+        m_midBar->bottomHolder->addChecker(blackCheckers[blackCheckerCount]);
+        blackCheckerCount++;
+    }
+
+    for(int j = 0; j < state.off(PlayerColor::WHITE); j++){
+        whiteOut->addChecker(whiteCheckers[whiteCheckerCount]);
+        whiteCheckerCount++;
+    }
+
+    for(int j = 0; j < state.off(PlayerColor::BLACK); j++){
+        blackOut->addChecker(blackCheckers[blackCheckerCount]);
+        blackCheckerCount++;
+    }
+
+    assert(whiteCheckerCount == whiteCheckers.size() && blackCheckerCount == blackCheckers.size());
+}
+
+void BoardScene::getMoveInit(TurnTrie *trie){
+    this->m_turnTrie = trie;
+    prepareCheckers();
+}
+
+void BoardScene::prepareCheckers(){
+    std::vector<Move> nextMoves = m_turnTrie->nextMoves();
+    for(Move &move : nextMoves){
+        HolderType fromType = move.m_from;
+        if(const SpecialPosition *specPos = std::get_if<SpecialPosition>(&fromType)){
+            assert(*specPos == SpecialPosition::BAR);
+            if(move.m_player == PlayerColor::WHITE){
+                whiteBar->enableCheckers(PlayerColor::WHITE);
+            }else{
+                blackBar->enableCheckers(PlayerColor::BLACK);
+            }
+        }else if(const int *point = std::get_if<int>(&fromType)){
+            assert((*point) >= 1 && (*point <= 24));
+            boardTriangles[(*point) - 1]->enableCheckers(move.m_player);
+        }
+    }
+}
+
+void BoardScene::prepareHolders(const HolderType &origin){
+    std::vector<Move> nextMoves = m_turnTrie->nextMoves();
+    for(const Move& move : nextMoves){
+        if(move.m_from != origin){
+            continue;
+        }
+        if(const SpecialPosition *specPos = std::get_if<SpecialPosition>(&move.m_to)){
+            if(move.m_player == PlayerColor::WHITE){
+                if(*specPos == SpecialPosition::BAR){
+                    whiteBar->allowDropoff = true;
+                }else if(*specPos == SpecialPosition::OFF){
+                    whiteOut->allowDropoff = true;
+                }
+            }else if(move.m_player == PlayerColor::BLACK){
+                if(*specPos == SpecialPosition::BAR){
+                    blackBar->allowDropoff = true;
+                }else if(*specPos == SpecialPosition::OFF){
+                    blackOut->allowDropoff = true;
+                }
+            }
+        }else if(const int *point = std::get_if<int>(&move.m_to)){
+            assert((*point) >= 1 && (*point <= 24));
+            boardTriangles[(*point) - 1]->allowDropoff = true;
+        }
+
+    }
+}
+
+void BoardScene::getMoveUpdate(const HolderType origin, const HolderType to){
+    std::vector<Move> nextMoves = m_turnTrie->nextMoves();
+    Move const *nextMove = nullptr;
+    for(const Move &move : nextMoves){
+        if(move.m_from == origin && move.m_to == to){
+            m_turnTrie->playMove(move);
+        }
+    }
+    if(m_turnTrie->isFinishedTurn()){
+        emit enableEndTurn();
+    }
+}
+
+void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
+    this->legalTurns = legalTurns;
+}
+
+void BoardScene::setRoll(Roll const *roll){
+    this->roll = roll;
 }

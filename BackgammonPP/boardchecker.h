@@ -3,24 +3,27 @@
 
 #include <QGraphicsItem>
 #include "checkerholder.h"
+#include "engine/core/playercolor.h"
 
 class CheckerHolder;
 
 class BoardChecker : public QGraphicsItem
 {
 public:
-    BoardChecker(QGraphicsItem *parent, qreal size, QColor color);
+    BoardChecker(QGraphicsItem *parent, qreal size, PlayerColor color);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
     void setAnchorPoint(const QPointF& anchorPoint);
     void setHolder(CheckerHolder* holder);
     qreal getSize();
     CheckerHolder *getHolder();
-    const QColor getColor() const;
+    const PlayerColor getColor() const;
+    const QColor getQColor() const;
 
 private:
     qreal m_size;
-    QColor m_color;
+    PlayerColor m_color;
+    QColor m_QColor;
     QPointF m_anchorPoint;
     bool m_dragged;
     CheckerHolder* m_holder;

@@ -39,6 +39,9 @@ set(SOURCE
     engine/core/turn.h
     engine/backgammon.cpp
     engine/backgammon.h
+    engine/core/turntrie.cpp engine/core/turntrie.h
+    main.cpp
+    mainwindow.cpp mainwindow.h mainwindow.ui
     utility/jsonserializer.h
     utility/serializable.h
     background_menu_image.qrc
@@ -80,7 +83,9 @@ set(SOURCE
     verticalchecker.cpp
     verticalchecker.h)
 
-qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE})
+qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE}
+    consts.h
+    stringlistmodel.h stringlistmodel.cpp)
 target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
 
 if((QT_VERSION_MAJOR GREATER 4))
