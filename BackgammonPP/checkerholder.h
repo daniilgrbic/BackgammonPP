@@ -1,5 +1,5 @@
-#ifndef CHECKERHOLDER_H
-#define CHECKERHOLDER_H
+#pragma once
+
 #include "boardchecker.h"
 #include "engine/core/specialposition.h"
 #include "engine/core/playercolor.h"
@@ -24,5 +24,3 @@ public:
     QVector<BoardChecker*> m_checkers;
     bool allowDropoff = true;
 };
-
-#endif // CHECKERHOLDER_H

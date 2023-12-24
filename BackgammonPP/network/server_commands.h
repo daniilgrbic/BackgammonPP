@@ -1,5 +1,4 @@
-#ifndef CONSTS_H
-#define CONSTS_H
+#pragma once
 
 #include <QString>
 
@@ -14,5 +13,3 @@ const QString serverCmdConnectedHost = "connected-host";
 const QString serverCmdConnectedPlayer = "connected-player";
 const QString serverCmdConnectedSpectator = "connected-spectator";
 const QString serverCmdConnectedWaiting = "connected-waiting";
-
-#endif // CONSTS_H

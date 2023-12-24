@@ -1,5 +1,4 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -36,5 +35,3 @@ public slots:
 private:
     QTcpSocket* m_socket;
 };
-
-#endif // CLIENT_H

@@ -1,5 +1,4 @@
-#ifndef SERVER_H
-#define SERVER_H
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -34,5 +33,3 @@ private:
     QMap<QTcpSocket*, QString> m_clientNames;
     QMap<QString, QTcpSocket*> m_clientSockets;
 };
-
-#endif // SERVER_H

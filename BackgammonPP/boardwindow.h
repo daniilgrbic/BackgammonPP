@@ -1,5 +1,4 @@
-#ifndef BOARDWINDOW_H
-#define BOARDWINDOW_H
+#pragma once
 
 #include "boardscene.h"
 #include <QWidget>
@@ -33,5 +32,3 @@ private:
     Ui::BoardWindow *ui;
     BoardScene *m_boardScene;
 };
-
-#endif // BOARDWINDOW_H

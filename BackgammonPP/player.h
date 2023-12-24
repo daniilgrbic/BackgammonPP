@@ -1,9 +1,8 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include <QObject>
 #include <vector>
-#include "network/Client.h"
+#include "network/client.h"
 #include "engine/core/boardstate.h"
 #include "engine/core/playercolor.h"
 #include "engine/core/turn.h"
@@ -34,5 +33,3 @@ private:
     Client* m_client;
     PlayerColor m_playerColor;
 };
-
-#endif // PLAYER_H

@@ -1,7 +1,5 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#pragma once
 
-#include "consts.h"
 #include "mainwindow.h"
 #include "boardwindow.h"
 #include <QApplication>
@@ -35,5 +33,3 @@ private:
 
     void playThemeSong();
 };
-
-#endif // CONTROLLER_H

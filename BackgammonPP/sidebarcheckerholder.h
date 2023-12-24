@@ -1,5 +1,4 @@
-#ifndef SIDEBARCHECKERHOLDER_H
-#define SIDEBARCHECKERHOLDER_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QBrush>
@@ -20,5 +19,3 @@ private:
     QVector<VerticalChecker *> verticalCheckers;
     void updateVericalCheckers();
 };
-
-#endif // SIDEBARCHECKERHOLDER_H

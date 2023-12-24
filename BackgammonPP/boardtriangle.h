@@ -1,5 +1,4 @@
-#ifndef BOARDTRIANGLE_H
-#define BOARDTRIANGLE_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QPolygonF>
@@ -27,5 +26,3 @@ private:
     bool m_upwards;
     QPolygonF m_polygon;
 };
-
-#endif // BOARDTRIANGLE_H

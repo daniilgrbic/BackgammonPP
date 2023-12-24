@@ -1,5 +1,4 @@
-#ifndef BOARDCHECKER_H
-#define BOARDCHECKER_H
+#pragma once
 
 #include <QGraphicsItem>
 #include "checkerholder.h"
@@ -32,5 +31,3 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 };
-
-#endif // BOARDCHECKER_H

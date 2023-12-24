@@ -1,5 +1,4 @@
-#ifndef LOCALPLAYER_H
-#define LOCALPLAYER_H
+#pragma once
 
 #include <QObject>
 #include "playableplayer.h"
@@ -16,6 +15,3 @@ public slots:
     void chooseMove(std::vector<Turn> &legalMoves) override;
     void acceptDice(int diceValue) override;
 };
-
-#endif // LOCALPLAYER_H
-
