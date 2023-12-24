@@ -77,6 +77,11 @@ set(SOURCE
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    network/server.cpp
+    network/server.h
+    network/client.cpp
+    network/client.h
+    network/server_commands.h
     preferences.ui
     sidebarcheckerholder.cpp
     sidebarcheckerholder.h
@@ -84,6 +89,10 @@ set(SOURCE
     verticalchecker.h)
 
 qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE}
+    player.h player.cpp
+    botplayer.h botplayer.cpp
+    playableplayer.h playableplayer.cpp
+    localplayer.h localplayer.cpp
     consts.h
     stringlistmodel.h stringlistmodel.cpp)
 target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
