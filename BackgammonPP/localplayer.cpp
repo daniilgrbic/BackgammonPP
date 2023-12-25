@@ -25,3 +25,7 @@ void LocalPlayer::setState(const BoardState &state){
 void LocalPlayer::setDice(const Roll& roll){
     emit forwardSetDice(roll);
 }
+
+void LocalPlayer::diceRolled(){
+    emit confirmRoll();
+}

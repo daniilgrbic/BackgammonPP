@@ -1,5 +1,4 @@
-#ifndef LOCALPLAYER_H
-#define LOCALPLAYER_H
+#pragma once
 
 #include <QObject>
 #include "playableplayer.h"
@@ -16,6 +15,7 @@ signals:
 signals:
     //connected to the match
     void returnMove(Turn turn);
+    void confirmRoll();
 
     //connected to the board
     void forwardMoveRequest(std::vector<Turn> *legalMoves, Roll *roll); //override;
@@ -30,6 +30,7 @@ public slots:
 
     //connected to the board
     void acceptMove(Turn turn);
+    void diceRolled();
 
 private:
     std::vector<Turn> *m_legalMoves;
@@ -37,5 +38,4 @@ private:
     BoardWindow *m_board;
 };
 
-#endif // LOCALPLAYER_H
 
