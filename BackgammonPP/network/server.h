@@ -20,18 +20,23 @@ public slots:
 
 private:
     void broadcast(QTcpSocket* src, QString message, bool all = false);
+
     void processAddNameCommand(QTcpSocket* src, QString name);
     void processRemoveNameCommand(QTcpSocket* src, QString name);
     void processSelectPlayerCommand(QTcpSocket* src, QString name);
     void processRemovePlayerCommand(QTcpSocket* src, QString name);
+
     void processStateCommand(QTcpSocket* src, QString state);
     void processChatCommand(QTcpSocket* src, QString json);
-    void processGameStartCommand();
+    void processDoublingCommand(QTcpSocket* src);
+
+    void processGameStartCommand(QTcpSocket* src);
+    void processGameEndCommand(QTcpSocket* src);
 
     void nukeGame();
     void removeName(QTcpSocket *);
 
-    bool m_gameStarted;
+    bool m_gameOn;
     QTcpServer* m_server;
     QTcpSocket* m_host;
     QTcpSocket* m_player1;

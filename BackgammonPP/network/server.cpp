@@ -8,7 +8,7 @@
 Server::Server(QObject *parent)
     : QObject(parent)
 {
-    m_gameStarted = false;
+    m_gameOn = false;
     m_server = new QTcpServer(this);
     m_player1 = nullptr;
     m_player2 = nullptr;
@@ -43,7 +43,7 @@ void Server::connected() {
 void Server::disconnected() {
     QTcpSocket* disconnectedSocket = static_cast<QTcpSocket *>(QObject::sender());
 
-    if (m_gameStarted) {
+    if (m_gameOn) {
         if (disconnectedSocket == m_host || disconnectedSocket == m_player1 || disconnectedSocket == m_player2) {
             nukeGame();
         }
@@ -99,8 +99,14 @@ void Server::readMessage() {
     else if (message.startsWith(srvconst::serverCmdChat)) {
         processChatCommand(sourceSocket, message.sliced(srvconst::serverCmdChat.length()));
     }
+    else if (message.startsWith(srvconst::serverCmdDoubling)) {
+        processDoublingCommand(sourceSocket);
+    }
     else if (message.startsWith(srvconst::serverCmdGameStart)) {
-        processGameStartCommand();
+        processGameStartCommand(sourceSocket);
+    }
+    else if (message.startsWith(srvconst::serverCmdGameEnd)) {
+        processGameEndCommand(sourceSocket);
     }
     else {
         throw std::runtime_error("");
@@ -155,7 +161,7 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         }
     }
 
-    if (m_gameStarted) {
+    if (m_gameOn) {
         src->write(srvconst::serverCmdGameOn.toStdString().c_str());
         return;
     }
@@ -199,7 +205,7 @@ void Server::processSelectPlayerCommand(QTcpSocket* src, QString playerName) {
     if (src != m_host) {
         throw std::runtime_error("Only the host can choose opponent");
     }
-    if (m_gameStarted) {
+    if (m_gameOn) {
         throw std::runtime_error("can't choose player after game has started");
     }
 
@@ -221,7 +227,7 @@ void Server::processRemovePlayerCommand(QTcpSocket* src, QString playerName) {
     if (src != m_host) {
         throw std::runtime_error("Only the host can choose opponent");
     }
-    if (m_gameStarted) {
+    if (m_gameOn) {
         throw std::runtime_error("can't remove player after game has started");
     }
 
@@ -243,7 +249,7 @@ void Server::processStateCommand(QTcpSocket* src, QString state) {
     if (src != m_player1 && src != m_player2) {
         throw std::runtime_error("only players can change game state");
     }
-    if (!m_gameStarted) {
+    if (!m_gameOn) {
         throw std::runtime_error("can't send state before the game has started");
     }
     if (m_player1 == nullptr || m_player2 == nullptr) {
@@ -273,8 +279,20 @@ void Server::processChatCommand(QTcpSocket* src, QString json) {
     }
 }
 
-void Server::processGameStartCommand() {
+void Server::processDoublingCommand(QTcpSocket *src) {
+    broadcast(src, (srvconst::serverCmdDoubling).toStdString().c_str(), true);
+}
 
+void Server::processGameStartCommand(QTcpSocket *src) {
+    m_gameOn = true;
+    broadcast(src, (srvconst::serverCmdGameStart).toStdString().c_str(), true);
+}
+
+void Server::processGameEndCommand(QTcpSocket *src) {
+    m_gameOn = false;
+    broadcast(src, (srvconst::serverCmdGameEnd).toStdString().c_str(), true);
+
+    nukeGame();
 }
 
 void Server::nukeGame() {
