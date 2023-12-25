@@ -31,7 +31,7 @@ void Network::calculateNeuron(Neuron& neuron){
         }
         value += neurons[incoming.out].value * incoming.weight;
     }
-    neuron.value = AI::sigmoid(value) > 0.5;
+    neuron.value = AI::sigmoid(value);
     neuron.calculated = true;
 }
 
@@ -44,17 +44,12 @@ double Network::evaluateNetwork(const QVector<double>& inputs){
     neurons[AI::inputSize - 1].value = 1; //Bias
     neurons[AI::inputSize - 1].calculated = true;
 
-
-//    calculateNeuron(neurons[AI::inputSize]);
-    for(auto& incoming : neurons[AI::inputSize].incoming){
-        calculateNeuron(neurons[incoming.out]);
-        neurons[AI::inputSize].value += neurons[incoming.out].value * incoming.weight;
-    }
+    calculateNeuron(neurons[AI::inputSize]);
 
     for(auto& neuron : neurons){
         neuron.calculated = false;
     }
-    return (AI::sigmoid(neurons[AI::inputSize].value) + 1.0 )/ 2.0;
+    return AI::sigmoid(neurons[AI::inputSize].value);
 }
 
 const QVector<double> Network::inputFromState(const BoardState& board){
