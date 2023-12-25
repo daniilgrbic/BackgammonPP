@@ -86,7 +86,8 @@ set(SOURCE
     sidebarcheckerholder.cpp
     sidebarcheckerholder.h
     verticalchecker.cpp
-    verticalchecker.h)
+    verticalchecker.h
+    )
 
 qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE}
     player.h player.cpp

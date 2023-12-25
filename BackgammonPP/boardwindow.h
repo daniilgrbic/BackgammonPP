@@ -22,7 +22,9 @@ public:
 public slots:
     void enableEndTurn();
     void requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll);
+    void showRoll(const Roll& roll);
 signals:
+    void setBoardState(const BoardState &state);
     void forwardTurnFinish(Turn);
     void requestCloseGame();
 private slots:

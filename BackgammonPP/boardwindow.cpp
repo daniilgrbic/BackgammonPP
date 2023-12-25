@@ -20,6 +20,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
     connect(m_boardScene, &BoardScene::enableEndTurn, this, &BoardWindow::enableEndTurn);
     //requestTUrn should be connected to from the LocalPlayer class
     connect(m_boardScene, &BoardScene::sendTurnFinish, this, &BoardWindow::forwardTurnFinish);
+    connect(this, &BoardWindow::setBoardState, m_boardScene, &BoardScene::setBoardState);
 }
 
 BoardWindow::~BoardWindow()
@@ -44,6 +45,10 @@ void BoardWindow::on_pbRollDice_clicked()
     m_boardScene->updatePlayingDice();
     ui->pbRollDice->setEnabled(false);
     m_boardScene->getTurnInit();
+}
+
+void BoardWindow::showRoll(const Roll& roll){
+    m_boardScene->updatePlayingDice(roll);
 }
 
 void BoardWindow::requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll){

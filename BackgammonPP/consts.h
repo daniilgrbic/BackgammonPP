@@ -1,6 +1,4 @@
-#ifndef CONSTS_H
-#define CONSTS_H
-
+#pragma once
 #include <QString>
 
 enum GameType {
@@ -28,4 +26,3 @@ const qint16 MAX_USERNAME_SIZE = 20;
 const qint16 MIN_NUM_MOVES = 10;
 const qint16 MAX_NUM_MOVES = 200;
 
-#endif // CONSTS_H

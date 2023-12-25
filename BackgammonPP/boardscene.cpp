@@ -176,9 +176,13 @@ void BoardScene::setDoublingDie(){
 
 void BoardScene::updatePlayingDice(){
     assert(roll != nullptr);
-    int value1 = roll->dice().front();
-    int value2 = roll->dice().back();
-    auto pos = (roll->onRoll() == PlayerColor::WHITE ? BoardPlayingDie::Position::LEFT : BoardPlayingDie::Position::RIGHT);
+    updatePlayingDice(*roll);
+}
+
+void BoardScene::updatePlayingDice(const Roll& roll){
+    int value1 = roll.dice().front();
+    int value2 = roll.dice().back();
+    auto pos = (roll.onRoll() == PlayerColor::WHITE ? BoardPlayingDie::Position::LEFT : BoardPlayingDie::Position::RIGHT);
     if(value1)
         die1->updateDie(pos, value1);
     if(value2)
@@ -204,8 +208,8 @@ void BoardScene::disableAllHolders(){
 }
 
 
-void BoardScene::setBoardState(const BoardState givenState){
-    state = std::move(givenState);
+void BoardScene::setBoardState(const BoardState &givenState){
+    state = BoardState(givenState);
     int blackCheckerCount = 0, whiteCheckerCount = 0;
     assert(NUMBER_OF_POINTS == trianglePairs * 2);
     for(int i = 1; i <= NUMBER_OF_POINTS; i++){

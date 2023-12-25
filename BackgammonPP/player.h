@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <vector>
-#include "network/Client.h"
+#include "network/client.h"
 #include "engine/core/boardstate.h"
 #include "engine/core/playercolor.h"
 #include "engine/core/turn.h"

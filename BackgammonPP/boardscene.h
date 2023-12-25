@@ -22,8 +22,9 @@ class BoardScene : public QGraphicsScene
 public:
     BoardScene(QObject *parent, qreal width, qreal height);
     void updatePlayingDice();
+    void updatePlayingDice(const Roll& roll);
 
-    void setBoardState(const BoardState state);
+    void setBoardState(const BoardState &state);
     void getTurnInit();
 
     void setLegalTurns(std::vector<Turn> const *legalTurns);
