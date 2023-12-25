@@ -20,9 +20,10 @@ public:
     void paintEvent(QPaintEvent *);
     ~BoardWindow();
 public slots:
-    void requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll);
     void enableEndTurn();
+    void requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll);
 signals:
+    void forwardTurnFinish(Turn);
     void requestCloseGame();
 private slots:
     void on_pbExitGame_clicked();

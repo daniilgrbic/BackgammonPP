@@ -13,7 +13,7 @@
 
 
 BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, PlayerColor color) :
-    QGraphicsItem(parent) ,
+    QGraphicsObject(parent) ,
     m_size(size), m_color(color),
     m_dragged(false),
     m_holder(nullptr)
@@ -75,6 +75,7 @@ void BoardChecker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     setCursor(Qt::ClosedHandCursor);
     setZValue(100);
+    emit startMove(m_holder->m_type);
     QGraphicsItem::mousePressEvent(event);
 }
 void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -97,8 +98,11 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
                 }
             }
             if(closestItem){
+                HolderType origin = this->getHolder()->m_type;
                 CheckerHolder *closestHolder = dynamic_cast<CheckerHolder*>(closestItem);
                 closestHolder->addChecker(this);
+                HolderType to = closestHolder->m_type;
+                emit updateTurn(origin, to);
             }else{
                 this->setPos(m_anchorPoint);
                 m_holder->updateCheckerPos();
@@ -107,6 +111,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         }
         m_dragged = false;
     }
+    emit endMove();
     QGraphicsItem::mouseReleaseEvent(event);
 }
 

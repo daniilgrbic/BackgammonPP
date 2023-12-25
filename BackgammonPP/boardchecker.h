@@ -2,14 +2,20 @@
 #define BOARDCHECKER_H
 
 #include <QGraphicsItem>
+#include <QObject>
 #include "checkerholder.h"
 #include "engine/core/playercolor.h"
+#include "engine/core/specialposition.h"
 
 class CheckerHolder;
+using HolderType = std::variant<int, SpecialPosition>;
 
-class BoardChecker : public QGraphicsItem
+class BoardChecker :  public QGraphicsObject
 {
+    Q_OBJECT
+
 public:
+
     BoardChecker(QGraphicsItem *parent, qreal size, PlayerColor color);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
@@ -20,6 +26,11 @@ public:
     const PlayerColor getColor() const;
     const QColor getQColor() const;
 
+signals:
+    void updateTurn(const HolderType origin, const HolderType to);
+    void startMove(const HolderType origin);
+    void endMove();
+
 private:
     qreal m_size;
     PlayerColor m_color;
@@ -27,6 +38,7 @@ private:
     QPointF m_anchorPoint;
     bool m_dragged;
     CheckerHolder* m_holder;
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;

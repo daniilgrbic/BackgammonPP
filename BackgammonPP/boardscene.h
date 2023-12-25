@@ -21,21 +21,27 @@ class BoardScene : public QGraphicsScene
     Q_OBJECT
 public:
     BoardScene(QObject *parent, qreal width, qreal height);
-    void updatePlayingDice(int value1, int value2, BoardPlayingDie::Position pos);
+    void updatePlayingDice();
 
     void setBoardState(const BoardState state);
-    void getMoveInit(TurnTrie *trie);
-    void getMoveUpdate(const HolderType origin, const HolderType to);
-    void getMoveFinish();
+    void getTurnInit();
 
     void setLegalTurns(std::vector<Turn> const *legalTurns);
     void setRoll(Roll const *roll);
 
     void prepareCheckers();
-    void prepareHolders(const HolderType& origin);
+    void prepareHolders(const HolderType origin);
 
 signals:
     void enableEndTurn();
+    void sendTurnFinish(Turn);
+
+public slots:
+    void checkerStartMoving(const HolderType origin);
+    void checkerEndMoving();
+    void getTurnUpdate(const HolderType origin, const HolderType to);
+private slots:
+    void getTurnFinish();
 
 private:
     const qreal heightCoef = 0.4;
@@ -55,6 +61,8 @@ private:
     const qreal playingDieSide;
     const qreal doublingDieSide;
     const QPainter m_painter;
+
+    BoardState state;
 
     QVector<BoardTriangle*> boardTriangles;
     QVector<BoardChecker*> boardCheckers;

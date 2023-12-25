@@ -64,12 +64,16 @@ void BoardScene::setBoardCheckers(){
         boardCheckers.push_back(checker);
         whiteCheckers.push_back(checker);
     }
-    for(auto checker : qAsConst(boardCheckers))
+    for(BoardChecker *checker : boardCheckers){
+        connect(checker, &BoardChecker::updateTurn, this, &BoardScene::getTurnUpdate);
+        connect(checker, &BoardChecker::startMove, this, &BoardScene::checkerStartMoving);
+        connect(checker, &BoardChecker::endMove, this, &BoardScene::checkerEndMoving);
         this->addItem(checker);
+    }
 
     int i = 0;
     int j = 0;
-    /*
+
     for(int n = i + 5; i < n; ++i)
         boardTriangles[11]->addChecker(blackCheckers[i]);
 
@@ -93,7 +97,7 @@ void BoardScene::setBoardCheckers(){
 
     for(int n = j + 2; j < n; ++j)
         boardTriangles[23]->addChecker(whiteCheckers[j]);
-        */
+
 }
 
 void BoardScene::setBoardBar()
@@ -170,7 +174,11 @@ void BoardScene::setDoublingDie(){
     addItem(doublingDie);
 }
 
-void BoardScene::updatePlayingDice(int value1, int value2, BoardPlayingDie::Position pos){
+void BoardScene::updatePlayingDice(){
+    assert(roll != nullptr);
+    int value1 = roll->dice().front();
+    int value2 = roll->dice().back();
+    auto pos = (roll->onRoll() == PlayerColor::WHITE ? BoardPlayingDie::Position::LEFT : BoardPlayingDie::Position::RIGHT);
     if(value1)
         die1->updateDie(pos, value1);
     if(value2)
@@ -196,7 +204,8 @@ void BoardScene::disableAllHolders(){
 }
 
 
-void BoardScene::setBoardState(const BoardState state){
+void BoardScene::setBoardState(const BoardState givenState){
+    state = std::move(givenState);
     int blackCheckerCount = 0, whiteCheckerCount = 0;
     assert(NUMBER_OF_POINTS == trianglePairs * 2);
     for(int i = 1; i <= NUMBER_OF_POINTS; i++){
@@ -236,8 +245,8 @@ void BoardScene::setBoardState(const BoardState state){
     assert(whiteCheckerCount == whiteCheckers.size() && blackCheckerCount == blackCheckers.size());
 }
 
-void BoardScene::getMoveInit(TurnTrie *trie){
-    this->m_turnTrie = trie;
+void BoardScene::getTurnInit(){
+    this->m_turnTrie = new TurnTrie(*legalTurns, state);
     prepareCheckers();
 }
 
@@ -259,7 +268,11 @@ void BoardScene::prepareCheckers(){
     }
 }
 
-void BoardScene::prepareHolders(const HolderType &origin){
+void BoardScene::checkerStartMoving(const HolderType origin){
+    prepareHolders(origin);
+}
+
+void BoardScene::prepareHolders(const HolderType origin){
     std::vector<Move> nextMoves = m_turnTrie->nextMoves();
     for(const Move& move : nextMoves){
         if(move.m_from != origin){
@@ -287,17 +300,36 @@ void BoardScene::prepareHolders(const HolderType &origin){
     }
 }
 
-void BoardScene::getMoveUpdate(const HolderType origin, const HolderType to){
+void BoardScene::checkerEndMoving(){
+    disableAllHolders();
+}
+void BoardScene::getTurnUpdate(const HolderType origin, const HolderType to){
+    disableAllCheckers();
     std::vector<Move> nextMoves = m_turnTrie->nextMoves();
-    Move const *nextMove = nullptr;
+    bool moveFound = false;
     for(const Move &move : nextMoves){
         if(move.m_from == origin && move.m_to == to){
             m_turnTrie->playMove(move);
+            moveFound = true;
+            break;
         }
     }
+    assert(moveFound);
+    prepareCheckers();
     if(m_turnTrie->isFinishedTurn()){
         emit enableEndTurn();
     }
+}
+
+void BoardScene::getTurnFinish(){
+    assert(m_turnTrie->isFinishedTurn());
+    Turn nextTurn = m_turnTrie->getTurn();
+    delete m_turnTrie;
+    m_turnTrie = nullptr;
+    legalTurns = nullptr;
+    roll = nullptr;
+    state = BoardState(nextTurn.m_finalBoard);
+    emit sendTurnFinish(std::move(nextTurn));
 }
 
 void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){

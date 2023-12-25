@@ -5,8 +5,8 @@ Controller::Controller()
     this->preferences = new Preferences();
     this->mainWindow = new MainWindow();
     this->boardWindow = new BoardWindow();
-    mainWindow->show();
-
+    //mainWindow->show();
+    boardWindow->show();
     this->playThemeSong();
 
     connect(mainWindow, &MainWindow::requestCreateGame, this, &Controller::createGameFromMenu);
