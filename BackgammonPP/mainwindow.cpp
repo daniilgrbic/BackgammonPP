@@ -25,11 +25,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Create Game Lobby
     connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
+    connect(ui->btStartGame, SIGNAL(clicked(false)), this, SLOT(on_btStartGame_clicked()));
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
+    connect(ui->btJoinLobby, SIGNAL(clicked(false)), this, SLOT(on_btJoinLobby_clicked()));
 
     // Preferences - labelPrefUsername, btSavePreferences
     connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
