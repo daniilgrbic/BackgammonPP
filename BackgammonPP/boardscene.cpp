@@ -254,6 +254,9 @@ void BoardScene::setBoardState(const BoardState &givenState){
 void BoardScene::getTurnInit(){
     this->m_turnTrie = new TurnTrie(*legalTurns, state);
     prepareCheckers();
+    if(m_turnTrie->isFinishedTurn()){
+        emit enableEndTurn();
+    }
 }
 
 void BoardScene::prepareCheckers(){
