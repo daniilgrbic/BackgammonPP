@@ -14,7 +14,7 @@ public:
     virtual ~Game() = 0;
     virtual std::vector<Turn> generateLegalTurns() = 0;
     void playTurn(Turn turn);
-    std::optional<GameResult> getResult() const;
+    virtual std::optional<GameResult> getResult() = 0;
     virtual bool isFinished(PlayerColor player) const = 0;
 
     const Roll& currentRoll() const;

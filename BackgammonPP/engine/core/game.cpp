@@ -26,11 +26,6 @@ const BoardState& Game::board() const {
     return m_board;
 }
 
-std::optional<GameResult> Game::getResult() const
-{
-    return m_result;
-}
-
 bool Game::isBlot(const Point& point, PlayerColor player) const {
     return point.count() == 1 && point.owner().value() == player;
 }

@@ -15,6 +15,44 @@ Backgammon::Backgammon() : Game()
     m_currentRoll = Roll::getInitialRoll(m_firstDie, m_secondDie);
 }
 
+bool Backgammon::isGammon() const {
+    return (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) ||
+           (isFinished(PlayerColor::BLACK) && !m_board.off(PlayerColor::WHITE));
+}
+
+bool Backgammon::isBackgammon() const {
+    constexpr auto QUADRANT_SIZE = NUMBER_OF_POINTS / 4;
+    if (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) {
+        for (auto i = 1; i <= QUADRANT_SIZE; ++i)
+            if (m_board.point(i).owner().value_or(PlayerColor::WHITE) == PlayerColor::BLACK)
+                return true;
+    }
+    if (isFinished(PlayerColor::BLACK) && !m_board.off(PlayerColor::WHITE)) {
+            for (auto i = 1; i <= QUADRANT_SIZE; ++i)
+                if (m_board.point(NUMBER_OF_POINTS - i + 1).owner().value_or(PlayerColor::BLACK) == PlayerColor::WHITE)
+                    return true;
+    }
+    return false;
+}
+
+std::optional<GameResult> Backgammon::getResult() {
+    if (m_result)
+        return m_result;
+
+    if (isFinished(PlayerColor::WHITE)) {
+        auto points = 1;
+        if (isGammon()) points = 2;
+        if (isBackgammon()) points = 3;
+        m_result = GameResult(PlayerColor::WHITE, points);
+    } else if (isFinished(PlayerColor::BLACK)) {
+        auto points = 1;
+        if (isGammon()) points = 2;
+        if (isBackgammon()) points = 3;
+        m_result = GameResult(PlayerColor::BLACK, points);
+    }
+    return m_result;
+}
+
 // WIP
 // TODO:
 // - exhaustive testing: currently tested only for regular moves (from point to point, without blots)

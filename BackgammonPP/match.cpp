@@ -1,11 +1,15 @@
 #include "match.h"
 #include <algorithm>
 #include <vector>
+#include <iostream>
 
-Match::Match(QObject *parent, LocalPlayer *white, LocalPlayer *black)
+Match::Match(QObject *parent, LocalPlayer *white, LocalPlayer *black, int length)
     : QObject(parent),
       m_white(white),
-      m_black(black)
+      m_black(black),
+      m_length(length),
+      m_whiteScore(0),
+      m_blackScore(0)
 {
     startGame();
 }
@@ -32,7 +36,6 @@ void Match::startGame(){
     startMove();
 }
 
-
 void Match::startMove(){
     currentLegalTurns = game->generateLegalTurns();
     currentRoll = Roll(game->currentRoll());
@@ -47,14 +50,26 @@ void Match::getTurn(Turn turn){
     //TODO: Match has to be changed. It cannot be responsible for the game
     game->playTurn(turn);
     emit setState(game->board());
-    if(game->isFinished(PlayerColor::WHITE) || game->isFinished(PlayerColor::BLACK)){
-        //HAS TO BE IMPLEMENTED
-        exit(1);
+    if(game->isFinished(PlayerColor::WHITE) || game->isFinished(PlayerColor::BLACK)) {
+        endGame();
+    } else {
+        std::swap(m_onTurn, m_waiting);
+        connectSlots(m_onTurn, m_waiting);
+        startMove();
     }
-    std::swap(m_onTurn, m_waiting);
-    connectSlots(m_onTurn, m_waiting);
-    startMove();
+}
 
+void Match::endGame() {
+    auto result = game->getResult().value();
+    auto& winnerPoints = result.winner == PlayerColor::WHITE ? m_whiteScore : m_blackScore;
+    winnerPoints += result.points;
+
+    // Debug log
+    std::cerr << "WHITE: " << m_whiteScore << "\t" << "BLACK: " << m_blackScore << std::endl;
+
+    delete game;    // This might change if we add game log
+    if (winnerPoints < m_length)
+        startGame();
 }
 
 void Match::connectSlots(LocalPlayer *onMove, LocalPlayer *waiting){
