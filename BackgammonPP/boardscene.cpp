@@ -21,6 +21,7 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setSideBars();
     setPlayingDice();
     setDoublingDie();
+    disableAllHolders();
     whiteOut = m_rightBar->bottomHolder;
     blackOut = m_rightBar->topHolder;
 }

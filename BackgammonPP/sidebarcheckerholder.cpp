@@ -9,6 +9,7 @@ SidebarCheckerHolder::SidebarCheckerHolder(QGraphicsItem *parent, qreal width, q
 {
     setZValue(1);
     m_type = SpecialPosition::OFF;
+    allowDropoff = false;
 }
 
 QRectF SidebarCheckerHolder::boundingRect() const {
