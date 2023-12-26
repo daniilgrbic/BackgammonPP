@@ -7,6 +7,14 @@ Controller::Controller()
     this->boardWindow = new BoardWindow();
     //mainWindow->show();
     boardWindow->show();
+    LocalPlayer *white = new LocalPlayer(nullptr, this->boardWindow);
+    LocalPlayer *black= new LocalPlayer(nullptr, this->boardWindow);
+    Match *m = new Match(nullptr, white, black);
+    white->setParent(m);
+    black->setParent(m);
+    m->startGame();
+
+
     this->playThemeSong();
 
     connect(mainWindow, &MainWindow::requestCreateGame, this, &Controller::createGameFromMenu);

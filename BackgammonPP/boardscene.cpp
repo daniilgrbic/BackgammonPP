@@ -33,6 +33,7 @@ void BoardScene::setBoardTriangles() {
         qreal y_point = m_height - triangleHeight;
         BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true, trianglePairs - i);
         boardTriangles.push_back(bottomTriangle);
+        this->drawBoardTriangle(bottomTriangle);
     }
     ///temporary fix for syncing triangle numerations between the board and the game engine, reverse the bottom row of triangles
     std::reverse(boardTriangles.begin(),boardTriangles.end());
@@ -44,11 +45,12 @@ void BoardScene::setBoardTriangles() {
         qreal y_point = 0;
         BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false, trianglePairs + 1 + i);
         boardTriangles.push_back(upperTriangle);
+        this->drawBoardTriangle(upperTriangle);
     }
-
+/*
     for(auto triangle : qAsConst(boardTriangles))
         this->drawBoardTriangle(triangle);
-
+*/
 
 }
 void BoardScene::setBoardCheckers(){
@@ -98,6 +100,7 @@ void BoardScene::setBoardCheckers(){
     for(int n = j + 2; j < n; ++j)
         boardTriangles[23]->addChecker(whiteCheckers[j]);
 
+    disableAllCheckers();
 }
 
 void BoardScene::setBoardBar()
@@ -191,8 +194,7 @@ void BoardScene::updatePlayingDice(const Roll& roll){
 
 void BoardScene::disableAllCheckers(){
     for(BoardChecker *checker: boardCheckers){
-        checker->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        checker->setFlag(QGraphicsItem::ItemIsMovable, false);
+        checker->setEnabled(false);
     }
 }
 
@@ -267,12 +269,14 @@ void BoardScene::prepareCheckers(){
             }
         }else if(const int *point = std::get_if<int>(&fromType)){
             assert((*point) >= 1 && (*point <= 24));
+            int test = (*point) - 1;
             boardTriangles[(*point) - 1]->enableCheckers(move.m_player);
         }
     }
 }
 
 void BoardScene::checkerStartMoving(const HolderType origin){
+    disableAllHolders();
     prepareHolders(origin);
 }
 

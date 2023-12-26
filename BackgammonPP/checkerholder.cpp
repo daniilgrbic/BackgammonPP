@@ -23,8 +23,7 @@ void CheckerHolder::removeChecker(BoardChecker *checker){
 void CheckerHolder::enableCheckers(const PlayerColor &color){
     for(BoardChecker *checker: m_checkers){
         if(checker->getColor() == color){
-            checker->setFlag(QGraphicsItem::ItemIsSelectable, false);
-            checker->setFlag(QGraphicsItem::ItemIsMovable, false);
+            checker->setEnabled(true);
         }
     }
 }

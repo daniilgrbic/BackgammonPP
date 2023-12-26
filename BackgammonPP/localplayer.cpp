@@ -15,7 +15,7 @@ void LocalPlayer::chooseMove(std::vector<Turn> *legalMoves, Roll *roll){
 }
 
 void LocalPlayer::acceptMove(Turn turn){
-    emit returnAcquiredTurn(std::move(turn));
+    emit returnMove(std::move(turn));
 }
 
 void LocalPlayer::setState(const BoardState &state){

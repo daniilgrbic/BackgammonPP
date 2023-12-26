@@ -62,3 +62,10 @@ void BoardWindow::requestTurn(const std::vector<Turn> *legalTurns, const Roll *r
 void BoardWindow::enableEndTurn(){
     ui->pbEndTurn->setEnabled(true);
 }
+
+void BoardWindow::on_pbEndTurn_clicked()
+{
+    ui->pbEndTurn->setEnabled(false);
+    m_boardScene->getTurnFinish();
+}
+

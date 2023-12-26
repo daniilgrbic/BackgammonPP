@@ -32,6 +32,8 @@ private slots:
 
     void on_pbRollDice_clicked();
 
+    void on_pbEndTurn_clicked();
+
 private:
     Ui::BoardWindow *ui;
     BoardScene *m_boardScene;

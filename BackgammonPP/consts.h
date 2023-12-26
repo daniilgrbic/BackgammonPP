@@ -1,12 +1,12 @@
 #pragma once
 #include <QString>
 
-enum GameType {
+enum class GameType {
     ClassicGameType,
     LongNardyGameType
 };
 
-enum PlayerType {
+enum class PlayerType {
     BotPlayer,
     LocalPlayer,
     RemotePlayer

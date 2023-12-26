@@ -26,6 +26,7 @@ public:
 
     void setBoardState(const BoardState &state);
     void getTurnInit();
+    void getTurnFinish();
 
     void setLegalTurns(std::vector<Turn> const *legalTurns);
     void setRoll(Roll const *roll);
@@ -41,8 +42,6 @@ public slots:
     void checkerStartMoving(const HolderType origin);
     void checkerEndMoving();
     void getTurnUpdate(const HolderType origin, const HolderType to);
-private slots:
-    void getTurnFinish();
 
 private:
     const qreal heightCoef = 0.4;

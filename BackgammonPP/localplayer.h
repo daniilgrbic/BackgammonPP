@@ -9,8 +9,6 @@ class LocalPlayer : public QObject // : public PlayablePlayer
     Q_OBJECT
 public:
     explicit LocalPlayer(QObject *parent, BoardWindow *m_board);
-signals:
-    void returnAcquiredTurn(Turn);
 
 signals:
     //connected to the match

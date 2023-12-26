@@ -116,7 +116,7 @@ void MainWindow::on_btStartGame_clicked()
         return;
     }
 
-    if (playerType == BotPlayer) {
+    if (playerType == PlayerType::BotPlayer) {
         emit requestCreateGame();
     }
     else {        
@@ -153,21 +153,21 @@ void MainWindow::handlePreferences(Preferences *preferences)
 GameType MainWindow::getGameType()
 {
     if (this->ui->rbModeClassic->isChecked())
-        return ClassicGameType;
+        return GameType::ClassicGameType;
     else if (this->ui->rbModeNardy->isChecked())
-        return LongNardyGameType;
-    return ClassicGameType;
+        return GameType::LongNardyGameType;
+    return GameType::ClassicGameType;
 }
 
 PlayerType MainWindow::getPlayerType()
 {
     if (this->ui->rbPlayerBot->isChecked())
-        return BotPlayer;
+        return PlayerType::BotPlayer;
     else if (this->ui->rbPlayerLocal->isChecked())
-        return LocalPlayer;
+        return PlayerType::LocalPlayer;
     else if (this->ui->rbPlayerRemote->isChecked())
-        return RemotePlayer;
-    return BotPlayer;
+        return PlayerType::RemotePlayer;
+    return PlayerType::BotPlayer;
 }
 
 

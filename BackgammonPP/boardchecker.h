@@ -25,6 +25,7 @@ public:
     CheckerHolder *getHolder();
     const PlayerColor getColor() const;
     const QColor getQColor() const;
+    bool m_enabled = false;
 
 signals:
     void updateTurn(const HolderType origin, const HolderType to);

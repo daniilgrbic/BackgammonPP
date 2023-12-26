@@ -4,6 +4,7 @@
 #include "consts.h"
 #include "mainwindow.h"
 #include "boardwindow.h"
+#include "match.h"
 #include <QApplication>
 
 
