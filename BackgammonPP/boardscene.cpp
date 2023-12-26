@@ -317,8 +317,6 @@ void BoardScene::getTurnUpdate(const HolderType origin, const HolderType to){
     bool moveFound = false;
     for(const Move &move : nextMoves){
         if(move.m_from == origin && move.m_to == to){
-            int a = std::get<int>(move.m_from);
-            int b = std::get<int>(move.m_to);
             m_turnTrie->playMove(move);
             moveFound = true;
             break;
@@ -337,9 +335,10 @@ void BoardScene::getTurnFinish(){
     delete m_turnTrie;
     m_turnTrie = nullptr;
     legalTurns = nullptr;
-    roll = nullptr;
-    state = BoardState(nextTurn.m_finalBoard);
-    setBoardState(state);
+    roll = nullptr; 
+            //= BoardState(nextTurn.m_finalBoard);
+
+    //setBoardState(state);
     emit sendTurnFinish(std::move(nextTurn));
 }
 

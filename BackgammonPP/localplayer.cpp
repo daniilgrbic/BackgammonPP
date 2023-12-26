@@ -5,16 +5,17 @@ LocalPlayer::LocalPlayer(QObject *parent, BoardWindow *board)
 {
     connect(this, &LocalPlayer::forwardSetState, board, &BoardWindow::setBoardState);
     connect(this, &LocalPlayer::forwardMoveRequest, board, &BoardWindow::requestTurn);
-    connect(board, &BoardWindow::forwardTurnFinish, this, &LocalPlayer::acceptMove);
+    //connect(board, &BoardWindow::forwardTurnFinish, this, &LocalPlayer::acceptMove);
     connect(this, &LocalPlayer::forwardSetDice, board, &BoardWindow::showRoll);
-
 }
 
 void LocalPlayer::chooseMove(std::vector<Turn> *legalMoves, Roll *roll){
+    connectToBoard();
     emit forwardMoveRequest(legalMoves, roll);
 }
 
 void LocalPlayer::acceptMove(Turn turn){
+    disconnectFromBoard();
     emit returnMove(std::move(turn));
 }
 
@@ -28,4 +29,12 @@ void LocalPlayer::setDice(const Roll& roll){
 
 void LocalPlayer::diceRolled(){
     emit confirmRoll();
+}
+
+void LocalPlayer::connectToBoard(){
+    connect(m_board, &BoardWindow::forwardTurnFinish, this, &LocalPlayer::acceptMove);
+}
+
+void LocalPlayer::disconnectFromBoard(){
+    disconnect(m_board, &BoardWindow::forwardTurnFinish, this, &LocalPlayer::acceptMove);
 }

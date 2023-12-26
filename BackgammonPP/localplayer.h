@@ -34,6 +34,11 @@ private:
     std::vector<Turn> *m_legalMoves;
     Roll *m_roll;
     BoardWindow *m_board;
+
+
+    void connectToBoard();
+    void disconnectFromBoard();
+
 };
 
 
