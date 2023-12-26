@@ -27,6 +27,10 @@ void BoardTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->setBrush(QBrush(Qt::gray));
     painter->drawRect(boundingRect());
 
+    if(canDropoff()){
+        painter->setPen(QPen(Qt::red, 4));
+    }
+
     painter->setBrush(QBrush(Qt::blue));
     painter->drawPolygon(m_polygon);
 
@@ -49,5 +53,8 @@ void BoardTriangle::updateCheckerPos()
     }
 }
 
+void BoardTriangle::updateHighlighting(){
+    update();
+}
 
 

@@ -92,7 +92,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             for(QGraphicsItem* item : qAsConst(colItems)){
                 QLineF line(item->sceneBoundingRect().center(), this->sceneBoundingRect().center());
                 CheckerHolder* itemAsHolder = dynamic_cast<CheckerHolder*>(item);
-                if(itemAsHolder && itemAsHolder->allowDropoff && line.length() < shortestDist){
+                if(itemAsHolder && itemAsHolder->canDropoff() && line.length() < shortestDist){
                     shortestDist = line.length();
                     closestItem = item;
                 }

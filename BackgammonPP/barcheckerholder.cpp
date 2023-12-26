@@ -6,7 +6,6 @@ BarCheckerHolder::BarCheckerHolder(QGraphicsItem *parent, qreal width, qreal hei
       m_width(width),
       m_height(height)
 {
-    allowDropoff = false;
     m_type = SpecialPosition::BAR;
 }
 
@@ -32,4 +31,8 @@ void BarCheckerHolder::updateCheckerPos()
         checker->setAnchorPoint(checker->pos());
         checker->setZValue(i+1);
     }
+}
+
+void BarCheckerHolder::updateHighlighting(){
+
 }

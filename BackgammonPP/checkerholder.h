@@ -19,10 +19,16 @@ public:
     virtual void removeChecker(BoardChecker* checker);
     virtual void updateCheckerPos() = 0;
     void enableCheckers(const PlayerColor& color);
+    void setAllowDropoff(bool allowDropoff);
+    bool canDropoff();
+    virtual void updateHighlighting() = 0;
+
 
     HolderType m_type;
     QVector<BoardChecker*> m_checkers;
-    bool allowDropoff = true;
+
+private:
+    bool m_allowDropoff = false;
 };
 
 #endif // CHECKERHOLDER_H

@@ -9,7 +9,6 @@ SidebarCheckerHolder::SidebarCheckerHolder(QGraphicsItem *parent, qreal width, q
 {
     setZValue(1);
     m_type = SpecialPosition::OFF;
-    allowDropoff = false;
 }
 
 QRectF SidebarCheckerHolder::boundingRect() const {
@@ -19,7 +18,11 @@ QRectF SidebarCheckerHolder::boundingRect() const {
 
 void SidebarCheckerHolder::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(QBrush(Qt::gray));
+    if(canDropoff()){
+        painter->setPen(QPen(Qt::red, 4));
+    }
     painter->drawRect(boundingRect());
+
 }
 
 void SidebarCheckerHolder::updateCheckerPos()
@@ -55,4 +58,8 @@ void SidebarCheckerHolder::updateVericalCheckers()
 
     }
 
+}
+
+void SidebarCheckerHolder::updateHighlighting(){
+    update();
 }

@@ -19,6 +19,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
     void updateCheckerPos() override;
+    void updateHighlighting() override;
 private:
     qreal m_x;
     qreal m_y;

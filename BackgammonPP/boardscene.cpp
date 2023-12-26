@@ -201,12 +201,12 @@ void BoardScene::disableAllCheckers(){
 
 void BoardScene::disableAllHolders(){
     for(BoardTriangle *triangle: boardTriangles){
-        triangle->allowDropoff = false;
+        triangle->setAllowDropoff(false);
     }
-    m_leftBar->topHolder->allowDropoff = false;
-    m_leftBar->topHolder->allowDropoff = false;
-    m_rightBar->bottomHolder->allowDropoff = false;
-    m_rightBar->bottomHolder->allowDropoff = false;
+    m_leftBar->topHolder->setAllowDropoff(false);
+    m_leftBar->topHolder->setAllowDropoff(false);
+    m_rightBar->bottomHolder->setAllowDropoff(false);
+    m_rightBar->bottomHolder->setAllowDropoff(false);
 
 }
 
@@ -273,7 +273,6 @@ void BoardScene::prepareCheckers(){
             }
         }else if(const int *point = std::get_if<int>(&fromType)){
             assert((*point) >= 1 && (*point <= 24));
-            int test = (*point) - 1;
             boardTriangles[(*point) - 1]->enableCheckers(move.m_player);
         }
     }
@@ -293,20 +292,20 @@ void BoardScene::prepareHolders(const HolderType origin){
         if(const SpecialPosition *specPos = std::get_if<SpecialPosition>(&move.m_to)){
             if(move.m_player == PlayerColor::WHITE){
                 if(*specPos == SpecialPosition::BAR){
-                    whiteBar->allowDropoff = true;
+                    whiteBar->setAllowDropoff(true);
                 }else if(*specPos == SpecialPosition::OFF){
-                    whiteOut->allowDropoff = true;
+                    whiteOut->setAllowDropoff(true);
                 }
             }else if(move.m_player == PlayerColor::BLACK){
                 if(*specPos == SpecialPosition::BAR){
-                    blackBar->allowDropoff = true;
+                    blackBar->setAllowDropoff(true);
                 }else if(*specPos == SpecialPosition::OFF){
-                    blackOut->allowDropoff = true;
+                    blackOut->setAllowDropoff(true);
                 }
             }
         }else if(const int *point = std::get_if<int>(&move.m_to)){
             assert((*point) >= 1 && (*point <= 24));
-            boardTriangles[(*point) - 1]->allowDropoff = true;
+            boardTriangles[(*point) - 1]->setAllowDropoff(true);
         }
 
     }

@@ -27,3 +27,12 @@ void CheckerHolder::enableCheckers(const PlayerColor &color){
         }
     }
 }
+
+void CheckerHolder::setAllowDropoff(bool allowDropoff){
+    this->m_allowDropoff = allowDropoff;
+    this->updateHighlighting();
+}
+
+bool CheckerHolder::canDropoff(){
+    return m_allowDropoff;
+}
