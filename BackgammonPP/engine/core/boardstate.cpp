@@ -36,7 +36,7 @@ void BoardState::move(const Move &move)
     const auto& to = move.m_to;
 
     if (move.m_isHit) {
-        const auto opponent = player == PlayerColor::BLACK ? PlayerColor::BLACK : PlayerColor::WHITE;
+        const auto opponent = player == PlayerColor::WHITE ? PlayerColor::BLACK : PlayerColor::WHITE;
         auto opponentsMove = Move(opponent, to, SpecialPosition::BAR);
         this->move(opponentsMove);
     }

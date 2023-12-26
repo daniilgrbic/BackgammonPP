@@ -221,7 +221,7 @@ void BoardScene::setBoardState(const BoardState &givenState){
                 boardTriangles[i-1]->addChecker(whiteCheckers[whiteCheckerCount]);
                 whiteCheckerCount++;
             }
-        }else{
+        }else if(point.owner() == PlayerColor::BLACK){
             for(int j = 0; j < point.count(); j++){
                 boardTriangles[i-1]->addChecker(blackCheckers[blackCheckerCount]);
                 blackCheckerCount++;
@@ -319,10 +319,12 @@ void BoardScene::getTurnUpdate(const HolderType origin, const HolderType to){
         if(move.m_from == origin && move.m_to == to){
             m_turnTrie->playMove(move);
             moveFound = true;
+            setBoardState(m_turnTrie->board());
             break;
         }
     }
     assert(moveFound);
+
     prepareCheckers();
     if(m_turnTrie->isFinishedTurn()){
         emit enableEndTurn();
