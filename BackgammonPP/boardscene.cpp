@@ -21,8 +21,8 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setSideBars();
     setPlayingDice();
     setDoublingDie();
-    whiteOut = m_leftBar->bottomHolder;
-    blackOut = m_leftBar->topHolder;
+    whiteOut = m_rightBar->bottomHolder;
+    blackOut = m_rightBar->topHolder;
 }
 
 void BoardScene::setBoardTriangles() {
