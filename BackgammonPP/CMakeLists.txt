@@ -40,7 +40,6 @@ add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     engine/bot/nodegene.hpp
     engine/bot/link.hpp
     engine/bot/connectgene.cpp
-    engine/bot/progresssignaler.hpp engine/bot/progresssignaler.cpp
 )
 target_link_libraries(BackgammonPP PRIVATE
     Qt::Core

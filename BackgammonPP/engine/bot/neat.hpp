@@ -8,13 +8,10 @@
 #include <random>
 #include <cmath>
 #include <thread>
-#include <QProgressBar>
-#include "engine/bot/progresssignaler.hpp"
 
 namespace AI{
 extern size_t inputSize;
 extern size_t outputSize;
-extern std::string popPath;
 
 extern size_t populationSize;
 extern size_t generations;
@@ -41,16 +38,12 @@ extern double sigmoid(const double x);
 extern std::default_random_engine generator;
 extern std::uniform_real_distribution<double> random01;
 
-typedef std::tuple<Genome&, Genome&, std::atomic<int>&, std::atomic<int>&, ProgressSignaler*> Job;
+typedef std::tuple<Genome&, Genome&, std::atomic<int>&, std::atomic<int>&> Job;
 
 class Neat{
 public:
-    static void calculateFitness(std::vector<Genome>& population, ProgressSignaler *ps);
+    static void calculateFitness(std::vector<Genome>& population);
     static void savePopulation(std::vector<Genome>& population, std::string filename);
     static void loadPopulation(std::vector<Genome>& population, std::string filename);
-    static void train(int generations, int cores, ProgressSignaler *ps);
-signals:
-    void progress(int value);
 };
-
 }
