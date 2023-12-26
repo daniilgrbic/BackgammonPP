@@ -20,6 +20,8 @@ public:
     Turn getTurn() const;
 
     void playMove(const Move& move);
+
+    bool canUndo();
     void undoMove();
 
 private:

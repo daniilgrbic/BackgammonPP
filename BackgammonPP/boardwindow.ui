@@ -40,7 +40,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>530</y>
+     <y>470</y>
      <width>141</width>
      <height>51</height>
     </rect>
@@ -60,6 +60,19 @@
    </property>
    <property name="text">
     <string>End turn</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbUndo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>530</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Undo</string>
    </property>
   </widget>
  </widget>

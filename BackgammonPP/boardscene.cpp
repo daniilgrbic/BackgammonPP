@@ -327,7 +327,9 @@ void BoardScene::getTurnUpdate(const HolderType origin, const HolderType to){
         }
     }
     assert(moveFound);
-
+    if(m_turnTrie->canUndo()){
+        emit setUndoEnabled(true);
+    }
     prepareCheckers();
     if(m_turnTrie->isFinishedTurn()){
         emit enableEndTurn();
@@ -343,10 +345,20 @@ void BoardScene::getTurnFinish(){
     roll = nullptr; 
             //= BoardState(nextTurn.m_finalBoard);
 
+    emit setUndoEnabled(false);
     //setBoardState(state);
     emit sendTurnFinish(std::move(nextTurn));
 }
 
+void BoardScene::undoMove(){
+    disableAllCheckers();
+    m_turnTrie->undoMove();
+    setBoardState(m_turnTrie->board());
+    prepareCheckers();
+    if(m_turnTrie->canUndo()){
+        emit setUndoEnabled(true);
+    }
+}
 void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
     this->legalTurns = legalTurns;
 }

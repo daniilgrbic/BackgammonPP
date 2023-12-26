@@ -34,8 +34,11 @@ public:
     void prepareCheckers();
     void prepareHolders(const HolderType origin);
 
+    void undoMove();
+
 signals:
     void enableEndTurn();
+    void setUndoEnabled(bool enable);
     void sendTurnFinish(Turn);
 
 public slots:
