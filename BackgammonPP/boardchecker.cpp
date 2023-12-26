@@ -43,6 +43,11 @@ void BoardChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     //    painter->drawRect(boundingRect());
 
     painter->setBrush(QBrush(m_QColor));
+    if(isEnabled()){
+        painter->setPen(QPen(Qt::red, 0.07*m_size));
+    }else if(m_QColor == Qt::black){
+        painter->setPen(Qt::white);
+    }
     painter->drawEllipse(QPoint(0,0),(int) m_size,(int) m_size);
 }
 
@@ -121,4 +126,9 @@ void BoardChecker::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     m_dragged = true;
     QGraphicsItem::mouseMoveEvent(event);
 
+}
+
+void BoardChecker::setEnabledUpdate(bool enabled){
+    this->setEnabled(enabled);
+    update();
 }

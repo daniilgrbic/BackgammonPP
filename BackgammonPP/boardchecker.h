@@ -15,7 +15,6 @@ class BoardChecker :  public QGraphicsObject
     Q_OBJECT
 
 public:
-
     BoardChecker(QGraphicsItem *parent, qreal size, PlayerColor color);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
@@ -26,6 +25,7 @@ public:
     const PlayerColor getColor() const;
     const QColor getQColor() const;
     bool m_enabled = false;
+    void setEnabledUpdate(bool enabled);
 
 signals:
     void updateTurn(const HolderType origin, const HolderType to);

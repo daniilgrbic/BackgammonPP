@@ -195,7 +195,7 @@ void BoardScene::updatePlayingDice(const Roll& roll){
 
 void BoardScene::disableAllCheckers(){
     for(BoardChecker *checker: boardCheckers){
-        checker->setEnabled(false);
+        checker->setEnabledUpdate(false);
     }
 }
 
