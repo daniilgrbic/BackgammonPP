@@ -14,6 +14,7 @@
 #include <QMap>
 #include <random>
 #include <atomic>
+#include "species.hpp"
 
 class Network;
 class Species;
@@ -42,10 +43,11 @@ public:
     QVector<ConnectGene> genes;
 
     int fitness{0};
-    int adjustedFitness;
+    double adjustedFitness{0.0};
     Network* network;
     Innovation* innovation;
     int maxNeuron;
+
 // maybe will need idk
 //    QMap<std::string, double> mutationRates;
 //    QVector<NodeGene> nodegenes;

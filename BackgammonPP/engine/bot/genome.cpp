@@ -173,6 +173,7 @@ Genome::Genome(const Genome& genome){
         this->genes.push_back(ConnectGene(genome.genes[i]));
     }
     this->fitness = genome.fitness;
+    this->adjustedFitness = genome.adjustedFitness;
 }
 
 double Genome::disjoint(const Genome& g1, const Genome& g2){

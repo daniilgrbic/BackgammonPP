@@ -5,13 +5,14 @@
 class Genome;
 class Species{
 public:
+    static std::vector<Species> createSpecies(std::vector<Genome>& population);
     double calculateAverageFitness();
     void cullSpecies(bool cutToOne);
     void addToSpecies(Genome* g);
-private:
+
     int topFitness;
     int staleness;
     std::vector<Genome*> genomes;
-    int averageFitness;
+    double averageFitness;
 
 };
