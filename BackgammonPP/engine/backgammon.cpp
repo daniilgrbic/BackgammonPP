@@ -69,7 +69,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
             for (size_t i = 0; i < dice.size(); ++i) {
                 auto die = dice[i];
                 if (board.bar(onRoll)) {
-                    auto nextPos = NUMBER_OF_POINTS - die;
+                    auto nextPos = NUMBER_OF_POINTS - die + 1;
                     if (!isBlockedBy(board.point(nextPos), opponent)) {
                         auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos, isBlot(board.point(nextPos), opponent));
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
