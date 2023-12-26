@@ -41,8 +41,9 @@ void Match::confirmRoll(){
 }
 
 void Match::getTurn(Turn turn){
-    game->playTurn(turn);
-    emit setState(game->board());
+    //TODO: Match has to be changed. It cannot be responsible for the game
+    //game->playTurn(turn);
+    //emit setState(game->board());
     if(game->isFinished(PlayerColor::WHITE) || game->isFinished(PlayerColor::BLACK)){
         //HAS TO BE IMPLEMENTED
         exit(1);
