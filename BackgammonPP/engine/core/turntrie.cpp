@@ -62,6 +62,10 @@ void TurnTrie::playMove(const Move& move) {
     m_currentNode = nextNode;
 }
 
+bool TurnTrie::canUndo(){
+    return m_currentNode->parent;
+}
+
 void TurnTrie::undoMove() {
     if (m_currentNode->parent)
         m_currentNode = m_currentNode->parent;

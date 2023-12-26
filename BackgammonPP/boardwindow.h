@@ -21,6 +21,7 @@ public:
     ~BoardWindow();
 public slots:
     void enableEndTurn();
+    void setUndoEnabled(bool enabled);
     void requestTurn(const std::vector<Turn> *legalTurns, const Roll *roll);
     void showRoll(const Roll& roll);
 signals:
@@ -33,6 +34,8 @@ private slots:
     void on_pbRollDice_clicked();
 
     void on_pbEndTurn_clicked();
+
+    void on_pbUndo_clicked();
 
 private:
     Ui::BoardWindow *ui;

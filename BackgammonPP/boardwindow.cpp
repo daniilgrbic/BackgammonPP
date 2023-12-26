@@ -17,10 +17,12 @@ BoardWindow::BoardWindow(QWidget *parent) :
     //ui->boardView->resize(605,305);
     ui->pbEndTurn->setEnabled(false);
     ui->pbRollDice->setEnabled(false);
+    ui->pbUndo->setEnabled(false);
     connect(m_boardScene, &BoardScene::enableEndTurn, this, &BoardWindow::enableEndTurn);
     //requestTUrn should be connected to from the LocalPlayer class
     connect(m_boardScene, &BoardScene::sendTurnFinish, this, &BoardWindow::forwardTurnFinish);
     connect(this, &BoardWindow::setBoardState, m_boardScene, &BoardScene::setBoardState);
+    connect(m_boardScene, &BoardScene::setUndoEnabled, this, &BoardWindow::setUndoEnabled);
 }
 
 BoardWindow::~BoardWindow()
@@ -69,3 +71,15 @@ void BoardWindow::on_pbEndTurn_clicked()
     m_boardScene->getTurnFinish();
 }
 
+
+void BoardWindow::on_pbUndo_clicked()
+{
+    ui->pbUndo->setEnabled(false);
+    m_boardScene->undoMove();
+
+}
+
+
+void BoardWindow::setUndoEnabled(bool enabled){
+    ui->pbUndo->setEnabled(enabled);
+}
