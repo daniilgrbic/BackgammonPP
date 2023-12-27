@@ -107,19 +107,24 @@ void MainWindow::on_btStartGame_clicked()
     if (playerType == PlayerType::BotPlayer) {
         emit requestCreateGame();
     }
-    else {        
+    else {
         if (opponentPlayer.size() < MIN_USERNAME_SIZE or opponentPlayer.size() > MAX_USERNAME_SIZE) {
             QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
             return;
         }
 
-        // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
-        QStringList opponents;
-        model = new StringListModel(opponents);
-        ui->lvOpponents->setModel(model);
-        ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
-        model->addOpponent("pera"); // Example how to add names to listview
-        ui->stackedWidget->setCurrentIndex(4);
+        if (playerType == PlayerType::LocalPlayer) {
+            emit requestCreateGame();
+        }
+        else {
+            // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
+            QStringList opponents;
+            model = new StringListModel(opponents);
+            ui->lvOpponents->setModel(model);
+            ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
+            model->addOpponent("pera"); // Example how to add names to listview
+            ui->stackedWidget->setCurrentIndex(4);
+        }
     }
 }
 
