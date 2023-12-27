@@ -204,8 +204,8 @@ void BoardScene::disableAllHolders(){
         triangle->setAllowDropoff(false);
     }
     m_leftBar->topHolder->setAllowDropoff(false);
-    m_leftBar->topHolder->setAllowDropoff(false);
-    m_rightBar->bottomHolder->setAllowDropoff(false);
+    m_leftBar->bottomHolder->setAllowDropoff(false);
+    m_rightBar->topHolder->setAllowDropoff(false);
     m_rightBar->bottomHolder->setAllowDropoff(false);
 
 }
