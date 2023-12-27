@@ -82,6 +82,15 @@ BoardState BoardState::getNextState(const std::vector<Move>& moves) const {
     return nextState;
 }
 
+bool BoardState::isLastChecker(const PlayerColor player, const int position) const {
+    for (int pointId = position + 1; position <= NUMBER_OF_POINTS; ++pointId) {
+        auto owner = point(pointId).owner();
+        if (owner && owner.value() == player)
+            return false;
+    }
+    return true;
+}
+
 QVariant BoardState::toVariant() const
 {
     QVariantMap map;

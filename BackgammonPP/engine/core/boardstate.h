@@ -26,6 +26,8 @@ public:
     BoardState getNextState(const Move& move) const;
     BoardState getNextState(const std::vector<Move>& move) const;
 
+    bool isLastChecker(const PlayerColor player, const int position) const;
+
     bool operator ==(const BoardState&) const = default;
 
     // Serializable interface
