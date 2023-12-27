@@ -6,8 +6,8 @@
 
 LongNardy::LongNardy() : Game()
 {
-    m_board.point(24).add(PlayerColor::WHITE, 15);
-    m_board.point(12).add(PlayerColor::BLACK, 15);
+    m_board.point(24).add(PlayerColor::WHITE, CHECKERS_COUNT);
+    m_board.point(12).add(PlayerColor::BLACK, CHECKERS_COUNT);
 
     // intial play order is determined just like in backgammon,
     // but then the first player throws both dice again (instead of using the intial roll)
@@ -123,24 +123,52 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     } while (not nextLevel.empty());
 
     std::vector<Turn> legalTurns;
-    std::transform(
-        level.cbegin(), level.cend(),
-        std::back_inserter(legalTurns),
-        [onRoll, this](const RollState& roll) {
-            std::vector<Move> moves;
-            if (onRoll == PlayerColor::BLACK) {
-                std::transform(
-                    roll.moves().cbegin(), roll.moves().cend(),
-                    std::back_inserter(moves),
-                    [](const auto& move) { return Move::centralMirror(move); }
-                    );
-            } else {
-                moves = std::move(roll.moves());
-            }
 
-            return Turn { 0, onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? roll.board() : BoardState::centralMirror(roll.board()) };
+    for(const auto& roll : level) {
+        std::vector<Move> moves;
+        if (onRoll == PlayerColor::BLACK) {
+            std::transform(
+                roll.moves().cbegin(), roll.moves().cend(),
+                std::back_inserter(moves),
+                [](const auto& move) { return Move::centralMirror(move); }
+                );
+        } else {
+            moves = std::move(roll.moves());
         }
-    );
+
+        auto turn = Turn {
+            0,
+            onRoll,
+            m_currentRoll.dice(),
+            moves,
+            onRoll == PlayerColor::WHITE ? roll.board() : BoardState::centralMirror(roll.board())
+        };
+
+        // check if blocking opponent (a prime in front of all opponent checkers)
+        int consecutive = 0;
+        bool blockade = false;
+        for(int p = 1; p <= NUMBER_OF_POINTS; p++) {
+            auto pointOwner = turn.m_finalBoard.point(p).owner();
+            if(not pointOwner.has_value()) {
+                consecutive = 0;
+            }
+            if(pointOwner == opponent) {
+                break;
+            }
+            if(pointOwner == onRoll){
+                consecutive++;
+                if(consecutive == 6) {
+                    blockade = true;
+                    break;
+                }
+            }
+        }
+
+        if(not blockade) {
+            legalTurns.push_back(turn);
+        }
+    }
+
     std::cout << "Legal Turns:" << std::endl;
     for(const auto& lt : legalTurns) {
         std::cout << lt.toString().toStdString() << std::endl;
