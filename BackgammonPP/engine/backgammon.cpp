@@ -116,7 +116,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                     if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
                         auto nextPos = pos - die;
                         if (nextPos <= 0) {
-                            if (isBearingOff(board, onRoll) && board.isLastChecker(onRoll, pos)) {
+                            if (isBearingOff(board, onRoll)) {
                                 auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                                 nextLevel.push_back(roll.getNextRollState(nextMove, i));
                             }
