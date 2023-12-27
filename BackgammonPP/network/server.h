@@ -29,6 +29,7 @@ private:
     void processStateCommand(QTcpSocket* src, QString state);
     void processChatCommand(QTcpSocket* src, QString json);
     void processDoublingCommand(QTcpSocket* src);
+    void processDiceCommand(QTcpSocket* src, QString cmd);
 
     void processGameStartCommand(QTcpSocket* src);
     void processGameEndCommand(QTcpSocket* src);

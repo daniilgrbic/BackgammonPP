@@ -12,8 +12,9 @@ namespace srvconst {
     inline const QString serverCmdRemovePlayer = "player-remove-";
     inline const QString serverCmdState = "state-";
     inline const QString serverCmdChat = "chat-";
+    inline const QString serverCmdDoubling = "doubling";
+    inline const QString serverCmdDice = "dice-";
     inline const QString serverCmdGameOn = "game-on";
     inline const QString serverCmdGameStart = "game-start";
     inline const QString serverCmdGameEnd = "game-end";
-    inline const QString serverCmdDoubling = "doubling";
 }
