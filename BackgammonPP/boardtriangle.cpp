@@ -25,7 +25,7 @@ QRectF BoardTriangle::boundingRect() const {
 
 void BoardTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(QBrush(Qt::gray));
-    painter->drawRect(boundingRect());
+    //painter->drawRect(boundingRect());
 
     if(canDropoff()){
         painter->setPen(QPen(Qt::red, 4));

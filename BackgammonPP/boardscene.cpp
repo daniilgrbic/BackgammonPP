@@ -15,12 +15,13 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
 {
 
     setSceneRect(0, 0, m_width, m_height);
+    setBackgroundBrush(QBrush(Qt::lightGray));
     setBoardTriangles();
     setBoardCheckers();
     setBoardBar();
     setSideBars();
     setPlayingDice();
-    setDoublingDie();
+    //setDoublingDie();
     disableAllHolders();
     whiteOut = m_rightBar->bottomHolder;
     blackOut = m_rightBar->topHolder;
