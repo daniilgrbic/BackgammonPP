@@ -6,8 +6,8 @@
 
 LongNardy::LongNardy() : Game()
 {
-    m_board.point(pointIdByPlayer(PlayerColor::WHITE, 24)).add(PlayerColor::WHITE, 15);
-    m_board.point(pointIdByPlayer(PlayerColor::BLACK, 24)).add(PlayerColor::BLACK, 15);
+    m_board.point(24).add(PlayerColor::WHITE, 15);
+    m_board.point(12).add(PlayerColor::BLACK, 15);
 
     // intial play order is determined just like in backgammon,
     // but then the first player throws both dice again (instead of using the intial roll)
@@ -15,34 +15,7 @@ LongNardy::LongNardy() : Game()
         Roll::getInitialRoll(m_firstDie, m_secondDie).onRoll(),
         m_firstDie,
         m_secondDie
-        );
-}
-
-int LongNardy::pointIdByPlayer(PlayerColor player, int point)
-{
-    if(player == PlayerColor::WHITE)
-        return point;
-    else
-        return (point >= 1 and point <= 12) ? point + 12 : point - 12;
-}
-
-BoardState LongNardy::mirrorBoard(BoardState boardState)
-{
-    BoardState mirroredBoard;
-    for(int i = 1; i <= 12; i++) {
-        std::swap(boardState.point(i), boardState.point(i+12));
-    }
-    return boardState;
-}
-
-Move LongNardy::mirrorMove(Move move)
-{
-    Move newMove = move;
-    if(std::holds_alternative<int>(move.m_from))
-        newMove.m_from = pointIdByPlayer(move.m_player, std::get<int>(move.m_from));
-    if(std::holds_alternative<int>(move.m_to))
-        newMove.m_to = pointIdByPlayer(move.m_player, std::get<int>(move.m_to));
-    return newMove;
+    );
 }
 
 std::vector<Turn> LongNardy::generateLegalTurns() {

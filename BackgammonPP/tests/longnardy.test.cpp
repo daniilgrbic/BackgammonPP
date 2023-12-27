@@ -113,8 +113,8 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         bs.point(13).add(PlayerColor::BLACK, 6);
 
         // Act
-        auto mbs = LongNardy::mirrorBoard(bs);
-        auto mmbs = LongNardy::mirrorBoard(mbs);
+        auto mbs = BoardState::centralMirror(bs);
+        auto mmbs = BoardState::centralMirror(mbs);
 
         // Assert
         REQUIRE(bs == mmbs);
@@ -138,8 +138,6 @@ TEST_CASE( "Long Nardy turn generation", "[class][ruleset]" ) {
         // Assert
         REQUIRE(turns.size() == 1);
         auto finalBoard = turns.front().m_finalBoard;
-        REQUIRE(finalBoard.point(LongNardy::pointIdByPlayer(player, 24)).count() == 14);
-        REQUIRE(finalBoard.point(LongNardy::pointIdByPlayer(player, 19)).count() == 1);
         REQUIRE(finalBoard.point(12).count() == 14);
         REQUIRE(finalBoard.point(7).count() == 1);
     }
