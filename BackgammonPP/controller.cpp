@@ -43,8 +43,8 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames)
 
     boardWindow->setOpponentName(opponentName);
     boardWindow->show();
-    LocalPlayer *white = new LocalPlayer(nullptr, this->boardWindow);
-    LocalPlayer *black= new LocalPlayer(nullptr, this->boardWindow);
+    Player *white = new LocalPlayer(nullptr, this->boardWindow);
+    Player *black= new LocalPlayer(nullptr, this->boardWindow);
     Match *m = new Match(nullptr, white, black, numGames);
     white->setParent(m);
     black->setParent(m);

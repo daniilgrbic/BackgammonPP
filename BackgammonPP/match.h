@@ -4,31 +4,29 @@
 #include "localplayer.h"
 #include "engine/backgammon.h"
 
-
-class LocalPlayer;
-
 class Match : public QObject
 {
     Q_OBJECT
 public:
-    Match(QObject *parent, LocalPlayer *white, LocalPlayer *black, int length=1);
+    Match(QObject *parent, Player *white, Player *black, int length=1);
 
     void startGame();
 
 signals:
-    void requestMove(std::vector<Turn> *legalMoves, Roll *roll); //override;
+    void requestMove(Turn *turn, std::vector<Turn> *legalMoves, Roll *roll); //override;
     void setState(const BoardState &state); //override;
     void setDice(const Roll &roll);
+    void sendTurn(const Turn &turn);
 
 public slots:
     void getTurn(Turn turn);
-    void confirmRoll();
+    void confirmRoll(Roll roll);
 private:
-    LocalPlayer *m_white;
-    LocalPlayer *m_black;
+    Player *m_white;
+    Player *m_black;
 
-    LocalPlayer *m_onTurn;
-    LocalPlayer *m_waiting;
+    Player *m_onTurn;
+    Player *m_waiting;
 
     int m_length;
 
@@ -42,8 +40,8 @@ private:
     Roll currentRoll;
 
     void endGame();
-    void connectSlots(LocalPlayer *onMove, LocalPlayer *waiting);
-    void startMove();
+    void connectSlots(Player *onMove, Player *waiting);
+    void startMove(Turn *turn = nullptr);
 
 };
 
