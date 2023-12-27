@@ -102,6 +102,9 @@ void Server::readMessage() {
     else if (message.startsWith(srvconst::serverCmdDoubling)) {
         processDoublingCommand(sourceSocket);
     }
+    else if (message.startsWith(srvconst::serverCmdDice)) {
+        processDiceCommand(sourceSocket, message);
+    }
     else if (message.startsWith(srvconst::serverCmdGameStart)) {
         processGameStartCommand(sourceSocket);
     }
@@ -281,6 +284,10 @@ void Server::processChatCommand(QTcpSocket* src, QString json) {
 
 void Server::processDoublingCommand(QTcpSocket *src) {
     broadcast(src, (srvconst::serverCmdDoubling).toStdString().c_str(), true);
+}
+
+void Server::processDiceCommand(QTcpSocket *src, QString cmd) {
+    broadcast(src, cmd.toStdString().c_str());
 }
 
 void Server::processGameStartCommand(QTcpSocket *src) {
