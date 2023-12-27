@@ -1,5 +1,5 @@
-#ifndef BOARDPLAYINGDIE_H
-#define BOARDPLAYINGDIE_H
+#pragma once
+
 #include <QGraphicsItem>
 #include <QBrush>
 #include <QPainter>
@@ -33,5 +33,3 @@ private:
         { QPointF(0.25, 0.25), QPointF(0.25, 0.75), QPointF(0.75, 0.25), QPointF(0.75, 0.75), QPointF(0.25, 0.50), QPointF(0.75, 0.50) },
     };
 };
-
-#endif // BOARDPLAYINGDIE_H

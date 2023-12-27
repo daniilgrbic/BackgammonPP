@@ -1,5 +1,4 @@
-#ifndef BOARDWINDOW_H
-#define BOARDWINDOW_H
+#pragma once
 
 #include "boardscene.h"
 #include <QWidget>
@@ -47,5 +46,3 @@ private:
     BoardScene *m_historyboardScene;
     HistoryListModel *m_historyModel;
 };
-
-#endif // BOARDWINDOW_H

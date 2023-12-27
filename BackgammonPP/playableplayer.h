@@ -1,5 +1,4 @@
-#ifndef PLAYABLEPLAYER_H
-#define PLAYABLEPLAYER_H
+#pragma once
 
 #include <QObject>
 #include "player.h"
@@ -19,5 +18,3 @@ signals:
 public slots:
     virtual void acceptDice(int diceValue) = 0;
 };
-
-#endif // PLAYABLEPLAYER_H

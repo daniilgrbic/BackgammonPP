@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QStackedWidget>
@@ -65,4 +64,3 @@ private:
     PlayerType getPlayerType();
     StringListModel *model;
 };
-#endif // MAINWINDOW_H

@@ -1,5 +1,4 @@
-#ifndef BOTPLAYER_H
-#define BOTPLAYER_H
+#pragma once
 
 #include <QObject>
 #include "player.h"
@@ -15,5 +14,3 @@ public slots:
     void receivedState(BoardState* state) override;
     void chooseMove(std::vector<Turn> &legalMoves) override;
 };
-
-#endif // BOTPLAYER_H

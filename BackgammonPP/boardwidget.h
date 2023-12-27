@@ -1,5 +1,4 @@
-#ifndef BOARDWIDGET_H
-#define BOARDWIDGET_H
+#pragma once
 
 #include <QWidget>
 
@@ -12,5 +11,3 @@ public:
 signals:
 
 };
-
-#endif // BOARDWIDGET_H

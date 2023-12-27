@@ -1,5 +1,4 @@
-#ifndef BOARDDOUBLINGDIE_H
-#define BOARDDOUBLINGDIE_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QBrush>
@@ -25,5 +24,3 @@ private:
     Position m_position;
     QMap<Position, QPointF> m_posMap;
 };
-
-#endif // BOARDDOUBLINGDIE_H

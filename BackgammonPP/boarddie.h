@@ -1,5 +1,4 @@
-#ifndef BOARDDIE_H
-#define BOARDDIE_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QBrush>
@@ -16,5 +15,3 @@ protected:
     const QColor m_primary = Qt::black;
     const QColor m_secondary = Qt::white;
 };
-
-#endif // BOARDDIE_H

@@ -1,7 +1,5 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#pragma once
 
-#include "consts.h"
 #include "mainwindow.h"
 #include "boardwindow.h"
 #include "match.h"
@@ -31,10 +29,8 @@ private:
     Preferences *preferences;
     QMediaPlayer *themeSong;
     QAudioOutput *themeAudioOutput;
-    QString playerName = "Player";
-    QString themeSongPath = "qrc:/audio/uSnovimaProdBane.mp3";
+    QString playerName = Preferences().playerName;
+    QString themeSongPath = THEME_SOUND_PATH;
 
     void playThemeSong();
 };
-
-#endif // CONTROLLER_H

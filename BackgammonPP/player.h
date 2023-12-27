@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include <QObject>
 #include <vector>
@@ -34,5 +33,3 @@ private:
     Client* m_client;
     PlayerColor m_playerColor;
 };
-
-#endif // PLAYER_H

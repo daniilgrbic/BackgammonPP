@@ -1,5 +1,4 @@
-#ifndef STRINGLISTMODEL_H
-#define STRINGLISTMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QObject>
@@ -22,5 +21,3 @@ public:
 private:
     QStringList stringList;
 };
-
-#endif // STRINGLISTMODEL_H
