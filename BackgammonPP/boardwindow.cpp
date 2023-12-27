@@ -5,13 +5,19 @@
 #include <QPainter>
 #include "engine/core/boardstate.h"
 #include "engine/backgammon.h"
+#include "historylistmodel.h"
+#include <iostream>
 
 BoardWindow::BoardWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BoardWindow)
 {
     ui->setupUi(this);
+    m_historyModel = new HistoryListModel();
+    ui->listView->setModel(m_historyModel);
+    ui->historyboardView->hide();
     m_boardScene = new BoardScene(this, ui->boardView->size().width()-5, ui->boardView->size().height()-5);
+    m_historyboardScene = new BoardScene(this, ui->historyboardView->size().width()-5, ui->historyboardView->size().height()-5);
     ui->boardView->setScene(m_boardScene);
     ui->boardView->setRenderHint(QPainter::Antialiasing);
     //ui->boardView->resize(605,305);
@@ -23,6 +29,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
     connect(m_boardScene, &BoardScene::sendTurnFinish, this, &BoardWindow::forwardTurnFinish);
     connect(this, &BoardWindow::setBoardState, m_boardScene, &BoardScene::setBoardState);
     connect(m_boardScene, &BoardScene::setUndoEnabled, this, &BoardWindow::setUndoEnabled);
+    connect(m_boardScene, &BoardScene::sendTurnFinish, this->m_historyModel, &HistoryListModel::addTurn);
 }
 
 BoardWindow::~BoardWindow()
@@ -83,3 +90,30 @@ void BoardWindow::on_pbUndo_clicked()
 void BoardWindow::setUndoEnabled(bool enabled){
     ui->pbUndo->setEnabled(enabled);
 }
+
+void BoardWindow::on_listView_clicked(const QModelIndex &index)
+{
+//    std::cout << index.data().toString().toStdString() << std::endl;
+    bool isCurrentBoardState = index.data(Qt::UserRole + 1).toBool();
+    if(isCurrentBoardState){
+        ui->pbEndTurn->show();
+        ui->pbRollDice->show();
+        ui->pbUndo->show();
+        ui->boardView->show();
+        ui->historyboardView->hide();
+    }else{
+        ui->pbEndTurn->hide();
+        ui->pbRollDice->hide();
+        ui->pbUndo->hide();
+        ui->boardView->hide();
+        Turn turn;
+        turn.fromVariant(index.data(Qt::UserRole));
+        m_historyboardScene->setBoardState(turn.m_finalBoard);
+
+        ui->historyboardView->setScene(m_historyboardScene);
+        ui->historyboardView->setRenderHint(QPainter::Antialiasing);
+        ui->historyboardView->show();
+    }
+
+}
+

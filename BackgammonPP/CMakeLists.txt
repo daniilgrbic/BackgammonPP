@@ -96,7 +96,8 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE}
     localplayer.h localplayer.cpp
     match.h match.cpp
     consts.h
-    stringlistmodel.h stringlistmodel.cpp)
+    stringlistmodel.h stringlistmodel.cpp
+    historylistmodel.h historylistmodel.cpp)
 target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
 
 if((QT_VERSION_MAJOR GREATER 4))

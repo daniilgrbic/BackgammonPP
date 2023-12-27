@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>967</width>
+    <width>1192</width>
     <height>661</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QGraphicsView" name="boardView">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>410</x>
      <y>20</y>
      <width>771</width>
      <height>581</height>
@@ -26,7 +26,7 @@
   <widget class="QPushButton" name="pbExitGame">
    <property name="geometry">
     <rect>
-     <x>830</x>
+     <x>1070</x>
      <y>610</y>
      <width>111</width>
      <height>41</height>
@@ -73,6 +73,26 @@
    </property>
    <property name="text">
     <string>Undo</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="listView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>371</width>
+     <height>451</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="historyboardView">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>20</y>
+     <width>771</width>
+     <height>581</height>
+    </rect>
    </property>
   </widget>
  </widget>

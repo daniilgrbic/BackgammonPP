@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QPaintEvent>
 #include "engine/core/game.h"
+#include "historylistmodel.h"
 namespace Ui {
 class BoardWindow;
 }
@@ -37,9 +38,13 @@ private slots:
 
     void on_pbUndo_clicked();
 
+    void on_listView_clicked(const QModelIndex &index);
+
 private:
     Ui::BoardWindow *ui;
     BoardScene *m_boardScene;
+    BoardScene *m_historyboardScene;
+    HistoryListModel *m_historyModel;
 };
 
 #endif // BOARDWINDOW_H
