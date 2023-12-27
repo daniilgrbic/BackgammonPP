@@ -9,6 +9,7 @@
 #include <QPalette>
 #include <QMessageBox>
 #include <QHostAddress>
+#include <QNetworkInterface>
 #include <iostream>
 #include "boardwindow.h"
 #include "consts.h"
@@ -61,6 +62,7 @@ private:
     void setPicture(QString picturePath, QWidget *pictureWidget);
     bool isValidIpAddress(const QString &ipAddress);
     void displayPreferences();
+    void showIpAddress();
     GameType getGameType();
     PlayerType getPlayerType();
     StringListModel *model;

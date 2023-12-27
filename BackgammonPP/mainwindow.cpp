@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
     connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
     this->on_rbPlayerBot_clicked();
+    this->showIpAddress();
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -202,4 +203,16 @@ void MainWindow::on_rbPlayerBot_clicked() {
         ui->labelOpponentUsername->setDisabled(false);
         ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8");
     }
+}
+
+void MainWindow::showIpAddress() {
+    const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
+    QString ipAddress = "Can't find address";
+    for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
+            ipAddress = address.toString();
+            break;
+        }
+    }
+    ui->labeIP->setText(ipAddress);
 }
