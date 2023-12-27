@@ -3,7 +3,6 @@
 #include <QObject>
 #include "localplayer.h"
 #include "engine/backgammon.h"
-#include "engine/longnardy.h"
 
 
 class LocalPlayer;

@@ -15,7 +15,7 @@ Match::Match(QObject *parent, LocalPlayer *white, LocalPlayer *black, int length
 }
 
 void Match::startGame(){
-    game = new LongNardy();
+    game = new Backgammon();
     connect(this, &Match::setState, m_white, &LocalPlayer::setState);
     emit setState(game->board());
     connect(this, &Match::setState, m_black, &LocalPlayer::setState);
