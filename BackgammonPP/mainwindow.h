@@ -27,7 +27,7 @@ public:
     ~MainWindow();
 
 signals:
-    void requestCreateGame();
+    void requestCreateGame(QString opponentName, qint8 numGames);
     void requestPreferences(qint16 newVolume);
 
 public slots:

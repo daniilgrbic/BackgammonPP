@@ -19,7 +19,7 @@ signals:
     void sendPreferences(Preferences *preferences);
 
 public slots:
-    void createGameFromMenu();
+    void createGameFromMenu(QString opponentName, qint8 numGames);
     void closeGameAndOpenMenu();
     void getPreferences(qint16 newVolume);
 

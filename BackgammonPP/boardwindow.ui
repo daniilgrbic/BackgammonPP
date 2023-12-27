@@ -23,7 +23,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pbExitGame">
+  <widget class="QPushButton" name="pbExitCurrentGame">
    <property name="geometry">
     <rect>
      <x>1070</x>
@@ -31,6 +31,9 @@
      <width>111</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>Exit Game</string>
@@ -45,6 +48,9 @@
      <height>51</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
     <string>Roll dice</string>
    </property>
@@ -58,6 +64,9 @@
      <height>51</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
     <string>End turn</string>
    </property>
@@ -70,6 +79,9 @@
      <width>141</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>Undo</string>

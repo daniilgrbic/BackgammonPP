@@ -96,7 +96,7 @@ void MainWindow::on_btStartGame_clicked()
 {
     GameType gameType = this->getGameType();
     PlayerType playerType = this->getPlayerType();
-    QString opponentPlayer = this->ui->labelTextEdit->toPlainText();
+    QString opponentName = this->ui->labelTextEdit->toPlainText();
     qint32 gameNumber = this->ui->sbGameDuration->value();
 
     if (gameNumber < MIN_NUM_GAMES or gameNumber > MAX_NUM_GAMES) {
@@ -105,16 +105,16 @@ void MainWindow::on_btStartGame_clicked()
     }
 
     if (playerType == PlayerType::BotPlayer) {
-        emit requestCreateGame();
+        emit requestCreateGame(opponentName, gameNumber);
     }
     else {
-        if (opponentPlayer.size() < MIN_USERNAME_SIZE or opponentPlayer.size() > MAX_USERNAME_SIZE) {
+        if (opponentName.size() < MIN_USERNAME_SIZE or opponentName.size() > MAX_USERNAME_SIZE) {
             QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
             return;
         }
 
         if (playerType == PlayerType::LocalPlayer) {
-            emit requestCreateGame();
+            emit requestCreateGame(opponentName, gameNumber);
         }
         else {
             // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
