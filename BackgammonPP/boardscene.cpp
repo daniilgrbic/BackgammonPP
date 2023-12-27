@@ -358,6 +358,9 @@ void BoardScene::undoMove(){
     if(m_turnTrie->canUndo()){
         emit setUndoEnabled(true);
     }
+    if(m_turnTrie->isFinishedTurn()){
+        emit enableEndTurn();
+    }
 }
 void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
     this->legalTurns = legalTurns;
