@@ -22,6 +22,8 @@ struct Move : public Serializable
     std::variant<int, SpecialPosition> m_from;
     std::variant<int, SpecialPosition> m_to;
 
+    QString toString() const;
+
     // Serializable interface
     QVariant toVariant() const;
     void fromVariant(const QVariant &variant);

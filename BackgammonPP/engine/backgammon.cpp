@@ -136,7 +136,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     std::transform(
         level.cbegin(), level.cend(),
         std::back_inserter(legalTurns),
-        [onRoll](const RollState& roll) {
+        [onRoll, this](const RollState& roll) {
             std::vector<Move> moves;
             if (onRoll == PlayerColor::BLACK) {
                 std::transform(
@@ -148,7 +148,8 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                 moves = std::move(roll.moves());
             }
 
-            return Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() }; }
+            return Turn { 0, onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() };
+        }
     );
     return legalTurns;
 }

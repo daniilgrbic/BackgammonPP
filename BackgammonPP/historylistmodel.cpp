@@ -1,5 +1,4 @@
 #include "historylistmodel.h"
-#include <iostream>
 #include <qnamespace.h>
 
 int HistoryListModel::rowCount(const QModelIndex &parent) const
@@ -15,8 +14,8 @@ QVariant HistoryListModel::data(const QModelIndex &index, int role) const
     if (index.row() >= turnList.size())
         return QVariant();
 
-    if (role == Qt::DisplayRole)        // Ovde treba nesto smisleno? index.row() + turnList.at(index.row()).toString()...
-        return QString("%1 :Turn %2").arg(turnList.at(index.row()).m_player == PlayerColor::BLACK ? "black" : "white").arg(index.row() + 1);
+    if (role == Qt::DisplayRole)
+        return QString("%1").arg(turnList.at(index.row()).toString());
 
     if(role == Qt::UserRole){
         return turnList.at(index.row()).toVariant();

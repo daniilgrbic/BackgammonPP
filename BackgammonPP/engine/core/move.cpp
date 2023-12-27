@@ -28,6 +28,14 @@ Move Move::mirror() const {
     return { m_player, from, to, m_isHit };
 }
 
+QString Move::toString() const
+{
+    QVariantMap map = toVariant().toMap();
+    return QString("%1/%2")
+        .arg(map.value("from").toString())
+        .arg(map.value("to").toString());
+}
+
 QVariant Move::toVariant() const
 {
     QVariantMap map;
