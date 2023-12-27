@@ -314,19 +314,22 @@ void BoardScene::prepareHolders(const HolderType origin){
 void BoardScene::checkerEndMoving(){
     disableAllHolders();
 }
+
 void BoardScene::getTurnUpdate(const HolderType origin, const HolderType to){
     disableAllCheckers();
     std::vector<Move> nextMoves = m_turnTrie->nextMoves();
-    bool moveFound = false;
-    for(const Move &move : nextMoves){
-        if(move.m_from == origin && move.m_to == to){
-            m_turnTrie->playMove(move);
-            moveFound = true;
-            setBoardState(m_turnTrie->board());
-            break;
-        }
-    }
-    assert(moveFound);
+    Move* preferredMove = nullptr;
+    for(Move &move : nextMoves)
+        if(move.m_from == origin && move.m_to == to &&
+           (!preferredMove || move.m_hittedPoints.size() > preferredMove->m_hittedPoints.size())
+          )
+            preferredMove = &move;
+
+    assert(preferredMove);
+
+    m_turnTrie->playMove(*preferredMove);
+    setBoardState(m_turnTrie->board());
+
     if(m_turnTrie->canUndo()){
         emit setUndoEnabled(true);
     }

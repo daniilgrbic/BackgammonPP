@@ -1,12 +1,11 @@
 #include "turntrie.h"
 
-#include <iostream>
+#include <queue>
 
 TurnTrie::TurnTrie(const std::vector<Turn>& turns, const BoardState& board)
     : m_root { new TurnNode {} }, m_currentNode { m_root }
 {
     m_root->board = board;
-    m_currentNode = m_root;
 
     for (const auto& turn : turns) {
         auto* currentNode = m_root;
@@ -19,6 +18,8 @@ TurnTrie::TurnTrie(const std::vector<Turn>& turns, const BoardState& board)
         }
         currentNode->turn = turn;
     }
+
+    generateLinkedMoves(m_root);
 }
 
 TurnTrie::~TurnTrie() {
@@ -69,4 +70,33 @@ bool TurnTrie::canUndo(){
 void TurnTrie::undoMove() {
     if (m_currentNode->parent)
         m_currentNode = m_currentNode->parent;
+}
+
+void TurnTrie::generateLinkedMoves(TurnNode* root) {
+    std::queue<std::pair<Move, TurnNode*>> children;
+
+    for (const auto& child : root->children)
+        children.push(child);
+
+    while (!children.empty()) {
+        const auto& [childMove, child] = children.front();
+        children.pop();
+        generateLinkedMoves(child);
+        for (const auto& [gcMove, grandchild] : child->children) {
+            if (gcMove.m_from == childMove.m_to) {
+                auto move = childMove;
+                move.m_to = gcMove.m_to;
+                move.m_hittedPoints.insert(
+                    move.m_hittedPoints.end(),
+                    gcMove.m_hittedPoints.begin(),
+                    gcMove.m_hittedPoints.end()
+                );
+                auto* node = new TurnNode { *grandchild };
+                node->parent = root;
+
+                root->children[move] = node;
+                children.emplace(std::make_pair(std::move(move), node));
+            }
+        }
+    }
 }

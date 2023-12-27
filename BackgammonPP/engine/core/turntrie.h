@@ -30,6 +30,18 @@ private:
             : parent { parent }
         {}
 
+        TurnNode(const TurnNode& node)
+            : parent { node.parent }
+            , board { node.board }
+            , turn { node.turn }
+        {
+            for (const auto& [move, child] : node.children) {
+                auto* childCpy = new TurnNode { *child };
+                childCpy->parent = this;
+                children[move] = childCpy;
+            }
+        }
+
         TurnNode* parent { nullptr };
         std::unordered_map<Move, TurnNode*> children {};
         std::optional<BoardState> board { std::nullopt };
@@ -38,4 +50,6 @@ private:
 
     TurnNode *m_root;
     TurnNode *m_currentNode;
+
+    void generateLinkedMoves(TurnNode* root);
 };

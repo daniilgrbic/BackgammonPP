@@ -109,6 +109,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                 if (board.bar(onRoll)) {
                     auto nextPos = NUMBER_OF_POINTS - die + 1;
                     if (!isBlockedBy(board.point(nextPos), opponent)) {
+
                         auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos, isBlot(board.point(nextPos), opponent));
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
                     }

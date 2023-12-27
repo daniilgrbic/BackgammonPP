@@ -6,8 +6,23 @@
 #include <QVariantList>
 #include <QJsonDocument>
 
-Move::Move(const PlayerColor player, const std::variant<int, SpecialPosition>& from, const std::variant<int, SpecialPosition>& to, const bool isHit)
-    : m_player { player }, m_from { from }, m_to { to }, m_isHit { isHit }
+Move::Move(
+    const PlayerColor player,
+    const std::variant<int,SpecialPosition>& from,
+    const std::variant<int, SpecialPosition>& to,
+    const bool isHit
+) : m_player { player }, m_from { from }, m_to { to }, m_hittedPoints {}
+{
+    if (isHit)
+        m_hittedPoints.push_back(std::get<int>(to));
+}
+
+Move::Move(
+    const PlayerColor player,
+    const std::variant<int,SpecialPosition>& from,
+    const std::variant<int, SpecialPosition>& to,
+    const std::vector<int>& hittedPoints
+    ) : m_player { player }, m_from { from }, m_to { to }, m_hittedPoints { hittedPoints }
 {}
 
 Move Move::mirror() const {
@@ -25,7 +40,12 @@ Move Move::mirror() const {
         to = m_to;
     }
 
-    return { m_player, from, to, m_isHit };
+    std::vector<int> hittedPoints;
+    for (const auto p : m_hittedPoints) {
+        hittedPoints.push_back(NUMBER_OF_POINTS + 1 - p);
+    }
+
+    return { m_player, from, to, hittedPoints };
 }
 
 QVariant Move::toVariant() const
