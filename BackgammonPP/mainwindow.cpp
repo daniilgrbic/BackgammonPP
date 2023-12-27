@@ -25,7 +25,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Create Game Lobby
     connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btStartGame, SIGNAL(clicked(false)), this, SLOT(on_btStartGame_clicked()));
+    connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
+    connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
+    connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
+    connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
+    this->on_rbPlayerBot_clicked();
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -96,7 +100,7 @@ void MainWindow::on_btStartGame_clicked()
 {
     GameType gameType = this->getGameType();
     PlayerType playerType = this->getPlayerType();
-    QString opponentName = this->ui->labelTextEdit->toPlainText();
+    QString opponentName = this->ui->labelOpponentUsername->toPlainText();
     qint32 gameNumber = this->ui->sbGameDuration->value();
 
     if (gameNumber < MIN_NUM_GAMES or gameNumber > MAX_NUM_GAMES) {
@@ -105,7 +109,7 @@ void MainWindow::on_btStartGame_clicked()
     }
 
     if (playerType == PlayerType::BotPlayer) {
-        emit requestCreateGame(opponentName, gameNumber);
+        emit requestCreateGame("Bot", gameNumber);
     }
     else {
         if (opponentName.size() < MIN_USERNAME_SIZE or opponentName.size() > MAX_USERNAME_SIZE) {
@@ -188,3 +192,14 @@ void MainWindow::on_btReturnFromCreateGameLobby_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+void MainWindow::on_rbPlayerBot_clicked() {
+    if (ui->rbPlayerBot->isChecked()) {
+        ui->labelOpponentUsername->setDisabled(true);
+        ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+        ui->labelOpponentUsername->setText("");
+    }
+    else {
+        ui->labelOpponentUsername->setDisabled(false);
+        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8");
+    }
+}

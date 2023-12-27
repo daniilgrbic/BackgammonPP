@@ -561,7 +561,7 @@ QPushButton:hover {
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
-            <widget class="QTextEdit" name="labelTextEdit">
+            <widget class="QTextEdit" name="labelOpponentUsername">
              <property name="geometry">
               <rect>
                <x>20</x>

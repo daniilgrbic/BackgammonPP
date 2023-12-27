@@ -39,6 +39,7 @@ private slots:
 
     void on_btCreateGame_clicked();
     void on_btStartGame_clicked();
+    void on_rbPlayerBot_clicked();
 
     void on_btJoinGame_clicked();
     void on_btJoinLobby_clicked();
