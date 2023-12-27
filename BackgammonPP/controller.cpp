@@ -5,7 +5,9 @@ Controller::Controller()
     this->preferences = new Preferences();
     this->mainWindow = new MainWindow();
     this->boardWindow = new BoardWindow();
-    //mainWindow->show();
+    
+    mainWindow->show();
+    /*
     boardWindow->show();
     LocalPlayer *white = new LocalPlayer(nullptr, this->boardWindow);
     LocalPlayer *black= new LocalPlayer(nullptr, this->boardWindow);
@@ -13,6 +15,7 @@ Controller::Controller()
     white->setParent(m);
     black->setParent(m);
     m->startGame();
+    */
 
 
     this->playThemeSong();
@@ -26,23 +29,21 @@ Controller::Controller()
 
 void Controller::playThemeSong()
 {
-    /* TODO: CAN'T IMPORT LIBRARIES
-    mediaPlayer = new QMediaPlayer(this);
-    playlist = new QMediaPlaylist(mediaPlayer);
+    this->themeSong = new QMediaPlayer(this);
+    this->themeAudioOutput = new QAudioOutput(this);
 
-    playlist->addMedia(QUrl(this->themeSongPath));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-    mediaPlayer->setPlaylist(playlist);
-    mediaPlayer->play();
+    this->themeAudioOutput->setVolume(BASE_THEME_VOLUME);
+    this->themeSong->setAudioOutput(this->themeAudioOutput);
+    this->themeSong->setSource(this->themeSongPath);
+    this->themeSong->setLoops(-1);
 
-    QTimer *checkTimer = new QTimer(this);
-    connect(checkTimer, &QTimer::timeout, this, &SoundWidget::checkIfAudioStillPlaying);
-    checkTimer->start(1000);
-    */
+    this->themeSong->play();
 }
 
-void Controller::getPreferences()
+void Controller::getPreferences(qint16 newVolume)
 {
+    this->themeAudioOutput->setVolume((float)newVolume / (float)MAX_VOLUME);
+    this->themeSong->play();
     emit sendPreferences(this->preferences);
 }
 

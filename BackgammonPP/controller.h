@@ -7,10 +7,8 @@
 #include "match.h"
 #include <QApplication>
 
-
-// FIXME: CAN'T IMPORT LIBRARIES
-// #include <QMediaPlayer>
-// #include <QMediaPlaylist>
+#include <QtMultimedia>
+#include <QAudioOutput>
 
 class Controller : public QObject
 {
@@ -25,14 +23,16 @@ signals:
 public slots:
     void createGameFromMenu();
     void closeGameAndOpenMenu();
-    void getPreferences();
+    void getPreferences(qint16 newVolume);
 
 private:
     MainWindow *mainWindow;
     BoardWindow *boardWindow;
     Preferences *preferences;
+    QMediaPlayer *themeSong;
+    QAudioOutput *themeAudioOutput;
     QString playerName = "Player";
-    QString themeSongPath = ":/music/audio/skip_james-devil_got_my_woman.mp3";
+    QString themeSongPath = "qrc:/audio/uSnovimaProdBane.mp3";
 
     void playThemeSong();
 };
