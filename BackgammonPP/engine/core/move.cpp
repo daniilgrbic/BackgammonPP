@@ -28,6 +28,30 @@ Move Move::mirror() const {
     return { m_player, from, to, m_isHit };
 }
 
+Move Move::verticalMirror(Move move)
+{
+    if (std::holds_alternative<int>(move.m_from)) {
+        move.m_from = NUMBER_OF_POINTS + 1 - std::get<int>(move.m_from);
+    }
+    if (std::holds_alternative<int>(move.m_to)) {
+        move.m_to = NUMBER_OF_POINTS + 1 - std::get<int>(move.m_to);
+    }
+    return move;
+}
+
+Move Move::centralMirror(Move move)
+{
+    if(std::holds_alternative<int>(move.m_from)) {
+        int point = std::get<int>(move.m_from);
+        move.m_from = (point >= 1 and point <= 12) ? point + 12 : point - 12;
+    }
+    if(std::holds_alternative<int>(move.m_to)) {
+        int point = std::get<int>(move.m_to);
+        move.m_to = (point >= 1 and point <= 12) ? point + 12 : point - 12;
+    }
+    return move;
+}
+
 QString Move::toString() const
 {
     QVariantMap map = toVariant().toMap();

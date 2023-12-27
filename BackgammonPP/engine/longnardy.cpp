@@ -159,7 +159,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
                 std::transform(
                     roll.moves().cbegin(), roll.moves().cend(),
                     std::back_inserter(moves),
-                    [](const auto& move) { return mirrorMove(move); }
+                    [](const auto& move) { return Move::centralMirror(move); }
                     );
             } else {
                 moves = std::move(roll.moves());
@@ -169,7 +169,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
         }
     );
     std::cout << "Legal Turns:" << std::endl;
-    for(auto lt : legalTurns) {
+    for(const auto& lt : legalTurns) {
         std::cout << lt.toString().toStdString() << std::endl;
     }
     return legalTurns;
