@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-Match::Match(QObject *parent, LocalPlayer *white, LocalPlayer *black, int length)
+Match::Match(QObject *parent, Player *white, Player *black, int length)
     : QObject(parent),
       m_white(white),
       m_black(black),
@@ -16,13 +16,13 @@ Match::Match(QObject *parent, LocalPlayer *white, LocalPlayer *black, int length
 
 void Match::startGame(){
     game = new Backgammon();
-    connect(this, &Match::setState, m_white, &LocalPlayer::setState);
+    connect(this, &Match::setState, m_white, &Player::setState);
     emit setState(game->board());
-    connect(this, &Match::setState, m_black, &LocalPlayer::setState);
+    connect(this, &Match::setState, m_black, &Player::setState);
     emit setState(game->board());
 
-    disconnect(this, &Match::setState, m_white, &LocalPlayer::setState);
-    disconnect(this, &Match::setState, m_black, &LocalPlayer::setState);
+    disconnect(this, &Match::setState, m_white, &Player::setState);
+    disconnect(this, &Match::setState, m_black, &Player::setState);
 
     PlayerColor first = game->currentRoll().onRoll();
     if(first == PlayerColor::WHITE){
@@ -36,14 +36,14 @@ void Match::startGame(){
     startMove();
 }
 
-void Match::startMove(){
+void Match::startMove(Turn *turn){
     currentLegalTurns = game->generateLegalTurns();
     currentRoll = Roll(game->currentRoll());
-    emit requestMove(&currentLegalTurns, &currentRoll);
+    emit requestMove(turn, &currentLegalTurns, &currentRoll);
 }
 
-void Match::confirmRoll(){
-    emit setDice(currentRoll);
+void Match::confirmRoll(Roll roll){
+    emit setDice(roll);
 }
 
 void Match::getTurn(Turn turn){
@@ -55,7 +55,7 @@ void Match::getTurn(Turn turn){
     } else {
         std::swap(m_onTurn, m_waiting);
         connectSlots(m_onTurn, m_waiting);
-        startMove();
+        startMove(&turn);
     }
 }
 
@@ -72,19 +72,19 @@ void Match::endGame() {
         startGame();
 }
 
-void Match::connectSlots(LocalPlayer *onMove, LocalPlayer *waiting){
-    disconnect(this, &Match::requestMove, waiting, &LocalPlayer::chooseMove);
-    disconnect(this, &Match::setDice, onMove, &LocalPlayer::setDice);
-    disconnect(this, &Match::setState, onMove, &LocalPlayer::setState);
+void Match::connectSlots(Player *onMove, Player *waiting){
+    disconnect(this, &Match::requestMove, waiting, &Player::chooseMove);
+    disconnect(this, &Match::setDice, onMove, &Player::setDice);
+    disconnect(this, &Match::setState, onMove, &Player::setState);
 
-    disconnect(waiting, &LocalPlayer::returnMove, this, &Match::getTurn);
-    disconnect(waiting, &LocalPlayer::confirmRoll, this, &Match::confirmRoll);
+    disconnect(waiting, &Player::returnMove, this, &Match::getTurn);
+    disconnect(waiting, &Player::confirmRoll, this, &Match::confirmRoll);
 
-    connect(this, &Match::requestMove, onMove, &LocalPlayer::chooseMove);
-    connect(this, &Match::setDice, waiting, &LocalPlayer::setDice);
-    connect(this, &Match::setState, waiting, &LocalPlayer::setState);
+    connect(this, &Match::requestMove, onMove, &Player::chooseMove);
+    connect(this, &Match::setDice, waiting, &Player::setDice);
+    connect(this, &Match::setState, waiting, &Player::setState);
 
-    connect(onMove, &LocalPlayer::returnMove, this, &Match::getTurn);
-    connect(onMove, &LocalPlayer::confirmRoll, this, &Match::confirmRoll);
+    connect(onMove, &Player::returnMove, this, &Match::getTurn);
+    connect(onMove, &Player::confirmRoll, this, &Match::confirmRoll);
 
 }

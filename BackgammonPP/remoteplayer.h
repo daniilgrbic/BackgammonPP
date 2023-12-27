@@ -2,17 +2,13 @@
 
 #include <QObject>
 #include "player.h"
-#include "boardwindow.h"
+#include "network/client.h"
 
-class LocalPlayer : public Player
+class RemotePlayer : public Player
 {
     Q_OBJECT
 public:
-    explicit LocalPlayer(QObject *parent, BoardWindow *m_board);
-
-signals:
-    //connected to the board
-    void forwardMoveRequest(std::vector<Turn> *legalMoves, Roll *roll);
+    explicit RemotePlayer(QObject *parent = nullptr, QString ip = "", QString username = "");
 
 public slots:
     //connected to the match
@@ -20,15 +16,12 @@ public slots:
     void setState(const BoardState& state) override;
     void setDice(const Roll& roll) override;
 
-    //connected to the board
+    //connected to the client
     void acceptMove(Turn turn) override;
     void diceRolled(Roll roll) override;
 
 private:
-    BoardWindow *m_board;
-
-    void connectToBoard();
-    void disconnectFromBoard();
+    Client *m_client;
 };
 
 

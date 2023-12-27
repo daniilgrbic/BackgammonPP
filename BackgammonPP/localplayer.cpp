@@ -1,7 +1,7 @@
 #include "localplayer.h"
 
 LocalPlayer::LocalPlayer(QObject *parent, BoardWindow *board)
-    : QObject(parent), m_board(board)
+    : Player(parent), m_board(board)
 {
     connect(this, &LocalPlayer::forwardSetState, board, &BoardWindow::setBoardState);
     connect(this, &LocalPlayer::forwardMoveRequest, board, &BoardWindow::requestTurn);
@@ -9,7 +9,7 @@ LocalPlayer::LocalPlayer(QObject *parent, BoardWindow *board)
     connect(this, &LocalPlayer::forwardSetDice, board, &BoardWindow::showRoll);
 }
 
-void LocalPlayer::chooseMove(std::vector<Turn> *legalMoves, Roll *roll){
+void LocalPlayer::chooseMove(Turn *turn, std::vector<Turn> *legalMoves, Roll *roll){
     connectToBoard();
     emit forwardMoveRequest(legalMoves, roll);
 }
@@ -27,8 +27,8 @@ void LocalPlayer::setDice(const Roll& roll){
     emit forwardSetDice(roll);
 }
 
-void LocalPlayer::diceRolled(){
-    emit confirmRoll();
+void LocalPlayer::diceRolled(Roll roll){
+    emit confirmRoll(roll);
 }
 
 void LocalPlayer::connectToBoard(){
