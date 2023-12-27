@@ -81,14 +81,13 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
 
     player.h player.cpp
     botplayer.h botplayer.cpp
-    playableplayer.h playableplayer.cpp
     localplayer.h localplayer.cpp
     match.h match.cpp
     consts.h
     stringlistmodel.h stringlistmodel.cpp
     historylistmodel.h historylistmodel.cpp
     stringlistmodel.h stringlistmodel.cpp
-
+    remoteplayer.h remoteplayer.cpp
     music.qrc
 )
 target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network Qt::Multimedia)
