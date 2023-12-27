@@ -42,6 +42,8 @@ set(SOURCE
     engine/core/turntrie.cpp engine/core/turntrie.h
     main.cpp
     mainwindow.cpp mainwindow.h mainwindow.ui
+    engine/longnardy.cpp
+    engine/longnardy.h
     utility/jsonserializer.h
     utility/serializable.h
     background_menu_image.qrc
