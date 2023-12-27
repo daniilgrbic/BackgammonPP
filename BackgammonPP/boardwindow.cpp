@@ -82,6 +82,7 @@ void BoardWindow::on_pbEndTurn_clicked()
 void BoardWindow::on_pbUndo_clicked()
 {
     ui->pbUndo->setEnabled(false);
+    ui->pbEndTurn->setEnabled(false);
     m_boardScene->undoMove();
 
 }
