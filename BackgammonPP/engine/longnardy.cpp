@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <iostream>
 
 LongNardy::LongNardy() : Game()
 {
@@ -86,7 +87,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     std::vector<RollState> level {
         {
             {},
-            onRoll == PlayerColor::WHITE ? m_board : mirrorBoard(m_board),
+            onRoll == PlayerColor::WHITE ? m_board : BoardState::centralMirror(m_board),
             m_currentRoll.dice()
         }
     };
@@ -149,29 +150,27 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     } while (not nextLevel.empty());
 
     std::vector<Turn> legalTurns;
-    for(const auto& rollState : level) {
-        // TODO: make this pretty and optimized
-        std::vector<Move> moves;
-        if (onRoll == PlayerColor::BLACK) {
-            std::transform(
-                rollState.moves().cbegin(), rollState.moves().cend(),
-                std::back_inserter(moves),
-                [](const auto& move) { return mirrorMove(move); }
-            );
-        } else {
-            moves = std::move(rollState.moves());
-        }
-        auto newTurn = Turn { 0, onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? rollState.board() : mirrorBoard(rollState.board()) };
-        bool unique = true;
-        for(const auto& turn : legalTurns) {
-            if(turn.m_finalBoard == newTurn.m_finalBoard) {
-                unique = false;
-                break;
+    std::transform(
+        level.cbegin(), level.cend(),
+        std::back_inserter(legalTurns),
+        [onRoll, this](const RollState& roll) {
+            std::vector<Move> moves;
+            if (onRoll == PlayerColor::BLACK) {
+                std::transform(
+                    roll.moves().cbegin(), roll.moves().cend(),
+                    std::back_inserter(moves),
+                    [](const auto& move) { return mirrorMove(move); }
+                    );
+            } else {
+                moves = std::move(roll.moves());
             }
+
+            return Turn { 0, onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? roll.board() : BoardState::centralMirror(roll.board()) };
         }
-        if(unique) {
-            legalTurns.push_back(newTurn);
-        }
+    );
+    std::cout << "Legal Turns:" << std::endl;
+    for(auto lt : legalTurns) {
+        std::cout << lt.toString().toStdString() << std::endl;
     }
     return legalTurns;
 }
