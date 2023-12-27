@@ -19,6 +19,7 @@ class BoardWindow : public QWidget
 public:
     explicit BoardWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
+    void setExitPoints(GameType);
     ~BoardWindow();
 public slots:
     void enableEndTurn();

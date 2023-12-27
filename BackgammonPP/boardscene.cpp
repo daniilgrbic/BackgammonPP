@@ -186,7 +186,7 @@ void BoardScene::updatePlayingDice(){
 void BoardScene::updatePlayingDice(const Roll& roll){
     int value1 = roll.dice().front();
     int value2 = roll.dice().back();
-    auto pos = (roll.onRoll() == PlayerColor::WHITE ? BoardPlayingDie::Position::LEFT : BoardPlayingDie::Position::RIGHT);
+    auto pos = (roll.onRoll() == PlayerColor::WHITE ? BoardPlayingDie::Position::RIGHT : BoardPlayingDie::Position::LEFT);
     if(value1)
         die1->updateDie(pos, value1);
     if(value2)
@@ -361,6 +361,20 @@ void BoardScene::undoMove(){
     if(m_turnTrie->isFinishedTurn()){
         emit enableEndTurn();
     }
+}
+
+void BoardScene::setExitPoints(GameType type){
+    switch(type){
+        case GameType::ClassicGameType:
+            whiteOut = m_rightBar->bottomHolder;
+            blackOut = m_rightBar->topHolder;
+            break;
+        case GameType::LongNardyGameType:
+            whiteOut = m_rightBar->bottomHolder;
+            blackOut = m_leftBar->topHolder;
+            break;
+    }
+
 }
 void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
     this->legalTurns = legalTurns;

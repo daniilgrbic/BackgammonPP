@@ -41,6 +41,10 @@ void BoardWindow::paintEvent(QPaintEvent *) {
     QPainter painter(this);
 }
 
+void BoardWindow::setExitPoints(GameType type){
+    m_boardScene->setExitPoints(type);
+}
+
 void BoardWindow::on_pbExitGame_clicked()
 {
     emit requestCloseGame();

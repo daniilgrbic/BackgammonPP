@@ -15,6 +15,7 @@
 #include "engine/core/boardstate.h"
 #include "engine/core/turntrie.h"
 #include "engine/core/roll.h"
+#include "consts.h"
 
 class BoardScene : public QGraphicsScene
 {
@@ -35,6 +36,7 @@ public:
     void prepareHolders(const HolderType origin);
 
     void undoMove();
+    void setExitPoints(GameType);
 
 signals:
     void enableEndTurn();
