@@ -161,7 +161,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
         } else {
             moves = std::move(rollState.moves());
         }
-        auto newTurn = Turn { 0, onRoll, moves, onRoll == PlayerColor::WHITE ? rollState.board() : mirrorBoard(rollState.board()) };
+        auto newTurn = Turn { 0, onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? rollState.board() : mirrorBoard(rollState.board()) };
         bool unique = true;
         for(const auto& turn : legalTurns) {
             if(turn.m_finalBoard == newTurn.m_finalBoard) {
@@ -184,4 +184,16 @@ bool LongNardy::isFinished(PlayerColor player) const
 bool LongNardy::isBlockedBy(const Point &point, PlayerColor player) const
 {
     return point.count() >= 1 && point.owner().value() == player;
+}
+
+std::optional<GameResult> LongNardy::getResult()
+{
+    if(m_result)
+        return m_result;
+    if (isFinished(PlayerColor::WHITE)) {
+        m_result = GameResult(PlayerColor::WHITE, 1);
+    } else if (isFinished(PlayerColor::BLACK)) {
+        m_result = GameResult(PlayerColor::BLACK, 1);
+    }
+    return m_result;
 }

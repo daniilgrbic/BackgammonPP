@@ -18,6 +18,7 @@ public:
     std::vector<Turn> generateLegalTurns() override;
     bool isFinished(PlayerColor player) const override;
     bool isBlockedBy(const Point& point, PlayerColor player) const override;
+    std::optional<GameResult> getResult();
 
 private:
     const int CHECKERS_COUNT = 15;
