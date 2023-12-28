@@ -15,7 +15,6 @@ Match::Match(QObject *parent, Player *white, Player *black, int length, GameType
       m_whiteScore(0),
       m_blackScore(0)
 {
-    startGame();
 }
 
 void Match::startGame(){

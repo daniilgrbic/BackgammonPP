@@ -1,6 +1,8 @@
 #include "controller.h"
 #include "match.h"
 #include "localplayer.h"
+#include "botplayer.h"
+#include "engine/bot/bot.hpp"
 
 Controller::Controller()
 {
@@ -46,7 +48,8 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
     boardWindow->setOpponentName(opponentName);
     boardWindow->show();
     Player *white = new LocalPlayer(nullptr, this->boardWindow);
-    Player *black= new LocalPlayer(nullptr, this->boardWindow);
+    AI::Bot *bot = new AI::Bot("../BackgammonPP/engine/bot/saved_genomes/gen_603.genome");
+    Player *black= new BotPlayer(nullptr, this->boardWindow, bot);//LocalPlayer(nullptr, this->boardWindow);
     Match *m = new Match(nullptr, white, black, numGames, gameType);
     white->setParent(m);
     black->setParent(m);

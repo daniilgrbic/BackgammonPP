@@ -20,27 +20,27 @@ MainWindow::MainWindow(QWidget *parent)
     setPicture(this->backgroundPicPath, this);
     setPicture(this->sketchPicPath, ui->optionsFrame);
 
-    connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
-    connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
-    connect(ui->btPreferences, SIGNAL(clicked()), this, SLOT(on_btPreference_clicked()));
+    // connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
+    // connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
+    // connect(ui->btPreferences, SIGNAL(clicked()), this, SLOT(on_btPreference_clicked()));
 
 
     // Create Game Lobby
-    connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
-    connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
-    connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
-    connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
+    // connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+    // connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
+    // connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
+    // connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
+    // connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
     this->on_rbPlayerRemote_clicked();
     this->showIpAddress();
 
     // Join Game Lobby
-    connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
+    // connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+    // connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
 
     // Preferences - labelPrefUsername, btSavePreferences
-    connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btSavePreferences, SIGNAL(clicked()), this, SLOT(on_btSavePreference_clicked()));
+    // connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
+    // connect(ui->btSavePreferences, SIGNAL(clicked()), this, SLOT(on_btSavePreference_clicked()));
     this->ui->lineEdit->setText(Preferences().playerName);
 }
 
