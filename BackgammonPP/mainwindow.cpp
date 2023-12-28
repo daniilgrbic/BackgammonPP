@@ -89,7 +89,7 @@ void MainWindow::on_btJoinLobby_clicked()
         QMessageBox::information(nullptr, "Alert", "Enter valid IP address");
     }
     else {
-        // CONNECT
+        emit joinRemoteMatch(ipAddress);
     }
 }
 
@@ -109,7 +109,7 @@ void MainWindow::on_btStartGame_clicked()
         emit requestCreateGame("Bot", gameNumber, gameType, playerType);
     }
     else if (playerType == PlayerType::LocalPlayer) {
-        emit requestCreateGame("Player2", gameNumber, gameType, playerType);
+        emit requestCreateGame("LocalPlayer", gameNumber, gameType, playerType);
     }
     else {
         if (opponentName.size() < MIN_USERNAME_SIZE or opponentName.size() > MAX_USERNAME_SIZE) {
@@ -118,12 +118,13 @@ void MainWindow::on_btStartGame_clicked()
         }
         else {
             // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
-            QStringList opponents;
-            model = new StringListModel(opponents);
-            ui->lvOpponents->setModel(model);
-            ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
-            model->addOpponent("pera"); // Example how to add names to listview
-            ui->stackedWidget->setCurrentIndex(4);
+            // QStringList opponents;
+            // model = new StringListModel(opponents);
+            // ui->lvOpponents->setModel(model);
+            // ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
+            // model->addOpponent("pera"); // Example how to add names to listview
+            // ui->stackedWidget->setCurrentIndex(4);
+            emit requestCreateGame(opponentName, gameNumber, gameType, playerType);
         }
     }
 }
@@ -191,24 +192,24 @@ void MainWindow::on_btReturnFromCreateGameLobby_clicked()
 void MainWindow::on_rbPlayerRemote_clicked() {
     if (ui->rbPlayerRemote->isChecked()) {
         ui->labelOpponentUsername->setDisabled(false);
-        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8");
+        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8; color: black");
     }
     else {
         ui->labelOpponentUsername->setDisabled(true);
-        ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+        ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
         ui->labelOpponentUsername->setText("");
     }
 }
 
 void MainWindow::on_rbPlayerLocal_clicked() {
     ui->labelOpponentUsername->setDisabled(true);
-    ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+    ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
     ui->labelOpponentUsername->setText("");
 }
 
 void MainWindow::on_rbPlayerBot_clicked() {
     ui->labelOpponentUsername->setDisabled(true);
-    ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+    ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
     ui->labelOpponentUsername->setText("");
 }
 

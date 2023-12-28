@@ -4,14 +4,19 @@
 #include <QString>
 #include <QTcpSocket>
 #include <network/server_commands.h>
+#include <engine/core/turn.h>
+#include <engine/core/roll.h>
+#include <utility/jsonserializer.h>>
 
 
 class Client : public QObject {
     Q_OBJECT
 public:
-    Client(bool host = false, QObject* parent = nullptr);
+    Client(QString ipAddress, QString username, bool host = false, QObject* parent = nullptr);
     ~Client();
     bool connectClient(QString ipAddress);
+    void sendTurnToServer(Turn* turn);
+    void sendRollToServer(Roll roll);
 
 signals:
     void connected(QString msg);
@@ -25,6 +30,9 @@ signals:
     void unknownServerCommand(QString srvCmd);
     void notConnected();
 
+    void acceptMove(Turn turn);
+    void diceRolled(Roll roll);
+
 
 public slots:
     void readMessageFromServer();
@@ -33,6 +41,8 @@ public slots:
     void sendStateToServer(QString state);
     void sendPlayerToServer(QString state);
     void sendNameToServer(QString state);
+
+    void sendRollToServer(QString roll);
 
 
 private:

@@ -29,6 +29,7 @@ public:
 
 signals:
     void requestCreateGame(QString opponentName, qint8 numGames, GameType gameType, PlayerType playerType);
+    void joinRemoteMatch(QString ipAddress);
     void requestPreferences(qint16 newVolume);
 
 public slots:

@@ -17,6 +17,8 @@ Controller::Controller()
     connect(mainWindow, &MainWindow::requestCreateGame, this, &Controller::createGameFromMenu);
     connect(boardWindow, &BoardWindow::requestCloseGame, this, &Controller::closeGameAndOpenMenu);
 
+    connect(mainWindow, &MainWindow::joinRemoteMatch, this, &Controller::joinRemoteMatchFromMenu);
+
     connect(mainWindow, &MainWindow::requestPreferences, this, &Controller::getPreferences);
     connect(this, &Controller::sendPreferences, mainWindow, &MainWindow::handlePreferences);
 }
@@ -58,7 +60,8 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         white->setParent(m);
         black->setParent(m);
         m->startGame();
-    }else if (playerType == PlayerType::LocalPlayer) {
+    }
+    else if (playerType == PlayerType::LocalPlayer) {
         mainWindow->close();
 
         boardWindow->setOpponentName(opponentName);
@@ -72,7 +75,18 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         black->setParent(m);
         m->startGame();
     }
+    else {
+        thread_server = new QThread();
+        server_local = new Server(opponentName);
+        server_local->moveToThread(thread_server);
+        thread_server->start();
+    }
 
+}
+
+void Controller::joinRemoteMatchFromMenu(QString ipAddress)
+{
+    client_local = new Client(ipAddress, preferences->playerName);
 }
 
 void Controller::closeGameAndOpenMenu()

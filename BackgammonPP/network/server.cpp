@@ -5,9 +5,10 @@
 #include <string>
 
 
-Server::Server(QObject *parent)
+Server::Server(QString name, QObject *parent)
     : QObject(parent)
 {
+    oppName = name;
     m_gameOn = false;
     m_server = new QTcpServer(this);
     m_player1 = nullptr;
@@ -15,7 +16,10 @@ Server::Server(QObject *parent)
 
     QObject::connect(m_server, &QTcpServer::newConnection, this, &Server::connected);
 
-    m_server->listen(QHostAddress::AnyIPv4, srvconst::PORT);
+    if (m_server->listen(QHostAddress::AnyIPv4, srvconst::PORT))
+        qDebug() << "listening on port:" << srvconst::PORT << "\n";
+    else
+        qDebug() << "this port is already in use\n";
 }
 
 Server::~Server() {
@@ -43,8 +47,11 @@ void Server::connected() {
 void Server::disconnected() {
     QTcpSocket* disconnectedSocket = static_cast<QTcpSocket *>(QObject::sender());
 
+    qDebug() << "123\n";
+
     if (m_gameOn) {
         if (disconnectedSocket == m_host || disconnectedSocket == m_player1 || disconnectedSocket == m_player2) {
+            qDebug() << "Nuke game?\n";
             nukeGame();
         }
         else {
@@ -54,6 +61,7 @@ void Server::disconnected() {
     }
     else { // still in lobby
         if (disconnectedSocket == m_host) {
+            qDebug() << "Nuke game - host????\n";
             nukeGame();
         }
         else {
@@ -91,7 +99,7 @@ void Server::readMessage() {
         processSelectPlayerCommand(sourceSocket, message.sliced(srvconst::serverCmdSelectPlayer.length()));
     }
     else if (message.startsWith(srvconst::serverCmdRemovePlayer)) {
-            processRemovePlayerCommand(sourceSocket, message.sliced(srvconst::serverCmdSelectPlayer.length()));
+        processRemovePlayerCommand(sourceSocket, message.sliced(srvconst::serverCmdSelectPlayer.length()));
     }
     else if (message.startsWith(srvconst::serverCmdState)) {
         processStateCommand(sourceSocket, message.sliced(srvconst::serverCmdState.length()));
@@ -110,6 +118,12 @@ void Server::readMessage() {
     }
     else if (message.startsWith(srvconst::serverCmdGameEnd)) {
         processGameEndCommand(sourceSocket);
+    }
+    else if (message.startsWith(srvconst::serverCmdRoll)) {
+        processRollCommand(sourceSocket, message);
+    }
+    else if (message.startsWith(srvconst::serverCmdTurn)) {
+        processTurnCommand(sourceSocket, message);
     }
     else {
         throw std::runtime_error("");
@@ -164,10 +178,10 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         }
     }
 
-    if (m_gameOn) {
-        src->write(srvconst::serverCmdGameOn.toStdString().c_str());
-        return;
-    }
+    // if (m_gameOn) {
+    //     src->write(srvconst::serverCmdGameOn.toStdString().c_str());
+    //     return;
+    // }
 
     if (m_clientNames.find(src) == m_clientNames.end()) { // socket doesn't have a name registered
         QString finalName = name;
@@ -177,7 +191,7 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
             m_clientSockets[name] = src;
         }
         else {
-            QString finalName = name + QString::number(m_namesCnt[name]);
+            finalName = name + QString::number(m_namesCnt[name]);
 
             m_clientNames[src] = finalName;
             m_clientSockets[finalName] = src;
@@ -186,6 +200,9 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         m_spectators.insert(src);
 
         // update local names list
+
+        qDebug() << finalName << "\n";
+
 
         src->write((srvconst::serverCmdAddName + finalName).toStdString().c_str());
 
@@ -197,6 +214,13 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         }
 
         broadcast(src, srvconst::serverCmdAddName + finalName);
+
+        if (finalName == oppName) {
+            qDebug() << "GAME START";
+
+            processSelectPlayerCommand(m_host, finalName);
+            processGameStartCommand(m_host);
+        }
     }
 }
 
@@ -290,9 +314,19 @@ void Server::processDiceCommand(QTcpSocket *src, QString cmd) {
     broadcast(src, cmd.toStdString().c_str());
 }
 
+
+void Server::processRollCommand(QTcpSocket* src, QString roll) {
+    broadcast(src, roll.toStdString().c_str(), true);
+}
+
+void Server::processTurnCommand(QTcpSocket* src, QString turn) {
+    broadcast(src, turn.toStdString().c_str(), true);
+}
+
+
 void Server::processGameStartCommand(QTcpSocket *src) {
     m_gameOn = true;
-    broadcast(src, (srvconst::serverCmdGameStart).toStdString().c_str(), true);
+    broadcast(nullptr, (srvconst::serverCmdGameStart).toStdString().c_str(), true);
 }
 
 void Server::processGameEndCommand(QTcpSocket *src) {
@@ -303,16 +337,17 @@ void Server::processGameEndCommand(QTcpSocket *src) {
 }
 
 void Server::nukeGame() {
-    processRemovePlayerCommand(m_host, m_clientNames[m_player1]);
-    processRemovePlayerCommand(m_host, m_clientNames[m_player2]);
+    qDebug() << "Reached\n";
+    // processRemoveNameCommand(m_host, m_clientNames[m_player1]);
+    processRemoveNameCommand(m_host, m_clientNames[m_player2]);
     for (auto spectator : m_spectators)
-        processRemovePlayerCommand(m_host, m_clientNames[spectator]);
-    m_player1 = nullptr;
+        processRemoveNameCommand(m_host, m_clientNames[spectator]);
+    // m_player1 = nullptr; // this will always be host
     m_player2 = nullptr;
     m_spectators.clear();
     m_clientNames.clear();
     m_clientSockets.clear();
-    throw std::runtime_error("handle differently?");
+    // throw std::runtime_error("handle differently?");
 }
 
 void Server::removeName(QTcpSocket *disconnectedSocket) {
