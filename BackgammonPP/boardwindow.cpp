@@ -21,6 +21,8 @@ BoardWindow::BoardWindow(QWidget *parent) :
     ui->boardView->setScene(m_boardScene);
     ui->boardView->setRenderHint(QPainter::Antialiasing);
     setWindowTitle("BackgammonPP");
+    setWindowIcon(QIcon(ICON_PATH));
+
     //ui->boardView->resize(605,305);
     ui->pbEndTurn->setEnabled(false);
     ui->pbRollDice->setEnabled(false);

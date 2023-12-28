@@ -73,7 +73,7 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     controller.h
     main.cpp
     mainwindow.cpp mainwindow.h mainwindow.ui
-    preferences.ui
+
     sidebarcheckerholder.cpp
     sidebarcheckerholder.h
     verticalchecker.cpp

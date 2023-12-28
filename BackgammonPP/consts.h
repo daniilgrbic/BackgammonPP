@@ -11,6 +11,7 @@ const qint16 BASE_THEME_VOLUME = 0;
 const qint16 MAX_VOLUME = 100;
 
 const QString THEME_SOUND_PATH = "qrc:/audio/uSnovimaProdBane.mp3";
+const QString ICON_PATH = ":/resources/img/logo.png";
 
 enum class GameType {
     ClassicGameType,

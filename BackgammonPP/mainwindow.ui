@@ -67,7 +67,7 @@
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="mainMenu">
        <widget class="QWidget" name="widget" native="true">
@@ -760,7 +760,7 @@ QPushButton:hover {
          </property>
          <property name="styleSheet">
           <string notr="true">QFrame {
-	background-color: rgba(0, 0, 0, 0);
+	background-color: transparent;
 	color: white;
 }</string>
          </property>
@@ -837,6 +837,11 @@ QPushButton:hover {
           <height>335</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.8);
+}</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -846,6 +851,11 @@ QPushButton:hover {
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QFrame" name="frame_11">
+           <property name="styleSheet">
+            <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
+           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -897,6 +907,11 @@ QPushButton:hover {
          </item>
          <item>
           <widget class="QFrame" name="frame">
+           <property name="styleSheet">
+            <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
+           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -974,6 +989,11 @@ QPushButton:hover {
          </item>
          <item>
           <widget class="QFrame" name="frame_9">
+           <property name="styleSheet">
+            <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
+           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -1052,6 +1072,7 @@ QPushButton:hover {
         <property name="styleSheet">
          <string notr="true">QFrame {
 	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
 }</string>
         </property>
         <property name="frameShape">
@@ -1075,6 +1096,11 @@ QPushButton:hover {
              <height>16777215</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+           </property>
            <property name="text">
             <string>Hi, </string>
            </property>
@@ -1085,6 +1111,11 @@ QPushButton:hover {
          </item>
          <item>
           <widget class="QLabel" name="labelPrefUsername">
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -1103,6 +1134,11 @@ QPushButton:hover {
           <height>371</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.8);
+}</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -1118,6 +1154,11 @@ QPushButton:hover {
            <height>92</height>
           </rect>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -1129,6 +1170,7 @@ QPushButton:hover {
            <widget class="QFrame" name="frame_2">
             <property name="styleSheet">
              <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
 	text: white;
 }</string>
             </property>
@@ -1162,7 +1204,7 @@ QPushButton:hover {
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>20</height>
+                 <height>30</height>
                 </size>
                </property>
               </spacer>
@@ -1172,6 +1214,11 @@ QPushButton:hover {
           </item>
           <item>
            <widget class="QFrame" name="frame_3">
+            <property name="styleSheet">
+             <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -1209,7 +1256,7 @@ QPushButton:hover {
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
               </spacer>
@@ -1227,6 +1274,11 @@ QPushButton:hover {
            <width>311</width>
            <height>81</height>
           </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>

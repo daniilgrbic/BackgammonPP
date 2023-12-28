@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     ui->horizontalSlider->setValue(BASE_THEME_VOLUME);
+    setWindowTitle("BackgammonPP");
+    setWindowIcon(QIcon(ICON_PATH));
 
     setFixedSize(width(), height());
 
@@ -26,15 +28,15 @@ MainWindow::MainWindow(QWidget *parent)
     // Create Game Lobby
     connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
     connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
-    connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
-    connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
-    connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
-    this->on_rbPlayerBot_clicked();
+    connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
+    connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
+    connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
+    this->on_rbPlayerRemote_clicked();
     this->showIpAddress();
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btJoinLobby, SIGNAL(clicked(false)), this, SLOT(on_btJoinLobby_clicked()));
+    connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
 
     // Preferences - labelPrefUsername, btSavePreferences
     connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -112,14 +114,13 @@ void MainWindow::on_btStartGame_clicked()
     if (playerType == PlayerType::BotPlayer) {
         emit requestCreateGame("Bot", gameNumber);
     }
+    else if (playerType == PlayerType::LocalPlayer) {
+        emit requestCreateGame("Player2", gameNumber);
+    }
     else {
         if (opponentName.size() < MIN_USERNAME_SIZE or opponentName.size() > MAX_USERNAME_SIZE) {
             QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
             return;
-        }
-
-        if (playerType == PlayerType::LocalPlayer) {
-            emit requestCreateGame(opponentName, gameNumber);
         }
         else {
             // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
@@ -193,15 +194,15 @@ void MainWindow::on_btReturnFromCreateGameLobby_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_rbPlayerBot_clicked() {
-    if (ui->rbPlayerBot->isChecked()) {
+void MainWindow::on_rbPlayerRemote_clicked() {
+    if (ui->rbPlayerRemote->isChecked()) {
+        ui->labelOpponentUsername->setDisabled(false);
+        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8");
+    }
+    else {
         ui->labelOpponentUsername->setDisabled(true);
         ui->labelOpponentUsername->setStyleSheet("background-color: gray");
         ui->labelOpponentUsername->setText("");
-    }
-    else {
-        ui->labelOpponentUsername->setDisabled(false);
-        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8");
     }
 }
 

@@ -96,6 +96,11 @@
      <height>451</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QListView {
+	border: 2px black;
+}</string>
+   </property>
   </widget>
   <widget class="QGraphicsView" name="historyboardView">
    <property name="geometry">
