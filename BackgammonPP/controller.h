@@ -32,7 +32,6 @@ private:
     Preferences *preferences;
     QMediaPlayer *themeSong;
     QAudioOutput *themeAudioOutput;
-    QString playerName = Preferences().playerName;
     QString themeSongPath = THEME_SOUND_PATH;
 
     Server *server_local = nullptr;
