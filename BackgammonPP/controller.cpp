@@ -41,19 +41,38 @@ void Controller::getPreferences(qint16 newVolume)
     emit sendPreferences(this->preferences);
 }
 
-void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameType gameType)
+void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameType gameType, PlayerType playerType)
 {
-    mainWindow->close();
 
-    boardWindow->setOpponentName(opponentName);
-    boardWindow->show();
-    Player *white = new LocalPlayer(nullptr, this->boardWindow);
-    AI::Bot *bot = new AI::Bot("../BackgammonPP/engine/bot/saved_genomes/gen_603.genome");
-    Player *black= new BotPlayer(nullptr, this->boardWindow, bot);//LocalPlayer(nullptr, this->boardWindow);
-    Match *m = new Match(nullptr, white, black, numGames, gameType);
-    white->setParent(m);
-    black->setParent(m);
-    m->startGame();
+    if (playerType == PlayerType::BotPlayer) {
+        mainWindow->close();
+
+        boardWindow->setOpponentName(opponentName);
+        boardWindow->show();
+        Player *white = new LocalPlayer(nullptr, this->boardWindow);
+        AI::Bot *bot = new AI::Bot("../BackgammonPP/engine/bot/saved_genomes/gen_603.genome");
+        Player *black= new BotPlayer(nullptr, this->boardWindow, bot);//LocalPlayer(nullptr, this->boardWindow);
+        Match *m = new Match(nullptr, white, black, numGames, gameType);
+        connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
+        connect(black, &BotPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
+        white->setParent(m);
+        black->setParent(m);
+        m->startGame();
+    }else if (playerType == PlayerType::LocalPlayer) {
+        mainWindow->close();
+
+        boardWindow->setOpponentName(opponentName);
+        boardWindow->show();
+        Player *white = new LocalPlayer(nullptr, this->boardWindow);
+        Player *black= new LocalPlayer(nullptr, this->boardWindow);
+        Match *m = new Match(nullptr, white, black, numGames, gameType);
+        connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
+        connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
+        white->setParent(m);
+        black->setParent(m);
+        m->startGame();
+    }
+
 }
 
 void Controller::closeGameAndOpenMenu()

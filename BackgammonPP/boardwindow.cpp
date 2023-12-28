@@ -33,7 +33,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
     connect(m_boardScene, &BoardScene::sendTurnFinish, this, &BoardWindow::forwardTurnFinish);
     connect(this, &BoardWindow::setBoardState, m_boardScene, &BoardScene::setBoardState);
     connect(m_boardScene, &BoardScene::setUndoEnabled, this, &BoardWindow::setUndoEnabled);
-    connect(this, &BoardWindow::forwardTurnFinish, this->m_historyModel, &HistoryListModel::addTurn);
+    // connect(this, &BoardWindow::forwardTurnFinish, this->m_historyModel, &HistoryListModel::addTurn);
 
     connect(ui->pbExitCurrentGame, SIGNAL(clicked()), this, SLOT(on_pbExitGame_clicked()));
 }

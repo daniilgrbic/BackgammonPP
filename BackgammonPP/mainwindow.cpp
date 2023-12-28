@@ -112,10 +112,10 @@ void MainWindow::on_btStartGame_clicked()
     }
 
     if (playerType == PlayerType::BotPlayer) {
-        emit requestCreateGame("Bot", gameNumber, gameType);
+        emit requestCreateGame("Bot", gameNumber, gameType, playerType);
     }
     else if (playerType == PlayerType::LocalPlayer) {
-        emit requestCreateGame("Player2", gameNumber, gameType);
+        emit requestCreateGame("Player2", gameNumber, gameType, playerType);
     }
     else {
         if (opponentName.size() < MIN_USERNAME_SIZE or opponentName.size() > MAX_USERNAME_SIZE) {
