@@ -2,7 +2,6 @@
 
 #include "mainwindow.h"
 #include "boardwindow.h"
-#include "match.h"
 #include <QApplication>
 
 #include <QtMultimedia>
@@ -19,7 +18,7 @@ signals:
     void sendPreferences(Preferences *preferences);
 
 public slots:
-    void createGameFromMenu(QString opponentName, qint8 numGames);
+    void createGameFromMenu(QString opponentName, qint8 numGames, GameType gameType);
     void closeGameAndOpenMenu();
     void getPreferences(qint16 newVolume);
 

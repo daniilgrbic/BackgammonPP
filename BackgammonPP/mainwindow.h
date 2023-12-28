@@ -10,7 +10,7 @@
 #include <QMessageBox>
 #include <QHostAddress>
 #include <QNetworkInterface>
-#include <iostream>
+
 #include "boardwindow.h"
 #include "consts.h"
 #include "stringlistmodel.h"
@@ -28,7 +28,7 @@ public:
     ~MainWindow();
 
 signals:
-    void requestCreateGame(QString opponentName, qint8 numGames);
+    void requestCreateGame(QString opponentName, qint8 numGames, GameType gameType);
     void requestPreferences(qint16 newVolume);
 
 public slots:

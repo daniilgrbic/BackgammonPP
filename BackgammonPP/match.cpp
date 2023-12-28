@@ -1,13 +1,17 @@
 #include "match.h"
+#include "engine/backgammon.h"
+#include "engine/longnardy.h"
+
 #include <algorithm>
 #include <vector>
 #include <iostream>
 
-Match::Match(QObject *parent, Player *white, Player *black, int length)
+Match::Match(QObject *parent, Player *white, Player *black, int length, GameType gameType)
     : QObject(parent),
       m_white(white),
       m_black(black),
       m_length(length),
+      m_gameType(gameType),
       m_whiteScore(0),
       m_blackScore(0)
 {
@@ -15,7 +19,18 @@ Match::Match(QObject *parent, Player *white, Player *black, int length)
 }
 
 void Match::startGame(){
-    game = new Backgammon();
+    switch (m_gameType) {
+    case GameType::ClassicGameType:
+        game = new Backgammon();
+        break;
+    case GameType::LongNardyGameType:
+        game = new LongNardy();
+        break;
+    default:
+        game = new Backgammon();
+        break;
+    }
+
     connect(this, &Match::setState, m_white, &Player::setState);
     emit setState(game->board());
     connect(this, &Match::setState, m_black, &Player::setState);

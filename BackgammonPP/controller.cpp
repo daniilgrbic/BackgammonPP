@@ -1,4 +1,6 @@
 #include "controller.h"
+#include "match.h"
+#include "localplayer.h"
 
 Controller::Controller()
 {
@@ -37,7 +39,7 @@ void Controller::getPreferences(qint16 newVolume)
     emit sendPreferences(this->preferences);
 }
 
-void Controller::createGameFromMenu(QString opponentName, qint8 numGames)
+void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameType gameType)
 {
     mainWindow->close();
 
@@ -45,7 +47,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames)
     boardWindow->show();
     Player *white = new LocalPlayer(nullptr, this->boardWindow);
     Player *black= new LocalPlayer(nullptr, this->boardWindow);
-    Match *m = new Match(nullptr, white, black, numGames);
+    Match *m = new Match(nullptr, white, black, numGames, gameType);
     white->setParent(m);
     black->setParent(m);
     m->startGame();

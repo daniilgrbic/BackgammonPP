@@ -1,14 +1,16 @@
 #pragma once
 
+#include "player.h"
+#include "consts.h"
+#include "engine/core/game.h"
+
 #include <QObject>
-#include "localplayer.h"
-#include "engine/backgammon.h"
 
 class Match : public QObject
 {
     Q_OBJECT
 public:
-    Match(QObject *parent, Player *white, Player *black, int length=1);
+    Match(QObject *parent, Player *white, Player *black, int length=1, GameType gameType=GameType::ClassicGameType);
 
     void startGame();
 
@@ -29,6 +31,8 @@ private:
     Player *m_waiting;
 
     int m_length;
+
+    GameType m_gameType;
 
     int m_whiteScore;
     int m_blackScore;
