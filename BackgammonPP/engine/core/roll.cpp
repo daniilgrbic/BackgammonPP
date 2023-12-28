@@ -43,3 +43,21 @@ std::vector<int> Roll::dice() const {
 PlayerColor Roll::onRoll() const {
     return m_onRoll;
 }
+
+QVariant Roll::toVariant() const
+{
+    QVariantMap map;
+    map.insert("onRoll", m_onRoll == PlayerColor::WHITE ? "white" : "black");
+    map.insert("dice", QVariantList(m_dice.begin(), m_dice.end()));
+    return map;
+}
+
+void Roll::fromVariant(const QVariant &variant)
+{
+    QVariantMap map = variant.toMap();
+    m_onRoll = map.value("onRoll").toString().toStdString() == "white" ?
+                   PlayerColor::WHITE : PlayerColor::BLACK;
+    m_dice.resize(0);
+    for(const auto& die : map.value("dice").toList())
+        m_dice.push_back(die.toInt());
+}

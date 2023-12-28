@@ -2,10 +2,11 @@
 
 #include "die.h"
 #include "playercolor.h"
+#include "../../utility/serializable.h"
 
 #include <vector>
 
-class Roll
+class Roll : public Serializable
 {
 public:
     Roll();
@@ -21,6 +22,10 @@ public:
     std::vector<int> dice() const;
 
     PlayerColor onRoll() const;
+
+    // Serializable interface
+    QVariant toVariant() const;
+    void fromVariant(const QVariant &variant);
 
 private:
     PlayerColor m_onRoll;
