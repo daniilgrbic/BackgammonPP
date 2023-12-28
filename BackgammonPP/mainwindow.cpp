@@ -211,7 +211,6 @@ void MainWindow::showIpAddress() {
     for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
         if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
             ipAddress = address.toString();
-            break;
         }
     }
     ui->labeIP->setText(ipAddress);

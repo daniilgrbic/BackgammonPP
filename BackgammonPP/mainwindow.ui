@@ -364,91 +364,18 @@ QPushButton:hover {
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QFrame" name="frameButtons">
+       <widget class="QFrame" name="frameCreateGame">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>410</y>
-          <width>251</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="btBackFromCreateToMenu">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-           </property>
-           <property name="text">
-            <string>Back</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btStartGame">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-           </property>
-           <property name="text">
-            <string>Start Game</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QFrame" name="frameGameMode">
-        <property name="geometry">
-         <rect>
-          <x>180</x>
+          <x>-10</x>
           <y>90</y>
-          <width>311</width>
-          <height>121</height>
+          <width>671</width>
+          <height>411</height>
          </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QFrame {
-	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
 }</string>
         </property>
         <property name="frameShape">
@@ -457,296 +384,415 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QLabel" name="labelGameMode">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QLabel {
+        <widget class="QFrame" name="frameGameMode">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>0</y>
+           <width>311</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0.0);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="labelGameMode">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
 	text: white;
 }</string>
-           </property>
-           <property name="text">
-            <string>Game mode</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="frame_7">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <widget class="QRadioButton" name="rbModeClassic">
-              <property name="styleSheet">
-               <string notr="true">QRadioButton {
-	color: white;
-}</string>
-              </property>
-              <property name="text">
-               <string>Classic</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="rbModeNardy">
-              <property name="styleSheet">
-               <string notr="true">QRadioButton {
-	color: white;
-}</string>
-              </property>
-              <property name="text">
-               <string>Long Nardy</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QFrame" name="frameGameType">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>210</y>
-          <width>501</width>
-          <height>191</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QFrame" name="frameName">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-           <widget class="QLabel" name="labelName">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>10</y>
-              <width>151</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-	color: white;
-}</string>
             </property>
             <property name="text">
-             <string>Opponent's Name:</string>
+             <string>Game mode</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
-           <widget class="QTextEdit" name="labelOpponentUsername">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>40</y>
-              <width>171</width>
-              <height>31</height>
-             </rect>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_7">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QRadioButton" name="rbModeClassic">
+               <property name="styleSheet">
+                <string notr="true">QRadioButton {
+	color: white;
+}</string>
+               </property>
+               <property name="text">
+                <string>Classic</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="rbModeNardy">
+               <property name="styleSheet">
+                <string notr="true">QRadioButton {
+	color: white;
+}</string>
+               </property>
+               <property name="text">
+                <string>Long Nardy</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QFrame" name="frameButtons">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>320</y>
+           <width>251</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="btBackFromCreateToMenu">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">QTextEdit {
+             <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: center;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
+            </property>
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btStartGame">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: center;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
+            </property>
+            <property name="text">
+             <string>Start Game</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QFrame" name="frameGameType">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>120</y>
+           <width>501</width>
+           <height>191</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QFrame" name="frameName">
+            <property name="styleSheet">
+             <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="labelName">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>10</y>
+               <width>151</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel {
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Opponent's Name:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+            <widget class="QTextEdit" name="labelOpponentUsername">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>40</y>
+               <width>171</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QTextEdit {
 	background-color: #EDE9E8 ;
 	color: black;
 }</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="labelGameDuration">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>90</y>
-              <width>181</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
+             </property>
+            </widget>
+            <widget class="QLabel" name="labelGameDuration">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>90</y>
+               <width>181</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel {
 	color: white;
 }</string>
-            </property>
-            <property name="text">
-             <string>Number of games:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-           <widget class="QSpinBox" name="sbGameDuration">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>120</y>
-              <width>171</width>
-              <height>25</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QSpinBox {
+             </property>
+             <property name="text">
+              <string>Number of games:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+            <widget class="QSpinBox" name="sbGameDuration">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>120</y>
+               <width>171</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QSpinBox {
 	background-color: #EDE9E8 ;
 	color: black;
 }</string>
-            </property>
-            <property name="value">
-             <number>3</number>
-            </property>
+             </property>
+             <property name="value">
+              <number>3</number>
+             </property>
+            </widget>
            </widget>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="framePlayer">
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-           <widget class="QRadioButton" name="rbPlayerBot">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>20</y>
-              <width>112</width>
-              <height>26</height>
-             </rect>
-            </property>
+          </item>
+          <item>
+           <widget class="QFrame" name="framePlayer">
             <property name="styleSheet">
-             <string notr="true">QRadioButton {
+             <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QRadioButton" name="rbPlayerBot">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>20</y>
+               <width>112</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QRadioButton {
 	color: white;
 }</string>
+             </property>
+             <property name="text">
+              <string>Bot</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QRadioButton" name="rbPlayerLocal">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>70</y>
+               <width>112</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QRadioButton {
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Local</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QRadioButton" name="rbPlayerRemote">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>120</y>
+               <width>112</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QRadioButton {
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Remote</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QFrame" name="ipFrame">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>360</y>
+           <width>151</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0);
+	color: white;
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QLabel" name="labelpNotation">
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>16777215</height>
+             </size>
             </property>
             <property name="text">
-             <string>Bot</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
+             <string>IP: </string>
             </property>
            </widget>
-           <widget class="QRadioButton" name="rbPlayerLocal">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>70</y>
-              <width>112</width>
-              <height>26</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QRadioButton {
-	color: white;
-}</string>
-            </property>
+          </item>
+          <item>
+           <widget class="QLabel" name="labeIP">
             <property name="text">
-             <string>Local</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
+             <string/>
             </property>
            </widget>
-           <widget class="QRadioButton" name="rbPlayerRemote">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>120</y>
-              <width>112</width>
-              <height>26</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QRadioButton {
-	color: white;
-}</string>
-            </property>
-            <property name="text">
-             <string>Remote</string>
-            </property>
-           </widget>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QFrame" name="ipFrame">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>450</y>
-          <width>151</width>
-          <height>44</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QFrame {
-	background-color: black;
-	color: white;
-}</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_11">
-         <item>
-          <widget class="QLabel" name="labelpNotation">
-           <property name="maximumSize">
-            <size>
-             <width>25</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>IP: </string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="labeIP">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="preferences">
