@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Preferences - labelPrefUsername, btSavePreferences
     // connect(ui->btSavePreferences, SIGNAL(clicked()), this, SLOT(on_btSavePreference_clicked()));
     this->ui->lineEdit->setText(Preferences().playerName);
+    menuVolume = ui->horizontalSlider->value();
 }
 
 MainWindow::~MainWindow()
@@ -127,20 +128,20 @@ void MainWindow::on_btStartGame_clicked()
     }
 }
 
-void MainWindow::on_btSavePreference_clicked()
+void MainWindow::on_btSavePreferences_clicked()
 {
     if (this->ui->lineEdit->text().size() < MIN_USERNAME_SIZE or this->ui->lineEdit->text().size() > MAX_USERNAME_SIZE) {
         QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
         return;
     }
-    qint16 newVolume = this->ui->horizontalSlider->value();
-    emit requestPreferences(newVolume);
+    menuVolume = this->ui->horizontalSlider->value();
+    emit requestPreferences(menuVolume);
 }
 
 void MainWindow::handlePreferences(Preferences *preferences)
 {
     preferences->playerName = this->ui->lineEdit->text();
-    this->ui->labelPrefUsername->setText(preferences->playerName);
+    ui->labelPrefUsername->setText(preferences->playerName);
 }
 
 GameType MainWindow::getGameType()
@@ -232,5 +233,6 @@ void MainWindow::on_btBackFromJoinLobby_clicked() {
 }
 
 void MainWindow::on_btReturnFromPreferences_clicked() {
+    ui->horizontalSlider->setValue(menuVolume);
     returnToMenu();
 }

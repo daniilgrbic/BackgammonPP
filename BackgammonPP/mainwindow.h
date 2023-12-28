@@ -49,7 +49,7 @@ private slots:
     void on_btJoinLobby_clicked();
     void on_btBackFromJoinLobby_clicked();
 
-    void on_btSavePreference_clicked();
+    void on_btSavePreferences_clicked();
     void on_btReturnFromPreferences_clicked();
 
     void on_btExit_clicked();
@@ -71,4 +71,5 @@ private:
     GameType getGameType();
     PlayerType getPlayerType();
     StringListModel *model;
+    qint16 menuVolume;
 };
