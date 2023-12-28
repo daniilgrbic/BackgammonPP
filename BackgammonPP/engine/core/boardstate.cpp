@@ -68,6 +68,20 @@ BoardState BoardState::mirror() const {
     return nextState;
 }
 
+BoardState BoardState::verticalMirror(BoardState board)
+{
+    std::reverse(board.m_points.begin(), board.m_points.end());
+    return board;
+}
+
+BoardState BoardState::centralMirror(BoardState board)
+{
+    for(int i = 1; i <= 12; i++) {
+        std::swap(board.point(i), board.point(i+12));
+    }
+    return board;
+}
+
 BoardState BoardState::getNextState(const Move& move) const {
     auto nextState = *this;
     nextState.move(move);

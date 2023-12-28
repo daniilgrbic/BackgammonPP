@@ -15,6 +15,7 @@ void Game::playTurn(Turn turn)
         m_board.move(move);
     }
 
+    m_history.push_back(turn);
     m_currentRoll = m_currentRoll.getNextRoll(m_firstDie, m_secondDie);
 }
 

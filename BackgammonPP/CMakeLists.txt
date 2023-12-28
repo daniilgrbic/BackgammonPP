@@ -32,6 +32,7 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     engine/core/turn.h engine/core/turn.cpp
     engine/core/turntrie.h engine/core/turntrie.cpp
     engine/backgammon.h engine/backgammon.cpp
+    engine/longnardy.h engine/longnardy.cpp
     network/server.cpp
     network/server.h
     network/client.cpp
@@ -41,6 +42,8 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     network/chat_message.h
     utility/jsonserializer.h
     utility/serializable.h
+    main.cpp
+    mainwindow.cpp mainwindow.h mainwindow.ui
     background_menu_image.qrc
     barcheckerholder.cpp
     barcheckerholder.h
@@ -78,7 +81,6 @@ qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     sidebarcheckerholder.h
     verticalchecker.cpp
     verticalchecker.h
-
     player.h player.cpp
     botplayer.h botplayer.cpp
     localplayer.h localplayer.cpp

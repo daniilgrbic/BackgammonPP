@@ -15,6 +15,8 @@ struct Move : public Serializable
     Move(const PlayerColor player, const std::variant<int, SpecialPosition>& from, const std::variant<int, SpecialPosition>& to, const bool isHit = false);
 
     Move mirror() const;
+    static Move verticalMirror(Move move);
+    static Move centralMirror(Move move);
 
     bool operator ==(const Move&) const = default;
 

@@ -22,6 +22,8 @@ public:
     void move(const Move& move);
 
     BoardState mirror() const;
+    static BoardState verticalMirror(BoardState board);
+    static BoardState centralMirror(BoardState board);
 
     BoardState getNextState(const Move& move) const;
     BoardState getNextState(const std::vector<Move>& move) const;
