@@ -15,10 +15,10 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("BackgammonPP");
     setWindowIcon(QIcon(ICON_PATH));
 
-    setFixedSize(width(), height());
+    // setFixedSize(width(), height());
 
     setPicture(this->backgroundPicPath, this);
-    setPicture(this->sketchPicPath, ui->optionsFrame);
+    // setPicture(this->sketchPicPath, ui->optionsFrame);
 
     connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
     connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
@@ -57,7 +57,7 @@ void MainWindow::setPicture(QString picturePath, QWidget *pictureWidget) {
     pallete.setBrush(QPalette::Window, pix);
     pictureWidget->setPalette(pallete);
     pictureWidget->setAutoFillBackground(true);
-    pictureWidget->setFixedSize(pix.size());
+    // pictureWidget->setFixedSize(pix.size());
 }
 
 void MainWindow::on_btCreateGame_clicked()
@@ -192,6 +192,11 @@ void MainWindow::on_btCreateGameLobby_clicked()
 void MainWindow::on_btReturnFromCreateGameLobby_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    setPicture(this->backgroundPicPath, this);
 }
 
 void MainWindow::on_rbPlayerRemote_clicked() {

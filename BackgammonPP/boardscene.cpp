@@ -377,6 +377,13 @@ void BoardScene::setExitPoints(GameType type){
     }
 
 }
+
+void BoardScene::setSize(qreal width, qreal height)
+{
+    m_width = width;
+    m_height = height;
+    // setSceneRect(0, 0, width, height);
+}
 void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
     this->legalTurns = legalTurns;
 }

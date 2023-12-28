@@ -59,6 +59,8 @@ private:
     QString backgroundPicPath = ":/resources/img/blurred_backgammon_blacked.png";
     QString sketchPicPath = ":/resources/img/menu_sketch.png";
 
+    void resizeEvent(QResizeEvent*);
+
     void setPicture(QString picturePath, QWidget *pictureWidget);
     bool isValidIpAddress(const QString &ipAddress);
     void displayPreferences();

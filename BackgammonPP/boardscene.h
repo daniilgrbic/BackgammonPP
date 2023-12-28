@@ -37,6 +37,8 @@ public:
     void undoMove();
     void setExitPoints(GameType);
 
+    void setSize(qreal width, qreal height);
+
 signals:
     void enableEndTurn();
     void setUndoEnabled(bool enable);
@@ -56,8 +58,8 @@ private:
     const int trianglePairs = 12;
     const int checkersNumber = 30;
 
-    const qreal m_height = 1.0;
-    const qreal m_width = 1.0;
+    qreal m_height = 1.0;
+    qreal m_width = 1.0;
     const qreal triangleHeight = 100;
     const qreal triangleWidth = 50;
     const qreal barWidth = 1;

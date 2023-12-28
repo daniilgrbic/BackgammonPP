@@ -16,13 +16,16 @@ BoardWindow::BoardWindow(QWidget *parent) :
     m_historyModel = new HistoryListModel();
     ui->listView->setModel(m_historyModel);
     ui->historyboardView->hide();
+    std::cout << ui->stackedWidget->size().width()-5 << std::endl;
     m_boardScene = new BoardScene(this, ui->boardView->size().width()-5, ui->boardView->size().height()-5);
     m_historyboardScene = new BoardScene(this, ui->historyboardView->size().width()-5, ui->historyboardView->size().height()-5);
     ui->boardView->setScene(m_boardScene);
     ui->boardView->setRenderHint(QPainter::Antialiasing);
     setWindowTitle("BackgammonPP");
     setWindowIcon(QIcon(ICON_PATH));
-    setFixedSize(width(), height());
+    // setFixedSize(width(), height());
+
+    ui->stackedWidget->setCurrentIndex(1);
 
     //ui->boardView->resize(605,305);
     ui->pbEndTurn->setEnabled(false);
@@ -49,6 +52,9 @@ void BoardWindow::setOpponentName(QString opponentName) {
 
 void BoardWindow::paintEvent(QPaintEvent *) {
     QPainter painter(this);
+    // m_boardScene->setSize(ui->boardView->size().width()-5, ui->boardView->size().height()-5);
+    // std::cout << ui->boardView->size().width()-5 << std::endl;
+    // m_boardScene->setSceneRect(0, 0, ui->boardView->size().width()-5, ui->boardView->size().height()-5);
 }
 
 void BoardWindow::setExitPoints(GameType type){
