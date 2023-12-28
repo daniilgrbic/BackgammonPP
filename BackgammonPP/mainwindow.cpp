@@ -88,7 +88,7 @@ void MainWindow::on_btJoinLobby_clicked()
         QMessageBox::information(nullptr, "Alert", "Enter valid IP address");
     }
     else {
-        // CONNECT
+        emit requestJoinRemoteGame(ipAddress);
     }
 }
 
@@ -118,12 +118,14 @@ void MainWindow::on_btStartGame_clicked()
         }
         else {
             // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
-            QStringList opponents;
-            model = new StringListModel(opponents);
-            ui->lvOpponents->setModel(model);
-            ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
-            model->addOpponent("pera"); // Example how to add names to listview
-            ui->stackedWidget->setCurrentIndex(4);
+            // QStringList opponents;
+            // model = new StringListModel(opponents);
+            // ui->lvOpponents->setModel(model);
+            // ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
+            // model->addOpponent("pera"); // Example how to add names to listview
+            // ui->stackedWidget->setCurrentIndex(4);
+
+            emit requestCreateRemoteGame(opponentPlayer);
         }
     }
 }

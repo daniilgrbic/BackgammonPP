@@ -3,7 +3,10 @@
 #include "mainwindow.h"
 #include "boardwindow.h"
 #include "match.h"
+#include "network/server.h"
+#include "network/client.h"
 #include <QApplication>
+#include <QThread>
 
 #include <QtMultimedia>
 #include <QAudioOutput>
@@ -20,6 +23,8 @@ signals:
 
 public slots:
     void createGameFromMenu();
+    void createRemoteGameFromMenu(QString oppName);
+    void joinRemoteGame(QString ip);
     void closeGameAndOpenMenu();
     void getPreferences(qint16 newVolume);
 
@@ -31,6 +36,9 @@ private:
     QAudioOutput *themeAudioOutput;
     QString playerName = Preferences().playerName;
     QString themeSongPath = THEME_SOUND_PATH;
+    Server *local_server;
+    Client *local_client;
+    QThread *server_thread;
 
     void playThemeSong();
 };

@@ -28,6 +28,8 @@ public:
 
 signals:
     void requestCreateGame();
+    void requestCreateRemoteGame(QString name);
+    void requestJoinRemoteGame(QString ip);
     void requestPreferences(qint16 newVolume);
 
 public slots:

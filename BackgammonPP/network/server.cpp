@@ -5,9 +5,10 @@
 #include <string>
 
 
-Server::Server(QObject *parent)
+Server::Server(QString name, QObject *parent)
     : QObject(parent)
 {
+    oppName = name;
     m_gameOn = false;
     m_server = new QTcpServer(this);
     m_player1 = nullptr;
@@ -164,10 +165,10 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         }
     }
 
-    if (m_gameOn) {
-        src->write(srvconst::serverCmdGameOn.toStdString().c_str());
-        return;
-    }
+    // if (m_gameOn) {
+    //     src->write(srvconst::serverCmdGameOn.toStdString().c_str());
+    //     return;
+    // }
 
     if (m_clientNames.find(src) == m_clientNames.end()) { // socket doesn't have a name registered
         QString finalName = name;
@@ -177,7 +178,7 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
             m_clientSockets[name] = src;
         }
         else {
-            QString finalName = name + QString::number(m_namesCnt[name]);
+            finalName = name + QString::number(m_namesCnt[name]);
 
             m_clientNames[src] = finalName;
             m_clientSockets[finalName] = src;
@@ -186,6 +187,9 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         m_spectators.insert(src);
 
         // update local names list
+
+        qDebug() << finalName << "\n";
+
 
         src->write((srvconst::serverCmdAddName + finalName).toStdString().c_str());
 
@@ -197,6 +201,11 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         }
 
         broadcast(src, srvconst::serverCmdAddName + finalName);
+
+        if (finalName == oppName) {
+            processSelectPlayerCommand(m_host, finalName);
+            processGameStartCommand(m_host);
+        }
     }
 }
 
@@ -292,7 +301,7 @@ void Server::processDiceCommand(QTcpSocket *src, QString cmd) {
 
 void Server::processGameStartCommand(QTcpSocket *src) {
     m_gameOn = true;
-    broadcast(src, (srvconst::serverCmdGameStart).toStdString().c_str(), true);
+    broadcast(nullptr, (srvconst::serverCmdGameStart).toStdString().c_str(), true);
 }
 
 void Server::processGameEndCommand(QTcpSocket *src) {

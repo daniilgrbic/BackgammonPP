@@ -5,12 +5,16 @@ Controller::Controller()
     this->preferences = new Preferences();
     this->mainWindow = new MainWindow();
     this->boardWindow = new BoardWindow();
+
+    server_thread = new QThread();
     
     mainWindow->show();
 
     this->playThemeSong();
 
     connect(mainWindow, &MainWindow::requestCreateGame, this, &Controller::createGameFromMenu);
+    connect(mainWindow, &MainWindow::requestCreateRemoteGame, this, &Controller::createRemoteGameFromMenu);
+    connect(mainWindow, &MainWindow::requestJoinRemoteGame, this, &Controller::joinRemoteGame);
     connect(boardWindow, &BoardWindow::requestCloseGame, this, &Controller::closeGameAndOpenMenu);
 
     connect(mainWindow, &MainWindow::requestPreferences, this, &Controller::getPreferences);
@@ -50,8 +54,47 @@ void Controller::createGameFromMenu()
     m->startGame();
 }
 
+void Controller::createRemoteGameFromMenu(QString oppName)
+{
+    mainWindow->close();
+
+    // boardWindow->show();
+    // LocalPlayer *white = new LocalPlayer(nullptr, this->boardWindow);
+    // LocalPlayer *black= new LocalPlayer(nullptr, this->boardWindow);
+    // Match *m = new Match(nullptr, white, black);
+    // white->setParent(m); =fiu
+    // black->setParent(m);
+    // m->startGame();
+
+    local_server = new Server(oppName);
+
+    local_server->moveToThread(server_thread);
+    server_thread->start();
+
+
+    boardWindow->show();
+}
+
+void Controller::joinRemoteGame(QString ip)
+{
+    local_client = new Client();
+    local_client->connectClient(ip);
+    local_client->addName(preferences->playerName);
+}
+
 void Controller::closeGameAndOpenMenu()
 {
     boardWindow->close();
+
+    if (server_thread != nullptr) {
+        server_thread->quit();
+        delete local_server;
+        local_server = nullptr;
+        qDebug() << "123\n";
+    }
+    if (server_thread != nullptr) {
+        qDebug() << "1234\n";
+    }
+
     mainWindow->show();
 }

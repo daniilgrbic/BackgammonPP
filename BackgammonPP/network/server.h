@@ -10,7 +10,7 @@
 class Server : public QObject {
     Q_OBJECT
 public:
-    Server(QObject* parent = nullptr);
+    Server(QString name, QObject* parent = nullptr);
     ~Server();
 
 public slots:
@@ -37,6 +37,7 @@ private:
     void nukeGame();
     void removeName(QTcpSocket *);
 
+    QString oppName;
     bool m_gameOn;
     QTcpServer* m_server;
     QTcpSocket* m_host;
