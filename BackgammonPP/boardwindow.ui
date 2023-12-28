@@ -98,7 +98,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QListView {
-	border: 2px black;
+	border: 1px black;
 }</string>
    </property>
   </widget>
