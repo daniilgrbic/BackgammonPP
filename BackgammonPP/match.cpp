@@ -6,18 +6,19 @@
 #include <vector>
 #include <iostream>
 
-Match::Match(QObject *parent, Player *white, Player *black, int length, GameType gameType)
+Match::Match(QObject *parent, Player *white, Player *black, int length, GameType gameType, bool host)
     : QObject(parent),
       m_white(white),
       m_black(black),
       m_length(length),
       m_gameType(gameType),
       m_whiteScore(0),
-      m_blackScore(0)
+      m_blackScore(0),
+      m_host(host)
 {
 }
 
-void Match::startGame(){
+void Match::startGame() {
     switch (m_gameType) {
     case GameType::ClassicGameType:
         game = new Backgammon();
@@ -38,7 +39,7 @@ void Match::startGame(){
     disconnect(this, &Match::setState, m_white, &Player::setState);
     disconnect(this, &Match::setState, m_black, &Player::setState);
 
-    PlayerColor first = game->currentRoll().onRoll();
+    PlayerColor first = PlayerColor::WHITE; // game->currentRoll().onRoll();
     if(first == PlayerColor::WHITE){
         m_onTurn = m_white;
         m_waiting = m_black;
@@ -47,10 +48,16 @@ void Match::startGame(){
         m_waiting = m_white;
     }
     connectSlots(m_onTurn, m_waiting);
-    startMove();
+    if (m_host) {
+        startMove();
+    }
 }
 
-void Match::startMove(Turn *turn){
+void Match::startGameRequest() {
+    startGame();
+}
+
+void Match::startMove(Turn *turn) {
     currentLegalTurns = game->generateLegalTurns();
     currentRoll = Roll(game->currentRoll());
     emit requestMove(turn, &currentLegalTurns, &currentRoll);
