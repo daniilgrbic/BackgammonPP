@@ -87,7 +87,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         boardWindow->setOpponentName(opponentName);
         boardWindow->show();
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
-        Player *black = new RemotePlayer(nullptr, ipAddress, playerName);
+        Player *black = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
         Match *m = new Match(nullptr, white, black, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
@@ -105,7 +105,7 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     boardWindow->show();
 
     Player *black = new LocalPlayer(nullptr, this->boardWindow);
-    Player *white = new RemotePlayer(nullptr, ipAddress, playerName);
+    Player *white = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
     Match *m = new Match(nullptr, white, black, 3, GameType::ClassicGameType, false); //un-hardcode this
     connect(white, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
