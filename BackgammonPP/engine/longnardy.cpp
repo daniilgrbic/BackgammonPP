@@ -57,18 +57,22 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     PlayerColor onRoll = m_currentRoll.onRoll();
     PlayerColor opponent = (onRoll == PlayerColor::WHITE) ? PlayerColor::BLACK : PlayerColor::WHITE;
 
+    auto dice = m_currentRoll.dice();
+    std::sort(dice.begin(), dice.end());
+
     std::vector<RollState> level {
         {
             {},
             onRoll == PlayerColor::WHITE ? m_board : BoardState::centralMirror(m_board),
-            m_currentRoll.dice()
+            dice
         }
     };
     std::vector<RollState> nextLevel = level;
 
-    auto dice = m_currentRoll.dice();
     bool doubles = std::count(dice.begin(), dice.end(), dice.front()) == dice.size();
-    bool doubleFirstMove = doubles and (dice.front() == 4 or dice.front() == 6) and m_history.empty();
+    bool doubleFirstMove = doubles
+                           and (dice.front() == 3 or dice.front() == 4 or dice.front() == 6)
+                           and m_history.empty();
 
     do {
         level = std::move(nextLevel);
@@ -86,6 +90,8 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
 
             for (size_t i = 0; i < diceRolls.size(); i++) {
                 int dieRoll = diceRolls[i];
+                if(i > 0 and dieRoll == diceRolls[i-1]) continue;
+
                 for (int pos = NUMBER_OF_POINTS; pos >= 1; pos--) {
 
                     // player is only allowed to take more than 1 checker from head on first turn
@@ -125,6 +131,29 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     std::vector<Turn> legalTurns;
 
     for(const auto& roll : level) {
+
+        // check if blocking opponent (a prime in front of all opponent checkers)
+        int consecutive = 0;
+        bool blockade = false;
+        for(int p = 1; p <= NUMBER_OF_POINTS; p++) {
+            auto pointOwner = BoardState::centralMirror(roll.board()).point(p).owner();
+            if(not pointOwner.has_value()) {
+                consecutive = 0;
+            }
+            else if(pointOwner == opponent) {
+                break;
+            }
+            else if(pointOwner == onRoll){
+                consecutive++;
+                if(consecutive == 6) {
+                    blockade = true;
+                    break;
+                }
+            }
+        }
+
+        if(blockade) continue;
+
         std::vector<Move> moves;
         if (onRoll == PlayerColor::BLACK) {
             std::transform(
@@ -144,35 +173,9 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
             onRoll == PlayerColor::WHITE ? roll.board() : BoardState::centralMirror(roll.board())
         };
 
-        // check if blocking opponent (a prime in front of all opponent checkers)
-        int consecutive = 0;
-        bool blockade = false;
-        for(int p = 1; p <= NUMBER_OF_POINTS; p++) {
-            auto pointOwner = turn.m_finalBoard.point(p).owner();
-            if(not pointOwner.has_value()) {
-                consecutive = 0;
-            }
-            if(pointOwner == opponent) {
-                break;
-            }
-            if(pointOwner == onRoll){
-                consecutive++;
-                if(consecutive == 6) {
-                    blockade = true;
-                    break;
-                }
-            }
-        }
-
-        if(not blockade) {
-            legalTurns.push_back(turn);
-        }
+        legalTurns.push_back(turn);
     }
 
-    std::cout << "Legal Turns:" << std::endl;
-    for(const auto& lt : legalTurns) {
-        std::cout << lt.toString().toStdString() << std::endl;
-    }
     return legalTurns;
 }
 
