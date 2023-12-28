@@ -336,18 +336,46 @@ QPushButton:hover {
        </widget>
       </widget>
       <widget class="QWidget" name="CreateGame">
-       <widget class="QFrame" name="frame_8">
+       <widget class="QLabel" name="label_5">
         <property name="geometry">
          <rect>
-          <x>50</x>
-          <y>80</y>
-          <width>541</width>
-          <height>421</height>
+          <x>0</x>
+          <y>20</y>
+          <width>661</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Corbel</family>
+          <pointsize>21</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: white;
+}</string>
+        </property>
+        <property name="text">
+         <string>Create Game</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QFrame" name="frameCreateGame">
+        <property name="geometry">
+         <rect>
+          <x>-10</x>
+          <y>90</y>
+          <width>671</width>
+          <height>411</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">QFrame {
-	background-color: rgba(0, 0, 0, 128);
+	background-color: rgba(0, 0, 0, 0.8);
 }</string>
         </property>
         <property name="frameShape">
@@ -356,79 +384,11 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QFrame" name="frameButtons">
-         <property name="geometry">
-          <rect>
-           <x>150</x>
-           <y>340</y>
-           <width>251</width>
-           <height>71</height>
-          </rect>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="btBackFromCreateToMenu">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-            </property>
-            <property name="text">
-             <string>Back</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btStartGame">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-            </property>
-            <property name="text">
-             <string>Create Game</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
         <widget class="QFrame" name="frameGameMode">
          <property name="geometry">
           <rect>
-           <x>130</x>
-           <y>20</y>
+           <x>180</x>
+           <y>0</y>
            <width>311</width>
            <height>121</height>
           </rect>
@@ -441,6 +401,7 @@ QPushButton:hover {
          <property name="styleSheet">
           <string notr="true">QFrame {
 	color: white;
+	background-color: rgba(0, 0, 0, 0.0);
 }</string>
          </property>
          <property name="frameShape">
@@ -511,14 +472,94 @@ QPushButton:hover {
           </item>
          </layout>
         </widget>
+        <widget class="QFrame" name="frameButtons">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>320</y>
+           <width>251</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="btBackFromCreateToMenu">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: center;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
+            </property>
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btStartGame">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: center;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
+            </property>
+            <property name="text">
+             <string>Start Game</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
         <widget class="QFrame" name="frameGameType">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>140</y>
+           <x>70</x>
+           <y>120</y>
            <width>501</width>
            <height>191</height>
           </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -529,6 +570,12 @@ QPushButton:hover {
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QFrame" name="frameName">
+            <property name="styleSheet">
+             <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -540,7 +587,7 @@ QPushButton:hover {
               <rect>
                <x>20</x>
                <y>10</y>
-               <width>121</width>
+               <width>151</width>
                <height>21</height>
               </rect>
              </property>
@@ -561,7 +608,7 @@ QPushButton:hover {
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
-            <widget class="QTextEdit" name="labelTextEdit">
+            <widget class="QTextEdit" name="labelOpponentUsername">
              <property name="geometry">
               <rect>
                <x>20</x>
@@ -573,6 +620,7 @@ QPushButton:hover {
              <property name="styleSheet">
               <string notr="true">QTextEdit {
 	background-color: #EDE9E8 ;
+	color: black;
 }</string>
              </property>
             </widget>
@@ -596,7 +644,7 @@ QPushButton:hover {
 }</string>
              </property>
              <property name="text">
-              <string>Duration (number of moves):</string>
+              <string>Number of games:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -617,11 +665,20 @@ QPushButton:hover {
 	color: black;
 }</string>
              </property>
+             <property name="value">
+              <number>3</number>
+             </property>
             </widget>
            </widget>
           </item>
           <item>
            <widget class="QFrame" name="framePlayer">
+            <property name="styleSheet">
+             <string notr="true">QFrame {
+	color: white;
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -645,6 +702,9 @@ QPushButton:hover {
              <property name="text">
               <string>Bot</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
             <widget class="QRadioButton" name="rbPlayerLocal">
              <property name="geometry">
@@ -664,7 +724,7 @@ QPushButton:hover {
               <string>Local</string>
              </property>
              <property name="checked">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
             </widget>
             <widget class="QRadioButton" name="rbPlayerRemote">
@@ -689,34 +749,50 @@ QPushButton:hover {
           </item>
          </layout>
         </widget>
-       </widget>
-       <widget class="QLabel" name="label_5">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>20</y>
-          <width>661</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Corbel</family>
-          <pointsize>21</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
+        <widget class="QFrame" name="ipFrame">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>360</y>
+           <width>151</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+	background-color: rgba(0, 0, 0, 0);
 	color: white;
 }</string>
-        </property>
-        <property name="text">
-         <string>Create Game</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QLabel" name="labelpNotation">
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>IP: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labeIP">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="preferences">
@@ -985,6 +1061,12 @@ QPushButton:hover {
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <property name="topMargin">
+          <number>6</number>
+         </property>
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
          <item>
           <widget class="QLabel" name="labelPrefHi">
            <property name="maximumSize">
@@ -1070,16 +1152,20 @@ QPushButton:hover {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_2">
-               <property name="styleSheet">
-                <string notr="true">QLabel {
-	color: white;
-}</string>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-               <property name="text">
-                <string>Opponent Username</string>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
                </property>
-              </widget>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1107,18 +1193,26 @@ QPushButton:hover {
                <property name="styleSheet">
                 <string notr="true">QTextEdit {
 	background-color: #EDE9E8 ;
+	color: black;
 }</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QTextEdit" name="inputName">
-               <property name="styleSheet">
-                <string notr="true">QTextEdit {
-	background-color: #EDE9E8 ;
-}</string>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-              </widget>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1182,38 +1276,6 @@ QPushButton:hover {
             </property>
             <property name="text">
              <string>Join</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QFrame" name="frame_5">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>110</y>
-           <width>431</width>
-           <height>141</height>
-          </rect>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLabel" name="messageFromServer">
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-	background-color: #EDE9E8 ;
-	color: black;
-	padding-left: 10px;
-}</string>
-            </property>
-            <property name="text">
-             <string/>
             </property>
            </widget>
           </item>

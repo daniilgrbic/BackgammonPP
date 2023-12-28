@@ -1,0 +1,10 @@
+stages:
+  - notification
+variables:
+  WEBHOOK_URL: "https://discord.com/api/webhooks/1180275747592609912/N_kk8D3GAGV9xeNJsNEHRudwySxCPLvgtR60BO-BZJLF9PaUHfcCP129VY6I3OLYe0nQ"
+success_notification:
+  stage: notification
+  script:
+    - wget https://raw.githubusercontent.com/DiscordHooks/gitlab-ci-discord-webhook/master/send.sh
+    - chmod +x send.sh
+    - ./send.sh $CI_COMMIT_MESSAGE $WEBHOOK_URL

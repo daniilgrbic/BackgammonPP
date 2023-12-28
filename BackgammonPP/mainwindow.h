@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QStackedWidget>
@@ -10,6 +9,7 @@
 #include <QPalette>
 #include <QMessageBox>
 #include <QHostAddress>
+#include <QNetworkInterface>
 #include <iostream>
 #include "boardwindow.h"
 #include "consts.h"
@@ -28,8 +28,8 @@ public:
     ~MainWindow();
 
 signals:
-    void requestCreateGame();
-    void requestPreferences();
+    void requestCreateGame(QString opponentName, qint8 numGames);
+    void requestPreferences(qint16 newVolume);
 
 public slots:
     void handlePreferences(Preferences *preferences);
@@ -40,6 +40,7 @@ private slots:
 
     void on_btCreateGame_clicked();
     void on_btStartGame_clicked();
+    void on_rbPlayerBot_clicked();
 
     void on_btJoinGame_clicked();
     void on_btJoinLobby_clicked();
@@ -61,8 +62,8 @@ private:
     void setPicture(QString picturePath, QWidget *pictureWidget);
     bool isValidIpAddress(const QString &ipAddress);
     void displayPreferences();
+    void showIpAddress();
     GameType getGameType();
     PlayerType getPlayerType();
     StringListModel *model;
 };
-#endif // MAINWINDOW_H

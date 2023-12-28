@@ -1,5 +1,4 @@
-#ifndef BOARDBAR_H
-#define BOARDBAR_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QPainter>
@@ -17,5 +16,3 @@ private:
     qreal m_width;
     qreal m_height;
 };
-
-#endif // BOARDBAR_H

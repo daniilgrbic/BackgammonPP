@@ -1,5 +1,5 @@
-#ifndef CHECKERHOLDER_H
-#define CHECKERHOLDER_H
+#pragma once
+
 #include "boardchecker.h"
 #include "engine/core/specialposition.h"
 #include "engine/core/playercolor.h"
@@ -30,5 +30,3 @@ public:
 private:
     bool m_allowDropoff = false;
 };
-
-#endif // CHECKERHOLDER_H

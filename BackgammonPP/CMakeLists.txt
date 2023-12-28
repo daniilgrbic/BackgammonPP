@@ -14,38 +14,36 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Network Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} OPTIONAL_COMPONENTS Widgets)
 
 add_subdirectory(tests)
 
-set(SOURCE
-    engine/core/boardstate.cpp
-    engine/core/boardstate.h
-    engine/core/die.cpp
-    engine/core/die.h
-    engine/core/game.cpp
-    engine/core/game.h
+qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
+    engine/core/boardstate.h engine/core/boardstate.cpp
+    engine/core/die.h engine/core/die.cpp
+    engine/core/game.h engine/core/game.cpp
     engine/core/gameresult.h
-    engine/core/move.cpp
-    engine/core/move.h
+    engine/core/move.h engine/core/move.cpp
     engine/core/playercolor.h
-    engine/core/point.cpp
-    engine/core/point.h
-    engine/core/roll.cpp
-    engine/core/roll.h
+    engine/core/point.h engine/core/point.cpp
+    engine/core/roll.h engine/core/roll.cpp
     engine/core/specialposition.h
-    engine/core/turn.cpp
-    engine/core/turn.h
-    engine/backgammon.cpp
-    engine/backgammon.h
-    engine/core/turntrie.cpp engine/core/turntrie.h
-    main.cpp
-    mainwindow.cpp mainwindow.h mainwindow.ui
-    engine/longnardy.cpp
-    engine/longnardy.h
+    engine/core/turn.h engine/core/turn.cpp
+    engine/core/turntrie.h engine/core/turntrie.cpp
+    engine/backgammon.h engine/backgammon.cpp
+    engine/longnardy.h engine/longnardy.cpp
+    network/server.cpp
+    network/server.h
+    network/client.cpp
+    network/client.h
+    network/server_commands.h
+    network/chat_message.cpp
+    network/chat_message.h
     utility/jsonserializer.h
     utility/serializable.h
+    main.cpp
+    mainwindow.cpp mainwindow.h mainwindow.ui
     background_menu_image.qrc
     barcheckerholder.cpp
     barcheckerholder.h
@@ -73,34 +71,28 @@ set(SOURCE
     checkerholder.cpp
     checkerholder.h
     CMakeLists.txt
+    consts.h
     controller.cpp
     controller.h
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    network/server.cpp
-    network/server.h
-    network/client.cpp
-    network/client.h
-    network/server_commands.h
+    mainwindow.cpp mainwindow.h mainwindow.ui
     preferences.ui
     sidebarcheckerholder.cpp
     sidebarcheckerholder.h
     verticalchecker.cpp
     verticalchecker.h
-    )
-
-qt_add_executable(BackgammonPP WIN32 MACOSX_BUNDLE ${SOURCE}
     player.h player.cpp
     botplayer.h botplayer.cpp
-    playableplayer.h playableplayer.cpp
     localplayer.h localplayer.cpp
     match.h match.cpp
     consts.h
     stringlistmodel.h stringlistmodel.cpp
-    historylistmodel.h historylistmodel.cpp)
-target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network)
+    historylistmodel.h historylistmodel.cpp
+    stringlistmodel.h stringlistmodel.cpp
+    remoteplayer.h remoteplayer.cpp
+    music.qrc
+)
+target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network Qt::Multimedia)
 
 if((QT_VERSION_MAJOR GREATER 4))
   target_link_libraries(BackgammonPP PRIVATE Qt::Widgets)

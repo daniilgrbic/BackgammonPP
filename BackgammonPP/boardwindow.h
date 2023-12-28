@@ -1,5 +1,4 @@
-#ifndef BOARDWINDOW_H
-#define BOARDWINDOW_H
+#pragma once
 
 #include "boardscene.h"
 #include <QWidget>
@@ -20,6 +19,7 @@ public:
     explicit BoardWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
     void setExitPoints(GameType);
+    void setOpponentName(QString opponentName);
     ~BoardWindow();
 public slots:
     void enableEndTurn();
@@ -30,6 +30,7 @@ signals:
     void setBoardState(const BoardState &state);
     void forwardTurnFinish(Turn);
     void requestCloseGame();
+
 private slots:
     void on_pbExitGame_clicked();
 
@@ -46,6 +47,6 @@ private:
     BoardScene *m_boardScene;
     BoardScene *m_historyboardScene;
     HistoryListModel *m_historyModel;
-};
 
-#endif // BOARDWINDOW_H
+    QString m_opponentName;
+};

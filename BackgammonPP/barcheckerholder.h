@@ -1,5 +1,4 @@
-#ifndef BARCHECKERHOLDER_H
-#define BARCHECKERHOLDER_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QBrush>
@@ -18,5 +17,3 @@ private:
     qreal m_width;
     qreal m_height;
 };
-
-#endif // BARCHECKERHOLDER_H

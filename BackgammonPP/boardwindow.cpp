@@ -31,11 +31,17 @@ BoardWindow::BoardWindow(QWidget *parent) :
     connect(this, &BoardWindow::setBoardState, m_boardScene, &BoardScene::setBoardState);
     connect(m_boardScene, &BoardScene::setUndoEnabled, this, &BoardWindow::setUndoEnabled);
     connect(m_boardScene, &BoardScene::sendTurnFinish, this->m_historyModel, &HistoryListModel::addTurn);
+
+    connect(ui->pbExitCurrentGame, SIGNAL(clicked()), this, SLOT(on_pbExitGame_clicked()));
 }
 
 BoardWindow::~BoardWindow()
 {
     delete ui;
+}
+
+void BoardWindow::setOpponentName(QString opponentName) {
+    this->m_opponentName = opponentName;
 }
 
 void BoardWindow::paintEvent(QPaintEvent *) {

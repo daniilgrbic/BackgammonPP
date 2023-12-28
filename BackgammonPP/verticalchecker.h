@@ -1,5 +1,4 @@
-#ifndef VERTICALCHECKER_H
-#define VERTICALCHECKER_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QBrush>
@@ -20,5 +19,3 @@ private:
     QColor m_border;
 
 };
-
-#endif // VERTICALCHECKER_H

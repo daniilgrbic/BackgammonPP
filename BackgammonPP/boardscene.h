@@ -1,5 +1,4 @@
-#ifndef BOARDSCENE_H
-#define BOARDSCENE_H
+#pragma once
 
 #include <QGraphicsScene>
 #include <QRectF>
@@ -97,5 +96,3 @@ private:
     void disableAllHolders();
 
 };
-
-#endif // BOARDSCENE_H
