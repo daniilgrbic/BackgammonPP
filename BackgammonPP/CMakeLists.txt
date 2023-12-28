@@ -92,7 +92,7 @@ add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     music.qrc
     utility/threadsafequeue.h
 
-    engine/bot/bot.cpp engine/bot/bot.hpp engine/bot/connectgene.hpp engine/bot/genome.hpp engine/bot/innovation.cpp engine/bot/innovation.hpp  engine/bot/neat.cpp engine/bot/network.cpp engine/bot/network.hpp engine/bot/neuron.hpp engine/bot/pool.cpp engine/bot/pool.hpp engine/bot/species.hpp
+    engine/bot/bot.cpp engine/bot/bot.hpp engine/bot/connectgene.hpp engine/bot/genome.hpp engine/bot/innovation.cpp engine/bot/innovation.hpp  engine/bot/neat.cpp engine/bot/network.cpp engine/bot/network.hpp engine/bot/neuron.hpp engine/bot/species.hpp
     engine/bot/neat.hpp
     engine/bot/genome.cpp
     engine/bot/saved_genomes/lilith.genome

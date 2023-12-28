@@ -5,7 +5,7 @@
 
 namespace AI{
 
-    Bot::Bot(std::string filepath){
+Bot::Bot(std::string filepath, QObject *parent) : QObject(parent){
         network = new Network(filepath);
     }
     Bot::~Bot(){
@@ -46,6 +46,11 @@ namespace AI{
         }else{
             return network->evaluateNetwork(network->inputFromState(state.mirror())) > magicConstant;
         }
+    }
+
+
+    void Bot::requestBestMove(PlayerColor color, const std::vector<Turn>& turns){
+        emit bestMove(bestTurn(color, turns));
     }
 }
 

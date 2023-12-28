@@ -46,7 +46,9 @@ private:
     Ui::BoardWindow *ui;
     BoardScene *m_boardScene;
     BoardScene *m_historyboardScene;
-    HistoryListModel *m_historyModel;
+
 
     QString m_opponentName;
+public:
+    HistoryListModel *m_historyModel;
 };
