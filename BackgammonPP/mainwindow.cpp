@@ -34,7 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Preferences - labelPrefUsername, btSavePreferences
     // connect(ui->btSavePreferences, SIGNAL(clicked()), this, SLOT(on_btSavePreference_clicked()));
-    this->ui->lineEdit->setText(Preferences().playerName);
+    ui->lineEdit->setText(Preferences().playerName);
+    ui->labelPrefUsername->setText(Preferences().playerName);
     menuVolume = ui->horizontalSlider->value();
 }
 
