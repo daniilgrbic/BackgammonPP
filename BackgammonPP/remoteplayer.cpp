@@ -4,9 +4,9 @@ RemotePlayer::RemotePlayer(QObject *parent, QString ip, QString username)
     : Player(parent)
 {
     // uncomment after fix
-    //m_client = new Client(ip, username); // uncomment after fix
-    //connect(this, &RemotePlayer::diceRolled, m_client, &Client::diceRolled);
-    //connect(this, &RemotePlayer::acceptMove, m_client, &Client::acceptMove);
+    m_client = new Client(ip, username); // uncomment after fix
+    connect(this, &RemotePlayer::diceRolled, m_client, &Client::diceRolled);
+    connect(this, &RemotePlayer::acceptMove, m_client, &Client::acceptMove);
 }
 
 void RemotePlayer::chooseMove(Turn *turn, std::vector<Turn> *legalMoves, Roll *roll){

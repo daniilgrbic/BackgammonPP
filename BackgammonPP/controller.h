@@ -22,8 +22,8 @@ signals:
     void sendPreferences(Preferences *preferences);
 
 public slots:
-    void createGameFromMenu();
     void createGameFromMenu(QString opponentName, qint8 numGames);
+    void createRemoteGameFromMenu(QString opponentName, qint8 numGames);
     void joinRemoteGame(QString ip);
     void closeGameAndOpenMenu();
     void getPreferences(qint16 newVolume);

@@ -17,4 +17,7 @@ namespace srvconst {
     inline const QString serverCmdGameOn = "game-on";
     inline const QString serverCmdGameStart = "game-start";
     inline const QString serverCmdGameEnd = "game-end";
+
+    inline const QString serverCmdRoll = "roll-";
+    inline const QString serverCmdTurn = "turn-";
 }

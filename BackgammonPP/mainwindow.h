@@ -4,13 +4,13 @@
 #include <QStackedWidget>
 #include <QCoreApplication>
 #include <QPixmap>
+#include <QObject>
 #include <QImage>
 #include <QString>
 #include <QPalette>
 #include <QMessageBox>
 #include <QHostAddress>
 #include <QNetworkInterface>
-#include <iostream>
 #include "boardwindow.h"
 #include "consts.h"
 #include "stringlistmodel.h"
@@ -29,7 +29,7 @@ public:
 
 signals:
     void requestCreateGame(QString opponentName, qint8 numGames);
-    void requestCreateRemoteGame(QString name);
+    void requestCreateRemoteGame(QString opponentName, qint8 numGames);
     void requestJoinRemoteGame(QString ip);
     void requestPreferences(qint16 newVolume);
 

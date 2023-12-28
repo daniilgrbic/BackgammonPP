@@ -5,8 +5,6 @@ Controller::Controller()
     this->preferences = new Preferences();
     this->mainWindow = new MainWindow();
     this->boardWindow = new BoardWindow();
-
-    server_thread = new QThread();
     
     mainWindow->show();
 
@@ -55,7 +53,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames)
     m->startGame();
 }
 
-void Controller::createRemoteGameFromMenu(QString oppName)
+void Controller::createRemoteGameFromMenu(QString opponentName, qint8 numGames)
 {
     mainWindow->close();
 
@@ -67,10 +65,12 @@ void Controller::createRemoteGameFromMenu(QString oppName)
     // black->setParent(m);
     // m->startGame();
 
-    local_server = new Server(oppName);
-
-    local_server->moveToThread(server_thread);
-    server_thread->start();
+    if (server_thread == nullptr) {
+        server_thread = new QThread();
+        local_server = new Server(opponentName);
+        local_server->moveToThread(server_thread);
+        server_thread->start();
+    }
 
 
     boardWindow->show();
@@ -78,24 +78,16 @@ void Controller::createRemoteGameFromMenu(QString oppName)
 
 void Controller::joinRemoteGame(QString ip)
 {
-    local_client = new Client();
-    local_client->connectClient(ip);
-    local_client->addName(preferences->playerName);
+    qDebug() << "Try to join...";
+    local_client = new Client(ip, preferences->playerName);
 }
 
 void Controller::closeGameAndOpenMenu()
 {
     boardWindow->close();
 
-    if (server_thread != nullptr) {
-        server_thread->quit();
-        delete local_server;
-        local_server = nullptr;
-        qDebug() << "123\n";
-    }
-    if (server_thread != nullptr) {
-        qDebug() << "1234\n";
-    }
+    // local_server->nukeGame();
+
 
     mainWindow->show();
 }

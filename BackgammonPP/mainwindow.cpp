@@ -130,7 +130,7 @@ void MainWindow::on_btStartGame_clicked()
             // model->addOpponent("pera"); // Example how to add names to listview
             // ui->stackedWidget->setCurrentIndex(4);
 
-            emit requestCreateRemoteGame(opponentPlayer);
+            emit requestCreateRemoteGame(opponentName, gameNumber);
         }
     }
 }
