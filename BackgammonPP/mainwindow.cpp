@@ -26,20 +26,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // Create Game Lobby
-    // connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    // connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
-    // connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
-    // connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
-    // connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerRemote_clicked()));
     this->on_rbPlayerRemote_clicked();
     this->showIpAddress();
 
     // Join Game Lobby
-    // connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
     // connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
 
     // Preferences - labelPrefUsername, btSavePreferences
-    // connect(ui->btReturnFromPreferences, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
     // connect(ui->btSavePreferences, SIGNAL(clicked()), this, SLOT(on_btSavePreference_clicked()));
     this->ui->lineEdit->setText(Preferences().playerName);
 }
@@ -65,13 +58,13 @@ void MainWindow::on_btCreateGame_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_btPreference_clicked()
+void MainWindow::on_btPreferences_clicked()
 {
     emit requestPreferences(this->ui->horizontalSlider->value());
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-void MainWindow::on_btReturnToMenu_clicked()
+void MainWindow::returnToMenu()
 {
     this->ui->lineEdit->setText(this->ui->labelPrefUsername->text());
     ui->stackedWidget->setCurrentIndex(0);
@@ -206,6 +199,19 @@ void MainWindow::on_rbPlayerRemote_clicked() {
     }
 }
 
+void MainWindow::on_rbPlayerLocal_clicked() {
+    ui->labelOpponentUsername->setDisabled(true);
+    ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+    ui->labelOpponentUsername->setText("");
+}
+
+void MainWindow::on_rbPlayerBot_clicked() {
+    ui->labelOpponentUsername->setDisabled(true);
+    ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+    ui->labelOpponentUsername->setText("");
+}
+
+
 void MainWindow::showIpAddress() {
     const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
     QString ipAddress = "Can't find address";
@@ -215,4 +221,16 @@ void MainWindow::showIpAddress() {
         }
     }
     ui->labeIP->setText(ipAddress);
+}
+
+void MainWindow::on_btBackFromCreateToMenu_clicked() {
+    returnToMenu();
+}
+
+void MainWindow::on_btBackFromJoinLobby_clicked() {
+    returnToMenu();
+}
+
+void MainWindow::on_btReturnFromPreferences_clicked() {
+    returnToMenu();
 }

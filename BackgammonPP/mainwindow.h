@@ -35,17 +35,22 @@ public slots:
     void handlePreferences(Preferences *preferences);
 
 private slots:
-    void on_btReturnToMenu_clicked();
-    void on_btPreference_clicked();
+    void returnToMenu();
+    void on_btPreferences_clicked();
 
     void on_btCreateGame_clicked();
     void on_btStartGame_clicked();
+    void on_rbPlayerBot_clicked();
+    void on_rbPlayerLocal_clicked();
     void on_rbPlayerRemote_clicked();
+    void on_btBackFromCreateToMenu_clicked();
 
     void on_btJoinGame_clicked();
     void on_btJoinLobby_clicked();
+    void on_btBackFromJoinLobby_clicked();
 
     void on_btSavePreference_clicked();
+    void on_btReturnFromPreferences_clicked();
 
     void on_btExit_clicked();
 
