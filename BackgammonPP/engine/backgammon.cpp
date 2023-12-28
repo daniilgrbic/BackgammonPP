@@ -53,10 +53,6 @@ std::optional<GameResult> Backgammon::getResult() {
     return m_result;
 }
 
-// WIP
-// TODO:
-// - exhaustive testing: currently tested only for regular moves (from point to point, without blots)
-// - refactor function
 std::vector<Turn> Backgammon::generateLegalTurns() {
 
     class RollState {
@@ -113,10 +109,11 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
                     }
                 } else for (int pos = NUMBER_OF_POINTS; pos >= 1; --pos) {
+                    bool foundPoint = false;
                     if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
                         auto nextPos = pos - die;
                         if (nextPos <= 0) {
-                            if (isBearingOff(board, onRoll)) {
+                            if (!(foundPoint && nextPos) && isBearingOff(board, onRoll)) {
                                 auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                                 nextLevel.push_back(roll.getNextRollState(nextMove, i));
                             }
@@ -125,6 +122,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                             auto nextMove = Move(onRoll, pos, nextPos, isBlot(board.point(nextPos), opponent));
                             nextLevel.push_back(roll.getNextRollState(nextMove, i));
                         }
+                        foundPoint = true;
                     }
                 }
             }
