@@ -213,6 +213,9 @@ void MainWindow::on_rbPlayerBot_clicked() {
     ui->labelOpponentUsername->setText("");
 }
 
+QString MainWindow::getIpAddress() {
+    return m_ipAddress;
+}
 
 void MainWindow::showIpAddress() {
     const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
@@ -222,6 +225,7 @@ void MainWindow::showIpAddress() {
             ipAddress = address.toString();
         }
     }
+    m_ipAddress = ipAddress;
     ui->labeIP->setText(ipAddress);
 }
 

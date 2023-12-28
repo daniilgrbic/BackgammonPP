@@ -27,6 +27,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QString getIpAddress();
+
 signals:
     void requestCreateGame(QString opponentName, qint8 numGames, GameType gameType, PlayerType playerType);
     void joinRemoteMatch(QString ipAddress);
@@ -64,6 +66,7 @@ private:
     BoardWindow *boardWindow;
     QString backgroundPicPath = ":/resources/img/blurred_backgammon_blacked.png";
     QString sketchPicPath = ":/resources/img/menu_sketch.png";
+    QString m_ipAddress;
 
     void setPicture(QString picturePath, QWidget *pictureWidget);
     bool isValidIpAddress(const QString &ipAddress);

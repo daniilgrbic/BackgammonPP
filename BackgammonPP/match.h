@@ -10,7 +10,7 @@ class Match : public QObject
 {
     Q_OBJECT
 public:
-    Match(QObject *parent, Player *white, Player *black, int length=1, GameType gameType=GameType::ClassicGameType);
+    Match(QObject *parent, Player *white, Player *black, int length=1, GameType gameType=GameType::ClassicGameType, bool host = true);
 
     void startGame();
 
@@ -23,6 +23,8 @@ signals:
 public slots:
     void getTurn(Turn turn);
     void confirmRoll(Roll roll);
+    void startGameRequest();
+
 private:
     Player *m_white;
     Player *m_black;
@@ -31,6 +33,7 @@ private:
     Player *m_waiting;
 
     int m_length;
+    bool m_host;
 
     GameType m_gameType;
 

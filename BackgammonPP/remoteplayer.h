@@ -9,6 +9,7 @@ class RemotePlayer : public Player
     Q_OBJECT
 public:
     explicit RemotePlayer(QObject *parent = nullptr, QString ip = "", QString username = "");
+    Client *getClient();
 
 public slots:
     //connected to the match
