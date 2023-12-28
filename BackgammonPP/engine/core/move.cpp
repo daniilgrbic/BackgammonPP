@@ -55,9 +55,11 @@ Move Move::centralMirror(Move move)
 QString Move::toString() const
 {
     QVariantMap map = toVariant().toMap();
-    return QString("%1/%2")
-        .arg(map.value("from").toString())
-        .arg(map.value("to").toString());
+    return QString("%1/%2%3").arg(
+        map.value("from").toString(),
+        map.value("to").toString(),
+        m_isHit ? "*" : ""
+    );
 }
 
 QVariant Move::toVariant() const
