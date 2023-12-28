@@ -70,9 +70,12 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     std::vector<RollState> nextLevel = level;
 
     bool doubles = std::count(dice.begin(), dice.end(), dice.front()) == dice.size();
+
+    // first move is doubled when player rolls 33, 44, or 66 and can't perform full move due to opponents head
+    bool blocked16 = (m_history.size() == 1 and level.front().board().point(16).count() > 0);
     bool doubleFirstMove = doubles
-                           and (dice.front() == 3 or dice.front() == 4 or dice.front() == 6)
-                           and m_history.empty();
+                           and m_history.size() <= 1
+                           and (dice.front() == 3 or (dice.front() == 4 and not blocked16) or dice.front() == 6);
 
     do {
         level = std::move(nextLevel);
