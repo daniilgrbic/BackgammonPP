@@ -25,7 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Create Game Lobby
     connect(ui->btBackFromCreateToMenu, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
-    connect(ui->btStartGame, SIGNAL(clicked(false)), this, SLOT(on_btStartGame_clicked()));
+    connect(ui->btStartGame, SIGNAL(clicked()), this, SLOT(on_btStartGame_clicked()));
+    connect(ui->rbPlayerBot, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
+    connect(ui->rbPlayerLocal, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
+    connect(ui->rbPlayerRemote, SIGNAL(clicked()), this, SLOT(on_rbPlayerBot_clicked()));
+    this->on_rbPlayerBot_clicked();
+    this->showIpAddress();
 
     // Join Game Lobby
     connect(ui->btBackFromJoinLobby, SIGNAL(clicked()), this, SLOT(on_btReturnToMenu_clicked()));
@@ -96,7 +101,7 @@ void MainWindow::on_btStartGame_clicked()
 {
     GameType gameType = this->getGameType();
     PlayerType playerType = this->getPlayerType();
-    QString opponentPlayer = this->ui->labelTextEdit->toPlainText();
+    QString opponentName = this->ui->labelOpponentUsername->toPlainText();
     qint32 gameNumber = this->ui->sbGameDuration->value();
 
     if (gameNumber < MIN_NUM_GAMES or gameNumber > MAX_NUM_GAMES) {
@@ -105,16 +110,16 @@ void MainWindow::on_btStartGame_clicked()
     }
 
     if (playerType == PlayerType::BotPlayer) {
-        emit requestCreateGame();
+        emit requestCreateGame("Bot", gameNumber);
     }
     else {
-        if (opponentPlayer.size() < MIN_USERNAME_SIZE or opponentPlayer.size() > MAX_USERNAME_SIZE) {
+        if (opponentName.size() < MIN_USERNAME_SIZE or opponentName.size() > MAX_USERNAME_SIZE) {
             QMessageBox::information(nullptr, "Alert", "Enter Username between " + QString::number(MIN_USERNAME_SIZE) + " and " + QString::number(MAX_USERNAME_SIZE) + " characters");
             return;
         }
 
         if (playerType == PlayerType::LocalPlayer) {
-            emit requestCreateGame();
+            emit requestCreateGame(opponentName, gameNumber);
         }
         else {
             // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
@@ -190,3 +195,25 @@ void MainWindow::on_btReturnFromCreateGameLobby_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+void MainWindow::on_rbPlayerBot_clicked() {
+    if (ui->rbPlayerBot->isChecked()) {
+        ui->labelOpponentUsername->setDisabled(true);
+        ui->labelOpponentUsername->setStyleSheet("background-color: gray");
+        ui->labelOpponentUsername->setText("");
+    }
+    else {
+        ui->labelOpponentUsername->setDisabled(false);
+        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8");
+    }
+}
+
+void MainWindow::showIpAddress() {
+    const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
+    QString ipAddress = "Can't find address";
+    for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
+            ipAddress = address.toString();
+        }
+    }
+    ui->labeIP->setText(ipAddress);
+}

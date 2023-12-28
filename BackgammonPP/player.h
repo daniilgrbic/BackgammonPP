@@ -1,35 +1,42 @@
 #pragma once
 
 #include <QObject>
+#include <QString>
 #include <vector>
-#include "network/client.h"
 #include "engine/core/boardstate.h"
 #include "engine/core/playercolor.h"
 #include "engine/core/turn.h"
+#include "engine/core/roll.h"
 
 class Player : public QObject
 {
     Q_OBJECT
 public:
     explicit Player(QObject *parent = nullptr);
-    bool connectToServer(QString ip, QString username);
 
 signals:
-    void gameEnded(int gameValue);
-    void matchEnded();
-    void requestLastBoardState();
+    //connected to the match
+    void returnMove(Turn turn); // salje od playera (gui) -> match odigrani potez
+    void confirmRoll(Roll roll); //
+
+    //connected to the board/client/bot
+    void forwardSetState(const BoardState &state);
+    void forwardSetDice(const Roll &roll);
 
 public slots:
-    void toDouble();
-    void toNotDouble();
-    void oppDoubled();
-    void askToDouble();
-    void endGame();
-    virtual void askedToDouble(BoardState* state) = 0;
-    virtual void receivedState(BoardState* state) = 0;
-    virtual void chooseMove(std::vector<Turn> &legalMoves) = 0;
+    //connected to the match
+    virtual void setState(const BoardState& state) = 0;
+    virtual void setDice(const Roll& roll) = 0;
+    virtual void chooseMove(Turn *turn, std::vector<Turn> *legalMoves, Roll *roll) = 0;
+
+    //connected to board/client/bot
+    virtual void acceptMove(Turn turn) = 0;
+    virtual void diceRolled(Roll roll) = 0;
 
 private:
-    Client* m_client;
+    std::vector<Turn> *m_legalMoves;
+    Roll *m_roll;
+
+    //Client* m_client; -> u remote player
     PlayerColor m_playerColor;
 };

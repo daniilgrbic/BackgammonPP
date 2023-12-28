@@ -23,7 +23,7 @@ signals:
 
 public slots:
     void createGameFromMenu();
-    void createRemoteGameFromMenu(QString oppName);
+    void createGameFromMenu(QString opponentName, qint8 numGames);
     void joinRemoteGame(QString ip);
     void closeGameAndOpenMenu();
     void getPreferences(qint16 newVolume);

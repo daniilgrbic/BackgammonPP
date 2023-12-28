@@ -9,6 +9,7 @@
 #include <QPalette>
 #include <QMessageBox>
 #include <QHostAddress>
+#include <QNetworkInterface>
 #include <iostream>
 #include "boardwindow.h"
 #include "consts.h"
@@ -27,7 +28,7 @@ public:
     ~MainWindow();
 
 signals:
-    void requestCreateGame();
+    void requestCreateGame(QString opponentName, qint8 numGames);
     void requestCreateRemoteGame(QString name);
     void requestJoinRemoteGame(QString ip);
     void requestPreferences(qint16 newVolume);
@@ -41,6 +42,7 @@ private slots:
 
     void on_btCreateGame_clicked();
     void on_btStartGame_clicked();
+    void on_rbPlayerBot_clicked();
 
     void on_btJoinGame_clicked();
     void on_btJoinLobby_clicked();
@@ -62,6 +64,7 @@ private:
     void setPicture(QString picturePath, QWidget *pictureWidget);
     bool isValidIpAddress(const QString &ipAddress);
     void displayPreferences();
+    void showIpAddress();
     GameType getGameType();
     PlayerType getPlayerType();
     StringListModel *model;

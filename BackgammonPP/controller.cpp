@@ -41,14 +41,15 @@ void Controller::getPreferences(qint16 newVolume)
     emit sendPreferences(this->preferences);
 }
 
-void Controller::createGameFromMenu()
+void Controller::createGameFromMenu(QString opponentName, qint8 numGames)
 {
     mainWindow->close();
 
+    boardWindow->setOpponentName(opponentName);
     boardWindow->show();
-    LocalPlayer *white = new LocalPlayer(nullptr, this->boardWindow);
-    LocalPlayer *black= new LocalPlayer(nullptr, this->boardWindow);
-    Match *m = new Match(nullptr, white, black);
+    Player *white = new LocalPlayer(nullptr, this->boardWindow);
+    Player *black= new LocalPlayer(nullptr, this->boardWindow);
+    Match *m = new Match(nullptr, white, black, numGames);
     white->setParent(m);
     black->setParent(m);
     m->startGame();
