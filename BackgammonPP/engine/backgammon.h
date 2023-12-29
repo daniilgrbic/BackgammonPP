@@ -9,6 +9,7 @@ public:
     struct Result;
 
     Backgammon();
+    Backgammon(const BoardState& board, const Roll& roll);
 
     bool isGammon() const;
     bool isBackgammon() const;

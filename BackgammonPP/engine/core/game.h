@@ -28,12 +28,9 @@ protected:
 
     BoardState m_board;
     Roll m_currentRoll;
-    std::vector<Turn> m_history;
-    std::optional<GameResult> m_result;
+    std::vector<Turn> m_history {};
+    std::optional<GameResult> m_result { std::nullopt };
 
     Die m_firstDie {};
     Die m_secondDie {};
-
-// private:
-//     const int CHECKERS_COUNT;
 };

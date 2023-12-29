@@ -15,6 +15,13 @@ Backgammon::Backgammon() : Game()
     m_currentRoll = Roll::getInitialRoll(m_firstDie, m_secondDie);
 }
 
+Backgammon::Backgammon(const BoardState& board, const Roll& roll)
+    : Game {}
+{
+    m_board = board;
+    m_currentRoll = roll;
+}
+
 bool Backgammon::isGammon() const {
     return (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) ||
            (isFinished(PlayerColor::BLACK) && !m_board.off(PlayerColor::WHITE));

@@ -11,6 +11,29 @@ BoardState::BoardState()
     : m_points(std::array<Point, NUMBER_OF_POINTS>())
 {}
 
+BoardState::BoardState(
+    const std::vector<std::pair<int, int>>& whitePoints,
+    const std::vector<std::pair<int, int>>& blackPoints,
+    const int whiteBar, const int blackBar,
+    const int whiteOff, const int blackOff
+)
+    : m_whiteBar { whiteBar }, m_blackBar { blackBar }
+    , m_whiteOff { whiteOff }, m_blackOff { blackOff }
+    , m_points {}
+{
+    auto whiteCheckers = whiteBar + whiteOff;
+    for (const auto [pos, count] : whitePoints) {
+        point(pos).add(PlayerColor::WHITE, count);
+        whiteCheckers += count;
+    }
+
+    auto blackCheckers = blackBar + blackOff;
+    for (const auto [pos, count] : blackPoints) {
+        point(pos).add(PlayerColor::BLACK, count);
+        blackCheckers += count;
+    }
+}
+
 int BoardState::bar(PlayerColor player) const {
     return player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
 }

@@ -14,6 +14,13 @@ class BoardState : public Serializable
 public:
     BoardState();
 
+    BoardState(
+        const std::vector<std::pair<int, int>>& whitePoints,
+        const std::vector<std::pair<int, int>>& blackPoints,
+        const int whiteBar, const int blackBar,
+        const int whiteOff, const int blackOff
+    );
+
     int bar(PlayerColor player) const;
     int off(PlayerColor player) const;
 
