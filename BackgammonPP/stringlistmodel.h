@@ -2,7 +2,6 @@
 
 #include <QAbstractListModel>
 #include <QObject>
-#include <QStyleOptionViewItem>
 
 class StringListModel : public QAbstractListModel
 {
