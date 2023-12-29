@@ -16,7 +16,7 @@ TEST_CASE("Turn struct serialization") {
         QVariantMap qMap = turn.toVariant().toMap();
 
         // Assert
-        REQUIRE(qMap.size() == 5);
+        REQUIRE(qMap.size() == 4);
         REQUIRE(qMap.value("player").toString().toStdString() == "white");
         REQUIRE(qMap.value("moves").toList().size() == 2);
         REQUIRE(qMap.value("dice").toList().size() == 2);

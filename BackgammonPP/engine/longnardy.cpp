@@ -72,10 +72,18 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     bool doubles = std::count(dice.begin(), dice.end(), dice.front()) == dice.size();
 
     // first move is doubled when player rolls 33, 44, or 66 and can't perform full move due to opponents head
-    bool blocked16 = (m_history.size() == 1 and level.front().board().point(16).count() > 0);
-    bool doubleFirstMove = doubles
-                           and m_history.size() <= 1
-                           and (dice.front() == 3 or (dice.front() == 4 and not blocked16) or dice.front() == 6);
+    if(m_history.size() <= 1 and doubles and dice.front() == 3) {
+        std::vector<Move>moves = {{onRoll, 24, 21}, {onRoll, 21, 18}, {onRoll, 18, 15}, {onRoll, 24, 21}};
+        return {Turn{onRoll, dice, moves, level.front().getNextRollState(moves, {}).board()}};
+    }
+    if(m_history.size() <= 1 and doubles and dice.front() == 4 and level.front().board().point(16).count() == 0) {
+        std::vector<Move>moves = {{onRoll, 24, 20}, {onRoll, 20, 16}, {onRoll, 24, 20}, {onRoll, 20, 16}};
+        return {Turn{onRoll, dice, moves, level.front().getNextRollState(moves, {}).board()}};
+    }
+    if(m_history.size() <= 1 and doubles and dice.front() == 6) {
+        std::vector<Move>moves = {{onRoll, 24, 18}, {onRoll, 24, 18}};
+        return {Turn{onRoll, dice, moves, level.front().getNextRollState(moves, {}).board()}};
+    }
 
     do {
         level = std::move(nextLevel);
@@ -85,10 +93,10 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
             const BoardState& board = rollState.board();
             const std::vector<int>& diceRolls = rollState.dice();
 
-            int movesFromHead = 0;
+            bool movedFromHead = false;
             for(const Move& move : rollState.moves()) {
                 if(std::holds_alternative<int>(move.m_from) and std::get<int>(move.m_from) == NUMBER_OF_POINTS)
-                    movesFromHead++;
+                    movedFromHead = true;
             }
 
             for (size_t i = 0; i < diceRolls.size(); i++) {
@@ -99,10 +107,8 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
 
                     // player is only allowed to take more than 1 checker from head on first turn
                     // when rolling double 4s or double 6s
-                    if(pos == NUMBER_OF_POINTS) {
-                        if(movesFromHead == 2) continue;
-                        if(movesFromHead == 1 and !doubleFirstMove) continue;
-                    }
+                    if(pos == NUMBER_OF_POINTS and movedFromHead)
+                        continue;
 
                     // skip pos if held by opponent
                     if(board.point(pos).owner() and board.point(pos).owner().value() != onRoll)

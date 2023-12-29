@@ -10,14 +10,16 @@ using uint = unsigned int;
 class Point : public Serializable
 {
 public:
-    Point();
+    Point() = default;
+    Point(std::optional<PlayerColor>, uint);
     std::optional<PlayerColor> owner() const;
     uint count() const;
     uint add(PlayerColor color, uint count = 1);
     uint remove(uint count = 1);
 
-    // [[maybe unused]]
     static int idByPlayer(PlayerColor color, size_t index);
+    static int centralMirrorId(size_t index);
+    static int verticalMirrorId(size_t index);
 
     bool operator ==(const Point&) const = default;
 

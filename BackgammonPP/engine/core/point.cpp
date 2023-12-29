@@ -5,7 +5,10 @@
 #include <QVariantMap>
 #include <QJsonDocument>
 
-Point::Point() = default;
+Point::Point(std::optional<PlayerColor> owner, uint count)
+    : m_owner(owner)
+    , m_count(count)
+    {};
 
 std::optional<PlayerColor> Point::owner() const
 {
@@ -44,6 +47,19 @@ int Point::idByPlayer(PlayerColor color, size_t index)
         throw std::logic_error("Point index must be an integer between 1 and 24");
 
     return color == PlayerColor::WHITE ? index : NUMBER_OF_POINTS + 1 - index;
+}
+
+int Point::centralMirrorId(size_t index)
+{
+    if(1 <= index and index <= 12) return index + 12;
+    if(13 <= index and index <= 24) return index - 12;
+    throw std::logic_error("Point index must be an integer between 1 and 24");
+}
+
+int Point::verticalMirrorId(size_t index)
+{
+    if(1 <= index and index <= 24) return NUMBER_OF_POINTS + 1 - index;
+    throw std::logic_error("Point index must be an integer between 1 and 24");
 }
 
 QVariant Point::toVariant() const
