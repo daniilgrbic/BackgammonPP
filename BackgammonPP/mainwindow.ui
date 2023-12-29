@@ -120,24 +120,6 @@
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLabel" name="bg_label">
-         <property name="geometry">
-          <rect>
-           <x>-10</x>
-           <y>-30</y>
-           <width>691</width>
-           <height>101</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	filter: blur(8px);
-}</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
         <widget class="QFrame" name="optionsFrame">
          <property name="geometry">
           <rect>
@@ -329,10 +311,6 @@ QPushButton:hover {
           </property>
          </widget>
         </widget>
-        <zorder>bg_label</zorder>
-        <zorder>title_label</zorder>
-        <zorder>optionsFrame</zorder>
-        <zorder>exitFrame</zorder>
        </widget>
       </widget>
       <widget class="QWidget" name="CreateGame">
@@ -783,11 +761,7 @@ QPushButton:hover {
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="labeIP">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
+           <widget class="QLabel" name="labeIP"/>
           </item>
          </layout>
         </widget>
@@ -862,7 +836,7 @@ QPushButton:hover {
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="usernameLabel">
               <property name="font">
                <font>
                 <pointsize>12</pointsize>
@@ -870,14 +844,15 @@ QPushButton:hover {
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel {
-	text-align: center;
-	content-align: center;
 	background: transparent;
 	color: white;
 }</string>
               </property>
               <property name="text">
                <string>Username</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::AutoText</enum>
               </property>
              </widget>
             </item>
@@ -930,8 +905,6 @@ QPushButton:hover {
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel {
-	text-align: center;
-	content-align: center;
 	background: transparent;
 	color: white;
 }</string>
@@ -1117,9 +1090,6 @@ QPushButton:hover {
             <string notr="true">QLabel {
 	background-color: rgba(0, 0, 0, 0);
 }</string>
-           </property>
-           <property name="text">
-            <string/>
            </property>
           </widget>
          </item>
