@@ -20,7 +20,6 @@ QString Turn::toString() const
 QVariant Turn::toVariant() const
 {
     QVariantMap map;
-    map.insert("index", m_index);
     map.insert("player", m_player == PlayerColor::WHITE ? "white" : "black");
     map.insert("dice", QVariantList(m_dice.begin(), m_dice.end()));
     map.insert("finalBoard", m_finalBoard.toVariant());
@@ -36,7 +35,6 @@ QVariant Turn::toVariant() const
 void Turn::fromVariant(const QVariant &variant)
 {
     QVariantMap data = variant.toMap();
-    m_index = data.value("index").toInt();
     m_player = data.value("player").toString().toStdString() == "white" ?
                    PlayerColor::WHITE : PlayerColor::BLACK;
     m_finalBoard.fromVariant(data.value("finalBoard"));

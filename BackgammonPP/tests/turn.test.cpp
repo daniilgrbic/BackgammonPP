@@ -10,14 +10,13 @@ auto const OFF = SpecialPosition::OFF;
 TEST_CASE("Turn struct serialization") {
     SECTION("Should serialize a turn") {
         // Arrange
-        Turn turn {1, WHI, {5, 1}, {{WHI, BAR, 20}, {WHI, 20, 19}}, {}};
+        Turn turn {WHI, {5, 1}, {{WHI, BAR, 20}, {WHI, 20, 19}}, {}};
 
         // Act
         QVariantMap qMap = turn.toVariant().toMap();
 
         // Assert
         REQUIRE(qMap.size() == 5);
-        REQUIRE(qMap.value("index").toInt() == 1);
         REQUIRE(qMap.value("player").toString().toStdString() == "white");
         REQUIRE(qMap.value("moves").toList().size() == 2);
         REQUIRE(qMap.value("dice").toList().size() == 2);
@@ -26,7 +25,6 @@ TEST_CASE("Turn struct serialization") {
     SECTION("Should deserialize a turn") {
         // Arrange
         QVariantMap data;
-        data.insert("index", 1);
         data.insert("player", "white");
         data.insert("dice", QVariantList{5, 1});
         data.insert("moves", QVariantList{Move{WHI, BAR, 20}.toVariant(), Move{WHI, 20, 19}.toVariant()});
@@ -37,7 +35,6 @@ TEST_CASE("Turn struct serialization") {
         turn.fromVariant(data);
 
         // Assert
-        REQUIRE(turn.m_index == 1);
         REQUIRE(turn.m_player == PlayerColor::WHITE);
         REQUIRE(turn.m_dice == std::vector<int>{5, 1});
         REQUIRE(turn.m_moves.size() == 2);

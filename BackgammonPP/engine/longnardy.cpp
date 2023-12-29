@@ -169,7 +169,6 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
         }
 
         auto turn = Turn {
-            0,
             onRoll,
             m_currentRoll.dice(),
             moves,

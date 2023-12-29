@@ -146,7 +146,7 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                 moves = std::move(roll.moves());
             }
 
-            return Turn { 0, onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() };
+            return Turn { onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() };
         }
     );
     return legalTurns;

@@ -7,14 +7,13 @@
 
 #include <algorithm>
 #include <vector>
-#include <iterator>
 
 struct Turn : public Serializable
 {
     Turn() = default;
 
-    Turn(const unsigned int index, const PlayerColor player, const std::vector<int>& dice, const std::vector<Move>& moves, const BoardState& finalBoard)
-        : m_index { index }, m_player { player }, m_dice { dice }, m_moves { moves }, m_finalBoard { finalBoard }
+    Turn(const PlayerColor player, const std::vector<int>& dice, const std::vector<Move>& moves, const BoardState& finalBoard)
+        : m_player { player }, m_dice { dice }, m_moves { moves }, m_finalBoard { finalBoard }
     {}
 
     bool operator ==(const Turn& other) const {
@@ -31,7 +30,6 @@ struct Turn : public Serializable
         return reprs;
     }
 
-    unsigned int m_index;
     PlayerColor m_player;
     std::vector<int> m_dice;
     std::vector<Move> m_moves;
