@@ -17,11 +17,14 @@ find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Network Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} OPTIONAL_COMPONENTS Widgets)
 
+add_subdirectory(tests)
+
 add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
-    engine/backgammon.cpp engine/backgammon.h
-    engine/core/boardstate.cpp engine/core/boardstate.h
-    engine/core/die.cpp engine/core/die.h
-    engine/core/game.cpp engine/core/game.h
+
+    # Engine Core
+    engine/core/boardstate.h engine/core/boardstate.cpp
+    engine/core/die.h engine/core/die.cpp
+    engine/core/game.h engine/core/game.cpp
     engine/core/gameresult.h
     engine/core/move.h engine/core/move.cpp
     engine/core/playercolor.h
@@ -30,76 +33,67 @@ add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
     engine/core/specialposition.h
     engine/core/turn.h engine/core/turn.cpp
     engine/core/turntrie.h engine/core/turntrie.cpp
+
+    # Game Variants
     engine/backgammon.h engine/backgammon.cpp
     engine/longnardy.h engine/longnardy.cpp
-    network/server.cpp
-    network/server.h
-    network/client.cpp
-    network/client.h
-    network/server_commands.h
-    network/chat_message.cpp
-    network/chat_message.h
+
+    # Game Bot
+    engine/bot/bot.hpp engine/bot/bot.cpp
+    engine/bot/connectgene.hpp engine/bot/connectgene.cpp
+    engine/bot/genome.hpp engine/bot/genome.cpp
+    engine/bot/innovation.cpp engine/bot/innovation.hpp
+    engine/bot/link.hpp
+    engine/bot/neat.hpp engine/bot/neat.cpp
+    engine/bot/network.hpp engine/bot/network.cpp
+    engine/bot/neuron.hpp engine/bot/species.hpp
+    engine/bot/nodegene.hpp
+    engine/bot/saved_genomes/lilith.genome
+    engine/bot/saved_genomes/lilith_copy.genome
+
+    # Utility Functions / Classes
     utility/jsonserializer.h
     utility/serializable.h
-    main.cpp
-    mainwindow.cpp mainwindow.h mainwindow.ui
-    background_menu_image.qrc
-    barcheckerholder.cpp
-    barcheckerholder.h
-    boardbar.cpp
-    boardbar.h
-    boardchecker.cpp
-    boardchecker.h
-    boarddie.cpp
-    boarddie.h
-    boarddoublingdie.cpp
-    boarddoublingdie.h
-    boardplayingdie.cpp
-    boardplayingdie.h
-    boardscene.cpp
-    boardscene.h
-    boardsidebar.cpp
-    boardsidebar.h
-    boardtriangle.cpp
-    boardtriangle.h
-    boardwidget.cpp
-    boardwidget.h
-    boardwindow.cpp
-    boardwindow.h
-    boardwindow.ui
-    checkerholder.cpp
-    checkerholder.h
-    CMakeLists.txt
-    consts.h
-    controller.cpp
-    controller.h
-    main.cpp
-    mainwindow.cpp mainwindow.h mainwindow.ui
+    utility/threadsafequeue.h
 
-    sidebarcheckerholder.cpp
-    sidebarcheckerholder.h
-    verticalchecker.cpp
-    verticalchecker.h
+    # Networking
+    network/chat_message.h network/chat_message.cpp
+    network/client.h network/client.cpp
+    network/server.h network/server.cpp
+    network/server_commands.h
+
+    # GUI
+    barcheckerholder.h barcheckerholder.cpp
+    boardbar.h boardbar.cpp
+    boardchecker.h boardchecker.cpp
+    boarddie.h boarddie.cpp
+    boarddoublingdie.h boarddoublingdie.cpp
+    boardplayingdie.h boardplayingdie.cpp
+    boardscene.h boardscene.cpp
+    boardsidebar.h boardsidebar.cpp
+    boardtriangle.h boardtriangle.cpp
+    boardwidget.h boardwidget.cpp
+    boardwindow.h boardwindow.cpp boardwindow.ui
+    checkerholder.h checkerholder.cpp
+    mainwindow.h mainwindow.cpp mainwindow.ui
+    sidebarcheckerholder.h sidebarcheckerholder.cpp
+    verticalchecker.h verticalchecker.cpp
+
+    stringlistmodel.h stringlistmodel.cpp
+    historylistmodel.h historylistmodel.cpp
+
+    consts.h
+    match.h match.cpp
     player.h player.cpp
     botplayer.h botplayer.cpp
     localplayer.h localplayer.cpp
-    match.h match.cpp
-    consts.h
-    stringlistmodel.h stringlistmodel.cpp
-    historylistmodel.h historylistmodel.cpp
-    stringlistmodel.h stringlistmodel.cpp
     remoteplayer.h remoteplayer.cpp
-    music.qrc
-    utility/threadsafequeue.h
 
-    engine/bot/bot.cpp engine/bot/bot.hpp engine/bot/connectgene.hpp engine/bot/genome.hpp engine/bot/innovation.cpp engine/bot/innovation.hpp  engine/bot/neat.cpp engine/bot/network.cpp engine/bot/network.hpp engine/bot/neuron.hpp engine/bot/species.hpp
-    engine/bot/neat.hpp
-    engine/bot/genome.cpp
-    engine/bot/saved_genomes/lilith.genome
-    engine/bot/saved_genomes/lilith_copy.genome
-    engine/bot/nodegene.hpp
-    engine/bot/link.hpp
-    engine/bot/connectgene.cpp
+    background_menu_image.qrc
+    music.qrc
+
+    controller.h controller.cpp
+    main.cpp
 )
 target_link_libraries(BackgammonPP PRIVATE Qt::Core Qt::Gui Qt::Network Qt::Multimedia)
 
