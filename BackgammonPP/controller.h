@@ -3,7 +3,6 @@
 #include "mainwindow.h"
 #include "boardwindow.h"
 #include "network/server.h"
-#include "network/client.h"
 #include "match.h"
 #include <QApplication>
 #include <QThread>
@@ -37,9 +36,9 @@ private:
 
     Server *server_local = nullptr;
     QThread *thread_server = nullptr;
+    Player *player_remote = nullptr;
 
     Match *match_current = nullptr;
-    Player *player_local = nullptr;
 
     void playThemeSong();
 };

@@ -96,7 +96,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         white->setParent(match_current);
         black->setParent(match_current);
 
-        player_local = black;
+        player_remote = black;
         connect(dynamic_cast<RemotePlayer*>(black), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
     }
 
@@ -117,7 +117,7 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     black->setParent(match_current);
     match_current->startGame();
 
-    player_local = white;
+    player_remote = white;
     connect(dynamic_cast<RemotePlayer*>(white), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
 }
 
@@ -125,8 +125,10 @@ void Controller::closeGameAndOpenMenu()
 {
     qDebug() << "closeGameAndOpenMenu\n";
 
-    if (player_local != nullptr)
-        disconnect(dynamic_cast<RemotePlayer*>(player_local), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
+    if (player_remote != nullptr) {
+        disconnect(dynamic_cast<RemotePlayer*>(player_remote), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
+        // delete player_remote;
+    }
 
     qDebug() << "Check1\n";
 
@@ -148,13 +150,13 @@ void Controller::closeGameAndOpenMenu()
 
     qDebug() << "Check3\n";
 
-    // if (match_current != nullptr)
-        // delete match_current;
+    if (match_current != nullptr)
+        delete match_current;
 
     qDebug() << "Check4\n";
 
     match_current = nullptr;
-    player_local = nullptr;
+    player_remote = nullptr;
 
     mainWindow->show();
 

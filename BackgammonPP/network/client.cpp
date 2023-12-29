@@ -24,7 +24,12 @@ bool Client::connectClient(QString ipAddress) {
 }
 
 void Client::disconnectClient() {
-    m_socket->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+    qDebug() << "Client disconnectClient\n";
+    if (m_socket != nullptr && m_socket->state() == QAbstractSocket::ConnectedState) {
+        qDebug() << "Usao ovde\n";
+        m_socket->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+    }
+    qDebug() << "Nije ovde problem...\n";
 }
 
 void Client::sendTurnToServer(Turn* turn) {
@@ -78,7 +83,6 @@ void Client::readMessageFromServer() {
         qDebug() << "Disconnect message from server\n";
         m_socket->disconnect();
         m_socket = nullptr;
-
         disconnectedFromServer();
     }
     else {
@@ -88,5 +92,6 @@ void Client::readMessageFromServer() {
 
 void Client::disconnectedFromServer() {
     qDebug() << "Disconnected from server\n";
+    // Ovde
     emit disconnected();
 }

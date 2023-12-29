@@ -13,7 +13,7 @@ public:
     Server(QString name, QObject* parent = nullptr);
     ~Server();
 
-    void nukeGame();
+    void nukeGame(QTcpSocket *);
 
 public slots:
     void connected();

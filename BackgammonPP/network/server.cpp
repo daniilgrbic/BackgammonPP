@@ -48,11 +48,9 @@ void Server::connected() {
 void Server::disconnected() {
     QTcpSocket* disconnectedSocket = static_cast<QTcpSocket *>(QObject::sender());
 
-    if (disconnectedSocket == m_player1 || disconnectedSocket == m_player2) {
-        nukeGame();
-    } else {
-        m_spectators.remove(disconnectedSocket);
-    }
+    qDebug() << "Saban\n";
+
+    processDisconnectCommand(disconnectedSocket);
 }
 
 void Server::readMessage() {
@@ -69,6 +67,12 @@ void Server::readMessage() {
         processTurnCommand(sourceSocket, message);
     }
     else if (message.startsWith(srvconst::serverCmdDisconnect)) {
+        if (sourceSocket == m_player1)
+            qDebug() << "host";
+        else
+            qDebug() << "non-host";
+
+        qDebug() << "Disconnected messaage\n";
         processDisconnectCommand(sourceSocket);
     }
     else {
@@ -92,17 +96,24 @@ void Server::broadcast(QTcpSocket * src, QString message) {
 }
 
 void Server::processAddNameCommand(QTcpSocket* src, QString name) {
+    qDebug() << name << "\n";
+
     if (src == m_player1) {
         return;
-    } else if (name == m_oppName) {
+    } else if (name == m_oppName && m_player2 == nullptr) {
         m_player2 = src;
+
         // connected as Player 2, let Player 1 know
         m_player1->write(srvconst::serverCmdGameStart.toStdString().c_str());
         m_player1->flush();
+
+        qDebug() << "Connected 2nd player\n";
     } else {
         // connected as Spectator
         src->write(srvconst::serverCmdConnectedAsSpectator.toStdString().c_str());
         src->flush();
+
+        qDebug() << "Connected spectator\n";
     }
 }
 
@@ -116,23 +127,28 @@ void Server::processTurnCommand(QTcpSocket* src, QString turn) {
 
 void Server::processDisconnectCommand(QTcpSocket *src) {
     if (src == m_player1 || src == m_player2) {
-        nukeGame();
+        qDebug() << "??? 1\n";
+        nukeGame(src);
     } else {
+        qDebug() << "??? 2\n";
         src->write(srvconst::serverCmdDisconnect.toStdString().c_str());
         src->flush();
         m_spectators.remove(src);
     }
 }
 
-void Server::nukeGame() {
+void Server::nukeGame(QTcpSocket *src) {
     qDebug() << "Nuke game\n";
 
-    if (m_player1 != nullptr) {
+    if (m_player1 != src) {
+        qDebug() << "Nuke game 1\n";
         m_player1->write(srvconst::serverCmdDisconnect.toStdString().c_str());
         m_player1->flush();
-        m_player1->disconnect();
+        // m_player1->disconnect();
     }
-    if (m_player2 != nullptr) {
+
+    if (m_player2 != src) {
+        qDebug() << "Nuke game 2\n";
         m_player2->write(srvconst::serverCmdDisconnect.toStdString().c_str());
         m_player2->flush();
         m_player2->disconnect();
