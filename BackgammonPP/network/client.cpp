@@ -23,6 +23,10 @@ bool Client::connectClient(QString ipAddress) {
     return m_socket->waitForConnected();
 }
 
+void Client::disconnectClient() {
+    m_socket->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+}
+
 void Client::sendTurnToServer(Turn* turn) {
     QString toServer = srvconst::serverCmdTurn + QString::fromUtf8(JSONSerializer<Turn>::toJson(*turn));
     if (m_socket->state() == QAbstractSocket::ConnectedState) {
@@ -70,11 +74,19 @@ void Client::readMessageFromServer() {
         Turn turn = JSONSerializer<Turn>::fromJson(temp);
         emit sendMove(turn);
     }
+    else if (message.startsWith(srvconst::serverCmdDisconnect)) {
+        qDebug() << "Disconnect message from server\n";
+        m_socket->disconnect();
+        m_socket = nullptr;
+
+        disconnectedFromServer();
+    }
     else {
         emit unknownServerCommand(message);
     }
 }
 
 void Client::disconnectedFromServer() {
+    qDebug() << "Disconnected from server\n";
     emit disconnected();
 }

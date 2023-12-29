@@ -35,7 +35,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
     connect(m_boardScene, &BoardScene::setUndoEnabled, this, &BoardWindow::setUndoEnabled);
     // connect(this, &BoardWindow::forwardTurnFinish, this->m_historyModel, &HistoryListModel::addTurn);
 
-    connect(ui->pbExitCurrentGame, SIGNAL(clicked()), this, SLOT(on_pbExitGame_clicked()));
+    // connect(ui->pbExitCurrentGame, SIGNAL(clicked()), this, SLOT(on_pbExitGame_clicked()));
 }
 
 BoardWindow::~BoardWindow()
@@ -54,12 +54,6 @@ void BoardWindow::paintEvent(QPaintEvent *) {
 void BoardWindow::setExitPoints(GameType type){
     m_boardScene->setExitPoints(type);
 }
-
-void BoardWindow::on_pbExitGame_clicked()
-{
-    emit requestCloseGame();
-}
-
 
 void BoardWindow::on_pbRollDice_clicked()
 {
@@ -130,5 +124,11 @@ void BoardWindow::on_listView_clicked(const QModelIndex &index)
         ui->historyboardView->show();
     }
 
+}
+
+
+void BoardWindow::on_pbExitCurrentGame_clicked()
+{
+    emit requestCloseGame();
 }
 

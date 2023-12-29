@@ -29,6 +29,8 @@ private:
     void processRollCommand(QTcpSocket* src, QString roll);
     void processTurnCommand(QTcpSocket* src, QString turn);
 
+    void processDisconnectCommand(QTcpSocket *);
+
     QString m_oppName;
     QTcpServer* m_server;
     QTcpSocket* m_player1;

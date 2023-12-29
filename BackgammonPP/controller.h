@@ -4,6 +4,7 @@
 #include "boardwindow.h"
 #include "network/server.h"
 #include "network/client.h"
+#include "match.h"
 #include <QApplication>
 #include <QThread>
 
@@ -35,8 +36,10 @@ private:
     QString themeSongPath = THEME_SOUND_PATH;
 
     Server *server_local = nullptr;
-    Client *client_local = nullptr;
     QThread *thread_server = nullptr;
+
+    Match *match_current = nullptr;
+    Player *player_local = nullptr;
 
     void playThemeSong();
 };

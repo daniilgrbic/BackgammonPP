@@ -23,9 +23,10 @@ Server::Server(QString name, QObject *parent)
 Server::~Server() {
     m_player1->disconnect();
     m_player2->disconnect();
-    for (auto spec : m_spectators) {
+    for (auto spec : std::as_const(m_spectators)) {
         spec->disconnect();
     }
+
     delete m_server;
 }
 
@@ -67,8 +68,11 @@ void Server::readMessage() {
     else if (message.startsWith(srvconst::serverCmdTurn)) {
         processTurnCommand(sourceSocket, message);
     }
+    else if (message.startsWith(srvconst::serverCmdDisconnect)) {
+        processDisconnectCommand(sourceSocket);
+    }
     else {
-        throw std::runtime_error("");
+        throw std::runtime_error("Unknown server command");
     }
 }
 
@@ -81,7 +85,7 @@ void Server::broadcast(QTcpSocket * src, QString message) {
         m_player2->write(message.toStdString().c_str());
         m_player2->flush();
     }
-    for (auto spectator : m_spectators) {
+    for (auto spectator : std::as_const(m_spectators)) {
         spectator->write(message.toStdString().c_str());
         spectator->flush();
     }
@@ -110,13 +114,35 @@ void Server::processTurnCommand(QTcpSocket* src, QString turn) {
     broadcast(src, turn.toStdString().c_str());
 }
 
-void Server::nukeGame() {
-    qDebug() << "Reached\n";
+void Server::processDisconnectCommand(QTcpSocket *src) {
+    if (src == m_player1 || src == m_player2) {
+        nukeGame();
+    } else {
+        src->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+        src->flush();
+        m_spectators.remove(src);
+    }
+}
 
-    m_player1 = nullptr;
-    m_player2 = nullptr;
-    delete m_server;
+void Server::nukeGame() {
+    qDebug() << "Nuke game\n";
+
+    if (m_player1 != nullptr) {
+        m_player1->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+        m_player1->flush();
+        m_player1->disconnect();
+    }
+    if (m_player2 != nullptr) {
+        m_player2->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+        m_player2->flush();
+        m_player2->disconnect();
+    }
+    for (auto spec : std::as_const(m_spectators)) {
+        spec->write(srvconst::serverCmdDisconnect.toStdString().c_str());
+        spec->flush();
+        spec->disconnect();
+    }
     m_spectators.clear();
 
-    throw std::runtime_error("Required players left!");
+    // delete m_server;
 }

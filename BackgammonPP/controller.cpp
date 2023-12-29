@@ -55,12 +55,12 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
         AI::Bot *bot = new AI::Bot("../BackgammonPP/engine/bot/saved_genomes/gen_603.genome");
         Player *black = new BotPlayer(nullptr, this->boardWindow, bot);
-        Match *m = new Match(nullptr, white, black, numGames, gameType);
+        match_current = new Match(nullptr, white, black, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &BotPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
-        white->setParent(m);
-        black->setParent(m);
-        m->startGame();
+        white->setParent(match_current);
+        black->setParent(match_current);
+        match_current->startGame();
     }
     else if (playerType == PlayerType::LocalPlayer) {
         mainWindow->close();
@@ -69,12 +69,12 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         boardWindow->show();
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
         Player *black = new LocalPlayer(nullptr, this->boardWindow);
-        Match *m = new Match(nullptr, white, black, numGames, gameType);
+        match_current = new Match(nullptr, white, black, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
-        white->setParent(m);
-        black->setParent(m);
-        m->startGame();
+        white->setParent(match_current);
+        black->setParent(match_current);
+        match_current->startGame();
     }
     else {
         QString ipAddress = mainWindow->getIpAddress();
@@ -89,12 +89,15 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
         Player *black = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
-        Match *m = new Match(nullptr, white, black, numGames, gameType);
+        match_current = new Match(nullptr, white, black, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
-        connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
-        connect(dynamic_cast<RemotePlayer*>(black)->getClient(), &Client::startGame, m, &Match::startGameRequest);
-        white->setParent(m);
-        black->setParent(m);
+        connect(black, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
+        connect(dynamic_cast<RemotePlayer*>(black)->getClient(), &Client::startGame, match_current, &Match::startGameRequest);
+        white->setParent(match_current);
+        black->setParent(match_current);
+
+        player_local = black;
+        connect(dynamic_cast<RemotePlayer*>(black), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
     }
 
 }
@@ -107,16 +110,53 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     Player *black = new LocalPlayer(nullptr, this->boardWindow);
     Player *white = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
-    Match *m = new Match(nullptr, white, black, 3, GameType::ClassicGameType, false); //un-hardcode this
+    match_current = new Match(nullptr, white, black, 3, GameType::ClassicGameType, false); //un-hardcode this
     connect(white, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
-    white->setParent(m);
-    black->setParent(m);
-    m->startGame();
+    white->setParent(match_current);
+    black->setParent(match_current);
+    match_current->startGame();
+
+    player_local = white;
+    connect(dynamic_cast<RemotePlayer*>(white), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
 }
 
 void Controller::closeGameAndOpenMenu()
 {
+    qDebug() << "closeGameAndOpenMenu\n";
+
+    if (player_local != nullptr)
+        disconnect(dynamic_cast<RemotePlayer*>(player_local), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
+
+    qDebug() << "Check1\n";
+
+    if (thread_server != nullptr) {
+        // thread_server->deleteLater(); -- this line is the problem
+        server_local->deleteLater();
+
+        thread_server = nullptr;
+        server_local = nullptr;
+    }
+
+    qDebug() << "Check2\n";
+
     boardWindow->close();
+
+    delete boardWindow;
+    boardWindow = new BoardWindow();
+    connect(boardWindow, &BoardWindow::requestCloseGame, this, &Controller::closeGameAndOpenMenu);
+
+    qDebug() << "Check3\n";
+
+    // if (match_current != nullptr)
+        // delete match_current;
+
+    qDebug() << "Check4\n";
+
+    match_current = nullptr;
+    player_local = nullptr;
+
     mainWindow->show();
+
+    qDebug() << "CheckFinal\n";
 }
