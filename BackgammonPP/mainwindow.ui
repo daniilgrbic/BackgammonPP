@@ -55,11 +55,11 @@
 	background-position: center;
 }</string>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_5">
+   <layout class="QGridLayout" name="gridLayout_2">
     <property name="topMargin">
      <number>9</number>
     </property>
-    <item>
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="styleSheet">
        <string notr="true">QStackedWidget {
@@ -67,237 +67,286 @@
 }</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="mainMenu">
-       <widget class="QWidget" name="widget" native="true">
-        <property name="enabled">
-         <bool>true</bool>
+      <widget class="QWidget" name="MainMenu">
+       <layout class="QVBoxLayout" name="verticalLayout_7" stretch="4,9,3">
+        <property name="spacing">
+         <number>50</number>
         </property>
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>671</width>
-          <height>501</height>
-         </rect>
+        <property name="leftMargin">
+         <number>25</number>
         </property>
-        <property name="mouseTracking">
-         <bool>false</bool>
+        <property name="topMargin">
+         <number>10</number>
         </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
+        <property name="rightMargin">
+         <number>25</number>
         </property>
-        <widget class="QLabel" name="title_label">
-         <property name="geometry">
-          <rect>
-           <x>-10</x>
-           <y>20</y>
-           <width>691</width>
-           <height>61</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Corbel</family>
-           <pointsize>21</pointsize>
-           <italic>false</italic>
-           <bold>true</bold>
-           <underline>false</underline>
-           <strikeout>false</strikeout>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Backgammon++</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QFrame" name="optionsFrame">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>110</y>
-           <width>121</width>
-           <height>261</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <property name="lineWidth">
-          <number>0</number>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="btCreateGame">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Corbel</family>
-                <pointsize>13</pointsize>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: left;
-}
-
-QPushButton:hover {
-	color: green;
-}</string>
-              </property>
-              <property name="text">
-               <string>Create Game</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btJoinGame">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Corbel</family>
-                <pointsize>13</pointsize>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: left;
-}
-
-QPushButton:hover {
-	color: green;
-}</string>
-              </property>
-              <property name="text">
-               <string>Join Game</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btPreferences">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Corbel</family>
-                <pointsize>13</pointsize>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: left;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-              </property>
-              <property name="text">
-               <string>Preferences</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QFrame" name="exitFrame">
-         <property name="geometry">
-          <rect>
-           <x>30</x>
-           <y>430</y>
-           <width>631</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <property name="lineWidth">
-          <number>0</number>
-         </property>
-         <widget class="QPushButton" name="btExit">
-          <property name="geometry">
-           <rect>
-            <x>500</x>
-            <y>10</y>
-            <width>91</width>
-            <height>31</height>
-           </rect>
-          </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="mainMenuTitle">
           <property name="font">
            <font>
             <family>Corbel</family>
-            <pointsize>13</pointsize>
+            <pointsize>21</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+            <kerning>true</kerning>
            </font>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton {
+           <string notr="true">QLabel {
+	color: white;
+}</string>
+          </property>
+          <property name="text">
+           <string>Backgammon++</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="optionsFrame">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QFrame" name="optionsFrameContent">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>140</width>
+               <height>200</height>
+              </size>
+             </property>
+             <layout class="QVBoxLayout" name="optionsFrameBox">
+              <property name="spacing">
+               <number>18</number>
+              </property>
+              <property name="topMargin">
+               <number>1</number>
+              </property>
+              <property name="rightMargin">
+               <number>1</number>
+              </property>
+              <property name="bottomMargin">
+               <number>1</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="btCreateGame">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>170</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Corbel</family>
+                  <pointsize>13</pointsize>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: left;
+	padding-left: 7px;
+}
+
+QPushButton:hover {
+	color: green;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Create Game</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btJoinGame">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>170</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Corbel</family>
+                  <pointsize>13</pointsize>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: left;
+	padding-left: 9px;
+}
+
+QPushButton:hover {
+	color: green;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Join Game</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btPreferences">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>170</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Corbel</family>
+                  <pointsize>13</pointsize>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background: transparent;
+	color: white;
+	text-align: left;
+	padding-left: 7px;
+}
+
+QPushButton:hover {
+	background: transparent;
+	color: green;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Preferences</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="optionsFrameHorizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="exitFrame">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <spacer name="exitFrameHorizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btExit">
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>160</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Corbel</family>
+               <pointsize>13</pointsize>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
 	background: transparent;
 	color: white;
 }
@@ -305,13 +354,16 @@ QPushButton:hover {
 QPushButton:hover {
 	color: green;
 }</string>
-          </property>
-          <property name="text">
-           <string>Exit</string>
-          </property>
+             </property>
+             <property name="text">
+              <string>Exit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </widget>
-       </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="CreateGame">
        <widget class="QLabel" name="label_5">

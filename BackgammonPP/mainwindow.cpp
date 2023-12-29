@@ -1,9 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "stringlistmodel.h"
-#include <iostream>
-
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,13 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     ui->horizontalSlider->setValue(BASE_THEME_VOLUME);
-    setWindowTitle("BackgammonPP");
+    setWindowTitle("Backgammon++");
     setWindowIcon(QIcon(ICON_PATH));
 
     setFixedSize(width(), height());
 
     setPicture(this->backgroundPicPath, this);
-    setPicture(this->sketchPicPath, ui->optionsFrame);
+    setPicture(this->sketchPicPath, ui->optionsFrameContent);
 
     // connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
     // connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
