@@ -2,12 +2,11 @@
 
 #include <algorithm>
 #include <iterator>
-#include <iostream>
 
 LongNardy::LongNardy() : Game()
 {
     m_board.point(24).add(PlayerColor::WHITE, CHECKERS_COUNT);
-    m_board.point(12).add(PlayerColor::BLACK, CHECKERS_COUNT);
+    m_board.point(Point::centralMirrorId(24)).add(PlayerColor::BLACK, CHECKERS_COUNT);
 
     // intial play order is determined just like in backgammon,
     // but then the first player throws both dice again (instead of using the intial roll)
@@ -58,7 +57,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     PlayerColor opponent = (onRoll == PlayerColor::WHITE) ? PlayerColor::BLACK : PlayerColor::WHITE;
 
     auto dice = m_currentRoll.dice();
-    std::sort(dice.begin(), dice.end());
+    std::sort(dice.rbegin(), dice.rend());
 
     std::vector<RollState> level {
         {
@@ -111,7 +110,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
                         continue;
 
                     // skip pos if held by opponent
-                    if(board.point(pos).owner() and board.point(pos).owner().value() != onRoll)
+                    if(board.point(pos).count() and board.point(pos).owner().value() != onRoll)
                         continue;
 
                     // skip pos if unoccupied
@@ -120,11 +119,19 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
 
                     int nextPos = pos - dieRoll;
 
+                    if (nextPos <= 0 and not isBearingOff(board, onRoll))
+                        break;
+
                     if (nextPos <= 0) {
-                        if (isBearingOff(board, onRoll)) {
+                        int lastChecker = 0;
+                        for(int p = pos; p <= 6; p++)
+                            if(board.point(p).count() and board.point(p).owner().value() == onRoll)
+                                lastChecker = p;
+                        if (pos == lastChecker) {
                             auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                             nextLevel.push_back(rollState.getNextRollState(nextMove, i));
                         }
+
                         break;
                     }
 
