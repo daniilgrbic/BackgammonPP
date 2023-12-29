@@ -27,7 +27,7 @@ Roll Roll::getInitialRoll(Die& first, Die& second) {
         secondValue = second.roll();
     } while (firstValue == secondValue);
 
-    auto onRoll = firstValue > secondValue ? PlayerColor::WHITE : PlayerColor::BLACK;
+    auto onRoll = PlayerColor::WHITE;//firstValue > secondValue ? PlayerColor::WHITE : PlayerColor::BLACK;
     return { onRoll, { firstValue, secondValue } };
 }
 

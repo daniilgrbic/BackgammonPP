@@ -33,13 +33,13 @@ void Match::startGame() {
 
     connect(this, &Match::setState, m_white, &Player::setState);
     emit setState(game->board());
+    disconnect(this, &Match::setState, m_white, &Player::setState);
+
     connect(this, &Match::setState, m_black, &Player::setState);
     emit setState(game->board());
-
-    disconnect(this, &Match::setState, m_white, &Player::setState);
     disconnect(this, &Match::setState, m_black, &Player::setState);
 
-    PlayerColor first = PlayerColor::WHITE; // game->currentRoll().onRoll();
+    PlayerColor first = game->currentRoll().onRoll();
     if(first == PlayerColor::WHITE){
         m_onTurn = m_white;
         m_waiting = m_black;
@@ -86,7 +86,7 @@ void Match::endGame() {
     winnerPoints += result.points;
 
     // Debug log
-    std::cerr << "WHITE: " << m_whiteScore << "\t" << "BLACK: " << m_blackScore << std::endl;
+    qDebug() << "WHITE: " << m_whiteScore << "\t" << "BLACK: " << m_blackScore;
 
     delete game;    // This might change if we add game log
     if (winnerPoints < m_length)
