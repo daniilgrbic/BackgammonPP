@@ -1,7 +1,5 @@
 #include "turntrie.h"
 
-#include <iostream>
-
 TurnTrie::TurnTrie(const std::vector<Turn>& turns, const BoardState& board)
     : m_root { new TurnNode {} }, m_currentNode { m_root }
 {
@@ -22,9 +20,6 @@ TurnTrie::TurnTrie(const std::vector<Turn>& turns, const BoardState& board)
 }
 
 TurnTrie::~TurnTrie() {
-    for (auto& child : m_root->children) {
-        delete child.second;
-    }
     delete m_root;
 }
 
