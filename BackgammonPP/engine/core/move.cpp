@@ -65,7 +65,10 @@ QString Move::toString() const
 QVariant Move::toVariant() const
 {
     QVariantMap map;
+
     map.insert("player", m_player == PlayerColor::WHITE ? "white" : "black");
+    map.insert("isHit", m_isHit);
+
     if(std::holds_alternative<int>(m_from)) {
         map.insert("from", std::get<int>(m_from));
     }
@@ -79,6 +82,7 @@ QVariant Move::toVariant() const
             break;
         }
     }
+
     if(std::holds_alternative<int>(m_to)) {
         map.insert("to", std::get<int>(m_to));
     }
@@ -92,14 +96,18 @@ QVariant Move::toVariant() const
             break;
         }
     }
+
     return map;
 }
 
 void Move::fromVariant(const QVariant &variant)
 {
     QVariantMap data = variant.toMap();
+
     m_player = data.value("player").toString().toStdString() == "white" ?
                    PlayerColor::WHITE : PlayerColor::BLACK;
+    m_isHit = data.value("isHit").toBool();
+
     if(data.value("from").toInt()) {
         m_from = data.value("from").toInt();
     }
@@ -108,6 +116,7 @@ void Move::fromVariant(const QVariant &variant)
         if(value == "bar") m_from = SpecialPosition::BAR;
         if(value == "off") m_from = SpecialPosition::OFF;
     }
+
     if(data.value("to").toInt()) {
         m_to = data.value("to").toInt();
     }

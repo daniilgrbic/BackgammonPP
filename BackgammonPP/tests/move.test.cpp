@@ -5,14 +5,14 @@
 TEST_CASE("Move struct serialization") {
     SECTION("Should serialize move without special positions") {
         // Arrange
-        Move move {PlayerColor::WHITE, 6, 2};
+        Move move {PlayerColor::WHITE, 6, 2, true};
 
         // Act
         QVariantMap serializedMoveQMap = move.toVariant().toMap();
 
         // Assert
-        REQUIRE(serializedMoveQMap.size() == 3);
         REQUIRE(serializedMoveQMap.value("player").toString().toStdString() == "white");
+        REQUIRE(serializedMoveQMap.value("isHit").toBool() == true);
         REQUIRE(serializedMoveQMap.value("from").toInt() == 6);
         REQUIRE(serializedMoveQMap.value("to").toInt() == 2);
     }
@@ -25,8 +25,8 @@ TEST_CASE("Move struct serialization") {
         QVariantMap serializedMoveQMap = move.toVariant().toMap();
 
         // Assert
-        REQUIRE(serializedMoveQMap.size() == 3);
         REQUIRE(serializedMoveQMap.value("player").toString().toStdString() == "black");
+        REQUIRE(serializedMoveQMap.value("isHit").toBool() == false);
         REQUIRE(serializedMoveQMap.value("from").toInt() == 2);
         REQUIRE(serializedMoveQMap.value("to").toString().toStdString() == "off");
     }
@@ -35,6 +35,7 @@ TEST_CASE("Move struct serialization") {
         // Arrange
         QVariantMap data;
         data.insert("player", "white");
+        data.insert("isHit", false);
         data.insert("from", 24);
         data.insert("to", 18);
 
@@ -44,6 +45,7 @@ TEST_CASE("Move struct serialization") {
 
         // Assert
         REQUIRE(move.m_player == PlayerColor::WHITE);
+        REQUIRE(move.m_isHit == false);
         REQUIRE(std::holds_alternative<int>(move.m_from));
         REQUIRE(std::get<int>(move.m_from) == 24);
         REQUIRE(std::holds_alternative<int>(move.m_to));
@@ -56,6 +58,7 @@ TEST_CASE("Move struct serialization") {
         data.insert("player", "white");
         data.insert("from", "bar");
         data.insert("to", 20);
+        data.insert("isHit", true);
 
         // Act
         Move move;
@@ -63,6 +66,7 @@ TEST_CASE("Move struct serialization") {
 
         // Assert
         REQUIRE(move.m_player == PlayerColor::WHITE);
+        REQUIRE(move.m_isHit == true);
         REQUIRE(std::holds_alternative<SpecialPosition>(move.m_from));
         REQUIRE(std::get<SpecialPosition>(move.m_from) == SpecialPosition::BAR);
         REQUIRE(std::holds_alternative<int>(move.m_to));
