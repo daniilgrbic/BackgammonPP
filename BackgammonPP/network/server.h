@@ -13,7 +13,7 @@ public:
     Server(QString name, QObject* parent = nullptr);
     ~Server();
 
-    void nukeGame();
+    void nukeGame(QTcpSocket *);
 
 public slots:
     void connected();
@@ -28,6 +28,8 @@ private:
 
     void processRollCommand(QTcpSocket* src, QString roll);
     void processTurnCommand(QTcpSocket* src, QString turn);
+
+    void processDisconnectCommand(QTcpSocket *);
 
     QString m_oppName;
     QTcpServer* m_server;

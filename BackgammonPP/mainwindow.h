@@ -57,8 +57,6 @@ private slots:
 
     void on_btExit_clicked();
 
-    void on_btCreateGameLobby_clicked();
-
     void on_btReturnFromCreateGameLobby_clicked();
 
 private:

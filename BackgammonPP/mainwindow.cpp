@@ -173,18 +173,6 @@ bool MainWindow::isValidIpAddress(const QString &ipAddress) {
     return address.setAddress(ipAddress);
 }
 
-void MainWindow::on_btCreateGameLobby_clicked()
-{
-    std::string selectedOpponent = ui->lvOpponents->currentIndex().data(Qt::DisplayRole).toString().toStdString();
-    if(selectedOpponent == ""){
-        QMessageBox::information(nullptr, "Alert", "You must select an opponent");
-    }else{
-        std::cout << selectedOpponent << std::endl;
-        //emit request for game creation
-    }
-}
-
-
 void MainWindow::on_btReturnFromCreateGameLobby_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
@@ -220,7 +208,7 @@ QString MainWindow::getIpAddress() {
 
 void MainWindow::showIpAddress() {
     const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
-    QString ipAddress = "Can't find address";
+    QString ipAddress = "Can't find";
     for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
         if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
             ipAddress = address.toString();

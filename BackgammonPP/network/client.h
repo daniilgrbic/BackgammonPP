@@ -15,6 +15,7 @@ public:
     Client(QString ipAddress, QString username, QObject* parent = nullptr);
     ~Client();
     bool connectClient(QString ipAddress);
+    void disconnectClient();
     void sendTurnToServer(Turn* turn);
     void sendRollToServer(Roll roll);
     void sendNameToServer(QString name);
