@@ -55,6 +55,7 @@ add_executable(BackgammonPPTest
     backgammon.test.cpp
     threadsafequeue.test.cpp
     roll.test.cpp
+    die.test.cpp
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)

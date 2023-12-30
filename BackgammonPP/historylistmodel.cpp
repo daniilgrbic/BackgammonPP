@@ -21,7 +21,6 @@ QVariant HistoryListModel::data(const QModelIndex &index, int role) const
         else
             return std::get<QString>(item);
     }
-        // return QString("%1").arg(turnList.at(index.row()).toString());
 
     if (role == Qt::UserRole) {
         auto item = turnList.at(index.row());

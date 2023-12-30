@@ -45,7 +45,6 @@ void SidebarCheckerHolder::updateVericalCheckers()
     }
 
     while(verticalCheckers.size() < m_checkers.size()){
-        ///FIXME: have checker number defined elsewhere!!! Also the Qt::gray in vertical checker constructor!!
         int checkerNumber = 15;
         qreal VCheckerWidth = m_width;
         qreal VCheckerHeight = m_height / checkerNumber;
