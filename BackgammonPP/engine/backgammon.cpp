@@ -179,6 +179,5 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
 
 bool Backgammon::isFinished(PlayerColor player) const
 {
-    // return true;
     return m_board.off(player) == CHECKERS_COUNT;
 }
