@@ -35,9 +35,9 @@ struct Move : public Serializable
 template <>
 struct std::hash<Move>
 {
-  std::size_t operator()(const Move& move) const
-  {
-      // Used only in unordered_map with ~10 elements
-      return 0;
-  }
+      std::size_t operator()(const Move& move) const
+      {
+          // Used only as a key in unordered_map with ~10 elements
+          return 0;
+      }
 };
