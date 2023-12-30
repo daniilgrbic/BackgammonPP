@@ -5,7 +5,7 @@ BoardSideBar::BoardSideBar(QGraphicsItem* parent, qreal width, qreal height)
       m_height(height)
 {
     qreal holderWidth = m_width / 1.25;
-    qreal holderHeight = m_height * 0.33;//fix constants
+    qreal holderHeight = m_height * 0.33;
     qreal holderX = (m_width - holderWidth) / 2;
     topHolder = new SidebarCheckerHolder(this, holderWidth, holderHeight);
     topHolder->setPos(holderX, (m_height/2 - holderHeight) / 2);

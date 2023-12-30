@@ -38,14 +38,14 @@ QRectF BoardChecker::boundingRect() const {
 }
 
 void BoardChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    //    painter->setBrush(QBrush(Qt::gray));
-    //    painter->drawRect(boundingRect());
 
     painter->setBrush(QBrush(m_QColor));
     if(isEnabled()){
         painter->setPen(QPen(Qt::red, 0.07*m_size));
     }else if(m_QColor == Qt::black){
         painter->setPen(Qt::white);
+    }else{
+        painter->setPen(Qt::black);
     }
     painter->drawEllipse(QPoint(0,0),(int) m_size,(int) m_size);
 }
@@ -120,7 +120,6 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 void BoardChecker::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
-//    std::cout << "Move" << std::endl;
     setCursor(Qt::OpenHandCursor);
     m_dragged = true;
     QGraphicsItem::mouseMoveEvent(event);

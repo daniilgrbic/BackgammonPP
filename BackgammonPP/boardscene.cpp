@@ -6,9 +6,9 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     : QGraphicsScene(parent),
       m_height(height),
       m_width(width),
-      triangleHeight(m_height*heightCoef), ///TODO: make constants instead of hardcoding
+      triangleHeight(m_height*heightCoef),
       triangleWidth( (m_width) / (trianglePairs + midBarCoef + 2 * sideBarCoef) ),
-      barWidth(triangleWidth*midBarCoef),///TODO: here too
+      barWidth(triangleWidth*midBarCoef),
       sideBarWidth(triangleWidth*sideBarCoef),
       playingDieSide(triangleWidth * playingDieCoef),
       doublingDieSide(doublingDieCoef*triangleWidth)
@@ -20,7 +20,6 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setBoardBar();
     setSideBars();
     setPlayingDice();
-    //setDoublingDie();
     setBoardCheckers();
     disableAllHolders();
     whiteOut = m_rightBar->bottomHolder;
@@ -36,29 +35,23 @@ void BoardScene::setBoardTriangles() {
     for(int i {0}; i < this->trianglePairs; ++i){
         qreal x_point = this->sideBarWidth +
                 this->triangleWidth * i +
-                ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
+                ((i >= trianglePairs/2) ? barWidth : 0) ;
         qreal y_point = m_height - triangleHeight;
         BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true, trianglePairs - i);
         boardTriangles.push_back(bottomTriangle);
         this->drawBoardTriangle(bottomTriangle);
     }
-    ///temporary fix for syncing triangle numerations between the board and the game engine, reverse the bottom row of triangles
     std::reverse(boardTriangles.begin(),boardTriangles.end());
 
     for(int i {0}; i < this->trianglePairs; ++i){
         qreal x_point = this->sideBarWidth +
                 this->triangleWidth * i +
-                ((i >= trianglePairs/2) ? barWidth : 0) ; //for triangles after the bar move their x coordinate
+                ((i >= trianglePairs/2) ? barWidth : 0) ;
         qreal y_point = 0;
         BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false, trianglePairs + 1 + i);
         boardTriangles.push_back(upperTriangle);
         this->drawBoardTriangle(upperTriangle);
     }
-/*
-    for(auto triangle : qAsConst(boardTriangles))
-        this->drawBoardTriangle(triangle);
-*/
-
 }
 void BoardScene::setBoardCheckers(){
 
@@ -82,31 +75,6 @@ void BoardScene::setBoardCheckers(){
 
     int i = 0;
     int j = 0;
-    /*
-    for(int n = i + 5; i < n; ++i)
-        boardTriangles[11]->addChecker(blackCheckers[i]);
-
-    for(int n = j + 3; j < n; ++j)
-        boardTriangles[7]->addChecker(whiteCheckers[j]);
-
-    for(int n = j + 5; j < n; ++j)
-        boardTriangles[5]->addChecker(whiteCheckers[j]);
-
-    for(int n = i + 2; i < n; ++i)
-        boardTriangles[0]->addChecker(blackCheckers[i]);
-
-    for(int n = j + 5; j < n; ++j)
-        boardTriangles[12]->addChecker(whiteCheckers[j]);
-
-    for(int n = i + 3; i < n; ++i)
-        boardTriangles[16]->addChecker(blackCheckers[i]);
-
-    for(int n = i + 5; i < n; ++i)
-        boardTriangles[18]->addChecker(blackCheckers[i]);
-
-    for(int n = j + 2; j < n; ++j)
-        boardTriangles[23]->addChecker(whiteCheckers[j]);
-    */
     for (auto blackChecker : blackCheckers) {
         m_rightBar->topHolder->addChecker(blackChecker);
     }
@@ -355,7 +323,6 @@ void BoardScene::getTurnFinish(){
     m_turnTrie = nullptr;
     legalTurns = nullptr;
     roll = nullptr; 
-            //= BoardState(nextTurn.m_finalBoard);
 
     emit setUndoEnabled(false);
     //setBoardState(state);
