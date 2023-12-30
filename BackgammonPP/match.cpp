@@ -45,6 +45,8 @@ void Match::startGame() {
     emit setState(game->board());
     disconnect(this, &Match::setState, m_black, &Player::setState);
 
+    m_gBoard->m_historyModel->addString("--- Start of match ---");
+
     PlayerColor first = game->currentRoll().onRoll();
     if(first == PlayerColor::WHITE){
         m_onTurn = m_white;
@@ -110,6 +112,8 @@ void Match::endGame() {
     QString winner = result.winner == PlayerColor::WHITE ? "WHITE" : "BLACK";
     QMessageBox::information(nullptr, "Game Result",
                              QString("%1 won!\nScore: white %2 - black %3").arg(winner).arg(m_whiteScore).arg(m_blackScore));
+
+    m_gBoard->m_historyModel->addString("---- End of match ----");
 
     delete game;
     game = nullptr;
