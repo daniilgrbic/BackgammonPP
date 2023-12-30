@@ -72,4 +72,130 @@ TEST_CASE("Move struct serialization") {
         REQUIRE(std::holds_alternative<int>(move.m_to));
         REQUIRE(std::get<int>(move.m_to) == 20);
     }
+    SECTION("Should mirror move without special positions"){
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("isHit", false);
+        data.insert("from", 24);
+        data.insert("to", 18);
+        Move move;
+        move.fromVariant(data);
+
+        // Act
+        Move mirrorMove = move.mirror();
+
+        // Assert
+        REQUIRE(mirrorMove.m_player == PlayerColor::WHITE);
+        REQUIRE(mirrorMove.m_isHit == false);
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_from));
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_to));
+        REQUIRE(std::get<int>(mirrorMove.m_from) == 1);
+        REQUIRE(std::get<int>(mirrorMove.m_to) == 7);
+    }
+    SECTION("Should mirror move with special positions"){
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("from", "bar");
+        data.insert("to", 20);
+        data.insert("isHit", true);
+        Move move;
+        move.fromVariant(data);
+
+        // Act
+        Move mirrorMove = move.mirror();
+
+        // Assert
+        REQUIRE(mirrorMove.m_player == PlayerColor::WHITE);
+        REQUIRE(mirrorMove.m_isHit == true);
+        REQUIRE(std::holds_alternative<SpecialPosition>(mirrorMove.m_from));
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_to));
+        REQUIRE(std::get<SpecialPosition>(mirrorMove.m_from) == SpecialPosition::BAR);
+        REQUIRE(std::get<int>(mirrorMove.m_to) == 5);
+    }
+    SECTION("Should vertical mirror move without special positions"){
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("isHit", false);
+        data.insert("from", 24);
+        data.insert("to", 18);
+        Move move;
+        move.fromVariant(data);
+
+        // Act
+        Move mirrorMove = Move::verticalMirror(move);
+
+        // Assert
+        REQUIRE(mirrorMove.m_player == PlayerColor::WHITE);
+        REQUIRE(mirrorMove.m_isHit == false);
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_from));
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_to));
+        REQUIRE(std::get<int>(mirrorMove.m_from) == 1);
+        REQUIRE(std::get<int>(mirrorMove.m_to) == 7);
+    }
+    SECTION("Should vertical mirror move with special positions"){
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("from", "bar");
+        data.insert("to", 20);
+        data.insert("isHit", true);
+        Move move;
+        move.fromVariant(data);
+
+        // Act
+        Move mirrorMove = Move::verticalMirror(move);
+
+        // Assert
+        REQUIRE(mirrorMove.m_player == PlayerColor::WHITE);
+        REQUIRE(mirrorMove.m_isHit == true);
+        REQUIRE(std::holds_alternative<SpecialPosition>(mirrorMove.m_from));
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_to));
+        REQUIRE(std::get<SpecialPosition>(mirrorMove.m_from) == SpecialPosition::BAR);
+        REQUIRE(std::get<int>(mirrorMove.m_to) == 5);
+    }
+    SECTION("Should central mirror move without special positions"){
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("isHit", false);
+        data.insert("from", 24);
+        data.insert("to", 18);
+        Move move;
+        move.fromVariant(data);
+
+        // Act
+        Move mirrorMove = Move::centralMirror(move);
+
+        // Assert
+        REQUIRE(mirrorMove.m_player == PlayerColor::WHITE);
+        REQUIRE(mirrorMove.m_isHit == false);
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_from));
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_to));
+        REQUIRE(std::get<int>(mirrorMove.m_from) == 12);
+        REQUIRE(std::get<int>(mirrorMove.m_to) == 6);
+    }
+    SECTION("Should central mirror move with special positions"){
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("from", "bar");
+        data.insert("to", 20);
+        data.insert("isHit", true);
+        Move move;
+        move.fromVariant(data);
+
+        // Act
+        Move mirrorMove = Move::centralMirror(move);
+
+        // Assert
+        REQUIRE(mirrorMove.m_player == PlayerColor::WHITE);
+        REQUIRE(mirrorMove.m_isHit == true);
+        REQUIRE(std::holds_alternative<SpecialPosition>(mirrorMove.m_from));
+        REQUIRE(std::holds_alternative<int>(mirrorMove.m_to));
+        REQUIRE(std::get<SpecialPosition>(mirrorMove.m_from) == SpecialPosition::BAR);
+        REQUIRE(std::get<int>(mirrorMove.m_to) == 8);
+    }
 }

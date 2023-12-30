@@ -16,6 +16,7 @@ Network::Network(Genome genome){
 
 Network::Network(std::string filename){
     Genome genome(filename);
+    delete genome.innovation;
     neurons.resize(genome.maxNeuron);
     for(auto& gene : genome.genes){
         if(!gene.enabled)

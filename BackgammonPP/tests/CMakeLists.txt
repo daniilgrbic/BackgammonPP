@@ -39,12 +39,17 @@ add_executable(BackgammonPPTest
     ../utility/jsonserializer.h
     ../utility/serializable.h
     ../stringlistmodel.h ../stringlistmodel.cpp
+    ../historylistmodel.h ../historylistmodel.cpp
+    ../engine/core/game.h ../engine/core/game.cpp
+    ../engine/backgammon.h ../engine/backgammon.cpp
     boardstate.test.cpp
     longnardy.test.cpp
     move.test.cpp
     point.test.cpp
     turn.test.cpp
     stringlistmode.test.cpp
+    historylistmodel.test.cpp
+    game.test.cpp
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
