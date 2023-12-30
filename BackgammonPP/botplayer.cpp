@@ -11,6 +11,7 @@ BotPlayer::BotPlayer(QObject *parent, BoardWindow *board, AI::Bot *bot)
     // connect(board, &BoardWindow::forwardTurnFinish, this, &BotPlayer::acceptMove);
     // connect(this, &BotPlayer::forwardSetDice, board, &BoardWindow::showRoll);
     // connect(this, &BotPlayer::returnMove, board->m_historyModel, &HistoryListModel::addTurn);
+    bot->setParent(this);
     connect(this, &BotPlayer::forwardRequestMove, m_bot, &AI::Bot::requestBestMove);
     connect(m_bot, &AI::Bot::bestMove, this, &BotPlayer::acceptMove);
 }
