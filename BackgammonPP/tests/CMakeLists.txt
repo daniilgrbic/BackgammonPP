@@ -50,6 +50,7 @@ add_executable(BackgammonPPTest
     stringlistmode.test.cpp
     historylistmodel.test.cpp
     game.test.cpp
+    backgammon.test.cpp
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
