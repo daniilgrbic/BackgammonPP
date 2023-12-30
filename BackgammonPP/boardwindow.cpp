@@ -20,7 +20,7 @@ BoardWindow::BoardWindow(QWidget *parent) :
     m_historyboardScene = new BoardScene(this, ui->historyboardView->size().width()-5, ui->historyboardView->size().height()-5);
     ui->boardView->setScene(m_boardScene);
     ui->boardView->setRenderHint(QPainter::Antialiasing);
-    setWindowTitle("BackgammonPP");
+    setWindowTitle("Backgammon++");
     setWindowIcon(QIcon(ICON_PATH));
     setFixedSize(width(), height());
 
