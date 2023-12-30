@@ -37,6 +37,8 @@ void Match::startGame() {
         break;
     }
 
+    m_gBoard->setExitPoints(m_gameType);
+
     connect(this, &Match::setState, m_white, &Player::setState);
     emit setState(game->board());
     disconnect(this, &Match::setState, m_white, &Player::setState);
