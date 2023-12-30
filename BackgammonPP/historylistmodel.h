@@ -1,10 +1,9 @@
 #ifndef HISTORYLISTMODEL_H
 #define HISTORYLISTMODEL_H
 
+#include "engine/core/turn.h"
 #include <QAbstractListModel>
 #include <QObject>
-#include <QStyleOptionViewItem>
-#include "engine/core/turn.h"
 #include <QList>
 
 class HistoryListModel : public QAbstractListModel
