@@ -1,5 +1,10 @@
 # Backgammon++
 
+<p>
+  <img src="docs/screenshots/main_menu.png" width="38%"  alt="board overview"/>
+  <img src="docs/screenshots/game_board.png" width="61.3%"  alt="white pieces"/>
+</p>
+
 Online Backgammon multiplayer game written in C++ using QT framework.
 
 Backgammon++ supports multiple game modes - playing online, playing against our custom built neural network, or playing locally (2 players using the same machine to take turns). 
