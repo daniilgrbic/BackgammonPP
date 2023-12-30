@@ -103,7 +103,8 @@ void BoardWindow::setUndoEnabled(bool enabled){
 
 void BoardWindow::on_listView_clicked(const QModelIndex &index)
 {
-//    std::cout << index.data().toString().toStdString() << std::endl;
+   // std::cout << index.data().toString().toStdString() << std::endl;
+
     bool isCurrentBoardState = index.data(Qt::UserRole + 1).toBool();
     if(isCurrentBoardState){
         ui->pbEndTurn->show();
@@ -111,22 +112,25 @@ void BoardWindow::on_listView_clicked(const QModelIndex &index)
         ui->pbUndo->show();
         ui->boardView->show();
         ui->historyboardView->hide();
-    }else{
-        ui->pbEndTurn->hide();
-        ui->pbRollDice->hide();
-        ui->pbUndo->hide();
-        ui->boardView->hide();
-        Turn turn;
-        turn.fromVariant(index.data(Qt::UserRole));
-        m_historyboardScene->setBoardState(turn.m_finalBoard);
-
-        ui->historyboardView->setScene(m_historyboardScene);
-        ui->historyboardView->setRenderHint(QPainter::Antialiasing);
-        ui->historyboardView->show();
+        return;
     }
 
-}
+    bool isTurn = index.data(Qt::UserRole + 2).toBool();
+    if(!isTurn)
+        return;
 
+    ui->pbEndTurn->hide();
+    ui->pbRollDice->hide();
+    ui->pbUndo->hide();
+    ui->boardView->hide();
+    Turn turn;
+    turn.fromVariant(index.data(Qt::UserRole));
+    m_historyboardScene->setBoardState(turn.m_finalBoard);
+
+    ui->historyboardView->setScene(m_historyboardScene);
+    ui->historyboardView->setRenderHint(QPainter::Antialiasing);
+    ui->historyboardView->show();
+}
 
 void BoardWindow::on_pbExitCurrentGame_clicked()
 {
@@ -136,4 +140,9 @@ void BoardWindow::on_pbExitCurrentGame_clicked()
 void BoardWindow::setScore(int white, int black){
     ui->lbScoreWhite->setText(QString::number(white));
     ui->lbScoreBlack->setText(QString::number(black));
+}
+
+void BoardWindow::scrollLogToBottom()
+{
+    ui->listView->scrollToBottom();
 }

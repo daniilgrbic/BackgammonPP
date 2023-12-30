@@ -12,7 +12,7 @@ class HistoryListModel : public QAbstractListModel
 
 public:
     HistoryListModel(const QVector<Turn> &turns, QObject *parent = nullptr)
-        : QAbstractListModel(parent), turnList(turns) {}
+        : QAbstractListModel(parent), turnList(turns.cbegin(), turns.cend()) {}
 
     HistoryListModel(QObject *parent = nullptr)
         : QAbstractListModel(parent) {}
@@ -23,11 +23,10 @@ public:
                         int role = Qt::DisplayRole) const override;
 public slots:
     void addTurn(const Turn& turn);
+    void addString(const QString& string);
+
 private:
-    QList<Turn> turnList;
-
-signals:
-
+    QList<std::variant<Turn, QString>> turnList;
 };
 
 #endif // HISTORYLISTMODEL_H

@@ -21,9 +21,10 @@ public:
     void sendTurnToServer(Turn* turn);
     void sendRollToServer(Roll roll);
     void sendNameToServer(QString name);
+    QTcpSocket* getSocket();
 
 signals:
-    void connectedAsSpectator(QString msg);
+    void connectedAsSpectator(int length, GameType gameType);
     void connectedAsPlayer(int length, GameType gameType);
     void disconnected();
     void unknownServerCommand(QString srvCmd);

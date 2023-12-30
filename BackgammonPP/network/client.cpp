@@ -18,6 +18,10 @@ Client::~Client() {
     delete m_socket;
 }
 
+QTcpSocket* Client::getSocket() {
+    return m_socket;
+}
+
 bool Client::connectClient(QString ipAddress) {
     m_socket->connectToHost(QHostAddress(ipAddress), srvconst::PORT);
     return m_socket->waitForConnected();
@@ -63,11 +67,23 @@ void Client::sendNameToServer(QString name) {
 
 void Client::readMessageFromServer() {
     QString message = m_socket->readAll();
-
-    if (message == srvconst::serverCmdConnectedAsSpectator) {
-        emit connectedAsSpectator(message);
-    } else if (message == srvconst::serverCmdGameStart) {
+    qDebug() << message;
+    if (message == srvconst::serverCmdGameStart) {
         emit startGame();
+    } else if (message.startsWith(srvconst::serverCmdConnectedAsSpectatorBG)) {
+        message = message.sliced(srvconst::serverCmdConnectedAsSpectatorBG.length());
+        std::string temp = message.toStdString();
+        emit connectedAsSpectator(stoi(temp), GameType::ClassicGameType);
+
+        m_socket->write((srvconst::serverCmdRequestState).toStdString().c_str());
+        m_socket->waitForBytesWritten();
+    } else if (message.startsWith(srvconst::serverCmdConnectedAsSpectatorLN)) {
+        message = message.sliced(srvconst::serverCmdConnectedAsSpectatorLN.length());
+        std::string temp = message.toStdString();
+        emit connectedAsSpectator(stoi(temp), GameType::LongNardyGameType);
+
+        m_socket->write((srvconst::serverCmdRequestState).toStdString().c_str());
+        m_socket->waitForBytesWritten();
     } else if (message.startsWith(srvconst::serverCmdConnectedAsPlayerBG)) {
         message = message.sliced(srvconst::serverCmdConnectedAsPlayerBG.length());
         std::string temp = message.toStdString();

@@ -106,11 +106,21 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
 
 void Controller::joinRemoteMatchFromMenu(QString ipAddress)
 {
-    mainWindow->close();
-    boardWindow->show();
 
     Player *black = new LocalPlayer(nullptr, this->boardWindow);
     Player *white = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
+
+    if (dynamic_cast<RemotePlayer *>(white)->getClient()->getSocket()->state() != QAbstractSocket::ConnectedState) {
+        QMessageBox::information(nullptr, "Alert", "Can't connect to given IP address");
+
+        delete black;
+        delete white;
+
+        return;
+    }
+
+    mainWindow->close();
+    boardWindow->show();
 
     match_current = new Match(nullptr, white, black, boardWindow, 3, GameType::ClassicGameType, false); //un-hardcode this
 
@@ -118,6 +128,7 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     connect(white, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(dynamic_cast<RemotePlayer*>(white)->getClient(), &Client::connectedAsPlayer, match_current, &Match::connectedAsPlayer);
+    connect(dynamic_cast<RemotePlayer*>(white)->getClient(), &Client::connectedAsSpectator, match_current, &Match::connectedAsSpectator);
 
     white->setParent(match_current);
     black->setParent(match_current);

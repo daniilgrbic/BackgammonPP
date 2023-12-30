@@ -16,8 +16,10 @@ Match::Match(QObject *parent, Player *white, Player *black, BoardWindow *gboard,
       m_whiteScore(0),
       m_blackScore(0),
       m_host(host),
-      m_gBoard(gboard)
-{ }
+      m_gBoard(gboard),
+      m_spectator(false)
+{
+}
 
 Match::~Match() {
     if (game)
@@ -37,6 +39,8 @@ void Match::startGame() {
         break;
     }
 
+    m_gBoard->setExitPoints(m_gameType);
+
     connect(this, &Match::setState, m_white, &Player::setState);
     emit setState(game->board());
     disconnect(this, &Match::setState, m_white, &Player::setState);
@@ -44,6 +48,9 @@ void Match::startGame() {
     connect(this, &Match::setState, m_black, &Player::setState);
     emit setState(game->board());
     disconnect(this, &Match::setState, m_black, &Player::setState);
+
+    m_gBoard->m_historyModel->addString("--- Start of match ---");
+    m_gBoard->scrollLogToBottom();
 
     PlayerColor first = game->currentRoll().onRoll();
     if(first == PlayerColor::WHITE){
@@ -69,6 +76,14 @@ void Match::connectedAsPlayer(int length, GameType gameType) {
     startGame();
 }
 
+void Match::connectedAsSpectator(int length, GameType gameType) {
+    m_length = length;
+    m_gameType = gameType;
+    m_spectator = true;
+    startGame();
+}
+
+
 void Match::startMove(Turn *turn) {
     currentLegalTurns = game->generateLegalTurns();
     currentRoll = Roll(game->currentRoll());
@@ -81,6 +96,10 @@ void Match::confirmRoll(Roll roll){
 
 void Match::getTurn(Turn turn){
     //TODO: Match has to be changed. It cannot be responsible for the game
+    if (m_spectator) {
+        emit setState(turn.m_finalBoard);
+        return;
+    }
     game->playTurn(turn);
     emit setState(game->board());
     if(game->isFinished(PlayerColor::WHITE) || game->isFinished(PlayerColor::BLACK)) {
@@ -95,6 +114,7 @@ void Match::getTurn(Turn turn){
         connectSlots(m_onTurn, m_waiting);
         startMove(&turn);
     }
+    m_gBoard->scrollLogToBottom();
 }
 
 void Match::endGame() {
@@ -110,6 +130,9 @@ void Match::endGame() {
     QString winner = result.winner == PlayerColor::WHITE ? "WHITE" : "BLACK";
     QMessageBox::information(nullptr, "Game Result",
                              QString("%1 won!\nScore: white %2 - black %3").arg(winner).arg(m_whiteScore).arg(m_blackScore));
+
+    m_gBoard->m_historyModel->addString("---- End of match ----");
+    m_gBoard->scrollLogToBottom();
 
     delete game;
     game = nullptr;

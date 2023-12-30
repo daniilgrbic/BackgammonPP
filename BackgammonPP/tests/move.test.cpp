@@ -17,6 +17,27 @@ TEST_CASE("Move struct serialization") {
         REQUIRE(serializedMoveQMap.value("to").toInt() == 2);
     }
 
+    SECTION("Should deserialize move without special positions") {
+        // Arrange
+        QVariantMap data;
+        data.insert("player", "white");
+        data.insert("isHit", true);
+        data.insert("from", 6);
+        data.insert("to", 2);
+
+        // Act
+        Move move;
+        move.fromVariant(data);
+
+        // Assert
+        REQUIRE(move.m_player == PlayerColor::WHITE);
+        REQUIRE(move.m_isHit == true);
+        REQUIRE(std::holds_alternative<int>(move.m_from));
+        REQUIRE(std::get<int>(move.m_from) == 6);
+        REQUIRE(std::holds_alternative<int>(move.m_to));
+        REQUIRE(std::get<int>(move.m_to) == 2);
+    }
+
     SECTION("Should serialize move with special positions") {
         // Arrange
         Move move {PlayerColor::BLACK, 2, SpecialPosition::OFF};

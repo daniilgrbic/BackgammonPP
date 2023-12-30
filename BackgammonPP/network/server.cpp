@@ -8,6 +8,7 @@ Server::Server(QString name, int numGames, GameType gameType, QObject *parent)
     : QObject(parent)
 {
     m_oppName = name;
+    m_lastTurn = "";
     m_gameType = gameType;
     m_numGames = numGames;
     m_server = new QTcpServer(this);
@@ -77,6 +78,12 @@ void Server::readMessage() {
         qDebug() << "Disconnected messaage\n";
         processDisconnectCommand(sourceSocket);
     }
+    else if (message == srvconst::serverCmdRequestState) {
+        if (m_lastTurn != "") {
+            sourceSocket->write(m_lastTurn.toStdString().c_str());
+            sourceSocket->flush();
+        }
+    }
     else {
         throw std::runtime_error("Unknown server command");
     }
@@ -128,9 +135,23 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
         m_player1->flush();
     } else {
         // connected as Spectator
-        src->write(srvconst::serverCmdConnectedAsSpectator.toStdString().c_str());
+        std::string message;
+        switch (m_gameType) {
+        case GameType::ClassicGameType:
+            message = srvconst::serverCmdConnectedAsSpectatorBG.toStdString() + std::to_string(m_numGames);
+            break;
+        case GameType::LongNardyGameType:
+            message = srvconst::serverCmdConnectedAsSpectatorLN.toStdString() + std::to_string(m_numGames);
+            break;
+        default:
+            message = srvconst::serverCmdConnectedAsSpectatorBG.toStdString() + std::to_string(m_numGames);
+            break;
+        }
+
+        src->write(message.c_str());
         src->flush();
 
+        m_spectators.insert(src);
         qDebug() << "Connected spectator\n";
     }
 }
@@ -140,6 +161,7 @@ void Server::processRollCommand(QTcpSocket* src, QString roll) {
 }
 
 void Server::processTurnCommand(QTcpSocket* src, QString turn) {
+    m_lastTurn = turn;
     broadcast(src, turn.toStdString().c_str());
 }
 
