@@ -32,6 +32,7 @@ public:
 
     void setLegalTurns(std::vector<Turn> const *legalTurns);
     void setRoll(Roll const *roll);
+    const Roll* getRoll();
 
     void prepareCheckers();
     void prepareHolders(const HolderType origin);

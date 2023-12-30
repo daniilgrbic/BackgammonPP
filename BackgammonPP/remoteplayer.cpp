@@ -27,7 +27,6 @@ Client* RemotePlayer::getClient() {
     return m_client;
 }
 
-
 void RemotePlayer::setState(const BoardState &state){
     return;
 }
@@ -37,5 +36,6 @@ void RemotePlayer::setDice(const Roll& roll){
 }
 
 void RemotePlayer::diceRolled(Roll roll){
+    emit forwardSetDice(roll);
     emit confirmRoll(roll);
 }

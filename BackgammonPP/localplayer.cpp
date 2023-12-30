@@ -5,9 +5,8 @@ LocalPlayer::LocalPlayer(QObject *parent, BoardWindow *board)
 {
     connect(this, &LocalPlayer::forwardSetState, board, &BoardWindow::setBoardState);
     connect(this, &LocalPlayer::forwardMoveRequest, board, &BoardWindow::requestTurn);
-    //connect(board, &BoardWindow::forwardTurnFinish, this, &LocalPlayer::acceptMove);
+    connect(board, &BoardWindow::diceRolled, this, &LocalPlayer::diceRolled);
     connect(this, &LocalPlayer::forwardSetDice, board, &BoardWindow::showRoll);
-
 }
 
 void LocalPlayer::chooseMove(Turn *turn, std::vector<Turn> *legalMoves, Roll *roll){
