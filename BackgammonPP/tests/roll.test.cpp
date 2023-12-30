@@ -20,6 +20,19 @@ TEST_CASE("Roll serialization" ) {
         // Assert
         REQUIRE(roll == roll_deserialized);
     }
+}
+
+TEST_CASE("Roll dice validation") {
+    SECTION("Assert that initial rolls are different") {
+        for (int i = 0; i < 10000; i++) {
+            // Arrange
+            Die first, second;
+            Roll initialRoll = Roll::getInitialRoll(first, second);
+
+            // Assert
+            REQUIRE(first != second);
+        }
+    }
 
     SECTION("Should be 4 dice if all are equal, otherwise two "){
         //ARRANGE
@@ -41,18 +54,5 @@ TEST_CASE("Roll serialization" ) {
             }
         }
     }
-
 }
 
-TEST_CASE("First roll") {
-    SECTION("Assert that initial rolls are different") {
-        for (int i = 0; i < 10000; i++) {
-            // Arrange
-            Die first, second;
-            Roll initialRoll = Roll::getInitialRoll(first, second);
-
-            // Assert
-            REQUIRE(first != second);
-        }
-    }
-}
