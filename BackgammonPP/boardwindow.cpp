@@ -62,6 +62,7 @@ void BoardWindow::on_pbRollDice_clicked()
     m_boardScene->updatePlayingDice();
     ui->pbRollDice->setEnabled(false);
     m_boardScene->getTurnInit();
+    emit diceRolled(*(m_boardScene->getRoll()));
 }
 
 void BoardWindow::showRoll(const Roll& roll){

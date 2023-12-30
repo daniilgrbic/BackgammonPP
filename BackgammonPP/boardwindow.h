@@ -27,6 +27,7 @@ public slots:
     void showRoll(const Roll& roll);
 signals:
     void setBoardState(const BoardState &state);
+    void diceRolled(Roll);
     void forwardTurnFinish(Turn);
     void requestCloseGame();
 
