@@ -97,25 +97,62 @@ TEST_CASE("Board State mirroring") {
     }
 }
 
-// TEST_CASE("Board State moving") {
-//     SECTION("Board State") {
-//         // Arrange
-//         const auto bs = BoardState(
-//             {{1, 3}, {2, 2}},
-//             {{19, 4}, {21, 1}},
-//             2, 3,
-//             0, 1
-//         );
+TEST_CASE("Board State moving") {
+    SECTION("Board State simple moving") {
+        // Arrange
+        auto bs = BoardState(
+            {{1, 3}, {2, 2}},
+            {{19, 4}, {21, 1}},
+            2, 3,
+            0, 1
+        );
 
-//         const auto move1 = Move(
-//             PlayerColor::WHITE,
-//             fromVariant,
-//             toVariant
-//         );
+        const auto move1 = Move(
+            PlayerColor::WHITE,
+            1,
+            2
+        );
 
-//         // Act
-//     }
-// }
+        // Act
+        bs.move(move1);
+
+        // Assert
+        auto bsVariant = bs.toVariant().toMap();
+        QVariantList bsVariantList = bsVariant.value("points").toList();
+        REQUIRE(bsVariantList.size() == 24);
+        REQUIRE(bsVariantList[0].toMap().value("owner") == "white");
+        REQUIRE(bsVariantList[1].toMap().value("owner") == "white");
+        REQUIRE(bsVariantList[0].toMap().value("count").toInt() == 2);
+        REQUIRE(bsVariantList[1].toMap().value("count").toInt() == 3);
+    }
+
+    SECTION("Board State special position moving") {
+        // Arrange
+        auto bs = BoardState(
+            {{1, 3}, {2, 2}},
+            {{19, 4}, {21, 1}},
+            2, 3,
+            0, 1
+            );
+
+        const auto move1 = Move(
+            PlayerColor::WHITE,
+            1,
+            SpecialPosition::OFF
+            );
+
+        // Act
+        bs.move(move1);
+
+        // Assert
+        auto bsVariant = bs.toVariant().toMap();
+        QVariantList bsVariantList = bsVariant.value("points").toList();
+        REQUIRE(bsVariantList.size() == 24);
+        REQUIRE(bsVariant.value("whiteOff").toInt() == 1);
+        REQUIRE(bsVariantList[0].toMap().value("owner") == "white");
+        REQUIRE(bsVariantList[0].toMap().value("count").toInt() == 2);
+    }
+}
 
 TEST_CASE("Board State serialization") {
     SECTION("Board State to variant") {
