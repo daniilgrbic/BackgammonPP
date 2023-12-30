@@ -127,7 +127,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
                         for(int p = pos; p <= 6; p++)
                             if(board.point(p).count() and board.point(p).owner().value() == onRoll)
                                 lastChecker = p;
-                        if (pos == lastChecker) {
+                        if (nextPos==0 or lastChecker == pos) {
                             auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                             nextLevel.push_back(rollState.getNextRollState(nextMove, i));
                         }

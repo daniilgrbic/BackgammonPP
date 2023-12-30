@@ -55,7 +55,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
         AI::Bot *bot = new AI::Bot("../BackgammonPP/engine/bot/saved_genomes/gen_603.genome");
         Player *black = new BotPlayer(nullptr, this->boardWindow, bot);
-        match_current = new Match(nullptr, white, black, numGames, gameType);
+        match_current = new Match(nullptr, white, black, boardWindow, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &BotPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         white->setParent(match_current);
@@ -69,7 +69,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         boardWindow->show();
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
         Player *black = new LocalPlayer(nullptr, this->boardWindow);
-        match_current = new Match(nullptr, white, black, numGames, gameType);
+        match_current = new Match(nullptr, white, black, boardWindow, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         white->setParent(match_current);
@@ -89,7 +89,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
         Player *black = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
-        match_current = new Match(nullptr, white, black, numGames, gameType);
+        match_current = new Match(nullptr, white, black, boardWindow, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(dynamic_cast<RemotePlayer*>(black)->getClient(), &Client::startGame, match_current, &Match::startGameRequest);
@@ -110,7 +110,7 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     Player *black = new LocalPlayer(nullptr, this->boardWindow);
     Player *white = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
-    match_current = new Match(nullptr, white, black, 3, GameType::ClassicGameType, false); //un-hardcode this
+    match_current = new Match(nullptr, white, black, boardWindow, 3, GameType::ClassicGameType, false); //un-hardcode this
     connect(white, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     white->setParent(match_current);
