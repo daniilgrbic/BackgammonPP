@@ -81,7 +81,7 @@ void MainWindow::on_btJoinGame_clicked()
 void MainWindow::on_btJoinLobby_clicked()
 {
 
-    const QString &ipAddress = ui->inputIP->text();
+    const QString &ipAddress = ui->inputIP->toPlainText();
     if (!this->isValidIpAddress(ipAddress)) {
         QMessageBox::information(nullptr, "Alert", "Enter valid IP address");
     }

@@ -19,7 +19,6 @@ public:
     void paintEvent(QPaintEvent *);
     void setExitPoints(GameType);
     void setOpponentName(QString opponentName);
-    void setScore(int white, int black);
     ~BoardWindow();
 public slots:
     void enableEndTurn();
