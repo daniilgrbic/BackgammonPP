@@ -34,6 +34,7 @@ private:
     void processDisconnectCommand(QTcpSocket *);
 
     QString m_oppName;
+    QString m_lastTurn;
     int m_numGames;
     GameType m_gameType;
     QTcpServer* m_server;

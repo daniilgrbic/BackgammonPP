@@ -31,7 +31,7 @@ void SidebarCheckerHolder::updateCheckerPos()
         BoardChecker *checker = m_checkers[i];
         checker->setPos(this->sceneBoundingRect().center().x(),this->pos().y() + checker->getSize());
         checker->setAnchorPoint(checker->pos());
-        checker->setZValue(0);
+        checker->setZValue(-1);
     }
     updateVericalCheckers();
 }

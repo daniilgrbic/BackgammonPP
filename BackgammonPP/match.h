@@ -28,6 +28,7 @@ public slots:
     void confirmRoll(Roll roll);
     void startGameRequest();
     void connectedAsPlayer(int length, GameType gameType);
+    void connectedAsSpectator(int length, GameType gameType);
 
 private:
     Player *m_white;
@@ -40,6 +41,7 @@ private:
 
     int m_length;
     bool m_host;
+    bool m_spectator;
 
     GameType m_gameType;
 

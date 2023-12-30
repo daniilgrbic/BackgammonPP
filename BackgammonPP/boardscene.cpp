@@ -17,11 +17,11 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     setSceneRect(0, 0, m_width, m_height);
     setBackgroundBrush(QBrush(Qt::lightGray));
     setBoardTriangles();
-    setBoardCheckers();
     setBoardBar();
     setSideBars();
     setPlayingDice();
     //setDoublingDie();
+    setBoardCheckers();
     disableAllHolders();
     whiteOut = m_rightBar->bottomHolder;
     blackOut = m_rightBar->topHolder;
@@ -82,7 +82,7 @@ void BoardScene::setBoardCheckers(){
 
     int i = 0;
     int j = 0;
-
+    /*
     for(int n = i + 5; i < n; ++i)
         boardTriangles[11]->addChecker(blackCheckers[i]);
 
@@ -106,7 +106,13 @@ void BoardScene::setBoardCheckers(){
 
     for(int n = j + 2; j < n; ++j)
         boardTriangles[23]->addChecker(whiteCheckers[j]);
-
+    */
+    for (auto blackChecker : blackCheckers) {
+        m_rightBar->topHolder->addChecker(blackChecker);
+    }
+    for (auto whiteChecker : whiteCheckers) {
+        m_rightBar->bottomHolder->addChecker(whiteChecker);
+    }
     disableAllCheckers();
 }
 
