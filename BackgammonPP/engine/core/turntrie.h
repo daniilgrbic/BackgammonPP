@@ -30,6 +30,11 @@ private:
             : parent { parent }
         {}
 
+        ~TurnNode() {
+            for (const auto& [move, child] : children)
+                delete child;
+        }
+
         TurnNode* parent { nullptr };
         std::unordered_map<Move, TurnNode*> children {};
         std::optional<BoardState> board { std::nullopt };

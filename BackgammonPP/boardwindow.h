@@ -5,7 +5,6 @@
 #include <QGraphicsScene>
 #include <QVector>
 #include <QPaintEvent>
-#include "engine/core/game.h"
 #include "historylistmodel.h"
 namespace Ui {
 class BoardWindow;
@@ -20,6 +19,7 @@ public:
     void paintEvent(QPaintEvent *);
     void setExitPoints(GameType);
     void setOpponentName(QString opponentName);
+    void setScore(int white, int black);
     ~BoardWindow();
 public slots:
     void enableEndTurn();
@@ -32,8 +32,6 @@ signals:
     void requestCloseGame();
 
 private slots:
-    void on_pbExitGame_clicked();
-
     void on_pbRollDice_clicked();
 
     void on_pbEndTurn_clicked();
@@ -41,6 +39,8 @@ private slots:
     void on_pbUndo_clicked();
 
     void on_listView_clicked(const QModelIndex &index);
+
+    void on_pbExitCurrentGame_clicked();
 
 private:
     Ui::BoardWindow *ui;
