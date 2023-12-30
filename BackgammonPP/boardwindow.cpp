@@ -141,3 +141,8 @@ void BoardWindow::setScore(int white, int black){
     ui->lbScoreWhite->setText(QString::number(white));
     ui->lbScoreBlack->setText(QString::number(black));
 }
+
+void BoardWindow::scrollLogToBottom()
+{
+    ui->listView->scrollToBottom();
+}
