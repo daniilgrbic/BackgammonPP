@@ -3,6 +3,7 @@
 #include "player.h"
 #include "consts.h"
 #include "engine/core/game.h"
+#include "boardwindow.h"
 
 #include <QObject>
 
@@ -10,7 +11,7 @@ class Match : public QObject
 {
     Q_OBJECT
 public:
-    Match(QObject *parent, Player *white, Player *black, int length=1, GameType gameType=GameType::ClassicGameType, bool host = true);
+    Match(QObject *parent, Player *white, Player *black, BoardWindow *gBoard, int length=1, GameType gameType=GameType::ClassicGameType, bool host = true);
 
     ~Match();
 
@@ -26,6 +27,7 @@ public slots:
     void getTurn(Turn turn);
     void confirmRoll(Roll roll);
     void startGameRequest();
+    void connectedAsPlayer(int length, GameType gameType);
 
 private:
     Player *m_white;
@@ -33,6 +35,8 @@ private:
 
     Player *m_onTurn;
     Player *m_waiting;
+
+    BoardWindow *m_gBoard;
 
     int m_length;
     bool m_host;

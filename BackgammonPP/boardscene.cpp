@@ -389,3 +389,7 @@ void BoardScene::setLegalTurns(std::vector<Turn> const *legalTurns){
 void BoardScene::setRoll(Roll const *roll){
     this->roll = roll;
 }
+
+const Roll* BoardScene::getRoll() {
+    return this->roll;
+}

@@ -19,6 +19,7 @@ public:
     void paintEvent(QPaintEvent *);
     void setExitPoints(GameType);
     void setOpponentName(QString opponentName);
+    void setScore(int white, int black);
     ~BoardWindow();
 public slots:
     void enableEndTurn();
@@ -27,6 +28,7 @@ public slots:
     void showRoll(const Roll& roll);
 signals:
     void setBoardState(const BoardState &state);
+    void diceRolled(Roll);
     void forwardTurnFinish(Turn);
     void requestCloseGame();
 

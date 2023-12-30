@@ -62,6 +62,7 @@ void BoardWindow::on_pbRollDice_clicked()
     m_boardScene->updatePlayingDice();
     ui->pbRollDice->setEnabled(false);
     m_boardScene->getTurnInit();
+    emit diceRolled(*(m_boardScene->getRoll()));
 }
 
 void BoardWindow::showRoll(const Roll& roll){
@@ -132,3 +133,7 @@ void BoardWindow::on_pbExitCurrentGame_clicked()
     emit requestCloseGame();
 }
 
+void BoardWindow::setScore(int white, int black){
+    ui->lbScoreWhite->setText(QString::number(white));
+    ui->lbScoreBlack->setText(QString::number(black));
+}

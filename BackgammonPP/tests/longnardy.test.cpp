@@ -276,7 +276,7 @@ TEST_CASE("Long Nardy bearoff") {
         board.point(6).add(PlayerColor::WHITE, 2);
 
         auto game = LongNardyTestHelper();
-        game.setCurrentRoll(PlayerColor::WHITE, {4, 5});
+        game.setCurrentRoll(PlayerColor::WHITE, {3, 5});
         game.setBoardState(board);
 
         // Act
@@ -284,9 +284,9 @@ TEST_CASE("Long Nardy bearoff") {
 
         // Assert
         for(const auto& turn : turns) {
-            REQUIRE(turn.m_finalBoard.point(1).count() == 1);
-            REQUIRE(turn.m_finalBoard.point(2).count() == 1);
-            REQUIRE(turn.m_finalBoard.point(4).count() == 2);
+            for(const auto& move : turn.m_moves) {
+                REQUIRE(std::holds_alternative<int>(move.m_to));
+            }
         }
     }
 

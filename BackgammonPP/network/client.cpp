@@ -68,6 +68,14 @@ void Client::readMessageFromServer() {
         emit connectedAsSpectator(message);
     } else if (message == srvconst::serverCmdGameStart) {
         emit startGame();
+    } else if (message.startsWith(srvconst::serverCmdConnectedAsPlayerBG)) {
+        message = message.sliced(srvconst::serverCmdConnectedAsPlayerBG.length());
+        std::string temp = message.toStdString();
+        emit connectedAsPlayer(stoi(temp), GameType::ClassicGameType);
+    } else if (message.startsWith(srvconst::serverCmdConnectedAsPlayerLN)) {
+        message = message.sliced(srvconst::serverCmdConnectedAsPlayerLN.length());
+        std::string temp = message.toStdString();
+        emit connectedAsPlayer(stoi(temp), GameType::LongNardyGameType);
     } else if (message.startsWith(srvconst::serverCmdRoll)) {
         message = message.sliced(srvconst::serverCmdRoll.length());
         std::string temp = message.toStdString();
@@ -78,14 +86,12 @@ void Client::readMessageFromServer() {
         std::string temp = message.toStdString();
         Turn turn = JSONSerializer<Turn>::fromJson(temp);
         emit sendMove(turn);
-    }
-    else if (message.startsWith(srvconst::serverCmdDisconnect)) {
+    } else if (message.startsWith(srvconst::serverCmdDisconnect)) {
         qDebug() << "Disconnect message from server\n";
         m_socket->disconnect();
         m_socket = nullptr;
         disconnectedFromServer();
-    }
-    else {
+    } else {
         emit unknownServerCommand(message);
     }
 }

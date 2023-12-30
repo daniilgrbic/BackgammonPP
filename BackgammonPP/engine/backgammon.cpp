@@ -83,11 +83,14 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     auto onRoll = m_currentRoll.onRoll();
     auto opponent = onRoll == PlayerColor::WHITE ? PlayerColor::BLACK : PlayerColor::WHITE;
 
+    auto dice = m_currentRoll.dice();
+    std::sort(dice.rbegin(), dice.rend());
+
     std::vector<RollState> level {
         {
             {},
             onRoll == PlayerColor::WHITE ? m_board : m_board.mirror(),
-            m_currentRoll.dice()
+            dice
         }
     };
     std::vector<RollState> nextLevel = level;
@@ -96,9 +99,9 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
         level = std::move(nextLevel);
         nextLevel = {};
 
-        for (auto& roll: level) {
-            const auto& board = roll.board();
-            const auto& dice = roll.dice();
+        for (RollState& roll: level) {
+            const BoardState& board = roll.board();
+            const std::vector<int>& dice = roll.dice();
 
             for (size_t i = 0; i < dice.size(); ++i) {
                 auto die = dice[i];
@@ -109,20 +112,35 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
                     }
                 } else for (int pos = NUMBER_OF_POINTS; pos >= 1; --pos) {
-                    bool foundPoint = false;
-                    if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
-                        auto nextPos = pos - die;
-                        if (nextPos <= 0) {
-                            if (!(foundPoint && nextPos) && isBearingOff(board, onRoll)) {
-                                auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
-                                nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                            }
-                            break;
-                        } else if (!isBlockedBy(board.point(nextPos), opponent)) {
-                            auto nextMove = Move(onRoll, pos, nextPos, isBlot(board.point(nextPos), opponent));
+
+                    // skip pos if held by opponent
+                    if(board.point(pos).count() and board.point(pos).owner().value() != onRoll)
+                        continue;
+
+                    // skip pos of unoccupied
+                    if(board.point(pos).count() == 0)
+                        continue;
+
+                    int nextPos = pos - die;
+
+                    if (nextPos <= 0 and not isBearingOff(board, onRoll))
+                        break;
+
+                    if (nextPos <= 0) {
+                        int lastChecker = 0;
+                        for(int p = pos; p <= 6; p++)
+                            if(board.point(p).count() and board.point(p).owner().value() == onRoll)
+                                lastChecker = p;
+                        if (nextPos==0 or lastChecker == pos) {
+                            auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                             nextLevel.push_back(roll.getNextRollState(nextMove, i));
                         }
-                        foundPoint = true;
+                        break;
+                    }
+
+                    if (!isBlockedBy(board.point(nextPos), opponent)) {
+                        auto nextMove = Move(onRoll, pos, nextPos, isBlot(board.point(nextPos), opponent));
+                        nextLevel.push_back(roll.getNextRollState(nextMove, i));
                     }
                 }
             }

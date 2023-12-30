@@ -4,10 +4,12 @@
 #include <string>
 
 
-Server::Server(QString name, QObject *parent)
+Server::Server(QString name, int numGames, GameType gameType, QObject *parent)
     : QObject(parent)
 {
     m_oppName = name;
+    m_gameType = gameType;
+    m_numGames = numGames;
     m_server = new QTcpServer(this);
     m_player1 = nullptr;
     m_player2 = nullptr;
@@ -103,11 +105,27 @@ void Server::processAddNameCommand(QTcpSocket* src, QString name) {
     } else if (name == m_oppName && m_player2 == nullptr) {
         m_player2 = src;
 
+        // let Player 2 know, type of game and number of games
+        std::string message;
+        switch (m_gameType) {
+        case GameType::ClassicGameType:
+            message = srvconst::serverCmdConnectedAsPlayerBG.toStdString() + std::to_string(m_numGames);
+            break;
+        case GameType::LongNardyGameType:
+            message = srvconst::serverCmdConnectedAsPlayerLN.toStdString() + std::to_string(m_numGames);
+            break;
+        default:
+            message = srvconst::serverCmdConnectedAsPlayerBG.toStdString() + std::to_string(m_numGames);
+            break;
+        }
+        m_player2->write(message.c_str());
+        m_player2->flush();
+
+        qDebug() << "Connected 2nd player\n";
+
         // connected as Player 2, let Player 1 know
         m_player1->write(srvconst::serverCmdGameStart.toStdString().c_str());
         m_player1->flush();
-
-        qDebug() << "Connected 2nd player\n";
     } else {
         // connected as Spectator
         src->write(srvconst::serverCmdConnectedAsSpectator.toStdString().c_str());

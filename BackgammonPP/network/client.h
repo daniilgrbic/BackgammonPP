@@ -1,5 +1,7 @@
 #pragma once
 
+#include "consts.h"
+
 #include <QObject>
 #include <QString>
 #include <QTcpSocket>
@@ -22,6 +24,7 @@ public:
 
 signals:
     void connectedAsSpectator(QString msg);
+    void connectedAsPlayer(int length, GameType gameType);
     void disconnected();
     void unknownServerCommand(QString srvCmd);
     void notConnected();
