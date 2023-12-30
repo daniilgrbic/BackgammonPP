@@ -42,6 +42,8 @@ add_executable(BackgammonPPTest
     ../historylistmodel.h ../historylistmodel.cpp
     ../engine/core/game.h ../engine/core/game.cpp
     ../engine/backgammon.h ../engine/backgammon.cpp
+    ../utility/threadsafequeue.h
+
     boardstate.test.cpp
     longnardy.test.cpp
     move.test.cpp
@@ -51,6 +53,7 @@ add_executable(BackgammonPPTest
     historylistmodel.test.cpp
     game.test.cpp
     backgammon.test.cpp
+    threadsafequeue.test.cpp
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
