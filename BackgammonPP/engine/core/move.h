@@ -32,12 +32,12 @@ struct Move : public Serializable
     bool m_isHit;
 };
 
-// TODO
 template <>
 struct std::hash<Move>
 {
   std::size_t operator()(const Move& move) const
   {
+      // Used only in unordered_map with ~10 elements
       return 0;
   }
 };

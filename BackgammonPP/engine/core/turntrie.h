@@ -11,6 +11,11 @@ public:
 
     ~TurnTrie();
 
+    TurnTrie(const TurnTrie&) = delete;
+    TurnTrie(TurnTrie&&) = delete;
+    TurnTrie& operator =(const TurnTrie&) = delete;
+    TurnTrie& operator =(TurnTrie&&) = delete;
+
     BoardState board() const;
 
     bool hasNextMove(const Move& move) const;
@@ -34,6 +39,11 @@ private:
             for (const auto& [move, child] : children)
                 delete child;
         }
+
+        TurnNode(const TurnNode&) = delete;
+        TurnNode(TurnNode&&) = delete;
+        TurnNode& operator =(const TurnNode&) = delete;
+        TurnNode& operator =(TurnNode&&) = delete;
 
         TurnNode* parent { nullptr };
         std::unordered_map<Move, TurnNode*> children {};

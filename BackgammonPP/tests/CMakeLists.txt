@@ -22,6 +22,7 @@ add_executable(BackgammonPPTest
     ../engine/core/move.cpp ../engine/core/move.h
     ../engine/core/point.cpp ../engine/core/point.h
     ../engine/core/turn.cpp ../engine/core/turn.h
+    ../engine/core/turntrie.cpp ../engine/core/turntrie.h
     ../engine/core/die.cpp ../engine/core/die.h
     ../engine/core/game.cpp ../engine/core/game.h
     ../engine/core/gameresult.h
@@ -56,6 +57,7 @@ add_executable(BackgammonPPTest
     threadsafequeue.test.cpp
     roll.test.cpp
     die.test.cpp
+    turntrie.test.cpp
 )
 
 target_link_libraries(BackgammonPPTest PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
