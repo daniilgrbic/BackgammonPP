@@ -20,6 +20,7 @@ public:
     void setExitPoints(GameType);
     void setOpponentName(QString opponentName);
     void setScore(int white, int black);
+    void scrollLogToBottom();
     ~BoardWindow();
 public slots:
     void enableEndTurn();
