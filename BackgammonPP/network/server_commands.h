@@ -4,8 +4,10 @@
 
 
 namespace srvconst {
-const quint16 PORT = 12345;
-    inline const QString serverCmdConnectedAsSpectator = "connected-as-spectator";
+    const quint16 PORT = 12345;
+    inline const QString serverCmdConnectedAsSpectator = "connected-spectator";
+    inline const QString serverCmdConnectedAsPlayerBG = "connected-player-bg-";
+    inline const QString serverCmdConnectedAsPlayerLN = "connected-player-ln-";
     inline const QString serverCmdAddName = "name-add-";
     inline const QString serverCmdGameStart = "game-start";
     inline const QString serverCmdRoll = "roll-";
