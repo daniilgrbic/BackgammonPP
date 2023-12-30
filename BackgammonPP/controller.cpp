@@ -139,14 +139,10 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
 
 void Controller::closeGameAndOpenMenu()
 {
-    qDebug() << "closeGameAndOpenMenu\n";
 
-    if (player_remote != nullptr) {
+    if (player_remote != nullptr)
         disconnect(dynamic_cast<RemotePlayer*>(player_remote), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);
-        // delete player_remote;
-    }
 
-    qDebug() << "Check1\n";
 
     if (thread_server != nullptr) {
         // thread_server->deleteLater(); -- this line is the problem
@@ -156,25 +152,19 @@ void Controller::closeGameAndOpenMenu()
         server_local = nullptr;
     }
 
-    qDebug() << "Check2\n";
-
     boardWindow->close();
 
     delete boardWindow;
     boardWindow = new BoardWindow();
     connect(boardWindow, &BoardWindow::requestCloseGame, this, &Controller::closeGameAndOpenMenu);
 
-    qDebug() << "Check3\n";
 
     if (match_current != nullptr)
         delete match_current;
 
-    qDebug() << "Check4\n";
 
     match_current = nullptr;
     player_remote = nullptr;
 
     mainWindow->show();
-
-    qDebug() << "CheckFinal\n";
 }

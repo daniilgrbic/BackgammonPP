@@ -28,12 +28,8 @@ bool Client::connectClient(QString ipAddress) {
 }
 
 void Client::disconnectClient() {
-    qDebug() << "Client disconnectClient\n";
-    if (m_socket != nullptr && m_socket->state() == QAbstractSocket::ConnectedState) {
-        qDebug() << "Usao ovde\n";
+    if (m_socket != nullptr && m_socket->state() == QAbstractSocket::ConnectedState)
         m_socket->write(srvconst::serverCmdDisconnect.toStdString().c_str());
-    }
-    qDebug() << "Nije ovde problem...\n";
 }
 
 void Client::sendTurnToServer(Turn* turn) {
@@ -67,7 +63,7 @@ void Client::sendNameToServer(QString name) {
 
 void Client::readMessageFromServer() {
     QString message = m_socket->readAll();
-    qDebug() << message;
+
     if (message == srvconst::serverCmdGameStart) {
         emit startGame();
     } else if (message.startsWith(srvconst::serverCmdConnectedAsSpectatorBG)) {
@@ -103,7 +99,6 @@ void Client::readMessageFromServer() {
         Turn turn = JSONSerializer<Turn>::fromJson(temp);
         emit sendMove(turn);
     } else if (message.startsWith(srvconst::serverCmdDisconnect)) {
-        qDebug() << "Disconnect message from server\n";
         m_socket->disconnect();
         m_socket = nullptr;
         disconnectedFromServer();
@@ -113,7 +108,5 @@ void Client::readMessageFromServer() {
 }
 
 void Client::disconnectedFromServer() {
-    qDebug() << "Disconnected from server\n";
-    // Ovde
     emit disconnected();
 }

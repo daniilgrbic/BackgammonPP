@@ -16,20 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     setPicture(this->backgroundPicPath, this);
     setPicture(this->sketchPicPath, ui->optionsFrameContent);
 
-    // connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
-    // connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
-    // connect(ui->btPreferences, SIGNAL(clicked()), this, SLOT(on_btPreference_clicked()));
-
 
     // Create Game Lobby
     this->on_rbPlayerRemote_clicked();
     this->showIpAddress();
 
-    // Join Game Lobby
-    // connect(ui->btJoinLobby, SIGNAL(clicked()), this, SLOT(on_btJoinLobby_clicked()));
-
     // Preferences - labelPrefUsername, btSavePreferences
-    // connect(ui->btSavePreferences, SIGNAL(clicked()), this, SLOT(on_btSavePreference_clicked()));
     ui->lineEdit->setText(Preferences().playerName);
     ui->labelPrefUsername->setText(Preferences().playerName);
     menuVolume = ui->horizontalSlider->value();
@@ -116,13 +108,6 @@ void MainWindow::on_btStartGame_clicked()
             return;
         }
         else {
-            // pass the arguments -> IGOR CALL FUNCTION HERE (create instance of your window in controller and emit signal for switching up here)
-            // QStringList opponents;
-            // model = new StringListModel(opponents);
-            // ui->lvOpponents->setModel(model);
-            // ui->lvOpponents->setSelectionMode(QAbstractItemView::SingleSelection);
-            // model->addOpponent("pera"); // Example how to add names to listview
-            // ui->stackedWidget->setCurrentIndex(4);
             emit requestCreateGame(opponentName, gameNumber, gameType, playerType);
         }
     }

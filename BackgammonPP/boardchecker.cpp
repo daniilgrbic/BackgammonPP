@@ -4,7 +4,6 @@
 #include <QCursor>
 #include <QColor>
 #include <QGraphicsSceneMouseEvent>
-#include <iostream>
 #include <QDrag>
 #include <QWidget>
 #include <QList>
@@ -94,7 +93,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         else {
             QGraphicsItem * closestItem = nullptr;
             qreal shortestDist = 100000;
-            for(QGraphicsItem* item : qAsConst(colItems)){
+            for(QGraphicsItem* item : std::as_const(colItems)){
                 QLineF line(item->sceneBoundingRect().center(), this->sceneBoundingRect().center());
                 CheckerHolder* itemAsHolder = dynamic_cast<CheckerHolder*>(item);
                 if(itemAsHolder && itemAsHolder->canDropoff() && line.length() < shortestDist){
