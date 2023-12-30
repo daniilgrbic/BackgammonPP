@@ -1,6 +1,7 @@
 #include "match.h"
 #include "engine/backgammon.h"
 #include "engine/longnardy.h"
+#include "remoteplayer.h"
 
 #include <algorithm>
 #include <vector>
@@ -76,6 +77,11 @@ void Match::getTurn(Turn turn){
     game->playTurn(turn);
     emit setState(game->board());
     if(game->isFinished(PlayerColor::WHITE) || game->isFinished(PlayerColor::BLACK)) {
+        if (dynamic_cast<RemotePlayer*>(m_waiting) != nullptr) {
+            std::swap(m_onTurn, m_waiting);
+            connectSlots(m_onTurn, m_waiting);
+            emit requestMove(&turn, nullptr, nullptr);
+        }
         endGame();
     } else {
         std::swap(m_onTurn, m_waiting);
@@ -95,8 +101,9 @@ void Match::endGame() {
 
     delete game;
     game = nullptr;
-    if (winnerPoints < m_length)
+    if (winnerPoints < m_length) {
         startGame();
+    }
 }
 
 void Match::connectSlots(Player *onMove, Player *waiting){
