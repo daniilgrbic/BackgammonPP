@@ -9,7 +9,6 @@ public:
     struct Result;
 
     Backgammon();
-    Backgammon(const BoardState& board, const Roll& roll);
 
     bool isGammon() const;
     bool isBackgammon() const;
@@ -18,6 +17,6 @@ public:
     std::vector<Turn> generateLegalTurns() override;
     bool isFinished(PlayerColor player) const override;
     std::optional<GameResult> getResult() override;
-private:
+
     const int CHECKERS_COUNT = 15;
 };
