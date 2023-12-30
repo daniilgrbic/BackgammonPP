@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <vector>
 
-Match::Match(QObject *parent, Player *white, Player *black, int length, GameType gameType, bool host)
+Match::Match(QObject *parent, Player *white, Player *black, BoardWindow *gboard, int length, GameType gameType, bool host)
     : QObject(parent),
       m_white(white),
       m_black(black),
@@ -13,9 +13,9 @@ Match::Match(QObject *parent, Player *white, Player *black, int length, GameType
       m_gameType(gameType),
       m_whiteScore(0),
       m_blackScore(0),
-      m_host(host)
-{
-}
+      m_host(host),
+      m_gBoard(gboard)
+{ }
 
 Match::~Match() {
     if (game)
@@ -91,6 +91,7 @@ void Match::endGame() {
 
     // Debug log
     qDebug() << "WHITE: " << m_whiteScore << "\t" << "BLACK: " << m_blackScore;
+    m_gBoard->setScore(m_whiteScore, m_blackScore);
 
     delete game;
     game = nullptr;

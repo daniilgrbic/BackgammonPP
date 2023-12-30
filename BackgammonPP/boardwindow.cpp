@@ -133,3 +133,7 @@ void BoardWindow::on_pbExitCurrentGame_clicked()
     emit requestCloseGame();
 }
 
+void BoardWindow::setScore(int white, int black){
+    ui->lbScoreWhite->setText(QString::number(white));
+    ui->lbScoreBlack->setText(QString::number(black));
+}
