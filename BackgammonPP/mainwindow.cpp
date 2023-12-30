@@ -169,11 +169,6 @@ bool MainWindow::isValidIpAddress(const QString &ipAddress) {
     return address.setAddress(ipAddress);
 }
 
-void MainWindow::on_btReturnFromCreateGameLobby_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
 void MainWindow::on_rbPlayerRemote_clicked() {
     if (ui->rbPlayerRemote->isChecked()) {
         ui->teOpponentUsername->setDisabled(false);

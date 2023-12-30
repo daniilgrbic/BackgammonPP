@@ -67,7 +67,7 @@
 }</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="MainMenu">
        <layout class="QVBoxLayout" name="verticalLayout_7" stretch="4,9,3">
@@ -1623,73 +1623,6 @@ QPushButton:hover {
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="CreateGameLobby">
-       <widget class="QWidget" name="gridLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>641</width>
-          <height>441</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0">
-          <widget class="QPushButton" name="btStartCreatedGame">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-           </property>
-           <property name="text">
-            <string>Start Game</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QListView" name="lvOpponents"/>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QPushButton" name="btReturnFromCreateGameLobby">
-        <property name="geometry">
-         <rect>
-          <x>490</x>
-          <y>460</y>
-          <width>161</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	background: transparent;
-	color: white;
-	text-align: center;
-}
-
-QPushButton:hover {
-	background: transparent;
-	color: green;
-}</string>
-        </property>
-        <property name="text">
-         <string>Back</string>
         </property>
        </widget>
       </widget>
