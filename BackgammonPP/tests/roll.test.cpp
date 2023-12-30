@@ -10,8 +10,6 @@ TEST_CASE("Roll serialization" ) {
     SECTION("Should deserialize a roll") {
         // Arrange
         Die first, second;
-        first.roll();
-        second.roll();
         Roll roll(WHI, first, second);
 
         // Act
@@ -24,3 +22,15 @@ TEST_CASE("Roll serialization" ) {
     }
 }
 
+TEST_CASE("First roll") {
+    SECTION("Assert that initial rolls are different") {
+        for (int i = 0; i < 10000; i++) {
+            // Arrange
+            Die first, second;
+            Roll initialRoll = Roll::getInitialRoll(first, second);
+
+            // Assert
+            REQUIRE(first != second);
+        }
+    }
+}
