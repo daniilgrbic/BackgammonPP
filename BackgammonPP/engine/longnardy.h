@@ -5,9 +5,6 @@
 class LongNardy : public Game
 {
 public:
-    enum class VictoryType;
-    struct Result;
-
     LongNardy();
 
     // Game interface
@@ -16,6 +13,5 @@ public:
     bool isBlockedBy(const Point& point, PlayerColor player) const override;
     std::optional<GameResult> getResult() override;
 
-private:
     const int CHECKERS_COUNT = 15;
 };

@@ -5,9 +5,6 @@
 class Backgammon : public Game
 {
 public:
-    enum class VictoryType;
-    struct Result;
-
     Backgammon();
 
     bool isGammon() const;
