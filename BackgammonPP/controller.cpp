@@ -80,7 +80,7 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         QString ipAddress = mainWindow->getIpAddress();
         mainWindow->close();
         thread_server = new QThread();
-        server_local = new Server(opponentName);
+        server_local = new Server(opponentName, numGames, gameType);
         server_local->moveToThread(thread_server);
         thread_server->start();
 
@@ -90,11 +90,12 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         Player *black = new RemotePlayer(nullptr, ipAddress, preferences->playerName);
 
         match_current = new Match(nullptr, white, black, numGames, gameType);
+
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
         connect(black, &RemotePlayer::forwardSetDice, boardWindow, &BoardWindow::showRoll);
-
         connect(dynamic_cast<RemotePlayer*>(black)->getClient(), &Client::startGame, match_current, &Match::startGameRequest);
+
         white->setParent(match_current);
         black->setParent(match_current);
 
@@ -117,10 +118,10 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     connect(white, &RemotePlayer::forwardSetDice, boardWindow, &BoardWindow::showRoll);
     connect(white, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
+    connect(dynamic_cast<RemotePlayer*>(white)->getClient(), &Client::connectedAsPlayer, match_current, &Match::connectedAsPlayer);
 
     white->setParent(match_current);
     black->setParent(match_current);
-    match_current->startGame();
 
     player_remote = white;
     connect(dynamic_cast<RemotePlayer*>(white), &RemotePlayer::terminateGame, this, &Controller::closeGameAndOpenMenu);

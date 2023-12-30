@@ -1,5 +1,7 @@
 #pragma once
 
+#include "consts.h"
+
 #include <QObject>
 #include <QMap>
 #include <QTcpServer>
@@ -10,7 +12,7 @@
 class Server : public QObject {
     Q_OBJECT
 public:
-    Server(QString name, QObject* parent = nullptr);
+    Server(QString name, int numGames, GameType gameType, QObject* parent = nullptr);
     ~Server();
 
     void nukeGame(QTcpSocket *);
@@ -32,6 +34,8 @@ private:
     void processDisconnectCommand(QTcpSocket *);
 
     QString m_oppName;
+    int m_numGames;
+    GameType m_gameType;
     QTcpServer* m_server;
     QTcpSocket* m_player1;
     QTcpSocket* m_player2;

@@ -62,6 +62,12 @@ void Match::startGameRequest() {
     startGame();
 }
 
+void Match::connectedAsPlayer(int length, GameType gameType) {
+    m_length = length;
+    m_gameType = gameType;
+    startGame();
+}
+
 void Match::startMove(Turn *turn) {
     currentLegalTurns = game->generateLegalTurns();
     currentRoll = Roll(game->currentRoll());

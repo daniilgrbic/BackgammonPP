@@ -26,6 +26,7 @@ public slots:
     void getTurn(Turn turn);
     void confirmRoll(Roll roll);
     void startGameRequest();
+    void connectedAsPlayer(int length, GameType gameType);
 
 private:
     Player *m_white;
