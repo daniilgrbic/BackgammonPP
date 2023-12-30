@@ -23,7 +23,7 @@ public:
     void sendNameToServer(QString name);
 
 signals:
-    void connectedAsSpectator(QString msg);
+    void connectedAsSpectator(int length, GameType gameType);
     void connectedAsPlayer(int length, GameType gameType);
     void disconnected();
     void unknownServerCommand(QString srvCmd);

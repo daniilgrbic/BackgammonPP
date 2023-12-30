@@ -118,6 +118,7 @@ void Controller::joinRemoteMatchFromMenu(QString ipAddress)
     connect(white, &RemotePlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(black, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
     connect(dynamic_cast<RemotePlayer*>(white)->getClient(), &Client::connectedAsPlayer, match_current, &Match::connectedAsPlayer);
+    connect(dynamic_cast<RemotePlayer*>(white)->getClient(), &Client::connectedAsSpectator, match_current, &Match::connectedAsSpectator);
 
     white->setParent(match_current);
     black->setParent(match_current);

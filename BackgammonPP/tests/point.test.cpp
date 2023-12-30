@@ -46,6 +46,14 @@ TEST_CASE("Point class core functionality") {
         REQUIRE(not point.owner().has_value());
         REQUIRE(point.count() == 0);
     }
+
+    SECTION("Remove more than checker count") {
+        // Arrange
+        auto point = Point();
+        point.add(PlayerColor::WHITE, 3);
+
+        REQUIRE_THROWS_AS(point.remove(4), std::logic_error);
+    }
 }
 
 TEST_CASE("Point class serialization") {
@@ -91,6 +99,7 @@ TEST_CASE("Point class serialization") {
         REQUIRE(point.count() == 4);
     }
 }
+
 TEST_CASE("Static methods"){
     SECTION("idByPlayer invalid index throws"){
         // Arrane

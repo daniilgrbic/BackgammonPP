@@ -3,7 +3,7 @@
 RemotePlayer::RemotePlayer(QObject *parent, QString ip, QString username)
     : Player(parent)
 {
-    m_client = new Client(ip, username); // uncomment after fix
+    m_client = new Client(ip, username);
     connect(m_client, &Client::diceRolled, this, &RemotePlayer::diceRolled);
     connect(m_client, &Client::sendMove, this, &RemotePlayer::acceptMove);
 
