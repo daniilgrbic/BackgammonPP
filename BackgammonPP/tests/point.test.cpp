@@ -91,3 +91,113 @@ TEST_CASE("Point class serialization") {
         REQUIRE(point.count() == 4);
     }
 }
+TEST_CASE("Static methods"){
+    SECTION("idByPlayer invalid index throws"){
+        // Arrane
+        PlayerColor color = PlayerColor::WHITE;
+        int index = 25;
+
+        // Act
+
+        // Assert
+        REQUIRE_THROWS(Point::idByPlayer(color, index));
+    }
+    SECTION("idByPlayer valid index doesnt throw"){
+        // Arrane
+        PlayerColor color = PlayerColor::WHITE;
+        int index = 12;
+
+        // Act
+
+        // Assert
+        REQUIRE_NOTHROW(Point::idByPlayer(color, index));
+    }
+    SECTION("idByPlayer white index 5"){
+        // Arrane
+        PlayerColor color = PlayerColor::WHITE;
+        int index = 5;
+
+        // Act
+        int id = Point::idByPlayer(color, index);
+
+        // Assert
+        REQUIRE(5 == id);
+    }
+    SECTION("idByPlayer black index 16"){
+        // Arrane
+        PlayerColor color = PlayerColor::BLACK;
+        int index = 16;
+
+        // Act
+        int id = Point::idByPlayer(color, index);
+
+            // Assert
+            REQUIRE(9 == id);
+    }
+    SECTION("centralMirrorId invalid index throws"){
+        // Arrane
+        int index = 25;
+
+        // Act
+
+        // Assert
+        REQUIRE_THROWS(Point::centralMirrorId(index));
+    }
+    SECTION("centralMirrorId invalid index doesnt throw"){
+        // Arrane
+        int index = 12;
+
+        // Act
+
+        // Assert
+        REQUIRE_NOTHROW(Point::centralMirrorId(index));
+    }
+    SECTION("centralMirrorId index 5"){
+        // Arrane
+        int index = 5;
+
+        // Act
+        int id = Point::centralMirrorId(index);
+
+        // Assert
+        REQUIRE(17 == id);
+    }
+    SECTION("centralMirrorId index 13"){
+        // Arrane
+        int index = 13;
+
+        // Act
+        int id = Point::centralMirrorId(index);
+
+        // Assert
+        REQUIRE(1 == id);
+    }
+    SECTION("verticalMirrorId invalid index throws"){
+        // Arrane
+        int index = 25;
+
+        // Act
+
+        // Assert
+        REQUIRE_THROWS(Point::verticalMirrorId(index));
+    }
+    SECTION("verticalMirrorId invalid index doesnt throw"){
+        // Arrane
+        int index = 12;
+
+        // Act
+
+        // Assert
+        REQUIRE_NOTHROW(Point::verticalMirrorId(index));
+    }
+    SECTION("verticalMirrorId index 5"){
+        // Arrane
+        int index = 5;
+
+        // Act
+        int id = Point::verticalMirrorId(index);
+
+        // Assert
+        REQUIRE(20 == id);
+    }
+}

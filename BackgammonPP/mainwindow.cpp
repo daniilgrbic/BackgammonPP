@@ -1,9 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "stringlistmodel.h"
-#include <iostream>
-
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,13 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     ui->horizontalSlider->setValue(BASE_THEME_VOLUME);
-    setWindowTitle("BackgammonPP");
+    setWindowTitle("Backgammon++");
     setWindowIcon(QIcon(ICON_PATH));
 
     setFixedSize(width(), height());
 
     setPicture(this->backgroundPicPath, this);
-    setPicture(this->sketchPicPath, ui->optionsFrame);
+    setPicture(this->sketchPicPath, ui->optionsFrameContent);
 
     // connect(ui->btCreateGame, SIGNAL(clicked()), this, SLOT(on_btCreateGame_clicked()));
     // connect(ui->btJoinGame, SIGNAL(clicked()), this, SLOT(on_btJoinGame_clicked()));
@@ -98,7 +94,7 @@ void MainWindow::on_btStartGame_clicked()
 {
     GameType gameType = this->getGameType();
     PlayerType playerType = this->getPlayerType();
-    QString opponentName = this->ui->labelOpponentUsername->toPlainText();
+    QString opponentName = this->ui->teOpponentUsername->text();
     qint32 gameNumber = this->ui->sbGameDuration->value();
 
     if (gameNumber < MIN_NUM_GAMES or gameNumber > MAX_NUM_GAMES) {
@@ -173,33 +169,28 @@ bool MainWindow::isValidIpAddress(const QString &ipAddress) {
     return address.setAddress(ipAddress);
 }
 
-void MainWindow::on_btReturnFromCreateGameLobby_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
 void MainWindow::on_rbPlayerRemote_clicked() {
     if (ui->rbPlayerRemote->isChecked()) {
-        ui->labelOpponentUsername->setDisabled(false);
-        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8; color: black");
+        ui->teOpponentUsername->setDisabled(false);
+        ui->teOpponentUsername->setStyleSheet("background-color: #EDE9E8; color: black");
     }
     else {
-        ui->labelOpponentUsername->setDisabled(true);
-        ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
-        ui->labelOpponentUsername->setText("");
+        ui->teOpponentUsername->setDisabled(true);
+        ui->teOpponentUsername->setStyleSheet("background-color: gray; color: black");
+        ui->teOpponentUsername->setText("");
     }
 }
 
 void MainWindow::on_rbPlayerLocal_clicked() {
-    ui->labelOpponentUsername->setDisabled(true);
-    ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
-    ui->labelOpponentUsername->setText("");
+    ui->teOpponentUsername->setDisabled(true);
+    ui->teOpponentUsername->setStyleSheet("background-color: gray; color: black");
+    ui->teOpponentUsername->setText("");
 }
 
 void MainWindow::on_rbPlayerBot_clicked() {
-    ui->labelOpponentUsername->setDisabled(true);
-    ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
-    ui->labelOpponentUsername->setText("");
+    ui->teOpponentUsername->setDisabled(true);
+    ui->teOpponentUsername->setStyleSheet("background-color: gray; color: black");
+    ui->teOpponentUsername->setText("");
 }
 
 QString MainWindow::getIpAddress() {
