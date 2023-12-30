@@ -94,7 +94,7 @@ void MainWindow::on_btStartGame_clicked()
 {
     GameType gameType = this->getGameType();
     PlayerType playerType = this->getPlayerType();
-    QString opponentName = this->ui->labelOpponentUsername->toPlainText();
+    QString opponentName = this->ui->teOpponentUsername->text();
     qint32 gameNumber = this->ui->sbGameDuration->value();
 
     if (gameNumber < MIN_NUM_GAMES or gameNumber > MAX_NUM_GAMES) {
@@ -176,26 +176,26 @@ void MainWindow::on_btReturnFromCreateGameLobby_clicked()
 
 void MainWindow::on_rbPlayerRemote_clicked() {
     if (ui->rbPlayerRemote->isChecked()) {
-        ui->labelOpponentUsername->setDisabled(false);
-        ui->labelOpponentUsername->setStyleSheet("background-color: #EDE9E8; color: black");
+        ui->teOpponentUsername->setDisabled(false);
+        ui->teOpponentUsername->setStyleSheet("background-color: #EDE9E8; color: black");
     }
     else {
-        ui->labelOpponentUsername->setDisabled(true);
-        ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
-        ui->labelOpponentUsername->setText("");
+        ui->teOpponentUsername->setDisabled(true);
+        ui->teOpponentUsername->setStyleSheet("background-color: gray; color: black");
+        ui->teOpponentUsername->setText("");
     }
 }
 
 void MainWindow::on_rbPlayerLocal_clicked() {
-    ui->labelOpponentUsername->setDisabled(true);
-    ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
-    ui->labelOpponentUsername->setText("");
+    ui->teOpponentUsername->setDisabled(true);
+    ui->teOpponentUsername->setStyleSheet("background-color: gray; color: black");
+    ui->teOpponentUsername->setText("");
 }
 
 void MainWindow::on_rbPlayerBot_clicked() {
-    ui->labelOpponentUsername->setDisabled(true);
-    ui->labelOpponentUsername->setStyleSheet("background-color: gray; color: black");
-    ui->labelOpponentUsername->setText("");
+    ui->teOpponentUsername->setDisabled(true);
+    ui->teOpponentUsername->setStyleSheet("background-color: gray; color: black");
+    ui->teOpponentUsername->setText("");
 }
 
 QString MainWindow::getIpAddress() {
