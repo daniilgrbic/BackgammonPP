@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include <vector>
-#include <iostream>
 
 Match::Match(QObject *parent, Player *white, Player *black, int length, GameType gameType, bool host)
     : QObject(parent),
@@ -16,6 +15,11 @@ Match::Match(QObject *parent, Player *white, Player *black, int length, GameType
       m_blackScore(0),
       m_host(host)
 {
+}
+
+Match::~Match() {
+    if (game)
+        delete game;
 }
 
 void Match::startGame() {
@@ -88,7 +92,8 @@ void Match::endGame() {
     // Debug log
     qDebug() << "WHITE: " << m_whiteScore << "\t" << "BLACK: " << m_blackScore;
 
-    delete game;    // This might change if we add game log
+    delete game;
+    game = nullptr;
     if (winnerPoints < m_length)
         startGame();
 }

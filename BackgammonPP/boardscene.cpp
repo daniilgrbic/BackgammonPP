@@ -27,6 +27,11 @@ BoardScene::BoardScene(QObject *parent, qreal width, qreal height)
     blackOut = m_rightBar->topHolder;
 }
 
+BoardScene::~BoardScene() {
+    if (m_turnTrie)
+        delete m_turnTrie;
+}
+
 void BoardScene::setBoardTriangles() {
     for(int i {0}; i < this->trianglePairs; ++i){
         qreal x_point = this->sideBarWidth +

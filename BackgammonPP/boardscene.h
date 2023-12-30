@@ -21,6 +21,8 @@ class BoardScene : public QGraphicsScene
     Q_OBJECT
 public:
     BoardScene(QObject *parent, qreal width, qreal height);
+    ~BoardScene();
+
     void updatePlayingDice();
     void updatePlayingDice(const Roll& roll);
 
@@ -80,7 +82,7 @@ private:
     CheckerHolder *whiteOut, *blackOut;
     CheckerHolder *whiteBar, *blackBar;
 
-    TurnTrie* m_turnTrie;
+    TurnTrie* m_turnTrie { nullptr };
     std::vector<Turn> const *legalTurns;
     Roll const *roll;
 

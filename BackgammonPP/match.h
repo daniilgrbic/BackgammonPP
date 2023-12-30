@@ -12,6 +12,8 @@ class Match : public QObject
 public:
     Match(QObject *parent, Player *white, Player *black, int length=1, GameType gameType=GameType::ClassicGameType, bool host = true);
 
+    ~Match();
+
     void startGame();
 
 signals:
@@ -42,7 +44,7 @@ private:
 
     //as the idea is to play multiple games, this class should own the game and free it when it is supposed to play another one
     //maybe an enum parameter to the constructor could resolve what gamemode, or smth like that
-    Game *game;
+    Game *game { nullptr };
     std::vector<Turn> currentLegalTurns;
     Roll currentRoll;
 
