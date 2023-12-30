@@ -1,12 +1,10 @@
-#ifndef CHAT_MESSAGE_H
-#define CHAT_MESSAGE_H
+#pragma once
 
 #include <QString>
 #include "utility/serializable.h"
 
 
-class ChatMessage : public Serializable
-{
+class ChatMessage : public Serializable {
 public:
     ChatMessage(QString m = "", QString r = "")
         : message{m}
@@ -28,4 +26,3 @@ private:
     QString sender;
 };
 
-#endif // CHAT_MESSAGE_H

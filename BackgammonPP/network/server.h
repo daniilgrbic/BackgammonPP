@@ -1,9 +1,8 @@
-#ifndef SERVER_H
-#define SERVER_H
+#pragma once
+
+#include "consts.h"
 
 #include <QObject>
-#include <QString>
-#include <QList>
 #include <QMap>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -13,27 +12,34 @@
 class Server : public QObject {
     Q_OBJECT
 public:
-    Server(QObject* parent = nullptr);
+    Server(QString name, int numGames, GameType gameType, QObject* parent = nullptr);
     ~Server();
+
+    void nukeGame(QTcpSocket *);
 
 public slots:
     void connected();
-    void readMessage();
     void disconnected();
+    void readMessage();
 
 private:
-    void broadcast(QString message);
-    void processNameCommand(QTcpSocket* src, QString name);
-    void processOpponentCommand(QTcpSocket* src, QString oppName);
-    void processStateCommand(QTcpSocket* src, QString state);
-    void processChatCommand(QTcpSocket* src, QString json);
-    bool m_gameStarted;
+    void broadcast(QTcpSocket* src, QString message);
+    void processAddNameCommand(QTcpSocket* src, QString name);
+
+    void processGameStartCommand(QTcpSocket* src);
+
+    void processRollCommand(QTcpSocket* src, QString roll);
+    void processTurnCommand(QTcpSocket* src, QString turn);
+
+    void processDisconnectCommand(QTcpSocket *);
+
+    QString m_oppName;
+    QString m_lastTurn;
+    int m_numGames;
+    GameType m_gameType;
     QTcpServer* m_server;
     QTcpSocket* m_player1;
     QTcpSocket* m_player2;
     QSet<QTcpSocket*> m_spectators;
-    QMap<QTcpSocket*, QString> m_clientNames;
-    QMap<QString, QTcpSocket*> m_clientSockets;
 };
 
-#endif // SERVER_H

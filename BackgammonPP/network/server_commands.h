@@ -1,18 +1,18 @@
-#ifndef CONSTS_H
-#define CONSTS_H
+#pragma once
 
 #include <QString>
 
 
-const quint16 PORT = 1234;
-const QString serverCmdOpp = "opp-";
-const QString serverCmdPotOpp = "potopp-";
-const QString serverCmdName = "name-";
-const QString serverCmdChat = "chat-";
-const QString serverCmdState = "state-";
-const QString serverCmdConnectedHost = "connected-host";
-const QString serverCmdConnectedPlayer = "connected-player";
-const QString serverCmdConnectedSpectator = "connected-spectator";
-const QString serverCmdConnectedWaiting = "connected-waiting";
-
-#endif // CONSTS_H
+namespace srvconst {
+    const quint16 PORT = 12345;
+    inline const QString serverCmdConnectedAsSpectatorBG = "connected-spectator-bg-";
+    inline const QString serverCmdConnectedAsSpectatorLN = "connected-spectator-ln-";
+    inline const QString serverCmdConnectedAsPlayerBG = "connected-player-bg-";
+    inline const QString serverCmdConnectedAsPlayerLN = "connected-player-ln-";
+    inline const QString serverCmdAddName = "name-add-";
+    inline const QString serverCmdGameStart = "game-start";
+    inline const QString serverCmdRoll = "roll-";
+    inline const QString serverCmdTurn = "turn-";
+    inline const QString serverCmdDisconnect = "disconnect";
+    inline const QString serverCmdRequestState = "request-state";
+}

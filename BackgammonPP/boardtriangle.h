@@ -1,5 +1,4 @@
-#ifndef BOARDTRIANGLE_H
-#define BOARDTRIANGLE_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QPolygonF>
@@ -15,10 +14,11 @@ class BoardChecker;
 class BoardTriangle : public QGraphicsItem, public CheckerHolder
 {
 public:
-    BoardTriangle(QGraphicsItem *parent, qreal m_x, qreal m_y, qreal width, qreal height, bool upwards);
+    BoardTriangle(QGraphicsItem *parent, qreal m_x, qreal m_y, qreal width, qreal height, bool upwards, int number);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
     void updateCheckerPos() override;
+    void updateHighlighting() override;
 private:
     qreal m_x;
     qreal m_y;
@@ -27,5 +27,3 @@ private:
     bool m_upwards;
     QPolygonF m_polygon;
 };
-
-#endif // BOARDTRIANGLE_H

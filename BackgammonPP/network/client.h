@@ -1,39 +1,43 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#pragma once
+
+#include "consts.h"
 
 #include <QObject>
 #include <QString>
 #include <QTcpSocket>
-#include <system_error>
 #include <network/server_commands.h>
+#include <engine/core/turn.h>
+#include <engine/core/roll.h>
+#include <utility/jsonserializer.h>
 
 
 class Client : public QObject {
     Q_OBJECT
 public:
-    Client(QObject* parent = nullptr);
+    Client(QString ipAddress, QString username, QObject* parent = nullptr);
     ~Client();
     bool connectClient(QString ipAddress);
+    void disconnectClient();
+    void sendTurnToServer(Turn* turn);
+    void sendRollToServer(Roll roll);
+    void sendNameToServer(QString name);
+    QTcpSocket* getSocket();
 
 signals:
-    void connectedAsHost();
-    void connectedAsPlayer();
-    void connectedAsSpectator();
-    void connectedAsWaiting();
-    void potentialOpponent(QString oppName);
-    void newState(QString state);
-    void newChatMessage(QString chatMessage);
+    void connectedAsSpectator(int length, GameType gameType);
+    void connectedAsPlayer(int length, GameType gameType);
+    void disconnected();
+    void unknownServerCommand(QString srvCmd);
+    void notConnected();
+    void startGame();
+
+    void sendMove(Turn turn);
+    void diceRolled(Roll roll);
 
 public slots:
-    void readMessage();
-    void sendStateToServer(QString state);
-    void sendOpponentToServer(QString state);
-    void sendNameToServer(QString name);
-    void sendChatMessageToServer(QString message);
-    void disconnected();
+    void readMessageFromServer();
+    void disconnectedFromServer();
 
 private:
     QTcpSocket* m_socket;
 };
-
-#endif // CLIENT_H

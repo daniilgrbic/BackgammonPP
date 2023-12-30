@@ -1,5 +1,4 @@
-#ifndef BOARDBAR_H
-#define BOARDBAR_H
+#pragma once
 
 #include <QGraphicsItem>
 #include <QPainter>
@@ -11,11 +10,9 @@ public:
     BoardBar(QGraphicsItem* parent, qreal width, qreal height);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
+    BarCheckerHolder *topHolder, *bottomHolder;
 
 private:
     qreal m_width;
     qreal m_height;
-    BarCheckerHolder *topHolder, *bottomHolder;
 };
-
-#endif // BOARDBAR_H

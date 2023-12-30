@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>img/blurred_backgammon_blacked.png</file>
+        <file>img/menu_sketch.png</file>
+        <file>img/logo.png</file>
+    </qresource>
+</RCC>

@@ -5,7 +5,9 @@ BarCheckerHolder::BarCheckerHolder(QGraphicsItem *parent, qreal width, qreal hei
       CheckerHolder(),
       m_width(width),
       m_height(height)
-{}
+{
+    m_type = SpecialPosition::BAR;
+}
 
 QRectF BarCheckerHolder::boundingRect() const {
     return QRectF(0, 0, m_width, m_height);
@@ -29,4 +31,8 @@ void BarCheckerHolder::updateCheckerPos()
         checker->setAnchorPoint(checker->pos());
         checker->setZValue(i+1);
     }
+}
+
+void BarCheckerHolder::updateHighlighting(){
+
 }

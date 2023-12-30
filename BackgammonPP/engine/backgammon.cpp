@@ -6,22 +6,59 @@
 Backgammon::Backgammon() : Game()
 {
     for(auto player : {PlayerColor::WHITE, PlayerColor::BLACK}) {
-        m_board.point(Point::idByPlayer(player, 5)).add(player, 5);
-        m_board.point(Point::idByPlayer(player, 7)).add(player, 3);
+        m_board.point(Point::idByPlayer(player, 6)).add(player, 5);
+        m_board.point(Point::idByPlayer(player, 8)).add(player, 3);
         m_board.point(Point::idByPlayer(player, 13)).add(player, 5);
         m_board.point(Point::idByPlayer(player, 24)).add(player, 2);
     };
+
+    m_currentRoll = Roll::getInitialRoll(m_firstDie, m_secondDie);
 }
 
-// TODO:
-// - makes it work for both directions (currently only works for 24 -> 1)
-// - refactor function
+bool Backgammon::isGammon() const {
+    return (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) ||
+           (isFinished(PlayerColor::BLACK) && !m_board.off(PlayerColor::WHITE));
+}
+
+bool Backgammon::isBackgammon() const {
+    constexpr auto QUADRANT_SIZE = NUMBER_OF_POINTS / 4;
+    if (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) {
+        for (auto i = 1; i <= QUADRANT_SIZE; ++i)
+            if (m_board.point(i).owner().value_or(PlayerColor::WHITE) == PlayerColor::BLACK)
+                return true;
+    }
+    if (isFinished(PlayerColor::BLACK) && !m_board.off(PlayerColor::WHITE)) {
+            for (auto i = 1; i <= QUADRANT_SIZE; ++i)
+                if (m_board.point(NUMBER_OF_POINTS - i + 1).owner().value_or(PlayerColor::BLACK) == PlayerColor::WHITE)
+                    return true;
+    }
+    return false;
+}
+
+std::optional<GameResult> Backgammon::getResult() {
+    if (m_result)
+        return m_result;
+
+    if (isFinished(PlayerColor::WHITE)) {
+        auto points = 1;
+        if (isGammon()) points = 2;
+        if (isBackgammon()) points = 3;
+        m_result = GameResult(PlayerColor::WHITE, points);
+    } else if (isFinished(PlayerColor::BLACK)) {
+        auto points = 1;
+        if (isGammon()) points = 2;
+        if (isBackgammon()) points = 3;
+        m_result = GameResult(PlayerColor::BLACK, points);
+    }
+    return m_result;
+}
+
 std::vector<Turn> Backgammon::generateLegalTurns() {
 
     class RollState {
     public:
         RollState(const std::vector<Move>& moves, const BoardState& board, const std::vector<int>& dice)
-            : m_moves { moves}, m_board { board }, m_dice { dice }
+            : m_moves { moves }, m_board { board }, m_dice { dice }
         {}
 
         const BoardState& board() const { return m_board; }
@@ -37,15 +74,6 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
             return { nextMoves, nextState, nextDice };
         }
 
-        RollState getNextRollState(const std::vector<Move> moves, int dieUsed) const {
-            auto nextMoves = m_moves;
-            nextMoves.insert(nextMoves.end(), moves.begin(), moves.end());
-            auto nextState = m_board.getNextState(moves);
-            auto nextDice = m_dice;
-            nextDice.erase(std::next(nextDice.begin(), dieUsed));
-            return { nextMoves, nextState, nextDice };
-        }
-
     private:
         std::vector<Move> m_moves;
         BoardState m_board;
@@ -53,50 +81,66 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     };
 
     auto onRoll = m_currentRoll.onRoll();
-    auto opponent = onRoll == PlayerColor::BLACK ? PlayerColor::WHITE : PlayerColor::BLACK;
-    std::vector<int> dice;
-    auto board = m_board;
+    auto opponent = onRoll == PlayerColor::WHITE ? PlayerColor::BLACK : PlayerColor::WHITE;
 
-    std::vector<RollState> level {{{}, board, dice}};
+    auto dice = m_currentRoll.dice();
+    std::sort(dice.rbegin(), dice.rend());
+
+    std::vector<RollState> level {
+        {
+            {},
+            onRoll == PlayerColor::WHITE ? m_board : m_board.mirror(),
+            dice
+        }
+    };
     std::vector<RollState> nextLevel = level;
 
     do {
         level = std::move(nextLevel);
         nextLevel = {};
 
-        for (auto& roll: level) {
-            const auto& board = roll.board();
-            const auto& dice = roll.dice();
+        for (RollState& roll: level) {
+            const BoardState& board = roll.board();
+            const std::vector<int>& dice = roll.dice();
 
             for (size_t i = 0; i < dice.size(); ++i) {
                 auto die = dice[i];
                 if (board.bar(onRoll)) {
-                    auto nextPos = Point::idByPlayer(onRoll, NUMBER_OF_POINTS - die);
-                    if (!isBlocked(nextPos, opponent) && !isBlot(nextPos, opponent)) {
-                        auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos);
+                    auto nextPos = NUMBER_OF_POINTS - die + 1;
+                    if (!isBlockedBy(board.point(nextPos), opponent)) {
+                        auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos, isBlot(board.point(nextPos), opponent));
                         nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                    } else if (isBlot(nextPos, opponent)) {
-                        auto opponentMove = Move(opponent, nextPos, SpecialPosition::BAR);
-                        auto onRollMove = Move(onRoll, SpecialPosition::BAR, nextPos);
-                        nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
                     }
-                } else for (int pos = NUMBER_OF_POINTS - 1; pos >= 0; --pos) {
-                    if (board.point(pos).owner() && board.point(pos).owner().value() == onRoll) {
-                        auto nextPos = pos - die;
-                        if (nextPos < 0) {
-                            if (isBearingOff(onRoll)) {
-                                auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
-                                nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                            }
-                            break;
-                        } else if (!isBlocked(nextPos, opponent) && !isBlot(nextPos, opponent)) {
-                            auto nextMove = Move(onRoll, SpecialPosition::BAR, nextPos);
+                } else for (int pos = NUMBER_OF_POINTS; pos >= 1; --pos) {
+
+                    // skip pos if held by opponent
+                    if(board.point(pos).count() and board.point(pos).owner().value() != onRoll)
+                        continue;
+
+                    // skip pos of unoccupied
+                    if(board.point(pos).count() == 0)
+                        continue;
+
+                    int nextPos = pos - die;
+
+                    if (nextPos <= 0 and not isBearingOff(board, onRoll))
+                        break;
+
+                    if (nextPos <= 0) {
+                        int lastChecker = 0;
+                        for(int p = pos; p <= 6; p++)
+                            if(board.point(p).count() and board.point(p).owner().value() == onRoll)
+                                lastChecker = p;
+                        if (nextPos==0 or lastChecker == pos) {
+                            auto nextMove = Move(onRoll, pos, SpecialPosition::OFF);
                             nextLevel.push_back(roll.getNextRollState(nextMove, i));
-                        } else if (isBlot(nextPos, opponent)) {
-                            auto opponentMove = Move(opponent, nextPos, SpecialPosition::BAR);
-                            auto onRollMove = Move(onRoll, SpecialPosition::BAR, nextPos);
-                            nextLevel.push_back(roll.getNextRollState({ opponentMove, onRollMove }, i));
                         }
+                        break;
+                    }
+
+                    if (!isBlockedBy(board.point(nextPos), opponent)) {
+                        auto nextMove = Move(onRoll, pos, nextPos, isBlot(board.point(nextPos), opponent));
+                        nextLevel.push_back(roll.getNextRollState(nextMove, i));
                     }
                 }
             }
@@ -108,7 +152,20 @@ std::vector<Turn> Backgammon::generateLegalTurns() {
     std::transform(
         level.cbegin(), level.cend(),
         std::back_inserter(legalTurns),
-        [onRoll](const RollState& roll) { return Turn { 0, onRoll, roll.moves() }; }
+        [onRoll, this](const RollState& roll) {
+            std::vector<Move> moves;
+            if (onRoll == PlayerColor::BLACK) {
+                std::transform(
+                    roll.moves().cbegin(), roll.moves().cend(),
+                    std::back_inserter(moves),
+                    [](const auto& move) { return move.mirror(); }
+                );
+            } else {
+                moves = std::move(roll.moves());
+            }
+
+            return Turn { onRoll, m_currentRoll.dice(), moves, onRoll == PlayerColor::WHITE ? roll.board() : roll.board().mirror() };
+        }
     );
     return legalTurns;
 }

@@ -6,9 +6,10 @@
 #include <iostream>
 #include "boardchecker.h"
 
-BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal x, qreal y, qreal width, qreal height, bool upwards)
+BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal x, qreal y, qreal width, qreal height, bool upwards, int number)
     : QGraphicsItem(parent), CheckerHolder(), m_x(x), m_y(y), m_width(width), m_height(height), m_upwards(upwards)
 {
+    m_type = number;
     setZValue(-1);
     this->setPos(m_x, m_y);
     if(m_upwards)
@@ -24,7 +25,10 @@ QRectF BoardTriangle::boundingRect() const {
 
 void BoardTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(QBrush(Qt::gray));
-    painter->drawRect(boundingRect());
+
+    if(canDropoff()){
+        painter->setPen(QPen(Qt::red, 4));
+    }
 
     painter->setBrush(QBrush(Qt::blue));
     painter->drawPolygon(m_polygon);
@@ -48,5 +52,8 @@ void BoardTriangle::updateCheckerPos()
     }
 }
 
+void BoardTriangle::updateHighlighting(){
+    update();
+}
 
 
