@@ -18,6 +18,10 @@ Client::~Client() {
     delete m_socket;
 }
 
+QTcpSocket* Client::getSocket() {
+    return m_socket;
+}
+
 bool Client::connectClient(QString ipAddress) {
     m_socket->connectToHost(QHostAddress(ipAddress), srvconst::PORT);
     return m_socket->waitForConnected();
