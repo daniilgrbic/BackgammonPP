@@ -97,25 +97,25 @@ TEST_CASE("Board State mirroring") {
     }
 }
 
-TEST_CASE("Board State moving") {
-    SECTION("Board State") {
-        // Arrange
-        const auto bs = BoardState(
-            {{1, 3}, {2, 2}},
-            {{19, 4}, {21, 1}},
-            2, 3,
-            0, 1
-        );
+// TEST_CASE("Board State moving") {
+//     SECTION("Board State") {
+//         // Arrange
+//         const auto bs = BoardState(
+//             {{1, 3}, {2, 2}},
+//             {{19, 4}, {21, 1}},
+//             2, 3,
+//             0, 1
+//         );
 
-        const auto move1 = Move(
-            PlayerColor::WHITE,
-            fromVariant,
-            toVariant
-        )
+//         const auto move1 = Move(
+//             PlayerColor::WHITE,
+//             fromVariant,
+//             toVariant
+//         );
 
-        // Act
-    }
-}
+//         // Act
+//     }
+// }
 
 TEST_CASE("Board State serialization") {
     SECTION("Board State to variant") {
