@@ -13,6 +13,10 @@ Additionally, Backgammon++ also includes multiple games played on the [tables](h
 - [Backgammon](https://en.wikipedia.org/wiki/Backgammon)
 - [Long Nardy](https://en.wikipedia.org/wiki/Long_Nardy)
 
+<br>
+
+Demo video (in Serbian): [link](https://www.youtube.com/watch?v=pObS1RZxKF8)
+
 ## Building instructions
 
 ### Using QT Creator
