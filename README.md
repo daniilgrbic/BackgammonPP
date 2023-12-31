@@ -34,9 +34,9 @@ Now open QT Creator, and click _Open Project_. Navigate to the project folder an
 Building and running the project now is as simple as pressing the big green button on the bottom left of the screen.
 
 ### Using CMake without QT Creator (on Linux)
-You will need `git`, `cmake`, and `g++` in order to clone and build the project, as well as two QT dependencies: `qt6-base-dev` and `qt6-multimedia-dev`. For example, on Debian you may run the following command to install the above packages:
+You will need `git`, `cmake`, `ninja`, and `g++` in order to clone and build the project, as well as two QT dependencies: `qt6-base-dev` and `qt6-multimedia-dev`. For example, on Debian you may run the following command to install the above packages:
 ```bash
-sudo apt-get install git cmake g++ qt6-base-dev qt6-multimedia-dev
+sudo apt-get install git cmake ninja-build g++ qt6-base-dev qt6-multimedia-dev
 ```
 
 Next you will need to to clone the repository, and position yourself inside of it:
@@ -46,21 +46,19 @@ git clone https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2023-2024/backgamm
 
 Now build the project by running the following command:
 ```bash
-cmake -S BackgammonPP -B ./build && make --directory=build
+cmake -G Ninja -B build/ -S BackgammonPP/ && ninja -C build/
 ```
 
 The binary is located inside the build directory, and can be launched from the terminal like this:
 ```bash
-./build/BackgammonPP
+cd build/ && ./BackgammonPP
 ```
 
-
-
 ## The team
- - <a href="https://gitlab.com/Brankonymous">Branko Grbić 2/2020</a>
- - <a href="https://gitlab.com/ivangogic">Ivan Gogić 29/2020</a>
- - <a href="https://gitlab.com/mgrujcic">Marko Grujčić 15/2020</a>
- - <a href="https://gitlab.com/igorkandic">Igor Kandić 70/2020</a>
- - <a href="https://gitlab.com/mladenpuzic">Mladen Puzić 18/2020</a>
- - <a href="https://gitlab.com/daniilgrbic">Daniil Grbić 42/2020</a>
- - <a href="https://gitlab.com/azecevic0">Aleksandar Zečević 45/2020</a>
+ - <a href="https://gitlab.com/Brankonymous">Branko Grbić, 2/2020</a>
+ - <a href="https://gitlab.com/ivangogic">Ivan Gogić, 29/2020</a>
+ - <a href="https://gitlab.com/mgrujcic">Marko Grujčić, 15/2020</a>
+ - <a href="https://gitlab.com/igorkandic">Igor Kandić, 70/2020</a>
+ - <a href="https://gitlab.com/mladenpuzic">Mladen Puzić, 18/2020</a>
+ - <a href="https://gitlab.com/daniilgrbic">Daniil Grbić, 42/2020</a>
+ - <a href="https://gitlab.com/azecevic0">Aleksandar Zečević, 45/2020</a>
