@@ -91,6 +91,7 @@ add_executable(BackgammonPP WIN32 MACOSX_BUNDLE
 
     background_menu_image.qrc
     music.qrc
+    botnetwork.qrc
 
     controller.h controller.cpp
     main.cpp

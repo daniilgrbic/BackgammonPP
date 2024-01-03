@@ -14,8 +14,8 @@ Network::Network(Genome genome){
     }
 }
 
-Network::Network(std::string filename){
-    Genome genome(filename);
+Network::Network(std::ifstream& filestream){
+    Genome genome(filestream);
     delete genome.innovation;
     neurons.resize(genome.maxNeuron);
     for(auto& gene : genome.genes){

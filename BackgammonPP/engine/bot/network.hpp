@@ -11,7 +11,7 @@ class Genome;
 class Network{
 public:
     Network(Genome genome);
-    Network(std::string filename);
+    Network(std::ifstream& filename);
     double evaluateNetwork(const QVector<double>& inputs);
     const QVector<double> inputFromState(const BoardState& board);
 private:

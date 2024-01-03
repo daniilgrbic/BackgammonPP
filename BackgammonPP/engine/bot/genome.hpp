@@ -25,7 +25,7 @@ public:
     static void playBackgammon(Genome& g1, Genome& g2, std::atomic<int>& fit1, std::atomic<int>& fit2);
 
     Genome() = default;
-    Genome(std::string filename);
+    Genome(std::ifstream& filestream);
     Genome(const Genome& g1,const Genome& g2);
     Genome(const Genome& genome);
 

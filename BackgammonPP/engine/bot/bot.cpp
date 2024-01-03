@@ -5,8 +5,8 @@
 
 namespace AI{
 
-Bot::Bot(std::string filepath, QObject *parent) : QObject(parent){
-        network = new Network(filepath);
+Bot::Bot(std::ifstream& filestream, QObject *parent) : QObject(parent){
+        network = new Network(filestream);
     }
     Bot::~Bot(){
         delete network;

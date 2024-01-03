@@ -4,6 +4,10 @@
 #include "botplayer.h"
 #include "remoteplayer.h"
 #include "engine/bot/bot.hpp"
+#include <iostream>
+#include <fstream>
+#include <QTemporaryFile>
+
 
 Controller::Controller()
 {
@@ -53,7 +57,15 @@ void Controller::createGameFromMenu(QString opponentName, qint8 numGames, GameTy
         boardWindow->setOpponentName(opponentName);
         boardWindow->show();
         Player *white = new LocalPlayer(nullptr, this->boardWindow);
-        AI::Bot *bot = new AI::Bot("../BackgammonPP/engine/bot/saved_genomes/gen_603.genome");
+        QFile file = QFile(":/bot/bot.net");
+        QTemporaryFile* tempFile = QTemporaryFile::createNativeFile(file);
+        std::string filename(tempFile->filesystemFileName().c_str());
+        std::ifstream stream(filename);
+
+
+        AI::Bot *bot = new AI::Bot(stream);
+
+        delete tempFile;
         Player *black = new BotPlayer(nullptr, this->boardWindow, bot);
         match_current = new Match(nullptr, white, black, boardWindow, numGames, gameType);
         connect(white, &LocalPlayer::returnMove, boardWindow->m_historyModel, &HistoryListModel::addTurn);
