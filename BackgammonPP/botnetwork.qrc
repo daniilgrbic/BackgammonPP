@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/bot">
+        <file alias="bot.net">engine/bot/saved_genomes/gen_604.genome</file>
+    </qresource>
+</RCC>

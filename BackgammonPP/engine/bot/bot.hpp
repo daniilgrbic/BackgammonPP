@@ -13,7 +13,7 @@ namespace AI{
         Q_OBJECT
 
     public:
-        Bot(std::string filepath, QObject *parent = nullptr);
+        Bot(std::ifstream& stream, QObject *parent = nullptr);
         ~Bot();
         Turn bestTurn(PlayerColor color, const std::vector<Turn>& turns);
         bool shouldDouble(PlayerColor color, const BoardState& state, bool onTurn);

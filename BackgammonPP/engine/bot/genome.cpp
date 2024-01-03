@@ -12,8 +12,9 @@
 #include <thread>
 #include <functional>
 
-Genome::Genome(std::string filename){
-    std::ifstream filestream(filename);
+Genome::Genome(std::ifstream& filestream){
+    if(!filestream.is_open())
+        throw std::ios_base::failure("Cant open bot file");
     int innov;
     filestream >> maxNeuron >> innov;
     innovation = new Innovation(innov);
