@@ -95,7 +95,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             qreal shortestDist = 100000;
             for(QGraphicsItem* item : std::as_const(colItems)){
                 QLineF line(item->sceneBoundingRect().center(), this->sceneBoundingRect().center());
-                CheckerHolder* itemAsHolder = dynamic_cast<CheckerHolder*>(item);
+                auto* itemAsHolder = dynamic_cast<CheckerHolder*>(item);
                 if(itemAsHolder && itemAsHolder->canDropoff() && line.length() < shortestDist){
                     shortestDist = line.length();
                     closestItem = item;
@@ -103,7 +103,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             }
             if(closestItem){
                 HolderType origin = this->getHolder()->m_type;
-                CheckerHolder *closestHolder = dynamic_cast<CheckerHolder*>(closestItem);
+                auto *closestHolder = dynamic_cast<CheckerHolder*>(closestItem);
                 closestHolder->addChecker(this);
                 HolderType to = closestHolder->m_type;
                 emit updateTurn(origin, to);
