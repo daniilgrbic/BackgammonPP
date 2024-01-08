@@ -1,18 +1,18 @@
 #include "historylistmodel.h"
 #include <qnamespace.h>
 
-int HistoryListModel::rowCount(const QModelIndex &parent) const
+auto HistoryListModel::rowCount(const QModelIndex &parent) const -> int
 {
     return turnList.count();
 }
 
-QVariant HistoryListModel::data(const QModelIndex &index, int role) const
+auto HistoryListModel::data(const QModelIndex &index, int role) const -> QVariant
 {
     if (!index.isValid())
-        return QVariant();
+        return {};
 
     if (index.row() >= turnList.size())
-        return QVariant();
+        return {};
 
     if (role == Qt::DisplayRole) {
         auto item = turnList.at(index.row());
@@ -34,14 +34,14 @@ QVariant HistoryListModel::data(const QModelIndex &index, int role) const
     if (role == Qt::UserRole + 2)
         return std::holds_alternative<Turn>(turnList.at(index.row()));
 
-    return QVariant();
+    return {};
 }
 
-QVariant HistoryListModel::headerData(int section, Qt::Orientation orientation,
-                                     int role) const
+auto HistoryListModel::headerData(int section, Qt::Orientation orientation,
+                                     int role) const -> QVariant
 {
     if (role != Qt::DisplayRole)
-        return QVariant();
+        return {};
 
     if (orientation == Qt::Horizontal)
         return QStringLiteral("Column %1").arg(section);

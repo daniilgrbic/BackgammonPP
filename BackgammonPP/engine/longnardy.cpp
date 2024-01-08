@@ -17,7 +17,7 @@ LongNardy::LongNardy() : Game()
     );
 }
 
-std::vector<Turn> LongNardy::generateLegalTurns() {
+auto LongNardy::generateLegalTurns() -> std::vector<Turn> {
 
     class RollState {
     public:
@@ -25,11 +25,11 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
             : m_moves { moves }, m_board { board }, m_dice { dice }
         {}
 
-        const BoardState& board() const { return m_board; }
-        const std::vector<int>& dice() const { return m_dice; }
-        const std::vector<Move>& moves() const { return m_moves; }
+        auto board() const -> const BoardState& { return m_board; }
+        auto dice() const -> const std::vector<int>& { return m_dice; }
+        auto moves() const -> const std::vector<Move>& { return m_moves; }
 
-        RollState getNextRollState(const Move move, int dieUsed) const {
+        auto getNextRollState(const Move move, int dieUsed) const -> RollState {
             auto nextMoves = m_moves;
             nextMoves.push_back(move);
             auto nextState = m_board.getNextState(move);
@@ -38,7 +38,7 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
             return { nextMoves, nextState, nextDice };
         }
 
-        RollState getNextRollState(const std::vector<Move> moves, int dieUsed) const {
+        auto getNextRollState(const std::vector<Move> moves, int dieUsed) const -> RollState {
             auto nextMoves = m_moves;
             nextMoves.insert(nextMoves.end(), moves.begin(), moves.end());
             auto nextState = m_board.getNextState(moves);
@@ -194,17 +194,17 @@ std::vector<Turn> LongNardy::generateLegalTurns() {
     return legalTurns;
 }
 
-bool LongNardy::isFinished(PlayerColor player) const
+auto LongNardy::isFinished(PlayerColor player) const -> bool
 {
     return m_board.off(player) == CHECKERS_COUNT;
 }
 
-bool LongNardy::isBlockedBy(const Point &point, PlayerColor player) const
+auto LongNardy::isBlockedBy(const Point &point, PlayerColor player) const -> bool
 {
     return point.count() >= 1 && point.owner().value() == player;
 }
 
-std::optional<GameResult> LongNardy::getResult()
+auto LongNardy::getResult() -> std::optional<GameResult>
 {
     if(m_result)
         return m_result;

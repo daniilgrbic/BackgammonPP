@@ -1,7 +1,7 @@
 #include "chat_message.h"
 
 
-QVariant ChatMessage::toVariant() const
+auto ChatMessage::toVariant() const -> QVariant
 {
     QVariantMap map;
     map.insert("m", message);
@@ -18,17 +18,17 @@ void ChatMessage::fromVariant(const QVariant &variant)
     receiver = map.value("r").toString();
 }
 
-QString ChatMessage::getMessage() const
+auto ChatMessage::getMessage() const -> QString
 {
     return message;
 }
 
-QString ChatMessage::getReceiver() const
+auto ChatMessage::getReceiver() const -> QString
 {
     return receiver;
 }
 
-QString ChatMessage::getSender() const
+auto ChatMessage::getSender() const -> QString
 {
     return sender;
 }

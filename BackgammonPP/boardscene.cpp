@@ -37,7 +37,7 @@ void BoardScene::setBoardTriangles() {
                 this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ;
         qreal y_point = m_height - triangleHeight;
-        BoardTriangle *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true, trianglePairs - i);
+        auto *bottomTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, true, trianglePairs - i);
         boardTriangles.push_back(bottomTriangle);
         this->drawBoardTriangle(bottomTriangle);
     }
@@ -48,7 +48,7 @@ void BoardScene::setBoardTriangles() {
                 this->triangleWidth * i +
                 ((i >= trianglePairs/2) ? barWidth : 0) ;
         qreal y_point = 0;
-        BoardTriangle *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false, trianglePairs + 1 + i);
+        auto *upperTriangle = new BoardTriangle(nullptr, x_point, y_point, this->triangleWidth, this->triangleHeight, false, trianglePairs + 1 + i);
         boardTriangles.push_back(upperTriangle);
         this->drawBoardTriangle(upperTriangle);
     }
@@ -57,12 +57,12 @@ void BoardScene::setBoardCheckers(){
 
 
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::BLACK);
+        auto *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::BLACK);
         boardCheckers.push_back(checker);
         blackCheckers.push_back(checker);
     }
     for(int i = 0; i < checkersNumber / 2; ++i){
-        BoardChecker *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::WHITE);
+        auto *checker = new BoardChecker(nullptr, triangleWidth / 2, PlayerColor::WHITE);
         boardCheckers.push_back(checker);
         whiteCheckers.push_back(checker);
     }
@@ -363,6 +363,6 @@ void BoardScene::setRoll(Roll const *roll){
     this->roll = roll;
 }
 
-const Roll* BoardScene::getRoll() {
+auto BoardScene::getRoll() -> const Roll* {
     return this->roll;
 }

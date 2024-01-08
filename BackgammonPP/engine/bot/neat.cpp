@@ -32,7 +32,7 @@ double stepSize = 0.10;
 
 size_t maxNodes = 1000000;
 
-double sigmoid(const double x){
+auto sigmoid(const double x) -> double{
     return 1 / (1 + exp(-x));
 }
 

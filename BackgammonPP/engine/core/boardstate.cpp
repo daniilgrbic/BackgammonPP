@@ -34,20 +34,20 @@ BoardState::BoardState(
     }
 }
 
-int BoardState::bar(PlayerColor player) const {
+auto BoardState::bar(PlayerColor player) const -> int {
     return player == PlayerColor::BLACK ? m_blackBar : m_whiteBar;
 }
 
-int BoardState::off(PlayerColor player) const {
+auto BoardState::off(PlayerColor player) const -> int {
     return player == PlayerColor::BLACK ? m_blackOff : m_whiteOff;
 }
 
-Point& BoardState::point(const int pos) {
+auto BoardState::point(const int pos) -> Point& {
     assert(pos >= 1 and pos <= NUMBER_OF_POINTS);
     return m_points[pos - 1];
 }
 
-const Point& BoardState::point(const int pos) const {
+auto BoardState::point(const int pos) const -> const Point& {
     assert(pos >= 1 and pos <= NUMBER_OF_POINTS);
     return m_points[pos - 1];
 }
@@ -85,19 +85,19 @@ void BoardState::move(const Move &move)
     }
 }
 
-BoardState BoardState::mirror() const {
+auto BoardState::mirror() const -> BoardState {
     auto nextState = *this;
     std::reverse(nextState.m_points.begin(), nextState.m_points.end());
     return nextState;
 }
 
-BoardState BoardState::verticalMirror(BoardState board)
+auto BoardState::verticalMirror(BoardState board) -> BoardState
 {
     std::reverse(board.m_points.begin(), board.m_points.end());
     return board;
 }
 
-BoardState BoardState::centralMirror(BoardState board)
+auto BoardState::centralMirror(BoardState board) -> BoardState
 {
     for(int i = 1; i <= 12; i++) {
         std::swap(board.point(i), board.point(i+12));
@@ -105,13 +105,13 @@ BoardState BoardState::centralMirror(BoardState board)
     return board;
 }
 
-BoardState BoardState::getNextState(const Move& move) const {
+auto BoardState::getNextState(const Move& move) const -> BoardState {
     auto nextState = *this;
     nextState.move(move);
     return nextState;
 }
 
-BoardState BoardState::getNextState(const std::vector<Move>& moves) const {
+auto BoardState::getNextState(const std::vector<Move>& moves) const -> BoardState {
     auto nextState = *this;
     for (auto& move : moves) {
         nextState.move(move);
@@ -119,7 +119,7 @@ BoardState BoardState::getNextState(const std::vector<Move>& moves) const {
     return nextState;
 }
 
-QVariant BoardState::toVariant() const
+auto BoardState::toVariant() const -> QVariant
 {
     QVariantMap map;
     map.insert("blackBar", m_blackBar);

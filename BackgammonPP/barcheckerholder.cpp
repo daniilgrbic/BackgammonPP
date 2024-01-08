@@ -9,8 +9,8 @@ BarCheckerHolder::BarCheckerHolder(QGraphicsItem *parent, qreal width, qreal hei
     m_type = SpecialPosition::BAR;
 }
 
-QRectF BarCheckerHolder::boundingRect() const {
-    return QRectF(0, 0, m_width, m_height);
+auto BarCheckerHolder::boundingRect() const -> QRectF {
+    return {0, 0, m_width, m_height};
 }
 
 

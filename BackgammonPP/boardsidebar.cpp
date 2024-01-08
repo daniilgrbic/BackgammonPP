@@ -13,8 +13,8 @@ BoardSideBar::BoardSideBar(QGraphicsItem* parent, qreal width, qreal height)
     bottomHolder->setPos(holderX, m_height/2 + (m_height/2 - holderHeight) / 2);
 }
 
-QRectF BoardSideBar::boundingRect() const {
-    return QRectF(0, 0, m_width, m_height);
+auto BoardSideBar::boundingRect() const -> QRectF {
+    return {0, 0, m_width, m_height};
 }
 
 void BoardSideBar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {

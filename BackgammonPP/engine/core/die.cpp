@@ -1,9 +1,9 @@
 #include "die.h"
 
-int Die::roll() {
+auto Die::roll() -> int {
     return m_die(m_mt);
 }
 
-bool Die::operator ==(const Die& other) const {
+auto Die::operator ==(const Die& other) const -> bool {
     return m_value == other.m_value;
 }

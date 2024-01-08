@@ -23,26 +23,26 @@ TurnTrie::~TurnTrie() {
     delete m_root;
 }
 
-BoardState TurnTrie::board() const {
+auto TurnTrie::board() const -> BoardState {
     return m_currentNode->board.value();
 }
 
-bool TurnTrie::hasNextMove(const Move& move) const {
+auto TurnTrie::hasNextMove(const Move& move) const -> bool {
     return m_currentNode->children.contains(move);
 }
 
-std::vector<Move> TurnTrie::nextMoves() const {
+auto TurnTrie::nextMoves() const -> std::vector<Move> {
     std::vector<Move> moves;
     std::transform(m_currentNode->children.begin(), m_currentNode->children.end(), std::back_inserter(moves),
                    [](const auto& child) { return child.first; });
     return moves;
 }
 
-bool TurnTrie::isFinishedTurn() const {
+auto TurnTrie::isFinishedTurn() const -> bool {
     return m_currentNode->turn.has_value();
 }
 
-Turn TurnTrie::getTurn() const {
+auto TurnTrie::getTurn() const -> Turn {
     assert(isFinishedTurn());
     return m_currentNode->turn.value();
 }
@@ -57,7 +57,7 @@ void TurnTrie::playMove(const Move& move) {
     m_currentNode = nextNode;
 }
 
-bool TurnTrie::canUndo(){
+auto TurnTrie::canUndo() -> bool{
     return m_currentNode->parent;
 }
 

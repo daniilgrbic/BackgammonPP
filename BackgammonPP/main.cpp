@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <string>
 
-int main(int argc, char *argv[])
+auto main(int argc, char *argv[]) -> int
 {
     QApplication a(argc, argv);
     Controller controller;

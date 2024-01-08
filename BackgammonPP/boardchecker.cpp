@@ -33,8 +33,8 @@ BoardChecker::BoardChecker(QGraphicsItem *parent, qreal size, PlayerColor color)
         assert(false);
     }
 }
-QRectF BoardChecker::boundingRect() const {
-    return QRectF(-m_size,-m_size, 2 * m_size, 2 * m_size);
+auto BoardChecker::boundingRect() const -> QRectF {
+    return {-m_size,-m_size, 2 * m_size, 2 * m_size};
 }
 
 void BoardChecker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
@@ -57,19 +57,19 @@ void BoardChecker::setAnchorPoint(const QPointF &anchorPoint){
 void BoardChecker::setHolder(CheckerHolder *holder){
     m_holder = holder;
 }
-qreal BoardChecker::getSize(){
+auto BoardChecker::getSize() -> qreal{
     return m_size;
 }
-CheckerHolder *BoardChecker::getHolder(){
+auto BoardChecker::getHolder() -> CheckerHolder *{
     return m_holder;
 }
 
-const PlayerColor BoardChecker::getColor() const
+auto BoardChecker::getColor() const -> const PlayerColor
 {
     return m_color;
 }
 
-const QColor BoardChecker::getQColor() const
+auto BoardChecker::getQColor() const -> const QColor
 {
     return m_QColor;
 }
@@ -95,7 +95,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             qreal shortestDist = 100000;
             for(QGraphicsItem* item : std::as_const(colItems)){
                 QLineF line(item->sceneBoundingRect().center(), this->sceneBoundingRect().center());
-                CheckerHolder* itemAsHolder = dynamic_cast<CheckerHolder*>(item);
+                auto* itemAsHolder = dynamic_cast<CheckerHolder*>(item);
                 if(itemAsHolder && itemAsHolder->canDropoff() && line.length() < shortestDist){
                     shortestDist = line.length();
                     closestItem = item;
@@ -103,7 +103,7 @@ void BoardChecker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             }
             if(closestItem){
                 HolderType origin = this->getHolder()->m_type;
-                CheckerHolder *closestHolder = dynamic_cast<CheckerHolder*>(closestItem);
+                auto *closestHolder = dynamic_cast<CheckerHolder*>(closestItem);
                 closestHolder->addChecker(this);
                 HolderType to = closestHolder->m_type;
                 emit updateTurn(origin, to);

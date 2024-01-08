@@ -1,0 +1,1283 @@
+Enabled checks:
+    modernize-return-braced-init-list
+    modernize-use-trailing-return-type
+
+clang-apply-replacements version 14.0.0
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpslpw71n9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/generators/catch_generator_exception.cpp
+120 warnings generated.
+Suppressed 120 warnings (120 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpkdtiz0m7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_debug_console.cpp
+5310 warnings generated.
+Suppressed 5310 warnings (5308 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpvg6bwj1u.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_string_manip.cpp
+6054 warnings generated.
+Suppressed 6054 warnings (6052 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpz2g8565y.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers.cpp
+7342 warnings generated.
+Suppressed 7342 warnings (7339 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpc7fx7dvh.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_random_seed_generation.cpp
+8672 warnings generated.
+Suppressed 8672 warnings (8670 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpvx4ss9kx.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_leak_detector.cpp
+4293 warnings generated.
+Suppressed 4293 warnings (4291 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpqrwgmw60.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/player.cpp
+23096 warnings generated.
+Suppressed 23096 warnings (23093 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpea2r7a0l.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_test_case_registry_impl.cpp
+15311 warnings generated.
+Suppressed 15311 warnings (15308 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpgy4wfa_u.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/bot.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/bot.cpp:14:15: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+    Turn Bot::bestTurn(PlayerColor color, const std::vector<Turn>& turns){
+[0;1;32m    ~~~~      ^
+[0m[0;32m    auto                                                                  -> Turn
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/bot.cpp:42:15: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+    bool Bot::shouldDouble(PlayerColor color, const BoardState& state, bool onTurn){
+[0;1;32m    ~~~~      ^
+[0m[0;32m    auto                                                                            -> bool
+[0m24297 warnings generated.
+Suppressed 24295 warnings (24292 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp88wv0zn7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boarddie.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boarddie.cpp:9:18: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF BoardDie::boundingRect() const {
+[0;1;32m~~~~~~           ^
+[0m[0;32mauto                                  -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boarddie.cpp:10:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_side, m_side);
+[0;1;32m           ^~~~~~~                    ~
+[0m[0;32m           {                          }
+[0m25671 warnings generated.
+Suppressed 25669 warnings (25666 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpzkyk5xmd.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_floating_point_helpers.cpp
+2884 warnings generated.
+Suppressed 2884 warnings (2884 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp6orqrxrj.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/point.test.cpp
+22752 warnings generated.
+Suppressed 22752 warnings (22749 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpf0yz8qif.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/roll.test.cpp
+23249 warnings generated.
+Suppressed 23249 warnings (23246 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmphqbp556t.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_parse_numbers.cpp
+5079 warnings generated.
+Suppressed 5079 warnings (5077 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpkqgxeo76.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_lazy_expr.cpp
+7260 warnings generated.
+Suppressed 7260 warnings (7257 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpdpxo8v9p.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/verticalchecker.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/verticalchecker.cpp:12:25: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF VerticalChecker::boundingRect() const {
+[0;1;32m~~~~~~                  ^
+[0m[0;32mauto                                         -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/verticalchecker.cpp:13:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_width, m_height);
+[0;1;32m           ^~~~~~~                       ~
+[0m[0;32m           {                             }
+[0m25866 warnings generated.
+Suppressed 25864 warnings (25861 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpx1t_0trq.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/connectgene.cpp
+12 warnings generated.
+Suppressed 12 warnings (12 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7uv0qn75.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/die.test.cpp
+10147 warnings generated.
+Suppressed 10147 warnings (10144 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpxlqo5ew3.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_tostring.cpp
+10265 warnings generated.
+Suppressed 10265 warnings (10262 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpq9weumk1.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_function.cpp
+1415 warnings generated.
+Suppressed 1415 warnings (1414 in non-user code, 1 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpfrvwynb3.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_wildcard_pattern.cpp
+5837 warnings generated.
+Suppressed 5837 warnings (5835 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp5uue7mdu.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_registry_hub.cpp
+4293 warnings generated.
+Suppressed 4293 warnings (4291 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpo45_d_is.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_predicate.cpp
+7352 warnings generated.
+Suppressed 7352 warnings (7349 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpabngntsx.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_get_random_seed.cpp
+7313 warnings generated.
+Suppressed 7313 warnings (7310 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp9_x2ogl7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boarddoublingdie.cpp
+26390 warnings generated.
+Suppressed 26390 warnings (26387 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpicmc8orx.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_tag_alias_registry.cpp
+6793 warnings generated.
+Suppressed 6793 warnings (6791 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpp1uwcq3r.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/move.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/move.cpp:13:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Move Move::mirror() const {
+[0;1;32m~~~~       ^
+[0m[0;32mauto                      -> Move
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/move.cpp:31:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Move Move::verticalMirror(Move move)
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                 -> Move
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/move.cpp:42:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Move Move::centralMirror(Move move)
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                -> Move
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/move.cpp:55:15: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QString Move::toString() const
+[0;1;32m~~~~~~~       ^
+[0m[0;32mauto                           -> QString
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/move.cpp:65:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant Move::toVariant() const
+[0;1;32m~~~~~~~~       ^
+[0m[0;32mauto                             -> QVariant
+[0m24285 warnings generated.
+48570 warnings generated.
+Suppressed 48560 warnings (48554 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp86l2orie.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_test_spec.cpp
+9449 warnings generated.
+Suppressed 9449 warnings (9446 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp5qbsrnc3.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_output_redirect.cpp
+5712 warnings generated.
+Suppressed 5712 warnings (5710 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpmllxyzbt.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/turn.test.cpp
+23411 warnings generated.
+Suppressed 23411 warnings (23408 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpdbjlhm32.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/backgammon.test.cpp
+23797 warnings generated.
+Suppressed 23797 warnings (23794 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpgekl59x7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_test_case_info_hasher.cpp
+4927 warnings generated.
+Suppressed 4927 warnings (4925 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpllfa754u.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_version.cpp
+5315 warnings generated.
+Suppressed 5315 warnings (5313 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp217wjlmn.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardbar.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardbar.cpp:15:18: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF BoardBar::boundingRect() const {
+[0;1;32m~~~~~~           ^
+[0m[0;32mauto                                  -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardbar.cpp:16:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_width, m_height);
+[0;1;32m           ^~~~~~~                       ~
+[0m[0;32m           {                             }
+[0m25865 warnings generated.
+Suppressed 25863 warnings (25860 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpannk7wkm.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardwidget.cpp
+23134 warnings generated.
+Suppressed 23134 warnings (23131 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpkxzyx7au.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/network.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/network.cpp:39:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+double Network::evaluateNetwork(const QVector<double>& inputs){
+[0;1;32m~~~~~~          ^
+[0m[0;32mauto                                                           -> double
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/network.cpp:56:32: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const QVector<double> Network::inputFromState(const BoardState& board){
+[0;1;32m~~~~~~~~~~~~~~~~~~~~~          ^
+[0m[0;32mauto                                                                   -> const QVector<double>
+[0m24443 warnings generated.
+Suppressed 24441 warnings (24438 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpixturs6l.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/remoteplayer.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/remoteplayer.cpp:26:23: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Client* RemotePlayer::getClient() {
+[0;1;32m~~~~~~~               ^
+[0m[0;32mauto                              -> Client*
+[0m25429 warnings generated.
+Suppressed 25428 warnings (25425 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpywjfrl0f.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_getenv.cpp
+155 warnings generated.
+Suppressed 155 warnings (155 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpfcgm4w_9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/die.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/die.cpp:3:10: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int Die::roll() {
+[0;1;32m~~~      ^
+[0m[0;32mauto            -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/die.cpp:7:11: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Die::operator ==(const Die& other) const {
+[0;1;32m~~~~      ^
+[0m[0;32mauto                                          -> bool
+[0m7653 warnings generated.
+15306 warnings generated.
+Suppressed 15302 warnings (15298 in non-user code, 4 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp9amx1xt1.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_templated.cpp
+8744 warnings generated.
+Suppressed 8744 warnings (8741 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpsoduqmmx.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_generatortracker.cpp
+4408 warnings generated.
+Suppressed 4408 warnings (4406 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpbpy4zw4s.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_case_insensitive_comparisons.cpp
+6622 warnings generated.
+Suppressed 6622 warnings (6620 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpqgpz22vw.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:13:35: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::optional<PlayerColor> Point::owner() const
+[0;1;32m~~~~~~~~~~~~~~~~~~~~~~~~~~        ^
+[0m[0;32mauto                                            -> std::optional<PlayerColor>
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:18:13: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+uint Point::count() const
+[0;1;32m~~~~        ^
+[0m[0;32mauto                      -> uint
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:23:13: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+uint Point::add(PlayerColor color, uint count)
+[0;1;32m~~~~        ^
+[0m[0;32mauto                                           -> uint
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:33:13: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+uint Point::remove(uint count)
+[0;1;32m~~~~        ^
+[0m[0;32mauto                           -> uint
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:44:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int Point::idByPlayer(PlayerColor color, size_t index)
+[0;1;32m~~~        ^
+[0m[0;32mauto                                                   -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:52:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int Point::centralMirrorId(size_t index)
+[0;1;32m~~~        ^
+[0m[0;32mauto                                     -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:59:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int Point::verticalMirrorId(size_t index)
+[0;1;32m~~~        ^
+[0m[0;32mauto                                      -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/point.cpp:65:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant Point::toVariant() const
+[0;1;32m~~~~~~~~        ^
+[0m[0;32mauto                              -> QVariant
+[0m24207 warnings generated.
+48414 warnings generated.
+Suppressed 48398 warnings (48392 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpx5f7vsa1.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_errno_guard.cpp
+1 warning generated.
+Suppressed 1 warnings (1 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpvt4jhrhc.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_enforce.cpp
+5329 warnings generated.
+Suppressed 5329 warnings (5327 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpb16ax4nx.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_reporter_spec_parser.cpp
+8733 warnings generated.
+Suppressed 8733 warnings (8730 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmped_lg4bd.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_random_number_generator.cpp
+7 warnings generated.
+Suppressed 7 warnings (7 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpgu3kynsr.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardplayingdie.cpp
+26374 warnings generated.
+Suppressed 26374 warnings (26371 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpiqi09snb.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_reporter_factory.cpp
+4392 warnings generated.
+Suppressed 4392 warnings (4390 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp0xakv05u.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_session.cpp
+16578 warnings generated.
+Suppressed 16578 warnings (16575 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpdnpdt86n.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_decomposer.cpp
+7259 warnings generated.
+Suppressed 7259 warnings (7256 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7xrwtspp.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_message_info.cpp
+4402 warnings generated.
+Suppressed 4402 warnings (4400 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7eo6yzlc.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_console.cpp
+9266 warnings generated.
+Suppressed 9266 warnings (9263 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7cfm2avk.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_enum_values_registry.cpp
+5341 warnings generated.
+Suppressed 5341 warnings (5339 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp8nlbd88_.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/BackgammonPP_autogen/EWIEGA46WW/qrc_background_menu_image.cpp
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpfmb5ibl_.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/longnardy.test.cpp
+23746 warnings generated.
+Suppressed 23746 warnings (23743 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp90vni3tq.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/client.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/client.cpp:21:21: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QTcpSocket* Client::getSocket() {
+[0;1;32m~~~~~~~~~~~         ^
+[0m[0;32mauto                            -> QTcpSocket*
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/client.cpp:25:14: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Client::connectClient(QString ipAddress) {
+[0;1;32m~~~~         ^
+[0m[0;32mauto                                          -> bool
+[0m25938 warnings generated.
+Suppressed 25936 warnings (25933 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpliv3ed74.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_assertion_handler.cpp
+7391 warnings generated.
+Suppressed 7391 warnings (7388 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpyvctv49e.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_sonarqube.cpp
+9819 warnings generated.
+Suppressed 9819 warnings (9816 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp53cka450.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_polyfills.cpp
+2776 warnings generated.
+Suppressed 2776 warnings (2776 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpqxw6qzfu.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp:36:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF BoardChecker::boundingRect() const {
+[0;1;32m~~~~~~               ^
+[0m[0;32mauto                                      -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp:37:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(-m_size,-m_size, 2 * m_size, 2 * m_size);
+[0;1;32m           ^~~~~~~                                       ~
+[0m[0;32m           {                                             }
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp:60:21: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+qreal BoardChecker::getSize(){
+[0;1;32m~~~~~               ^
+[0m[0;32mauto                          -> qreal
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp:63:30: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+CheckerHolder *BoardChecker::getHolder(){
+[0;1;32m~~~~~~~~~~~~~~~              ^
+[0m[0;32mauto                                     -> CheckerHolder *
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp:67:33: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const PlayerColor BoardChecker::getColor() const
+[0;1;32m~~~~~~~~~~~~~~~~~               ^
+[0m[0;32mauto                                             -> const PlayerColor
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardchecker.cpp:72:28: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const QColor BoardChecker::getQColor() const
+[0;1;32m~~~~~~~~~~~~               ^
+[0m[0;32mauto                                         -> const QColor
+[0m26673 warnings generated.
+Suppressed 26667 warnings (26664 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmplnj_jy1h.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_startup_exception_registry.cpp
+1672 warnings generated.
+Suppressed 1672 warnings (1672 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpcx1prnho.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turn.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turn.cpp:9:15: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QString Turn::toString() const
+[0;1;32m~~~~~~~       ^
+[0m[0;32mauto                           -> QString
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turn.cpp:20:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant Turn::toVariant() const
+[0;1;32m~~~~~~~~       ^
+[0m[0;32mauto                             -> QVariant
+[0m24717 warnings generated.
+49434 warnings generated.
+Suppressed 49430 warnings (49424 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpruhfzxmh.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/roll.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/roll.cpp:23:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Roll Roll::getInitialRoll(Die& first, Die& second) {
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                               -> Roll
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/roll.cpp:34:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Roll Roll::getNextRoll(Die& first, Die& second) const {
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                                  -> Roll
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/roll.cpp:39:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::vector<int> Roll::dice() const {
+[0;1;32m~~~~~~~~~~~~~~~~       ^
+[0m[0;32mauto                                -> std::vector<int>
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/roll.cpp:43:19: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+PlayerColor Roll::onRoll() const {
+[0;1;32m~~~~~~~~~~~       ^
+[0m[0;32mauto                             -> PlayerColor
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/roll.cpp:47:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant Roll::toVariant() const
+[0;1;32m~~~~~~~~       ^
+[0m[0;32mauto                             -> QVariant
+[0m23321 warnings generated.
+46642 warnings generated.
+Suppressed 46632 warnings (46626 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpkm74jh5m.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_floating_point.cpp
+11493 warnings generated.
+Suppressed 11493 warnings (11490 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp94py1g75.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_stringref.cpp
+7176 warnings generated.
+Suppressed 7176 warnings (7174 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpg4mu8zi0.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_config.cpp
+5972 warnings generated.
+Suppressed 5972 warnings (5969 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpc0v__oo6.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_cumulative_base.cpp
+9264 warnings generated.
+Suppressed 9264 warnings (9261 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpkfukoctj.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp:26:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+BoardState TurnTrie::board() const {
+[0;1;32m~~~~~~~~~~           ^
+[0m[0;32mauto                               -> BoardState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp:30:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool TurnTrie::hasNextMove(const Move& move) const {
+[0;1;32m~~~~           ^
+[0m[0;32mauto                                               -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp:34:29: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::vector<Move> TurnTrie::nextMoves() const {
+[0;1;32m~~~~~~~~~~~~~~~~~           ^
+[0m[0;32mauto                                          -> std::vector<Move>
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp:41:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool TurnTrie::isFinishedTurn() const {
+[0;1;32m~~~~           ^
+[0m[0;32mauto                                  -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp:45:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Turn TurnTrie::getTurn() const {
+[0;1;32m~~~~           ^
+[0m[0;32mauto                           -> Turn
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/turntrie.cpp:60:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool TurnTrie::canUndo(){
+[0;1;32m~~~~           ^
+[0m[0;32mauto                     -> bool
+[0m22896 warnings generated.
+45792 warnings generated.
+Suppressed 45780 warnings (45774 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpswli5kpc.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardscene.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardscene.cpp:366:25: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const Roll* BoardScene::getRoll() {
+[0;1;32m~~~~~~~~~~~             ^
+[0m[0;32mauto                              -> const Roll*
+[0m33490 warnings generated.
+Suppressed 33489 warnings (33486 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp14km_sk6.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_capture.cpp
+5567 warnings generated.
+Suppressed 5567 warnings (5564 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpeb01wu2g.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/stringlistmode.test.cpp
+23299 warnings generated.
+Suppressed 23299 warnings (23296 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpemee8ih5.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/generators/catch_generators_random.cpp
+10215 warnings generated.
+Suppressed 10215 warnings (10212 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpj60iqzrh.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/move.test.cpp
+22855 warnings generated.
+Suppressed 22855 warnings (22852 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp_8ujk0ar.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/neat.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/neat.cpp:35:8: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+double sigmoid(const double x){
+[0;1;32m~~~~~~ ^
+[0m[0;32mauto                           -> double
+[0m25061 warnings generated.
+Suppressed 25060 warnings (25057 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpgy3s9kbn.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_compact.cpp
+8648 warnings generated.
+Suppressed 8648 warnings (8645 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmphb6hfyr4.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/chat_message.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/chat_message.cpp:4:23: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant ChatMessage::toVariant() const
+[0;1;32m~~~~~~~~              ^
+[0m[0;32mauto                                    -> QVariant
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/chat_message.cpp:21:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QString ChatMessage::getMessage() const
+[0;1;32m~~~~~~~              ^
+[0m[0;32mauto                                    -> QString
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/chat_message.cpp:26:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QString ChatMessage::getReceiver() const
+[0;1;32m~~~~~~~              ^
+[0m[0;32mauto                                     -> QString
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/chat_message.cpp:31:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QString ChatMessage::getSender() const
+[0;1;32m~~~~~~~              ^
+[0m[0;32mauto                                   -> QString
+[0m22238 warnings generated.
+Suppressed 22234 warnings (22231 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpiwuhjpme.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/BackgammonPP_autogen/EWIEGA46WW/qrc_botnetwork.cpp
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpmcj11arn.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_totals.cpp
+8 warnings generated.
+Suppressed 8 warnings (8 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpm5zwbft9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_uncaught_exceptions.cpp
+132 warnings generated.
+Suppressed 132 warnings (132 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpj0s1elwp.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_junit.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_junit.cpp:48:20: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+            return std::string(timeStamp, timeStampSize - 1);
+[0;1;32m                   ^
+[0m11933 warnings generated.
+Suppressed 11932 warnings (11929 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpvzoflzjs.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_automake.cpp
+8066 warnings generated.
+Suppressed 8066 warnings (8063 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmplc54p3uj.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_test_case_tracker.cpp
+7803 warnings generated.
+Suppressed 7803 warnings (7801 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpq3do_9i9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/match.cpp
+34674 warnings generated.
+Suppressed 34674 warnings (34671 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpoclyuowt.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_approx.cpp
+9157 warnings generated.
+Suppressed 9157 warnings (9154 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpqsksvpw7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_console_colour.cpp
+7250 warnings generated.
+Suppressed 7250 warnings (7247 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpupq_6cbs.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_tag_alias_autoregistrar.cpp
+4309 warnings generated.
+Suppressed 4309 warnings (4307 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpxzwzqtc7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_source_line_info.cpp
+5401 warnings generated.
+Suppressed 5401 warnings (5399 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmph759xijc.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_multi.cpp
+8619 warnings generated.
+Suppressed 8619 warnings (8616 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpni9v6zij.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/benchmark/detail/catch_stats.cpp
+9571 warnings generated.
+Suppressed 9571 warnings (9569 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp9d_0yk88.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_main.cpp
+10119 warnings generated.
+Suppressed 10119 warnings (10116 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpib_9h356.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-build/src/Catch2_autogen/mocs_compilation.cpp
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7b92ifqj.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_streaming_base.cpp
+6934 warnings generated.
+Suppressed 6934 warnings (6931 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpq_qm2vrl.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/barcheckerholder.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/barcheckerholder.cpp:12:26: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF BarCheckerHolder::boundingRect() const {
+[0;1;32m~~~~~~                   ^
+[0m[0;32mauto                                          -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/barcheckerholder.cpp:13:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_width, m_height);
+[0;1;32m           ^~~~~~~                       ~
+[0m[0;32m           {                             }
+[0m25957 warnings generated.
+Suppressed 25955 warnings (25952 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpf8ma72rp.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/benchmark/catch_chronometer.cpp
+1366 warnings generated.
+Suppressed 1366 warnings (1365 in non-user code, 1 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmppx0m8si7.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_common_base.cpp
+8533 warnings generated.
+Suppressed 8533 warnings (8530 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpv9xyg7vz.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/main.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/main.cpp:8:5: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int main(int argc, char *argv[])
+[0;1;32m~~~ ^
+[0m[0;32mauto                             -> int
+[0m61178 warnings generated.
+Suppressed 61177 warnings (61174 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpn2jo67fq.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/benchmark/detail/catch_run_for_at_least.cpp
+6505 warnings generated.
+Suppressed 6505 warnings (6502 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpcj_icxqj.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_config.cpp
+9287 warnings generated.
+Suppressed 9287 warnings (9284 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpp_8xyc7w.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_reporter.cpp
+10688 warnings generated.
+Suppressed 10688 warnings (10685 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp33kh1gvk.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:18:18: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Backgammon::isGammon() const {
+[0;1;32m~~~~             ^
+[0m[0;32mauto                              -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:23:18: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Backgammon::isBackgammon() const {
+[0;1;32m~~~~             ^
+[0m[0;32mauto                                  -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:38:39: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::optional<GameResult> Backgammon::getResult() {
+[0;1;32m~~~~~~~~~~~~~~~~~~~~~~~~~             ^
+[0m[0;32mauto                                              -> std::optional<GameResult>
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:56:31: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::vector<Turn> Backgammon::generateLegalTurns() {
+[0;1;32m~~~~~~~~~~~~~~~~~             ^
+[0m[0;32mauto                                               -> std::vector<Turn>
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:64:27: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        const BoardState& board() const { return m_board; }
+[0;1;32m        ~~~~~~~~~~~~~~~~~ ^
+[0m[0;32m        auto                            -> const BoardState&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:65:33: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        const std::vector<int>& dice() const { return m_dice; }
+[0;1;32m        ~~~~~~~~~~~~~~~~~~~~~~~ ^
+[0m[0;32m        auto                                 -> const std::vector<int>&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:66:34: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        const std::vector<Move>& moves() const { return m_moves; }
+[0;1;32m        ~~~~~~~~~~~~~~~~~~~~~~~~ ^
+[0m[0;32m        auto                                   -> const std::vector<Move>&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:68:19: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        RollState getNextRollState(const Move move, int dieUsed) const {
+[0;1;32m        ~~~~~~~~~ ^
+[0m[0;32m        auto                                                           -> RollState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/backgammon.cpp:173:18: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Backgammon::isFinished(PlayerColor player) const
+[0;1;32m~~~~             ^
+[0m[0;32mauto                                                  -> bool
+[0m23639 warnings generated.
+47278 warnings generated.
+Suppressed 47260 warnings (47254 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7bhwlh_r.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/game.test.cpp
+23778 warnings generated.
+Suppressed 23778 warnings (23775 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmptuz54c7_.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:3:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int StringListModel::rowCount(const QModelIndex &parent) const
+[0;1;32m~~~                  ^
+[0m[0;32mauto                                                           -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:8:27: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant StringListModel::data(const QModelIndex &index, int role) const
+[0;1;32m~~~~~~~~                  ^
+[0m[0;32mauto                                                                     -> QVariant
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:11:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:14:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:19:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:22:27: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant StringListModel::headerData(int section, Qt::Orientation orientation,
+[0;1;32m~~~~~~~~                  ^
+[0m[0;32mauto
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/stringlistmodel.cpp:26:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m22923 warnings generated.
+45846 warnings generated.
+Suppressed 45832 warnings (45826 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpw5ic1_5z.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_reusable_string_stream.cpp
+6304 warnings generated.
+Suppressed 6304 warnings (6302 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp5rmwopnw.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_message.cpp
+7690 warnings generated.
+Suppressed 7690 warnings (7687 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp_rtbu_re.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/generators/catch_generators.cpp
+7459 warnings generated.
+Suppressed 7459 warnings (7456 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp2mwhwq7a.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/BackgammonPP_autogen/EWIEGA46WW/qrc_music.cpp
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpl3rvrp4o.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardwindow.cpp
+35802 warnings generated.
+Suppressed 35802 warnings (35799 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpqg9fgxx3.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardtriangle.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardtriangle.cpp:21:23: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF BoardTriangle::boundingRect() const {
+[0;1;32m~~~~~~                ^
+[0m[0;32mauto                                       -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardtriangle.cpp:22:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_width, m_height);
+[0;1;32m           ^~~~~~~                       ~
+[0m[0;32m           {                             }
+[0m26365 warnings generated.
+Suppressed 26363 warnings (26360 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpm8qhrwix.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/mainwindow.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/mainwindow.cpp:132:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+GameType MainWindow::getGameType()
+[0;1;32m~~~~~~~~             ^
+[0m[0;32mauto                               -> GameType
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/mainwindow.cpp:141:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+PlayerType MainWindow::getPlayerType()
+[0;1;32m~~~~~~~~~~             ^
+[0m[0;32mauto                                   -> PlayerType
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/mainwindow.cpp:154:18: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool MainWindow::isValidIpAddress(const QString &ipAddress) {
+[0;1;32m~~~~             ^
+[0m[0;32mauto                                                        -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/mainwindow.cpp:183:21: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QString MainWindow::getIpAddress() {
+[0;1;32m~~~~~~~             ^
+[0m[0;32mauto                               -> QString
+[0m36417 warnings generated.
+Suppressed 36413 warnings (36410 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp5hf5ob_n.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardsidebar.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardsidebar.cpp:16:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF BoardSideBar::boundingRect() const {
+[0;1;32m~~~~~~               ^
+[0m[0;32mauto                                      -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/boardsidebar.cpp:17:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_width, m_height);
+[0;1;32m           ^~~~~~~                       ~
+[0m[0;32m           {                             }
+[0m26003 warnings generated.
+Suppressed 26001 warnings (25998 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpue_mona9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_helpers.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_helpers.cpp:67:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return std::string( buffer, printedLength );
+[0;1;32m               ^
+[0m11071 warnings generated.
+Suppressed 11070 warnings (11067 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpy9fxcelq.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/controller.cpp
+61828 warnings generated.
+Suppressed 61828 warnings (61825 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpisygy6l4.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_exception_translator_registry.cpp
+5893 warnings generated.
+Suppressed 5893 warnings (5891 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpddymh_a4.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_translate_exception.cpp
+4859 warnings generated.
+Suppressed 4859 warnings (4857 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpql6xzzc9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_clara.cpp
+10411 warnings generated.
+Suppressed 10411 warnings (10409 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpx4y943md.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/sidebarcheckerholder.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/sidebarcheckerholder.cpp:14:30: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QRectF SidebarCheckerHolder::boundingRect() const {
+[0;1;32m~~~~~~                       ^
+[0m[0;32mauto                                              -> QRectF
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/sidebarcheckerholder.cpp:15:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QRectF(0, 0, m_width, m_height);
+[0;1;32m           ^~~~~~~                       ~
+[0m[0;32m           {                             }
+[0m26416 warnings generated.
+Suppressed 26414 warnings (26411 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpbgnrr1bg.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_context.cpp
+30 warnings generated.
+Suppressed 30 warnings (30 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpwcdhzey3.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_textflow.cpp
+7480 warnings generated.
+Suppressed 7480 warnings (7478 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpmcz22qoo.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_fatal_condition_handler.cpp
+8547 warnings generated.
+Suppressed 8547 warnings (8544 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpixyjbeqf.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_registrars.cpp
+4438 warnings generated.
+Suppressed 4438 warnings (4436 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp_y1tzmu4.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/turntrie.test.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/turntrie.test.cpp:8:19: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::vector<Turn> turnTrieTurns(TurnTrie& trie) {
+[0;1;32m~~~~~~~~~~~~~~~~~ ^
+[0m[0;32mauto                                            -> std::vector<Turn>
+[0m23917 warnings generated.
+Suppressed 23916 warnings (23913 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpm4ddwa6n.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_list.cpp
+9512 warnings generated.
+Suppressed 9512 warnings (9509 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp8v3txt8b.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/innovation.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/innovation.cpp:3:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int Innovation::newInnovation(){
+[0;1;32m~~~             ^
+[0m[0;32mauto                            -> int
+[0m2 warnings generated.
+Suppressed 1 warnings (1 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp5_iceg47.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:37:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int BoardState::bar(PlayerColor player) const {
+[0;1;32m~~~             ^
+[0m[0;32mauto                                          -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:41:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int BoardState::off(PlayerColor player) const {
+[0;1;32m~~~             ^
+[0m[0;32mauto                                          -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:45:20: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+Point& BoardState::point(const int pos) {
+[0;1;32m~~~~~~             ^
+[0m[0;32mauto                                    -> Point&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:50:26: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const Point& BoardState::point(const int pos) const {
+[0;1;32m~~~~~~~~~~~~             ^
+[0m[0;32mauto                                                -> const Point&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:88:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+BoardState BoardState::mirror() const {
+[0;1;32m~~~~~~~~~~             ^
+[0m[0;32mauto                                  -> BoardState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:94:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+BoardState BoardState::verticalMirror(BoardState board)
+[0;1;32m~~~~~~~~~~             ^
+[0m[0;32mauto                                                    -> BoardState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:100:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+BoardState BoardState::centralMirror(BoardState board)
+[0;1;32m~~~~~~~~~~             ^
+[0m[0;32mauto                                                   -> BoardState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:108:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+BoardState BoardState::getNextState(const Move& move) const {
+[0;1;32m~~~~~~~~~~             ^
+[0m[0;32mauto                                                        -> BoardState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:114:24: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+BoardState BoardState::getNextState(const std::vector<Move>& moves) const {
+[0;1;32m~~~~~~~~~~             ^
+[0m[0;32mauto                                                                      -> BoardState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/boardstate.cpp:122:22: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant BoardState::toVariant() const
+[0;1;32m~~~~~~~~             ^
+[0m[0;32mauto                                   -> QVariant
+[0m24533 warnings generated.
+49066 warnings generated.
+Suppressed 49046 warnings (49040 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmprg3b7sgk.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_container_properties.cpp
+8757 warnings generated.
+Suppressed 8757 warnings (8754 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp5wlhch3g.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_debugger.cpp
+5832 warnings generated.
+Suppressed 5832 warnings (5830 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp_9qaoisp.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp:559:43: [0m[0;1;31merror: [0m[1mno viable constructor or deduction guide for deduction of template arguments of 'reverse_view' [clang-diagnostic-error][0m
+        for (auto & m_unfinishedSection : std::ranges::reverse_view(m_unfinishedSections))
+[0;1;32m                                          ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:3400:7: [0m[0;1;30mnote: [0mcandidate template ignored: substitution failure [with _Vp = std::vector<Catch::SectionEndInfo>]: constraints not satisfied for class template 'reverse_view' [with _Vp = std::vector<Catch::SectionEndInfo>][0m
+      reverse_view(_Vp __r)
+[0;1;32m      ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:3384:11: [0m[0;1;30mnote: [0mcandidate template ignored: could not match 'reverse_view' against 'vector'[0m
+    class reverse_view : public view_interface<reverse_view<_Vp>>
+[0;1;32m          ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:3451:5: [0m[0;1;30mnote: [0mcandidate template ignored: substitution failure [with _Range = std::vector<Catch::SectionEndInfo> &]: constraints not satisfied for class template 'reverse_view' [with _Vp = std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>][0m
+    reverse_view(_Range&&) -> reverse_view<views::all_t<_Range>>;
+[0;1;32m    ^                         ~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:3397:7: [0m[0;1;30mnote: [0mcandidate function template not viable: requires 0 arguments, but 1 was provided[0m
+      reverse_view() requires default_initializable<_Vp> = default;
+[0;1;32m      ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:979:13: [0m[0;1;31merror: [0m[1mno matching function for call to '__begin' [clang-diagnostic-error][0m
+        = decltype(ranges::__cust_access::__begin(std::declval<_Tp&>()));
+[0;1;32m                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_base.h:590:5: [0m[0;1;30mnote: [0min instantiation of template type alias '__range_iter_t' requested here[0m
+    using iterator_t = std::__detail::__range_iter_t<_Tp>;
+[0;1;32m    ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_util.h:98:43: [0m[0;1;30mnote: [0min instantiation of template type alias 'iterator_t' requested here[0m
+      data() requires contiguous_iterator<iterator_t<_Derived>>
+[0;1;32m                                          ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1048:29: [0m[0;1;30mnote: [0min instantiation of template class 'std::ranges::view_interface<std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>>' requested here[0m
+    class ref_view : public view_interface<ref_view<_Range>>
+[0;1;32m                            ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1104:38: [0m[0;1;30mnote: [0min instantiation of template class 'std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>' requested here[0m
+        concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+[0;1;32m                                            ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1104:38: [0m[0;1;30mnote: [0min instantiation of requirement here[0m
+        concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+[0;1;32m                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1104:27: [0m[0;1;30mnote: [0m(skipping 2 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)[0m
+        concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+[0;1;32m                                 ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1114:17: [0m[0;1;30mnote: [0mwhile substituting template arguments into constraint expression here[0m
+          || __detail::__can_ref_view<_Range>
+[0;1;32m                       ^~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1133:30: [0m[0;1;30mnote: [0mwhile checking constraint satisfaction for template 'operator()<std::vector<Catch::SectionEndInfo> &>' required here[0m
+      using all_t = decltype(all(std::declval<_Range>()));
+[0;1;32m                             ^~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1133:30: [0m[0;1;30mnote: [0min instantiation of function template specialization 'std::ranges::views::_All::operator()<std::vector<Catch::SectionEndInfo> &>' requested here[0m
+[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:3451:51: [0m[0;1;30mnote: [0min instantiation of template type alias 'all_t' requested here[0m
+    reverse_view(_Range&&) -> reverse_view<views::all_t<_Range>>;
+[0;1;32m                                                  ^
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp:559:43: [0m[0;1;30mnote: [0mwhile substituting deduced template arguments into function template '<deduction guide for reverse_view>' [with _Range = std::vector<SectionEndInfo> &][0m
+        for (auto & m_unfinishedSection : std::ranges::reverse_view(m_unfinishedSections))
+[0;1;32m                                          ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:963:7: [0m[0;1;30mnote: [0mcandidate template ignored: constraints not satisfied [with _Tp = std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>][0m
+      __begin(_Tp& __t)
+[0;1;32m      ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:961:16: [0m[0;1;30mnote: [0mbecause 'is_array_v<std::ranges::ref_view<std::vector<Catch::SectionEndInfo> > >' evaluated to false[0m
+      requires is_array_v<_Tp> || __member_begin<_Tp&> || __adl_begin<_Tp&>
+[0;1;32m               ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:961:35: [0m[0;1;30mnote: [0mand 'std::ranges::ref_view<std::vector<Catch::SectionEndInfo>> &' does not satisfy '__member_begin'[0m
+      requires is_array_v<_Tp> || __member_begin<_Tp&> || __adl_begin<_Tp&>
+[0;1;32m                                  ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:944:23: [0m[0;1;30mnote: [0mbecause '__decay_copy(__t.begin())' would be invalid: no member named 'begin' in 'std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>'[0m
+          { __decay_copy(__t.begin()) } -> input_or_output_iterator;
+[0;1;32m                             ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:961:59: [0m[0;1;30mnote: [0mand 'std::ranges::ref_view<std::vector<Catch::SectionEndInfo>> &' does not satisfy '__adl_begin'[0m
+      requires is_array_v<_Tp> || __member_begin<_Tp&> || __adl_begin<_Tp&>
+[0;1;32m                                                          ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/iterator_concepts.h:955:19: [0m[0;1;30mnote: [0mbecause '__decay_copy(begin(__t))' would be invalid: call to deleted function 'begin'[0m
+          { __decay_copy(begin(__t)) } -> input_or_output_iterator;
+[0;1;32m                         ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_util.h:110:24: [0m[0;1;31merror: [0m[1mconstraints not satisfied for alias template 'sentinel_t' [with _Range = std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>] [clang-diagnostic-error][0m
+        && sized_sentinel_for<sentinel_t<_Derived>, iterator_t<_Derived>>
+[0;1;32m                              ^~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1048:29: [0m[0;1;30mnote: [0min instantiation of template class 'std::ranges::view_interface<std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>>' requested here[0m
+    class ref_view : public view_interface<ref_view<_Range>>
+[0;1;32m                            ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1104:38: [0m[0;1;30mnote: [0min instantiation of template class 'std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>' requested here[0m
+        concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+[0;1;32m                                            ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1104:38: [0m[0;1;30mnote: [0min instantiation of requirement here[0m
+        concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+[0;1;32m                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1104:27: [0m[0;1;30mnote: [0mwhile substituting template arguments into constraint expression here[0m
+        concept __can_ref_view = requires { ref_view{std::declval<_Range>()}; };
+[0;1;32m                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1114:7: [0m[0;1;30mnote: [0mwhile checking the satisfaction of concept '__can_ref_view<std::vector<Catch::SectionEndInfo> &>' requested here[0m
+          || __detail::__can_ref_view<_Range>
+[0;1;32m             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1114:17: [0m[0;1;30mnote: [0mwhile substituting template arguments into constraint expression here[0m
+          || __detail::__can_ref_view<_Range>
+[0;1;32m                       ^~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1133:30: [0m[0;1;30mnote: [0mwhile checking constraint satisfaction for template 'operator()<std::vector<Catch::SectionEndInfo> &>' required here[0m
+      using all_t = decltype(all(std::declval<_Range>()));
+[0;1;32m                             ^~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:1133:30: [0m[0;1;30mnote: [0min instantiation of function template specialization 'std::ranges::views::_All::operator()<std::vector<Catch::SectionEndInfo> &>' requested here[0m
+[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ranges:3451:51: [0m[0;1;30mnote: [0min instantiation of template type alias 'all_t' requested here[0m
+    reverse_view(_Range&&) -> reverse_view<views::all_t<_Range>>;
+[0;1;32m                                                  ^
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp:559:43: [0m[0;1;30mnote: [0mwhile substituting deduced template arguments into function template '<deduction guide for reverse_view>' [with _Range = std::vector<SectionEndInfo> &][0m
+        for (auto & m_unfinishedSection : std::ranges::reverse_view(m_unfinishedSections))
+[0;1;32m                                          ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_base.h:592:12: [0m[0;1;30mnote: [0mbecause 'std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>' does not satisfy 'range'[0m
+  template<range _Range>
+[0;1;32m           ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_base.h:580:2: [0m[0;1;30mnote: [0mbecause 'ranges::begin(__t)' would be invalid: no matching function for call to object of type 'const __cust_access::_Begin'[0m
+        ranges::begin(__t);
+[0;1;32m        ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_util.h:116:24: [0m[0;1;31merror: [0m[1mconstraints not satisfied for alias template 'sentinel_t' [with _Range = const std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>] [clang-diagnostic-error][0m
+        && sized_sentinel_for<sentinel_t<const _Derived>,
+[0;1;32m                              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_base.h:592:12: [0m[0;1;30mnote: [0mbecause 'const std::ranges::ref_view<std::vector<Catch::SectionEndInfo>>' does not satisfy 'range'[0m
+  template<range _Range>
+[0;1;32m           ^
+[0m[1m/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ranges_base.h:580:2: [0m[0;1;30mnote: [0mbecause 'ranges::begin(__t)' would be invalid: no matching function for call to object of type 'const __cust_access::_Begin'[0m
+        ranges::begin(__t);
+[0;1;32m        ^
+[0m10708 warnings and 5 errors generated.
+Error while processing /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp.
+Suppressed 10708 warnings (10705 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+Found compiler error(s).
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpdw6wgtrh.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_test_case_info.cpp
+7515 warnings generated.
+Suppressed 7515 warnings (7513 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpn3xx7fuz.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_test_registry.cpp
+6794 warnings generated.
+Suppressed 6794 warnings (6792 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp6qjgaepl.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_registry_hub.cpp
+8791 warnings generated.
+Suppressed 8791 warnings (8788 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpx4w_nsjg.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/threadsafequeue.test.cpp
+8049 warnings generated.
+Suppressed 8049 warnings (8046 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpfy3glgwc.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_exception.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_exception.cpp:21:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return ExceptionMessageMatcher(message);
+[0;1;32m           ^
+[0m7355 warnings generated.
+Suppressed 7354 warnings (7351 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpgv8_ouus.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-build/src/Catch2WithMain_autogen/mocs_compilation.cpp
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp4cwd3q_q.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_exception.cpp
+4766 warnings generated.
+Suppressed 4766 warnings (4764 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpa5wgsulo.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_xml.cpp
+9332 warnings generated.
+Suppressed 9332 warnings (9329 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpzd21y0ej.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_timer.cpp
+1363 warnings generated.
+Suppressed 1363 warnings (1362 in non-user code, 1 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpyb08tqni.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_test_spec_parser.cpp
+5467 warnings generated.
+Suppressed 5467 warnings (5465 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmps9t4g0ac.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_stdstreams.cpp
+5504 warnings generated.
+Suppressed 5504 warnings (5502 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmps1fe9crc.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/boardstate.test.cpp
+22842 warnings generated.
+Suppressed 22842 warnings (22839 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpvdur7x3x.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_test_failure_exception.cpp
+5326 warnings generated.
+Suppressed 5326 warnings (5324 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmph7p86p1s.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_reporter_registry.cpp
+9490 warnings generated.
+Suppressed 9490 warnings (9487 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpy3wmcn26.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_xmlwriter.cpp
+7042 warnings generated.
+Suppressed 7042 warnings (7040 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpgf1hkcl9.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/checkerholder.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/checkerholder.cpp:36:21: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool CheckerHolder::canDropoff(){
+[0;1;32m~~~~                ^
+[0m[0;32mauto                             -> bool
+[0m24549 warnings generated.
+Suppressed 24548 warnings (24545 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpt656ppz5.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_quantifiers.cpp
+8762 warnings generated.
+Suppressed 8762 warnings (8759 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmphwffepqe.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_commandline.cpp
+13063 warnings generated.
+Suppressed 13063 warnings (13060 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp0zqq9i7x.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp:97:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return StringEqualsMatcher( CasedString( str, caseSensitivity) );
+[0;1;32m               ^
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp:100:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return StringContainsMatcher( CasedString( str, caseSensitivity) );
+[0;1;32m               ^
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp:103:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return EndsWithMatcher( CasedString( str, caseSensitivity) );
+[0;1;32m               ^
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp:106:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return StartsWithMatcher( CasedString( str, caseSensitivity) );
+[0;1;32m               ^
+[0m14664 warnings generated.
+Suppressed 14660 warnings (14657 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpfb9oxdcx.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/catch_assertion_result.cpp
+5462 warnings generated.
+Suppressed 5462 warnings (5460 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp7kq7mcbe.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_istream.cpp
+6437 warnings generated.
+Suppressed 6437 warnings (6435 in non-user code, 2 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpsk97qp64.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/tests/BackgammonPPTest_autogen/mocs_compilation.cpp
+23964 warnings generated.
+Suppressed 23964 warnings (23961 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpa_uxwy2q.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_result_type.cpp
+6 warnings generated.
+Suppressed 6 warnings (6 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpwgx8wxns.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/matchers/internal/catch_matchers_impl.cpp
+7345 warnings generated.
+Suppressed 7345 warnings (7342 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpc0b1706h.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_teamcity.cpp
+8654 warnings generated.
+Suppressed 8654 warnings (8651 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpazbimc7m.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/botplayer.cpp
+33379 warnings generated.
+Suppressed 33379 warnings (33376 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpesfhr1jh.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/tests/historylistmodel.test.cpp
+24219 warnings generated.
+Suppressed 24219 warnings (24216 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmppylkjq8m.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_tap.cpp
+9933 warnings generated.
+Suppressed 9933 warnings (9930 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmphk82g9gf.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_testcase.cpp
+1504 warnings generated.
+Suppressed 1504 warnings (1504 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpjj0_yhh2.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/network/server.cpp
+24300 warnings generated.
+Suppressed 24300 warnings (24297 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpvdrex_j_.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_singletons.cpp
+1615 warnings generated.
+Suppressed 1615 warnings (1615 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmp0ih68n1j.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/genome.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/genome.cpp:179:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+double Genome::disjoint(const Genome& g1, const Genome& g2){
+[0;1;32m~~~~~~         ^
+[0m[0;32mauto                                                        -> double
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/genome.cpp:192:16: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+double Genome::weights(const Genome& g1, const Genome& g2){
+[0;1;32m~~~~~~         ^
+[0m[0;32mauto                                                       -> double
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/bot/genome.cpp:202:14: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Genome::sameSpecies(const Genome& g1, const Genome& g2){
+[0;1;32m~~~~         ^
+[0m[0;32mauto                                                         -> bool
+[0m25474 warnings generated.
+Suppressed 25471 warnings (25468 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpe39gu1yh.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/reporters/catch_reporter_event_listener.cpp
+6801 warnings generated.
+Suppressed 6801 warnings (6798 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpt7scxxmk.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/_deps/catch2-src/src/catch2/internal/catch_section.cpp
+7998 warnings generated.
+Suppressed 7998 warnings (7995 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpnzzsz010.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/localplayer.cpp
+32473 warnings generated.
+Suppressed 32473 warnings (32470 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpkz3qutui.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:4:23: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+int HistoryListModel::rowCount(const QModelIndex &parent) const
+[0;1;32m~~~                   ^
+[0m[0;32mauto                                                            -> int
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:9:28: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant HistoryListModel::data(const QModelIndex &index, int role) const
+[0;1;32m~~~~~~~~                   ^
+[0m[0;32mauto                                                                      -> QVariant
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:12:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:15:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:37:12: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+    return QVariant();
+[0;1;32m           ^~~~~~~~~~
+[0m[0;32m           {}
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:40:28: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+QVariant HistoryListModel::headerData(int section, Qt::Orientation orientation,
+[0;1;32m~~~~~~~~                   ^
+[0m[0;32mauto
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/historylistmodel.cpp:44:16: [0m[0;1;35mwarning: [0m[1mavoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list][0m
+        return QVariant();
+[0;1;32m               ^~~~~~~~~~
+[0m[0;32m               {}
+[0m24168 warnings generated.
+48336 warnings generated.
+Suppressed 48322 warnings (48316 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpm22w5fn5.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/build/BackgammonPP_autogen/mocs_compilation.cpp
+62864 warnings generated.
+Suppressed 62864 warnings (62861 in non-user code, 3 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmpineupwku.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/game.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/game.cpp:22:19: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const Roll& Game::currentRoll() const {
+[0;1;32m~~~~~~~~~~~       ^
+[0m[0;32mauto                                  -> const Roll&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/game.cpp:26:25: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+const BoardState& Game::board() const {
+[0;1;32m~~~~~~~~~~~~~~~~~       ^
+[0m[0;32mauto                                  -> const BoardState&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/game.cpp:30:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Game::isBlot(const Point& point, PlayerColor player) const {
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                                            -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/game.cpp:34:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Game::isBlockedBy(const Point& point, PlayerColor player) const {
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                                                 -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/core/game.cpp:38:12: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool Game::isBearingOff(const BoardState& board, PlayerColor player) const {
+[0;1;32m~~~~       ^
+[0m[0;32mauto                                                                       -> bool
+[0m23158 warnings generated.
+46316 warnings generated.
+Suppressed 46306 warnings (46300 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+clang-tidy-14 --use-color -checks=-*,modernize-use-trailing-return-type,modernize-return-braced-init-list -export-fixes /tmp/tmp8p_o0o5u/tmppb0rf5xk.yaml -p=build /home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp
+[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:20:30: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::vector<Turn> LongNardy::generateLegalTurns() {
+[0;1;32m~~~~~~~~~~~~~~~~~            ^
+[0m[0;32mauto                                              -> std::vector<Turn>
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:28:27: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        const BoardState& board() const { return m_board; }
+[0;1;32m        ~~~~~~~~~~~~~~~~~ ^
+[0m[0;32m        auto                            -> const BoardState&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:29:33: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        const std::vector<int>& dice() const { return m_dice; }
+[0;1;32m        ~~~~~~~~~~~~~~~~~~~~~~~ ^
+[0m[0;32m        auto                                 -> const std::vector<int>&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:30:34: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        const std::vector<Move>& moves() const { return m_moves; }
+[0;1;32m        ~~~~~~~~~~~~~~~~~~~~~~~~ ^
+[0m[0;32m        auto                                   -> const std::vector<Move>&
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:32:19: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        RollState getNextRollState(const Move move, int dieUsed) const {
+[0;1;32m        ~~~~~~~~~ ^
+[0m[0;32m        auto                                                           -> RollState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:41:19: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+        RollState getNextRollState(const std::vector<Move> moves, int dieUsed) const {
+[0;1;32m        ~~~~~~~~~ ^
+[0m[0;32m        auto                                                                         -> RollState
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:197:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool LongNardy::isFinished(PlayerColor player) const
+[0;1;32m~~~~            ^
+[0m[0;32mauto                                                 -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:202:17: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+bool LongNardy::isBlockedBy(const Point &point, PlayerColor player) const
+[0;1;32m~~~~            ^
+[0m[0;32mauto                                                                      -> bool
+[0m[1m/home/marko/Documents/7_SEMESTAR/azrs/azrs-tracking/BackgammonPP/engine/longnardy.cpp:207:38: [0m[0;1;35mwarning: [0m[1muse a trailing return type for this function [modernize-use-trailing-return-type][0m
+std::optional<GameResult> LongNardy::getResult()
+[0;1;32m~~~~~~~~~~~~~~~~~~~~~~~~~            ^
+[0m[0;32mauto                                             -> std::optional<GameResult>
+[0m23755 warnings generated.
+47510 warnings generated.
+Suppressed 47492 warnings (47486 in non-user code, 6 with check filters).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+Applying fixes ...
