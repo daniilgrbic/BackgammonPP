@@ -33,6 +33,6 @@ void CheckerHolder::setAllowDropoff(bool allowDropoff){
     this->updateHighlighting();
 }
 
-auto CheckerHolder::canDropoff() -> bool{
+bool CheckerHolder::canDropoff(){
     return m_allowDropoff;
 }

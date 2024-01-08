@@ -11,8 +11,8 @@ SidebarCheckerHolder::SidebarCheckerHolder(QGraphicsItem *parent, qreal width, q
     m_type = SpecialPosition::OFF;
 }
 
-auto SidebarCheckerHolder::boundingRect() const -> QRectF {
-    return {0, 0, m_width, m_height};
+QRectF SidebarCheckerHolder::boundingRect() const {
+    return QRectF(0, 0, m_width, m_height);
 }
 
 

@@ -18,8 +18,8 @@ BoardTriangle::BoardTriangle(QGraphicsItem *parent, qreal x, qreal y, qreal widt
         m_polygon << QPointF(0, 0) << QPointF(m_width, 0) << QPointF(m_width / 2,m_height) << QPointF(0, 0);
 }
 
-auto BoardTriangle::boundingRect() const -> QRectF {
-    return {0, 0, m_width, m_height};
+QRectF BoardTriangle::boundingRect() const {
+    return QRectF(0, 0, m_width, m_height);
 }
 
 

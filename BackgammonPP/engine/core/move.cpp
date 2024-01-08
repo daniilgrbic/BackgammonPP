@@ -10,7 +10,7 @@ Move::Move(const PlayerColor player, const std::variant<int, SpecialPosition>& f
     : m_player { player }, m_from { from }, m_to { to }, m_isHit { isHit }
 {}
 
-auto Move::mirror() const -> Move {
+Move Move::mirror() const {
     std::variant<int, SpecialPosition> from;
     if (const int* fromPos = std::get_if<int>(&m_from)) {
         from = NUMBER_OF_POINTS + 1 - *fromPos;
@@ -28,7 +28,7 @@ auto Move::mirror() const -> Move {
     return { m_player, from, to, m_isHit };
 }
 
-auto Move::verticalMirror(Move move) -> Move
+Move Move::verticalMirror(Move move)
 {
     if (std::holds_alternative<int>(move.m_from)) {
         move.m_from = NUMBER_OF_POINTS + 1 - std::get<int>(move.m_from);
@@ -39,7 +39,7 @@ auto Move::verticalMirror(Move move) -> Move
     return move;
 }
 
-auto Move::centralMirror(Move move) -> Move
+Move Move::centralMirror(Move move)
 {
     if(std::holds_alternative<int>(move.m_from)) {
         int point = std::get<int>(move.m_from);
@@ -52,7 +52,7 @@ auto Move::centralMirror(Move move) -> Move
     return move;
 }
 
-auto Move::toString() const -> QString
+QString Move::toString() const
 {
     QVariantMap map = toVariant().toMap();
     return QString("%1/%2%3").arg(
@@ -62,7 +62,7 @@ auto Move::toString() const -> QString
     );
 }
 
-auto Move::toVariant() const -> QVariant
+QVariant Move::toVariant() const
 {
     QVariantMap map;
 

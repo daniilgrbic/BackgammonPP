@@ -9,8 +9,8 @@ VerticalChecker::VerticalChecker(QGraphicsItem* parent, qreal width, qreal heigh
 {
 }
 
-auto VerticalChecker::boundingRect() const -> QRectF {
-    return {0, 0, m_width, m_height};
+QRectF VerticalChecker::boundingRect() const {
+    return QRectF(0, 0, m_width, m_height);
 }
 
 

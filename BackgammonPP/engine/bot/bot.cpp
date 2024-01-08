@@ -11,7 +11,7 @@ Bot::Bot(std::ifstream& filestream, QObject *parent) : QObject(parent){
     Bot::~Bot(){
         delete network;
     }
-    auto Bot::bestTurn(PlayerColor color, const std::vector<Turn>& turns) -> Turn{
+    Turn Bot::bestTurn(PlayerColor color, const std::vector<Turn>& turns){
         if(color == PlayerColor::WHITE){
             std::pair<double, Turn> bestTurn = {network->evaluateNetwork(network->inputFromState(turns[0].m_finalBoard)), turns[0]};
             for(const auto& turn : turns){
@@ -39,7 +39,7 @@ Bot::Bot(std::ifstream& filestream, QObject *parent) : QObject(parent){
 
 
     }
-    auto Bot::shouldDouble(PlayerColor color, const BoardState& state, bool onTurn) -> bool{
+    bool Bot::shouldDouble(PlayerColor color, const BoardState& state, bool onTurn){
         double magicConstant = onTurn ?  0.8 : 0.5;
         if(color == PlayerColor::WHITE){
             return network->evaluateNetwork(network->inputFromState(state)) > magicConstant;

@@ -1,5 +1,5 @@
 #include "innovation.hpp"
 
-auto Innovation::newInnovation() -> int{
+int Innovation::newInnovation(){
     return ++innovation;
 }

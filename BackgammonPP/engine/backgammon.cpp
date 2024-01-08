@@ -15,12 +15,12 @@ Backgammon::Backgammon() : Game()
     m_currentRoll = Roll::getInitialRoll(m_firstDie, m_secondDie);
 }
 
-auto Backgammon::isGammon() const -> bool {
+bool Backgammon::isGammon() const {
     return (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) ||
            (isFinished(PlayerColor::BLACK) && !m_board.off(PlayerColor::WHITE));
 }
 
-auto Backgammon::isBackgammon() const -> bool {
+bool Backgammon::isBackgammon() const {
     constexpr auto QUADRANT_SIZE = NUMBER_OF_POINTS / 4;
     if (isFinished(PlayerColor::WHITE) && !m_board.off(PlayerColor::BLACK)) {
         for (auto i = 1; i <= QUADRANT_SIZE; ++i)
@@ -35,7 +35,7 @@ auto Backgammon::isBackgammon() const -> bool {
     return false;
 }
 
-auto Backgammon::getResult() -> std::optional<GameResult> {
+std::optional<GameResult> Backgammon::getResult() {
     if (m_result)
         return m_result;
 
@@ -53,7 +53,7 @@ auto Backgammon::getResult() -> std::optional<GameResult> {
     return m_result;
 }
 
-auto Backgammon::generateLegalTurns() -> std::vector<Turn> {
+std::vector<Turn> Backgammon::generateLegalTurns() {
 
     class RollState {
     public:
@@ -61,11 +61,11 @@ auto Backgammon::generateLegalTurns() -> std::vector<Turn> {
             : m_moves { moves }, m_board { board }, m_dice { dice }
         {}
 
-        auto board() const -> const BoardState& { return m_board; }
-        auto dice() const -> const std::vector<int>& { return m_dice; }
-        auto moves() const -> const std::vector<Move>& { return m_moves; }
+        const BoardState& board() const { return m_board; }
+        const std::vector<int>& dice() const { return m_dice; }
+        const std::vector<Move>& moves() const { return m_moves; }
 
-        auto getNextRollState(const Move move, int dieUsed) const -> RollState {
+        RollState getNextRollState(const Move move, int dieUsed) const {
             auto nextMoves = m_moves;
             nextMoves.push_back(move);
             auto nextState = m_board.getNextState(move);
@@ -170,7 +170,7 @@ auto Backgammon::generateLegalTurns() -> std::vector<Turn> {
     return legalTurns;
 }
 
-auto Backgammon::isFinished(PlayerColor player) const -> bool
+bool Backgammon::isFinished(PlayerColor player) const
 {
     return m_board.off(player) == CHECKERS_COUNT;
 }
