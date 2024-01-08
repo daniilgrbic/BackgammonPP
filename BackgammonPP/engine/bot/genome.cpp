@@ -176,7 +176,7 @@ Genome::Genome(const Genome& genome){
     this->fitness = genome.fitness;
 }
 
-auto Genome::disjoint(const Genome& g1, const Genome& g2) -> double{
+double Genome::disjoint(const Genome& g1, const Genome& g2){
     size_t disjoint {0};
 
     size_t i {0};
@@ -189,7 +189,7 @@ auto Genome::disjoint(const Genome& g1, const Genome& g2) -> double{
     return static_cast<double>(disjoint) / N;
 
 }
-auto Genome::weights(const Genome& g1, const Genome& g2) -> double{
+double Genome::weights(const Genome& g1, const Genome& g2){
     double sum {0.0};
     size_t i {0};
     while(g1.genes[i].innovation == g2.genes[i].innovation){
@@ -199,7 +199,7 @@ auto Genome::weights(const Genome& g1, const Genome& g2) -> double{
     return sum / i;
 
 }
-auto Genome::sameSpecies(const Genome& g1, const Genome& g2) -> bool{
+bool Genome::sameSpecies(const Genome& g1, const Genome& g2){
     return AI::deltaDisjoint*disjoint(g1, g2) + AI::deltaWeights*weights(g1, g2) < AI::deltaTreshold;
 }
 

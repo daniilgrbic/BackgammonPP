@@ -18,11 +18,11 @@ Client::~Client() {
     delete m_socket;
 }
 
-auto Client::getSocket() -> QTcpSocket* {
+QTcpSocket* Client::getSocket() {
     return m_socket;
 }
 
-auto Client::connectClient(QString ipAddress) -> bool {
+bool Client::connectClient(QString ipAddress) {
     m_socket->connectToHost(QHostAddress(ipAddress), srvconst::PORT);
     return m_socket->waitForConnected();
 }

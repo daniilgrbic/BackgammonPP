@@ -56,6 +56,3 @@ compile_commands.json
 
 # Other
 /.vscode
-
-build
-.cache

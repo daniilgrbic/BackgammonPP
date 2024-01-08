@@ -19,23 +19,23 @@ void Game::playTurn(Turn turn)
     m_currentRoll = m_currentRoll.getNextRoll(m_firstDie, m_secondDie);
 }
 
-auto Game::currentRoll() const -> const Roll& {
+const Roll& Game::currentRoll() const {
     return m_currentRoll;
 }
 
-auto Game::board() const -> const BoardState& {
+const BoardState& Game::board() const {
     return m_board;
 }
 
-auto Game::isBlot(const Point& point, PlayerColor player) const -> bool {
+bool Game::isBlot(const Point& point, PlayerColor player) const {
     return point.count() == 1 && point.owner().value() == player;
 }
 
-auto Game::isBlockedBy(const Point& point, PlayerColor player) const -> bool {
+bool Game::isBlockedBy(const Point& point, PlayerColor player) const {
     return point.count() >= 2 && point.owner().value() == player;
 }
 
-auto Game::isBearingOff(const BoardState& board, PlayerColor player) const -> bool {
+bool Game::isBearingOff(const BoardState& board, PlayerColor player) const {
     if(board.bar(player))
         return false;
     for(int pointId = 24; pointId >= 7; --pointId) {

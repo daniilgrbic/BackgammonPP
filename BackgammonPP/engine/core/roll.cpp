@@ -20,7 +20,7 @@ Roll::Roll(PlayerColor onRoll, const std::vector<int>& dice)
     : m_onRoll { onRoll }, m_dice { dice }
 {}
 
-auto Roll::getInitialRoll(Die& first, Die& second) -> Roll {
+Roll Roll::getInitialRoll(Die& first, Die& second) {
     int firstValue, secondValue;
     do {
         firstValue = first.roll();
@@ -31,20 +31,20 @@ auto Roll::getInitialRoll(Die& first, Die& second) -> Roll {
     return { onRoll, { firstValue, secondValue } };
 }
 
-auto Roll::getNextRoll(Die& first, Die& second) const -> Roll {
+Roll Roll::getNextRoll(Die& first, Die& second) const {
     auto opponent = m_onRoll == PlayerColor::WHITE ? PlayerColor::BLACK : PlayerColor::WHITE;
     return { opponent, first, second };
 }
 
-auto Roll::dice() const -> std::vector<int> {
+std::vector<int> Roll::dice() const {
     return m_dice;
 }
 
-auto Roll::onRoll() const -> PlayerColor {
+PlayerColor Roll::onRoll() const {
     return m_onRoll;
 }
 
-auto Roll::toVariant() const -> QVariant
+QVariant Roll::toVariant() const
 {
     QVariantMap map;
     map.insert("onRoll", m_onRoll == PlayerColor::WHITE ? "white" : "black");

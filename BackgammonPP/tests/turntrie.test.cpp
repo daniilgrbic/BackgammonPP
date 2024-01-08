@@ -5,7 +5,7 @@
 
 #include <algorithm>
 
-auto turnTrieTurns(TurnTrie& trie) -> std::vector<Turn> {
+std::vector<Turn> turnTrieTurns(TurnTrie& trie) {
     if (trie.isFinishedTurn())
         return { trie.getTurn() };
 

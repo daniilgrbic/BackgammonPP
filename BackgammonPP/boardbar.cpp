@@ -12,8 +12,8 @@ BoardBar::BoardBar(QGraphicsItem* parent, qreal width, qreal height)
     bottomHolder->setPos(0, 0.6*height);
 }
 
-auto BoardBar::boundingRect() const -> QRectF {
-    return {0, 0, m_width, m_height};
+QRectF BoardBar::boundingRect() const {
+    return QRectF(0, 0, m_width, m_height);
 }
 
 void BoardBar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {

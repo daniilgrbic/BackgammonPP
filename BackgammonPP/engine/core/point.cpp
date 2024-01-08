@@ -10,17 +10,17 @@ Point::Point(std::optional<PlayerColor> owner, uint count)
     , m_count(count)
     {};
 
-auto Point::owner() const -> std::optional<PlayerColor>
+std::optional<PlayerColor> Point::owner() const
 {
     return m_owner;
 }
 
-auto Point::count() const -> uint
+uint Point::count() const
 {
     return m_count;
 }
 
-auto Point::add(PlayerColor color, uint count) -> uint
+uint Point::add(PlayerColor color, uint count)
 {
     if(m_count > 0 and m_owner != color)
         throw std::logic_error("Cannot add checkers to point owned by opponent");
@@ -30,7 +30,7 @@ auto Point::add(PlayerColor color, uint count) -> uint
     return m_count;
 }
 
-auto Point::remove(uint count) -> uint
+uint Point::remove(uint count)
 {
     if(m_count < count)
         throw std::logic_error("Cannot remove more checkers than present on a point");
@@ -41,7 +41,7 @@ auto Point::remove(uint count) -> uint
     return m_count;
 }
 
-auto Point::idByPlayer(PlayerColor color, size_t index) -> int
+int Point::idByPlayer(PlayerColor color, size_t index)
 {
     if(index < 1 or index > NUMBER_OF_POINTS)
         throw std::logic_error("Point index must be an integer between 1 and 24");
@@ -49,20 +49,20 @@ auto Point::idByPlayer(PlayerColor color, size_t index) -> int
     return color == PlayerColor::WHITE ? index : NUMBER_OF_POINTS + 1 - index;
 }
 
-auto Point::centralMirrorId(size_t index) -> int
+int Point::centralMirrorId(size_t index)
 {
     if(1 <= index and index <= 12) return index + 12;
     if(13 <= index and index <= 24) return index - 12;
     throw std::logic_error("Point index must be an integer between 1 and 24");
 }
 
-auto Point::verticalMirrorId(size_t index) -> int
+int Point::verticalMirrorId(size_t index)
 {
     if(1 <= index and index <= 24) return NUMBER_OF_POINTS + 1 - index;
     throw std::logic_error("Point index must be an integer between 1 and 24");
 }
 
-auto Point::toVariant() const -> QVariant
+QVariant Point::toVariant() const
 {
     QVariantMap map;
     if(m_owner.has_value())

@@ -129,7 +129,7 @@ void MainWindow::handlePreferences(Preferences *preferences)
     ui->labelPrefUsername->setText(preferences->playerName);
 }
 
-auto MainWindow::getGameType() -> GameType
+GameType MainWindow::getGameType()
 {
     if (this->ui->rbModeClassic->isChecked())
         return GameType::ClassicGameType;
@@ -138,7 +138,7 @@ auto MainWindow::getGameType() -> GameType
     return GameType::ClassicGameType;
 }
 
-auto MainWindow::getPlayerType() -> PlayerType
+PlayerType MainWindow::getPlayerType()
 {
     if (this->ui->rbPlayerBot->isChecked())
         return PlayerType::BotPlayer;
@@ -151,7 +151,7 @@ auto MainWindow::getPlayerType() -> PlayerType
 
 
 
-auto MainWindow::isValidIpAddress(const QString &ipAddress) -> bool {
+bool MainWindow::isValidIpAddress(const QString &ipAddress) {
     QHostAddress address;
     return address.setAddress(ipAddress);
 }
@@ -180,7 +180,7 @@ void MainWindow::on_rbPlayerBot_clicked() {
     ui->teOpponentUsername->setText("");
 }
 
-auto MainWindow::getIpAddress() -> QString {
+QString MainWindow::getIpAddress() {
     return m_ipAddress;
 }
 
