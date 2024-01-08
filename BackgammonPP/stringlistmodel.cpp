@@ -1,29 +1,29 @@
 #include "stringlistmodel.h"
 
-int StringListModel::rowCount(const QModelIndex &parent) const
+auto StringListModel::rowCount(const QModelIndex &parent) const -> int
 {
     return stringList.count();
 }
 
-QVariant StringListModel::data(const QModelIndex &index, int role) const
+auto StringListModel::data(const QModelIndex &index, int role) const -> QVariant
 {
     if (!index.isValid())
-        return QVariant();
+        return {};
 
     if (index.row() >= stringList.size())
-        return QVariant();
+        return {};
 
     if (role == Qt::DisplayRole)
         return stringList.at(index.row());
     else
-        return QVariant();
+        return {};
 }
 
-QVariant StringListModel::headerData(int section, Qt::Orientation orientation,
-                                     int role) const
+auto StringListModel::headerData(int section, Qt::Orientation orientation,
+                                     int role) const -> QVariant
 {
     if (role != Qt::DisplayRole)
-        return QVariant();
+        return {};
 
     if (orientation == Qt::Horizontal)
         return QStringLiteral("Column %1").arg(section);

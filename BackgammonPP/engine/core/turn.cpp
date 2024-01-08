@@ -6,7 +6,7 @@
 #include <QJsonDocument>
 
 
-QString Turn::toString() const
+auto Turn::toString() const -> QString
 {
     QString builder = "";
     builder.append(m_player == PlayerColor::WHITE ? "W " : "B ");
@@ -17,7 +17,7 @@ QString Turn::toString() const
     return builder;
 }
 
-QVariant Turn::toVariant() const
+auto Turn::toVariant() const -> QVariant
 {
     QVariantMap map;
     map.insert("player", m_player == PlayerColor::WHITE ? "white" : "black");

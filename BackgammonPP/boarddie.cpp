@@ -6,6 +6,6 @@ BoardDie::BoardDie(QGraphicsItem *parent, qreal side)
 {
 }
 
-QRectF BoardDie::boundingRect() const {
-    return QRectF(0, 0, m_side, m_side);
+auto BoardDie::boundingRect() const -> QRectF {
+    return {0, 0, m_side, m_side};
 }

@@ -36,7 +36,7 @@ void Network::calculateNeuron(Neuron& neuron){
     neuron.calculated = true;
 }
 
-double Network::evaluateNetwork(const QVector<double>& inputs){
+auto Network::evaluateNetwork(const QVector<double>& inputs) -> double{
     assert(AI::inputSize - 1 == inputs.size());
     for(int i = 0; i < AI::inputSize - 1; i++){ //Input neurons
         neurons[i].value = inputs[i];
@@ -53,7 +53,7 @@ double Network::evaluateNetwork(const QVector<double>& inputs){
     return AI::sigmoid(neurons[AI::inputSize].value);
 }
 
-const QVector<double> Network::inputFromState(const BoardState& board){
+auto Network::inputFromState(const BoardState& board) -> const QVector<double>{
     PlayerColor opponent = PlayerColor::BLACK;
     PlayerColor player = PlayerColor::WHITE;
     QVector<double> inputs(AI::inputSize - 1);

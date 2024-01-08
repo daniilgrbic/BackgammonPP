@@ -363,6 +363,6 @@ void BoardScene::setRoll(Roll const *roll){
     this->roll = roll;
 }
 
-const Roll* BoardScene::getRoll() {
+auto BoardScene::getRoll() -> const Roll* {
     return this->roll;
 }

@@ -23,7 +23,7 @@ void RemotePlayer::acceptMove(Turn turn){
     emit returnMove(std::move(turn));
 }
 
-Client* RemotePlayer::getClient() {
+auto RemotePlayer::getClient() -> Client* {
     return m_client;
 }
 
